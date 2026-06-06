@@ -1,35 +1,37 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-06T00:45:45.1965545Z"
 Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
-OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 16104 MB
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-05T13:19:10.2987886Z"
+OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'vi' Physical Memory: 16118 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-06-05T13:19:10Z
+Date: 2026-06-06T00:45:45Z
 
 COMMAND LINE ARGUMENTS:
-D:\Unity\Unity Hub\6000.3.10f1\Editor\Unity.exe
+F:\GameDev\Unity\Editor\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker6
 -projectPath
-D:/Unity/VietNamVillage
+F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
 -logFile
 Logs/AssetImportWorker6.log
 -srvPort
-54096
+51006
+-licensingIpc
+LicenseClient-Uyen Nguyen
 -job-worker-count
-5
+1
 -background-job-worker-count
 8
 -gc-helper-count
 1
 -name
 AssetImport
-Successfully changed project path to: D:/Unity/VietNamVillage
-D:/Unity/VietNamVillage
+Successfully changed project path to: F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
+F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
     "memorysetup-temp-allocator-size-audio-worker=65536"
@@ -65,230 +67,13 @@ D:/Unity/VietNamVillage
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
-Player connection [67096]  Target information:
+Player connection [24216]  Target information:
 
-Player connection [67096]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 2973540272 [EditorId] 2973540272 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [24216]  * "[IP] 10.87.32.191 [Port] 0 [Flags] 2 [Guid] 3059924033 [EditorId] 3059924033 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [67096]  * "[IP] 192.168.2.125 [Port] 0 [Flags] 2 [Guid] 2973540272 [EditorId] 2973540272 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
-
-Player connection [67096] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [67096] Host joined alternative multi-casting on [225.0.0.222:34997]...
-JobSystem: Creating JobQueue using job-worker-count value 5
+Player connection [24216] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [24216] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 1
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
-Library Redirect Path: Library/
-[Physics::Module] Selected backend.
-[Physics::Module] Name: PhysX
-[Physics::Module] Id: 0xf2b8ea05
-[Physics::Module] SDK Version: 4.1.2
-[Physics::Module] Integration Version: 1.0.0
-[Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 2.60 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
-[Subsystems] Discovering subsystems at path D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path D:/Unity/VietNamVillage/Assets
-GfxDevice: creating device client; kGfxThreadingModeNonThreaded
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 4050 Laptop GPU (ID=0x28a1)
-    Vendor:   NVIDIA
-    VRAM:     5921 MB
-    Driver:   32.0.15.7652
-Initialize mono
-Mono path[0] = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Managed'
-Mono path[1] = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56088
-Begin MonoManager ReloadAssembly
-Registering precompiled unity dll's ...
-Register platform support module: D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000823 seconds.
-- Loaded All Assemblies, in  0.340 seconds
-Native extension for WindowsStandalone target not found
-ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.387 seconds
-Domain Reload Profiling: 728ms
-	BeginReloadAssembly (113ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (0ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (33ms)
-	RebuildNativeTypeToScriptingClass (13ms)
-	initialDomainReloadingComplete (38ms)
-	LoadAllAssembliesAndSetupDomain (144ms)
-		LoadAssemblies (112ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (141ms)
-			TypeCache.Refresh (140ms)
-				TypeCache.ScanAssembly (128ms)
-			BuildScriptInfoCaches (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (388ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (343ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (41ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (79ms)
-			ProcessInitializeOnLoadAttributes (156ms)
-			ProcessInitializeOnLoadMethodAttributes (64ms)
-			AfterProcessingInitializeOnLoad (0ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (0ms)
-========================================================================
-Worker process is ready to serve import requests
-Import Worker Mode flag is 0x00
-Begin MonoManager ReloadAssembly
-[Licensing::Module] Licensing is not yet initialized.
-[Licensing::Client] Handshaking with LicensingClient:
-  Version:                 1.17.4+4293ba1
-  Session Id:              cf8206057651467689fc4ec3a0ddf394
-  Correlation Id:          c634603eb276efaf55d3385dc0d85b1f
-  External correlation Id: 574387578824784025
-  Machine Id:              kL/tlNYam4nZ1oSlVMDU6iMuKso=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-pc" (connect: 0.00s, validation: 0.00s, handshake: 1.90s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc-notifications" at "2026-06-05T13:19:12.2050251Z"
-[Licensing::Module] Licensing Background thread has ended after 1.91s
-[Licensing::Module] Licensing is initialized (took 0.22s).
-[Licensing::Client] Successfully resolved entitlement details
-[Licensing::Module] License group:
-  Id: 18968328452681-UnityPersXXXX
-  Product: Unity Personal
-  Type: Assigned
-  Expiration: Unlimited
-- Loaded All Assemblies, in  0.868 seconds
-Refreshing native plugins compatible for Editor in 0.59 ms, found 3 plugins.
-Native extension for WindowsStandalone target not found
-Package Manager log level set to [2]
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.743 seconds
-Domain Reload Profiling: 1611ms
-	BeginReloadAssembly (371ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (34ms)
-	LoadAllAssembliesAndSetupDomain (412ms)
-		LoadAssemblies (281ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (215ms)
-			TypeCache.Refresh (154ms)
-				TypeCache.ScanAssembly (142ms)
-			BuildScriptInfoCaches (49ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (744ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (590ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (1ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (120ms)
-			ProcessInitializeOnLoadAttributes (404ms)
-			ProcessInitializeOnLoadMethodAttributes (58ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.09 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6498 unused Assets / (3.8 MB). Loaded Objects now: 7312.
-Memory consumption went from 151.3 MB to 147.5 MB.
-Total: 12.031700 ms (FindLiveObjects: 1.058200 ms CreateObjectMapping: 0.794100 ms MarkObjects: 8.107100 ms  DeleteObjects: 2.070500 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 265399.834323 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_1_long.prefab
-  artifactKey: Guid(6bcbc63413d5ea04c82595b70c2b7cf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_1_long.prefab using Guid(6bcbc63413d5ea04c82595b70c2b7cf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f87307fc4debf4ac782b19821b65231e') in 0.670727 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.212484 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_long.prefab
-  artifactKey: Guid(b1babe744cd674749958ffd5cadd1c02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_long.prefab using Guid(b1babe744cd674749958ffd5cadd1c02) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'df84c33ed4f9e6fad0de11065be78a2d') in 0.0152648 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_short.prefab
-  artifactKey: Guid(faf146961f63c4142ab913edea46c070) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_short.prefab using Guid(faf146961f63c4142ab913edea46c070) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a053187cadeed343242f2546a073a5f2') in 0.0126416 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.062392 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_long.prefab
-  artifactKey: Guid(44c579e2e0ccdc04ea3ec65283e49df6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_long.prefab using Guid(44c579e2e0ccdc04ea3ec65283e49df6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4bc039ed1fabdae7ec274c4b6b318fe0') in 0.0117583 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried1.prefab
-  artifactKey: Guid(39d3fb8f52794fd4188b360a25845c18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried1.prefab using Guid(39d3fb8f52794fd4188b360a25845c18) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '08702abb2090456a902babf5230da7ec') in 0.0114697 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.357357 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange/tree_pine_long_orange.prefab
-  artifactKey: Guid(bbee008c7403e5341a3ad19b77fea65c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange/tree_pine_long_orange.prefab using Guid(bbee008c7403e5341a3ad19b77fea65c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1a550046fffaed879218f8293bd0fdb0') in 0.0157279 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 27
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000054 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_long_white.prefab
-  artifactKey: Guid(f696c3aea7290c54dbdaa6fb86413d0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_long_white.prefab using Guid(f696c3aea7290c54dbdaa6fb86413d0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '586d2c9277d6db40636ecf0e46e7971b') in 0.0113682 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 27
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Wide/tree_wide.prefab
-  artifactKey: Guid(de34f8fbf5356c0489895fbbab74b3bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Wide/tree_wide.prefab using Guid(de34f8fbf5356c0489895fbbab74b3bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b6fac94a5689eff6c4065b13c921c4d2') in 0.010694 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Wide/tree_wide_pink.prefab
-  artifactKey: Guid(4a3d857d9d98fae4ca976b7d1d71661a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Wide/tree_wide_pink.prefab using Guid(4a3d857d9d98fae4ca976b7d1d71661a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '06c33c396b52691cd07e8d7ba0c18e27') in 0.0105797 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
-
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0
