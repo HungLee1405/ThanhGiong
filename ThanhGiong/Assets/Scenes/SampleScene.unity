@@ -119,256 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1001 &70666825
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_Name
-      value: nha_la_3 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 34.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 111.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.36625168
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.3662519
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.60486346
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.60486317
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -242.39099
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 70666828}
-    - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 70666827}
-  m_SourcePrefab: {fileID: -8670829309088485133, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
---- !u!1 &70666826 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-  m_PrefabInstance: {fileID: 70666825}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &70666827
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70666826}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4705953, y: 0.77051747, z: 0.47505417}
-  m_Center: {x: 0.12947495, y: 0.041250095, z: -0.23752692}
---- !u!65 &70666828
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70666826}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7591897, y: 0.4109145, z: 0.35113636}
-  m_Center: {x: -0.014822236, y: -0.138552, z: -0.17556801}
---- !u!1001 &91936144
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_Name
-      value: nha_la_3 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -45.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 97.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.10820822
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.10820822
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.6987784
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.6987781
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -162.395
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 91936147}
-    - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 91936146}
-  m_SourcePrefab: {fileID: -8670829309088485133, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
---- !u!1 &91936145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-  m_PrefabInstance: {fileID: 91936144}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &91936146
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 91936145}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4705953, y: 0.77051747, z: 0.47505417}
-  m_Center: {x: 0.12947495, y: 0.041250095, z: -0.23752692}
---- !u!65 &91936147
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 91936145}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7591897, y: 0.4109145, z: 0.35113636}
-  m_Center: {x: -0.014822236, y: -0.138552, z: -0.17556801}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &95007415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -438,224 +188,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &330585543
 GameObject:
-=======
---- !u!1 &168584109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6922187488808801084, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-  m_PrefabInstance: {fileID: 1449963113}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &168584113
-BoxCollider:
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 330585546}
-  - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
-  - component: {fileID: 330585547}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
---- !u!20 &330585545
-Camera:
-=======
-  m_GameObject: {fileID: 168584109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5053841, y: 0.39966118, z: 1.1709672}
-  m_Center: {x: -0.010857054, y: 0.0018405316, z: -0.5854836}
---- !u!65 &168584114
-BoxCollider:
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &330585546
-Transform:
-=======
-  m_GameObject: {fileID: 168584109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5053841, y: 0.39966118, z: 1.1709672}
-  m_Center: {x: -0.010857054, y: 0.0018405316, z: -0.5854836}
---- !u!1001 &321726334
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -36.72
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.96
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 144.81
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.08002298
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.08002314
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.70256424
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.70256406
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -192.996
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6922187488808801084, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      propertyPath: m_Name
-      value: gia_lang
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1483679035}
-    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1483679034}
-  m_SourcePrefab: {fileID: -8670829309088485133, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
---- !u!1 &330585543
-GameObject:
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-=======
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330585546}
@@ -734,7 +272,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1075,8 +612,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 1.82
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
@@ -1086,21 +621,6 @@ PrefabInstance:
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 68.5
-=======
-      value: -6.09
-=======
-      value: -58.864353
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 10.07
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-      propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
-      value: 88.39
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1117,29 +637,10 @@ PrefabInstance:
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.6174648
-=======
-      value: 103.674286
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.4320158
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.43201584
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.5597878
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.55978763
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1147,11 +648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-<<<<<<< HEAD
       value: 121.672
-=======
-      value: 104.682
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -6922187488808801084, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
       propertyPath: m_Name
@@ -1162,38 +659,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1 &565407636 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6922187488808801084, guid: 1b7b3c9707fa24d46a5b3c7369991fc5, type: 3}
-  m_PrefabInstance: {fileID: 454052098}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &565407640
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565407636}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.86594456, y: 0.61120594, z: 0.73604745}
-  m_Center: {x: 0.1358892, y: -0.010221121, z: -0.3680236}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &570854763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1332,146 +797,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1 &652109479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 652109482}
-  - component: {fileID: 652109481}
-  - component: {fileID: 652109480}
-  - component: {fileID: 652109483}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &652109480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652109479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e13923c0fc96f743a22ebdef0d5d3d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 10
-  jumpHeight: 2
-  gravity: -25
-  playerCamera: {fileID: 1578889660}
-  mouseSensitivity: 0.05
-  maxLookAngle: 80
-  groundCheck: {fileID: 1646333843}
-  groundDistance: 0.3
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!143 &652109481
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652109479}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 3
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.5, z: 0}
---- !u!4 &652109482
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652109479}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7020897, z: -0, w: 0.7120886}
-  m_LocalPosition: {x: -47.19, y: 9.96, z: 140.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1284815741}
-  - {fileID: 1578889660}
-  - {fileID: 1646333843}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.19, z: 0}
---- !u!23 &652109483
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652109479}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &677737295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1502,15 +827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 102.62
-=======
-      value: 111.37
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 102.62
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1549,38 +866,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1 &691365844 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 4ff5c5dc0b219494a972aa9949b7081c, type: 3}
-  m_PrefabInstance: {fileID: 1671431432}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &691365848
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691365844}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.56513494, y: 0.6606212, z: 0.7714529}
-  m_Center: {x: 0.023050321, y: 0.028161192, z: -0.3857266}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &747704349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1603,15 +888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 47.01
-=======
-      value: 31.75
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 47.01
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1619,15 +896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 90.94
-=======
-      value: 92.13
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 90.94
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1808,8 +1077,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1001 &842443708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2005,174 +1272,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-=======
---- !u!1 &937133809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
-  m_PrefabInstance: {fileID: 1447541919}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &937133813
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937133809}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6867399, y: 0.61413676, z: 0.6802523}
-  m_Center: {x: 0.05778227, y: -0.017374834, z: -0.3401261}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
---- !u!1001 &842443708
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_Name
-      value: nha_la_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 32.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 104.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.12187592
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.12187591
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.69652456
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.6965244
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -160.15
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: -8670829309088485133, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
---- !u!1001 &994548568
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_Name
-      value: nha_la_3 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 24.451878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -47.410324
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.800001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 99.122475
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.56050277
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.56050307
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.43108758
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.43108755
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362053972117396951, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -75.128
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: -8670829309088485133, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &1086066409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2242,85 +1341,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1 &1097938025 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 10c71e0a4b5bb95458779c49ad613883, type: 3}
-  m_PrefabInstance: {fileID: 570854763}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1097938029
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097938025}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7591897, y: 0.4109145, z: 0.35113636}
-  m_Center: {x: -0.014822236, y: -0.138552, z: -0.17556801}
---- !u!65 &1097938030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097938025}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4705953, y: 0.77051747, z: 0.47505417}
-  m_Center: {x: 0.12947495, y: 0.041250095, z: -0.23752692}
---- !u!1 &1193091735 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 4ff5c5dc0b219494a972aa9949b7081c, type: 3}
-  m_PrefabInstance: {fileID: 359709189}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1193091739
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193091735}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.57869756, y: 0.6761438, z: 0.7714529}
-  m_Center: {x: 0.017481666, y: 0.033944376, z: -0.38572645}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1 &1196439049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,17 +1453,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!4 &1284815741 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-  m_PrefabInstance: {fileID: 2026180985}
-  m_PrefabAsset: {fileID: 0}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &1286607706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2608,15 +1617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5362053972117396951, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 16.963047
-=======
-      value: 16.993824
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 16.963047
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: 5362053972117396951, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2624,15 +1625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5362053972117396951, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 130.38943
-=======
-      value: 130.42818
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 130.38943
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: 5362053972117396951, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2736,310 +1729,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1001 &1449963113
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -47.631966
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.94
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 130.39969
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.660616
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.660616
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.25216383
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.25216377
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -41.785
-      objectReference: {fileID: 0}
-    - target: {fileID: -7091441805879785097, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6922187488808801084, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_Name
-      value: me_giong
-      objectReference: {fileID: 0}
-    - target: {fileID: 3848688129510517219, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 168584114}
-    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 168584113}
-  m_SourcePrefab: {fileID: -8670829309088485133, guid: 1e7742d9ffbfb234b86680f4b2c0663c, type: 3}
---- !u!1 &1483679030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6922187488808801084, guid: 96eda4034b357ef4c89aa00863605193, type: 3}
-  m_PrefabInstance: {fileID: 321726334}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1483679034
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483679030}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.48654136, y: 0.33601654, z: 1.1177174}
-  m_Center: {x: -0.0011874795, y: 0.02084781, z: -0.55885863}
---- !u!65 &1483679035
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483679030}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.48654136, y: 0.33601654, z: 1.1177174}
-  m_Center: {x: -0.0011874795, y: 0.02084781, z: -0.55885863}
---- !u!1 &1578889659
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1578889660}
-  - component: {fileID: 1578889663}
-  - component: {fileID: 1578889662}
-  - component: {fileID: 1578889661}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1578889660
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578889659}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 652109482}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1578889661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578889659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
---- !u!81 &1578889662
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578889659}
-  m_Enabled: 1
---- !u!20 &1578889663
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578889659}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!1 &1646333842
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1646333843}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1646333843
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646333842}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 652109482}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &1671431432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3131,15 +1820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 42.32
-=======
-      value: 31.15
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 42.32
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3147,15 +1828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 98.59
-=======
-      value: 101.2
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 98.59
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3263,8 +1936,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1001 &1899332355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3334,36 +2005,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: b25dcfcf6a36a5a48a175f3801cd1b95, type: 3}
-=======
---- !u!1 &1834970803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
-  m_PrefabInstance: {fileID: 1365074103}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1834970807
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834970803}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6776735, y: 0.6135906, z: 0.6802521}
-  m_Center: {x: 0.06112382, y: -0.013258587, z: -0.34012604}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &2019297762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3386,11 +2027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
       value: -3.59
-=======
-      value: 2.73
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3398,11 +2035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
       value: 40.54
-=======
-      value: 59.09
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3441,85 +2074,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1001 &2026180985
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 652109482}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 280
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 280
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 280
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
-      propertyPath: m_Name
-      value: Idle
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1001 &2095988554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3542,15 +2096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 39.73
-=======
-      value: 34.02
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 39.73
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3558,15 +2104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
-<<<<<<< HEAD
       value: 86.63
-=======
-      value: 85.29
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-      value: 86.63
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3627,11 +2165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< HEAD
       value: -2.27
-=======
-      value: -4.52
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3639,11 +2173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalPosition.z
-<<<<<<< HEAD
       value: 47.77
-=======
-      value: 48.79
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
       objectReference: {fileID: 0}
     - target: {fileID: -7091441805879785097, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3682,38 +2212,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
---- !u!1 &2143370783 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
-  m_PrefabInstance: {fileID: 1086066409}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2143370787
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143370783}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6922898, y: 0.5884765, z: 0.6802521}
-  m_Center: {x: 0.043866202, y: -0.00831173, z: -0.340126}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3726,21 +2224,9 @@ SceneRoots:
   - {fileID: 1447541919}
   - {fileID: 1365074103}
   - {fileID: 1196439053}
-<<<<<<< HEAD
-<<<<<<< HEAD
   - {fileID: 842443708}
   - {fileID: 570854763}
   - {fileID: 994548568}
-=======
-  - {fileID: 570854763}
-  - {fileID: 70666825}
-  - {fileID: 91936144}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
-  - {fileID: 842443708}
-  - {fileID: 570854763}
-  - {fileID: 994548568}
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')
   - {fileID: 1671431432}
   - {fileID: 359709189}
   - {fileID: 454052098}
@@ -3756,14 +2242,5 @@ SceneRoots:
   - {fileID: 95007415}
   - {fileID: 2019297762}
   - {fileID: 2100465402}
-<<<<<<< HEAD
-<<<<<<< HEAD
   - {fileID: 1899332355}
   - {fileID: 953068302}
-=======
-  - {fileID: 1449963113}
-  - {fileID: 321726334}
-  - {fileID: 652109482}
->>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
-=======
->>>>>>> parent of 2d449fd (Merge remote-tracking branch 'origin/feature/add-player-collider')

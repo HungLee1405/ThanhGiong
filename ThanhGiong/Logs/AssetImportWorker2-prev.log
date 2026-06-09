@@ -1,0 +1,1364 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-06T03:48:39.8687934Z"
+Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 16104 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-06-06T03:48:39Z
+
+COMMAND LINE ARGUMENTS:
+D:\Unity\Unity Hub\6000.3.10f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker2
+-projectPath
+D:/Unity/VietNamVillage
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+59045
+-licensingIpc
+LicenseClient-pc
+-job-worker-count
+5
+-background-job-worker-count
+8
+-gc-helper-count
+1
+-name
+AssetImport
+Successfully changed project path to: D:/Unity/VietNamVillage
+D:/Unity/VietNamVillage
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [53948]  Target information:
+
+Player connection [53948]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 4137066387 [EditorId] 4137066387 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [53948]  * "[IP] 10.87.14.67 [Port] 0 [Flags] 2 [Guid] 4137066387 [EditorId] 4137066387 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [53948] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [53948] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 5
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 3.80 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
+[Subsystems] Discovering subsystems at path D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Unity/VietNamVillage/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4050 Laptop GPU (ID=0x28a1)
+    Vendor:   NVIDIA
+    VRAM:     5921 MB
+    Driver:   32.0.15.7652
+Initialize mono
+Mono path[0] = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Managed'
+Mono path[1] = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56860
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001534 seconds.
+- Loaded All Assemblies, in  0.657 seconds
+Native extension for WindowsStandalone target not found
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.919 seconds
+Domain Reload Profiling: 1576ms
+	BeginReloadAssembly (188ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (60ms)
+	RebuildNativeTypeToScriptingClass (21ms)
+	initialDomainReloadingComplete (69ms)
+	LoadAllAssembliesAndSetupDomain (318ms)
+		LoadAssemblies (187ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (312ms)
+			TypeCache.Refresh (309ms)
+				TypeCache.ScanAssembly (287ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (920ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (827ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (84ms)
+			SetLoadedEditorAssemblies (8ms)
+			BeforeProcessingInitializeOnLoad (187ms)
+			ProcessInitializeOnLoadAttributes (339ms)
+			ProcessInitializeOnLoadMethodAttributes (208ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Import Worker Mode flag is 0x00
+Begin MonoManager ReloadAssembly
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              abc2b2866b6e45ad8f31ca34649394d5
+  Correlation Id:          c634603eb276efaf55d3385dc0d85b1f
+  External correlation Id: 453816818185685198
+  Machine Id:              kL/tlNYam4nZ1oSlVMDU6iMuKso=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-pc" (connect: 0.00s, validation: 0.00s, handshake: 3.26s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc-notifications" at "2026-06-06T03:48:43.1282672Z"
+[Licensing::Module] Licensing Background thread has ended after 3.26s
+[Licensing::Module] Licensing is initialized (took 0.08s).
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968328452681-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+- Loaded All Assemblies, in  1.215 seconds
+Refreshing native plugins compatible for Editor in 0.55 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.183 seconds
+Domain Reload Profiling: 2397ms
+	BeginReloadAssembly (350ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (51ms)
+	RebuildCommonClasses (58ms)
+	RebuildNativeTypeToScriptingClass (19ms)
+	initialDomainReloadingComplete (52ms)
+	LoadAllAssembliesAndSetupDomain (735ms)
+		LoadAssemblies (486ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (383ms)
+			TypeCache.Refresh (288ms)
+				TypeCache.ScanAssembly (266ms)
+			BuildScriptInfoCaches (72ms)
+			ResolveRequiredComponents (17ms)
+	FinalizeReload (1184ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (968ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (260ms)
+			ProcessInitializeOnLoadAttributes (606ms)
+			ProcessInitializeOnLoadMethodAttributes (91ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (6ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Refreshing native plugins compatible for Editor in 1.62 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 18 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6515 unused Assets / (3.2 MB). Loaded Objects now: 7332.
+Memory consumption went from 153.1 MB to 149.9 MB.
+Total: 16.673900 ms (FindLiveObjects: 1.928200 ms CreateObjectMapping: 1.212100 ms MarkObjects: 9.888300 ms  DeleteObjects: 3.642800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 317577.304258 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0005.png
+  artifactKey: Guid(c0e169e27ef4740fa869aea58e90c67f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0005.png using Guid(c0e169e27ef4740fa869aea58e90c67f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'aa75ac22a7fced7bfd26b2f3c80fccb5') in 0.2117065 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/com.verasl.water-system/SeaVisual.prefab
+  artifactKey: Guid(2cac2e60f3f6f2447ad9b550450f60ed) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/SeaVisual.prefab using Guid(2cac2e60f3f6f2447ad9b550450f60ed) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '76183f7b8da5ca336ac63949d6602669') in 0.1182285 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1274
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000075 seconds.
+  path: Assets/Assets/com.verasl.water-system/Editor/WaterSurfaceDataEditor.cs
+  artifactKey: Guid(1016bd3ba0af54af184326cd470c1bb3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Editor/WaterSurfaceDataEditor.cs using Guid(1016bd3ba0af54af184326cd470c1bb3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'b39dc12175d5a1a524c77951d0710800') in 0.0280622 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0014.png
+  artifactKey: Guid(a9e17bc39e4e642f79f58d0145f4c64f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0014.png using Guid(a9e17bc39e4e642f79f58d0145f4c64f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '7ff814ebfe6776c9cabb44f1743949ee') in 0.0263119 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterLighting.hlsl
+  artifactKey: Guid(f1b7d55b20a1440b38c82e0092d37161) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterLighting.hlsl using Guid(f1b7d55b20a1440b38c82e0092d37161) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '8e80a1f99656f334c4bed9ca5b604cc7') in 0.0258218 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/Data/WaterSettingsData.asset
+  artifactKey: Guid(a4cacf74654e54b35b9eaea74fd20b4e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/Data/WaterSettingsData.asset using Guid(a4cacf74654e54b35b9eaea74fd20b4e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'bd17c07da4b848ab6afbb9e85e4845e6') in 0.0261692 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterTessellated.shader
+  artifactKey: Guid(4d4deeba0d8a64503964c2f653931109) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterTessellated.shader using Guid(4d4deeba0d8a64503964c2f653931109) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'd80ee9b9cfbd765c5db4fbc6605138cd') in 0.0262152 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0012.png
+  artifactKey: Guid(e69374d074db94252b6ac5ee11e37ecc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0012.png using Guid(e69374d074db94252b6ac5ee11e37ecc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '99e012d7cce29cb5a17e378e7bacb0e5') in 0.0285031 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0011.png
+  artifactKey: Guid(5d26ffc2c43a64df28a21ef8f4f3abb0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0011.png using Guid(5d26ffc2c43a64df28a21ef8f4f3abb0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '7b831c6bf923be4fb349b28c0333aea3') in 0.0230572 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/LocalToWorldJob.cs
+  artifactKey: Guid(3813a158650064768b37058dc089214a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/LocalToWorldJob.cs using Guid(3813a158650064768b37058dc089214a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '71094da806bec5c573888829f37720c9') in 0.0172778 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/Data/WaterSurfaceData.asset
+  artifactKey: Guid(846f3dc3b5341447a86687211f741bc7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/Data/WaterSurfaceData.asset using Guid(846f3dc3b5341447a86687211f741bc7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ee2c0591c674d8422aeb3ca0b6a7bf9f') in 0.0202427 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/BuoyantObject.cs
+  artifactKey: Guid(3d5ac9593b59d4847815e4528b52a6d2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/BuoyantObject.cs using Guid(3d5ac9593b59d4847815e4528b52a6d2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '81c80706ae463bc4a9d35fcc9defa06a') in 0.0187551 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/MainCameraAlign.cs
+  artifactKey: Guid(9a6b4e1e324e641ff86ca879104e20de) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/MainCameraAlign.cs using Guid(9a6b4e1e324e641ff86ca879104e20de) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '5428a169f4380acd6c0408d9d1c55753') in 0.0170214 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Assets/com.verasl.water-system/Editor/WaterSettingsDataEditor.cs
+  artifactKey: Guid(0935a4ad227524d3cae739e174b846b2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Editor/WaterSettingsDataEditor.cs using Guid(0935a4ad227524d3cae739e174b846b2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ff0d6312a62cbcc79ec3ae93d39a6a7c') in 0.0196996 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterTessellation.hlsl
+  artifactKey: Guid(b43b1830f56c64692b92d59d34a90038) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterTessellation.hlsl using Guid(b43b1830f56c64692b92d59d34a90038) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9818e380a56f1c7c60c308ed69a20ad4') in 0.0177848 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/WaterSurface_single.tif
+  artifactKey: Guid(f395b7d64f44848c6a3cba1f1173fe90) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/WaterSurface_single.tif using Guid(f395b7d64f44848c6a3cba1f1173fe90) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3386a860c312367d28358cf2279f9154') in 0.0268166 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterFXFoamOnly.shader
+  artifactKey: Guid(11c17326e513c47a6a4da8bc7e511417) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterFXFoamOnly.shader using Guid(11c17326e513c47a6a4da8bc7e511417) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '59c8e8ed1b954b3f2c3b46ac70f6291e') in 0.020454 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0008.png
+  artifactKey: Guid(2e5c69bf561f94a4c872042f9299a94f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0008.png using Guid(2e5c69bf561f94a4c872042f9299a94f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '2808d6c84b506cbfa1989f7f5f8a7295') in 0.0278377 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0001.png
+  artifactKey: Guid(7f1ef94d4c92a4e1ea6503d4956998c5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0001.png using Guid(7f1ef94d4c92a4e1ea6503d4956998c5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '0c5528ecb3604f093e23919e6ab130b5') in 0.0251433 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/CommonUtilities.hlsl
+  artifactKey: Guid(74c950d64fbb9465c9dd5b5d9800f9f5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/CommonUtilities.hlsl using Guid(74c950d64fbb9465c9dd5b5d9800f9f5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'bb29136b1d425aa20fa4389d8f9c39bb') in 0.0180332 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0006.png
+  artifactKey: Guid(7d5fa7be83c314bf7bb7a95773faf5ca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0006.png using Guid(7d5fa7be83c314bf7bb7a95773faf5ca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '2f8be76228fdcb4c2e8e68a22425f247') in 0.0292765 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0016.png
+  artifactKey: Guid(e74c8aa81639e487d82f913022f7509d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0016.png using Guid(e74c8aa81639e487d82f913022f7509d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '7fa8c48abecf1739946a4ebbd6fc0263') in 0.0288891 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.627717 seconds.
+  path: Assets/Assets/com.verasl.water-system
+  artifactKey: Guid(2b17393a302778147803fd02687fc3f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system using Guid(2b17393a302778147803fd02687fc3f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cbb1c2a057bf3d21f586cd07e961e9b1') in 0.0006415 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 27.585095 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '8af8defcf160ab12170ce29e3aa43d5a') in 0.0225217 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.476120 seconds.
+  path: Assets/Assets/com.verasl.water-system/SeaVisual.prefab
+  artifactKey: Guid(2cac2e60f3f6f2447ad9b550450f60ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/SeaVisual.prefab using Guid(2cac2e60f3f6f2447ad9b550450f60ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Shader error in 'BoatAttack/Water': 'DirectBDRF': no matching 4 parameter function at Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl(255) (on d3d11)
+
+Compiling Subshader: 0, Pass: WaterShading, Vertex program with _ADDITIONAL_LIGHT_SHADOWS _DEBUG_OFF _MAIN_LIGHT_SHADOWS _REFLECTION_PLANARREFLECTION
+Platform defines: SHADER_API_DESKTOP UNITY_ENABLE_DETAIL_NORMALMAP UNITY_ENABLE_REFLECTION_BUFFERS UNITY_LIGHTMAP_FULL_HDR UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_PBS_USE_BRDF1 UNITY_PLATFORM_SUPPORTS_DEPTH_FETCH UNITY_SPECCUBE_BLENDING UNITY_SPECCUBE_BOX_PROJECTION UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS
+Disabled keywords: FOG_EXP FOG_EXP2 FOG_LINEAR INSTANCING_ON SHADER_API_GLES30 SHADER_API_GLES31 SHADER_API_GLES32 UNITY_ASTC_NORMALMAP_ENCODING UNITY_COLORSPACE_GAMMA UNITY_FRAMEBUFFER_FETCH_AVAILABLE UNITY_HARDWARE_TIER1 UNITY_HARDWARE_TIER2 UNITY_HARDWARE_TIER3 UNITY_LIGHTMAP_DLDR_ENCODING UNITY_LIGHTMAP_RGBM_ENCODING UNITY_METAL_SHADOWS_USE_POINT_FILTERING UNITY_NO_DXT5nm UNITY_NO_SCREENSPACE_SHADOWS UNITY_PBS_USE_BRDF2 UNITY_PBS_USE_BRDF3 UNITY_PRETRANSFORM_TO_DISPLAY_ORIENTATION UNITY_UNIFIED_SHADER_PRECISION_MODEL UNITY_VIRTUAL_TEXTURING USE_STRUCTURED_BUFFER _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHTS_VERTEX _DEBUG_FOAM _DEBUG_FRESNEL _DEBUG_NORMAL _DEBUG_REFLECTION _DEBUG_REFRACTION _DEBUG_SSS _DEBUG_WATERDEPTH _DEBUG_WATEREFFECTS _MAIN_LIGHT_SHADOWS_CASCADE _REFLECTION_CUBEMAP _REFLECTION_PROBES _SHADOWS_SOFT _STATIC_SHADER
+Shader error in 'BoatAttack/Water': 'DirectBDRF': no matching 4 parameter function at Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl(255) (on d3d11)
+
+Compiling Subshader: 0, Pass: WaterShading, Vertex program with _ADDITIONAL_LIGHT_SHADOWS _DEBUG_OFF _MAIN_LIGHT_SHADOWS _REFLECTION_PLANARREFLECTION
+Platform defines: SHADER_API_DESKTOP UNITY_ENABLE_DETAIL_NORMALMAP UNITY_ENABLE_REFLECTION_BUFFERS UNITY_LIGHTMAP_FULL_HDR UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_PBS_USE_BRDF1 UNITY_PLATFORM_SUPPORTS_DEPTH_FETCH UNITY_SPECCUBE_BLENDING UNITY_SPECCUBE_BOX_PROJECTION UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS
+Disabled keywords: FOG_EXP FOG_EXP2 FOG_LINEAR INSTANCING_ON SHADER_API_GLES30 SHADER_API_GLES31 SHADER_API_GLES32 UNITY_ASTC_NORMALMAP_ENCODING UNITY_COLORSPACE_GAMMA UNITY_FRAMEBUFFER_FETCH_AVAILABLE UNITY_HARDWARE_TIER1 UNITY_HARDWARE_TIER2 UNITY_HARDWARE_TIER3 UNITY_LIGHTMAP_DLDR_ENCODING UNITY_LIGHTMAP_RGBM_ENCODING UNITY_METAL_SHADOWS_USE_POINT_FILTERING UNITY_NO_DXT5nm UNITY_NO_SCREENSPACE_SHADOWS UNITY_PBS_USE_BRDF2 UNITY_PBS_USE_BRDF3 UNITY_PRETRANSFORM_TO_DISPLAY_ORIENTATION UNITY_UNIFIED_SHADER_PRECISION_MODEL UNITY_VIRTUAL_TEXTURING USE_STRUCTURED_BUFFER _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHTS_VERTEX _DEBUG_FOAM _DEBUG_FRESNEL _DEBUG_NORMAL _DEBUG_REFLECTION _DEBUG_REFRACTION _DEBUG_SSS _DEBUG_WATERDEPTH _DEBUG_WATEREFFECTS _MAIN_LIGHT_SHADOWS_CASCADE _REFLECTION_CUBEMAP _REFLECTION_PROBES _SHADOWS_SOFT _STATIC_SHADER
+ -> (artifact id: '303ac8c65dc4a1c3736414cc10b84d05') in 0.6551599 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1274
+
+========================================================================
+Received Import Request.
+  Time since last request: 50.974153 seconds.
+  path: Assets/Assets/com.verasl.water-system/Materials
+  artifactKey: Guid(281da5c5be36c43d6963c96af26acf64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Materials using Guid(281da5c5be36c43d6963c96af26acf64) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd849e8d15bb9b70885b7a682a3774e99') in 0.0005945 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.703090 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/WaterSurface_single.tif
+  artifactKey: Guid(f395b7d64f44848c6a3cba1f1173fe90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/WaterSurface_single.tif using Guid(f395b7d64f44848c6a3cba1f1173fe90) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9fcff9ca003a372ccae99dca9e1d8eb1') in 0.0278391 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 23.413890 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a9b876280772fefa73d68f85864fa6bc') in 0.0192991 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.319706 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter)Opening scene 'Assets/Scenes/SampleScene.unity additively'
+Loaded scene 'Assets/Scenes/SampleScene.unity'
+	Deserialize:            12.514 ms
+	Integration:            163.541 ms
+	Integration of assets:  0.016 ms
+	Thread Wait Time:       0.028 ms
+	Total Operation Time:   176.099 ms
+ -> (artifact id: '6992a5a2ac6b9fcd141113eef3adac6f') in 0.8366321 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1407
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Bush_01.prefab
+  artifactKey: Guid(3cdafb3c2f54d434894928d72d282874) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Bush_01.prefab using Guid(3cdafb3c2f54d434894928d72d282874) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'e8e844b11333f40593e3f9b133dfc97f') in 0.0527991 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_04.prefab
+  artifactKey: Guid(f0c16f0ea935ea64297ca1d4d55d9746) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_04.prefab using Guid(f0c16f0ea935ea64297ca1d4d55d9746) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'c3240dda13071902f420a240550063ef') in 0.0455145 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red_multiple.prefab
+  artifactKey: Guid(30eef463851679d4b83b1fe0e484898b) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red_multiple.prefab using Guid(30eef463851679d4b83b1fe0e484898b) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '4d776f1ce93c0156ebf617eb632c6987') in 0.0177494 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Stump_01.prefab
+  artifactKey: Guid(eebb56c82efbd8d4bb0eb6bd925a0e9d) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Stump_01.prefab using Guid(eebb56c82efbd8d4bb0eb6bd925a0e9d) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '1ab90e935aee322f925c73ed9cfde2a5') in 0.0486846 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bushes/bush_fruit.prefab
+  artifactKey: Guid(4d67764c4b973f040923a85e6b817fdd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bushes/bush_fruit.prefab using Guid(4d67764c4b973f040923a85e6b817fdd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '84d1f55a9b4c94023aec4eb3001e1c54') in 0.0197454 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_trunk_short_white.prefab
+  artifactKey: Guid(4b6eb51b9f225d24183db3d6d22e32f9) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_trunk_short_white.prefab using Guid(4b6eb51b9f225d24183db3d6d22e32f9) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '11061424851d40b31240ad853cfdd5b6') in 0.0340038 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Branch_01.prefab
+  artifactKey: Guid(b9de24523a11d714db3851b5f0f9d527) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Branch_01.prefab using Guid(b9de24523a11d714db3851b5f0f9d527) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '172d49e975595c5796e036486c2e2d5a') in 0.0444249 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Flowers_02.prefab
+  artifactKey: Guid(299e7a1cb6456cf4fa6079cf5978df9b) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Flowers_02.prefab using Guid(299e7a1cb6456cf4fa6079cf5978df9b) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '6ce1adf76699d1a999f04c820605ab66') in 0.0191164 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_03.prefab
+  artifactKey: Guid(c60edd51c065ceb46b345849a03bc106) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_03.prefab using Guid(c60edd51c065ceb46b345849a03bc106) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '101fad4cc5f1d1b4d6f163b36af7b7dd') in 0.044023 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_01.prefab
+  artifactKey: Guid(ff62b58c5a9ea164fa8ddf8038e10cd1) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_01.prefab using Guid(ff62b58c5a9ea164fa8ddf8038e10cd1) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '7854697ae87f777abd67cef269153357') in 0.0206533 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Bush_02.prefab
+  artifactKey: Guid(b71b0f8d2f881c743a85228f3030d1cb) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Bush_02.prefab using Guid(b71b0f8d2f881c743a85228f3030d1cb) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'f245376a5a87708f8037cac075340fa4') in 0.0401825 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Grass_01.prefab
+  artifactKey: Guid(f1fc5bb90ac285e4486771552d63bcb8) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Grass_01.prefab using Guid(f1fc5bb90ac285e4486771552d63bcb8) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '6b4a6f3cc9c364cb5ef9bc6bfb19791e') in 0.0409518 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Lilypad/lilypad.prefab
+  artifactKey: Guid(15c9d4fcb02ef224e88343b4b4d80543) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Lilypad/lilypad.prefab using Guid(15c9d4fcb02ef224e88343b4b4d80543) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'f77323db0051b350e4c70fa5666585d5') in 0.0161725 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bamboo/bamboo_noleaves.prefab
+  artifactKey: Guid(6f0672dc4c9a93a4e862b9286ac7c875) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bamboo/bamboo_noleaves.prefab using Guid(6f0672dc4c9a93a4e862b9286ac7c875) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '3225d01a93c2bfbc9d968cf1392d4934') in 0.0160191 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/sunflower.prefab
+  artifactKey: Guid(6b1899bfd265594449eff0f595aa1a7a) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/sunflower.prefab using Guid(6b1899bfd265594449eff0f595aa1a7a) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '7fb960d5d150655c483d5f6d155d4199') in 0.0206106 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Ground_02.prefab
+  artifactKey: Guid(e2e682b966e3f644392ffbfab511e0e2) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Ground_02.prefab using Guid(e2e682b966e3f644392ffbfab511e0e2) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'e37610f850f35dbd2b012ebe1ee95461') in 0.0458301 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_long.prefab
+  artifactKey: Guid(b1babe744cd674749958ffd5cadd1c02) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_long.prefab using Guid(b1babe744cd674749958ffd5cadd1c02) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '81e6010e04e069cfe2b42167d200a092') in 0.032774 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_mid.prefab
+  artifactKey: Guid(a140fcf3354ffb94da005a76f7cabdab) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_mid.prefab using Guid(a140fcf3354ffb94da005a76f7cabdab) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '073731879c7a21a9a8a0d81f2a5a4085') in 0.0300775 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red.prefab
+  artifactKey: Guid(8cca2b277833d374c926a9dacb13150e) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red.prefab using Guid(8cca2b277833d374c926a9dacb13150e) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'd0654cdf73575b05d13de7554f46e4f1') in 0.0162425 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_short.prefab
+  artifactKey: Guid(faf146961f63c4142ab913edea46c070) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_short.prefab using Guid(faf146961f63c4142ab913edea46c070) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '44e26adaf7b8780f9cf59bd91e8c4065') in 0.019029 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_short.prefab
+  artifactKey: Guid(0491ec90cca31c548ace8392b7527da0) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_short.prefab using Guid(0491ec90cca31c548ace8392b7527da0) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '3c00ae1cb7f71b9e5514c184c4214ebc') in 0.0174223 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_long.prefab
+  artifactKey: Guid(44c579e2e0ccdc04ea3ec65283e49df6) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_long.prefab using Guid(44c579e2e0ccdc04ea3ec65283e49df6) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '11e8479d385c1aaba67ceb505e4f89df') in 0.0307998 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Rock_03.prefab
+  artifactKey: Guid(0fde05fa0f3321942a21896ff4f0856f) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Rock_03.prefab using Guid(0fde05fa0f3321942a21896ff4f0856f) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'e6478a8c56cd18df6df73fb4101d7bad') in 0.0435419 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_short.prefab
+  artifactKey: Guid(38c4e0018ff12b241939cc77205249c2) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_short.prefab using Guid(38c4e0018ff12b241939cc77205249c2) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'ed0b004e020da9db3879f3527b330306') in 0.0236292 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000070 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_02.prefab
+  artifactKey: Guid(494f6d43e170e9145bc7865d243ee00b) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_02.prefab using Guid(494f6d43e170e9145bc7865d243ee00b) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '06abcb9463796558826f5116508aea12') in 0.0209902 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green/tree_pine_short.prefab
+  artifactKey: Guid(50d1bdeeb3ba5454286e5af49106db16) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green/tree_pine_short.prefab using Guid(50d1bdeeb3ba5454286e5af49106db16) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'bd743c4181b9ac70f5db53ed0a482a26') in 0.0244763 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Rock_02.prefab
+  artifactKey: Guid(cebfacc247a640945a2c30b442202fca) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Rock_02.prefab using Guid(cebfacc247a640945a2c30b442202fca) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '44c7643968cdc760b69d7f48e1fbd64b') in 0.0433851 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Flowers_01.prefab
+  artifactKey: Guid(ac8efb728f1fb9b4092c4df591c827ca) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Flowers_01.prefab using Guid(ac8efb728f1fb9b4092c4df591c827ca) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'd57598ebeab46552e8d7187dfc422cf5') in 0.0185909 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000062 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_long.prefab
+  artifactKey: Guid(ca7044f9448b51e439544c10db6d7de6) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_long.prefab using Guid(ca7044f9448b51e439544c10db6d7de6) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '7003f0d4ca70607a4f4dbf150805bdd2') in 0.0325417 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Assets/com.verasl.water-system/Editor/WaterSystem.editor.asmdef
+  artifactKey: Guid(7ccf8aeedcc0c4661aacb3c94f093356) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Editor/WaterSystem.editor.asmdef using Guid(7ccf8aeedcc0c4661aacb3c94f093356) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '09fb10f4db6955692916817c6f93c861') in 0.0182242 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_mid.prefab
+  artifactKey: Guid(2ea78d3b69ba46e4b8a672cd79a346a5) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_mid.prefab using Guid(2ea78d3b69ba46e4b8a672cd79a346a5) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'e010562a90a8c384c26a79c5ffff015f') in 0.0337708 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried0.prefab
+  artifactKey: Guid(71bf2f0a83fee7f49b3fc680ff1c38bd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried0.prefab using Guid(71bf2f0a83fee7f49b3fc680ff1c38bd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '3de20687b288a111a758782788f0a8d3') in 0.0183373 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_long.prefab
+  artifactKey: Guid(bef352b25cc7d42468167bb4bdbcdbcc) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_long.prefab using Guid(bef352b25cc7d42468167bb4bdbcdbcc) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '8215d15c08dba09c63212dd72b487917') in 0.0359014 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried1.prefab
+  artifactKey: Guid(39d3fb8f52794fd4188b360a25845c18) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried1.prefab using Guid(39d3fb8f52794fd4188b360a25845c18) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '02c957fd8146366cd536dedf7439fb85') in 0.0191435 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Grass_02.prefab
+  artifactKey: Guid(ffbddc4ef9676cc419e81e06aaa836d8) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Grass_02.prefab using Guid(ffbddc4ef9676cc419e81e06aaa836d8) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '74698d4b45d1cc5181e0760665b543ba') in 0.0491078 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Overview.unity
+  artifactKey: Guid(b818941d93326b949a3840a1d79ea88f) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Overview.unity using Guid(b818941d93326b949a3840a1d79ea88f) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter)Opening scene 'Assets/Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Overview.unity additively'
+LightingSettings: switching bake backend from 2 to 1.
+Loaded scene 'Assets/Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Overview.unity'
+	Deserialize:            1.692 ms
+	Integration:            44.813 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       0.013 ms
+	Total Operation Time:   46.519 ms
+ -> (artifact id: '523a232157a0386d1e845235e41c2ff9') in 0.1584232 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 316
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_mid.prefab
+  artifactKey: Guid(b3cd183e812114043affe0707ed581cd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_mid.prefab using Guid(b3cd183e812114043affe0707ed581cd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '33eae30e0bf30d0c949dbbd6b1713bba') in 0.0357567 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Rock_01.prefab
+  artifactKey: Guid(c6308cb7062fac34e8e50600086b12a1) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Rock_01.prefab using Guid(c6308cb7062fac34e8e50600086b12a1) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '3098a68cc9a796ecf69f250b42ab59cc') in 0.0200116 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green/tree_pine_long_green.prefab
+  artifactKey: Guid(c18dc6081393df642a9484e0a8baab08) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green/tree_pine_long_green.prefab using Guid(c18dc6081393df642a9484e0a8baab08) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '88dfd985dc45ba76141d2ead0adabf6f') in 0.0241211 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange/tree_pine_short_orange.prefab
+  artifactKey: Guid(af4111f626a19c846a7b06a200bf3acf) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange/tree_pine_short_orange.prefab using Guid(af4111f626a19c846a7b06a200bf3acf) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '336df4d2443dac309e5d54347f26bdb9') in 0.0408849 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Scenes/Models.unity
+  artifactKey: Guid(5f87388e0e011404fabab5e82ab7b83e) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Scenes/Models.unity using Guid(5f87388e0e011404fabab5e82ab7b83e) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter)Opening scene 'Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Scenes/Models.unity additively'
+Loaded scene 'Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Scenes/Models.unity'
+	Deserialize:            3.213 ms
+	Integration:            134.640 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       0.033 ms
+	Total Operation Time:   137.888 ms
+ -> (artifact id: '21b814bcced49955c2a03fcc2548eea3') in 0.3667955 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 470
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown.prefab
+  artifactKey: Guid(edcc85655939fb94e95079b9a46399e8) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown.prefab using Guid(edcc85655939fb94e95079b9a46399e8) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'ec0569a559d2e1c8a78daa6ec0567545') in 0.019611 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/WaterSystem.Runtime.asmdef
+  artifactKey: Guid(eee6090a63a1e48e6857869e0cbe74dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/WaterSystem.Runtime.asmdef using Guid(eee6090a63a1e48e6857869e0cbe74dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '0c4bbef01f8d3152f37890b322500356') in 0.0166654 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_mid.prefab
+  artifactKey: Guid(f02b4d93cc99e17469fc3d1615a71994) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_mid.prefab using Guid(f02b4d93cc99e17469fc3d1615a71994) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'f7b0d94f3e6acb4a7fa723f5e62fc3c2') in 0.0182513 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Palms/palm_curved.prefab
+  artifactKey: Guid(1817a9975b36c7c4e8a45fcee2bc24ee) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Palms/palm_curved.prefab using Guid(1817a9975b36c7c4e8a45fcee2bc24ee) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '583992eeaf03b179294f09a2b3e8fcba') in 0.0252843 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Rock_05.prefab
+  artifactKey: Guid(a778b631c6253a04899cb31bad047c81) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Rock_05.prefab using Guid(a778b631c6253a04899cb31bad047c81) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '93c8f7df380b371f87265eedf669153d') in 0.0201644 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000120 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Wide/tree_wide.prefab
+  artifactKey: Guid(de34f8fbf5356c0489895fbbab74b3bd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Wide/tree_wide.prefab using Guid(de34f8fbf5356c0489895fbbab74b3bd) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'da937db75caf0e01247882a7480d5711') in 0.0199812 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_short.prefab
+  artifactKey: Guid(387375ad48305b94a873857521ed12a4) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_short.prefab using Guid(387375ad48305b94a873857521ed12a4) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'facc73a4492b0438163a1f82cb053ffc') in 0.0207956 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_long_white.prefab
+  artifactKey: Guid(f696c3aea7290c54dbdaa6fb86413d0c) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_long_white.prefab using Guid(f696c3aea7290c54dbdaa6fb86413d0c) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '8a7edf58afd35ce0078ebcfc4cb1409d') in 0.0229613 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trunk/trunk.prefab
+  artifactKey: Guid(3c889f11ff89e2442aae624b598c1f92) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trunk/trunk.prefab using Guid(3c889f11ff89e2442aae624b598c1f92) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '30043f7dc5f93b86c69c0d2309baedb2') in 0.0204889 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown_multiple.prefab
+  artifactKey: Guid(d24a2e215c6a37f4ab97648c27fdfd0a) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown_multiple.prefab using Guid(d24a2e215c6a37f4ab97648c27fdfd0a) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: '1ff32bd3d4f3b2977f75bc74bf12ca65') in 0.0198295 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_mid_white.prefab
+  artifactKey: Guid(c93db69c166335443a020b965bbbff62) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_mid_white.prefab using Guid(c93db69c166335443a020b965bbbff62) Importer(2089858483,e11c23a36db5f54750b8cd40eac0985b) (ScriptedImporter) -> (artifact id: 'a813f7b64276c61e3cc95cb63fcf210e') in 0.0427493 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.992818 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Textures/ColorPalette.png
+  artifactKey: Guid(56775c6f419d9174882a7256bb965d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Textures/ColorPalette.png using Guid(56775c6f419d9174882a7256bb965d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '95df1750dbcc2fd688ae1e0aba9b7f38') in 0.0178138 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0004.png
+  artifactKey: Guid(68835a4c28f0a42f2a1a39b612b96588) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0004.png using Guid(68835a4c28f0a42f2a1a39b612b96588) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9d3e88931c7b5bb3ef7336754a0dd48d') in 0.0247189 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0003.png
+  artifactKey: Guid(5a1ae4c6fbf414937add6da089b0b855) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0003.png using Guid(5a1ae4c6fbf414937add6da089b0b855) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9a7c63ee7d835c311d6328ff4106eb70') in 0.0185325 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/WaterSurface_atlas.tif
+  artifactKey: Guid(e5587917cd9a44d8a98a83b31e3f69c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/WaterSurface_atlas.tif using Guid(e5587917cd9a44d8a98a83b31e3f69c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'eef10dde94b10be36f4098ddda7c3bf4') in 0.023836 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0007.png
+  artifactKey: Guid(19ef48913af134984aaf8845a4f09294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0007.png using Guid(19ef48913af134984aaf8845a4f09294) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'df5c7d44b81cfeb8d238c1dd164f1e9e') in 0.0219433 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0009.png
+  artifactKey: Guid(93a6e3058e1934d85b5a01756fd2398c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0009.png using Guid(93a6e3058e1934d85b5a01756fd2398c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c206d2df2ae93294fb1aa979505dbc1f') in 0.0392155 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/WaterSurface.asset
+  artifactKey: Guid(2bf4e75081aab4b5f88bfb7069f598ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/WaterSurface.asset using Guid(2bf4e75081aab4b5f88bfb7069f598ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0f26ec1c2e8b32a3e6b2ce93181a4970') in 0.0509197 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0016.png
+  artifactKey: Guid(e74c8aa81639e487d82f913022f7509d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0016.png using Guid(e74c8aa81639e487d82f913022f7509d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0dac3048cca543a3a9bf8f9310204a76') in 0.0227077 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0014.png
+  artifactKey: Guid(a9e17bc39e4e642f79f58d0145f4c64f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Textures/SurfaceSequence/water_Final Color Output0014.png using Guid(a9e17bc39e4e642f79f58d0145f4c64f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '121e03323a567005f68fa69317c91f39') in 0.0199795 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/TutorialInfo/Icons/URP.png
+  artifactKey: Guid(727a75301c3d24613a3ebcec4a24c2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TutorialInfo/Icons/URP.png using Guid(727a75301c3d24613a3ebcec4a24c2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7a2146c33f79d0dc51214aaff4d4a6ae') in 0.0205646 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.158459 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders
+  artifactKey: Guid(6aab7b5e54a384c2790bfb04db9d7cfe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Shaders using Guid(6aab7b5e54a384c2790bfb04db9d7cfe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '30697e004ac11d0b93cfe15a3ec9b007') in 0.0008687 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.114418 seconds.
+  path: Assets/Assets/com.verasl.water-system/Meshes
+  artifactKey: Guid(bc33e2c6cda7143a3b9bd922abb88865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Meshes using Guid(bc33e2c6cda7143a3b9bd922abb88865) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '08f6ce08e17d31d02ae03d261f7cdae2') in 0.0006738 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 71.215330 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts
+  artifactKey: Guid(cfac61b5ac93c4101b40011e6cd637b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/com.verasl.water-system/Scripts using Guid(cfac61b5ac93c4101b40011e6cd637b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '90ed0b9d333034fb610b56d13ad000f0') in 0.0007618 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 160.088220 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl
+  artifactKey: Guid(8169b68b201d74e3597abae6c06c4264) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl using Guid(8169b68b201d74e3597abae6c06c4264) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a835d5410e41cc0d5b08192674cfc6c4') in 0.0206053 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 201.383757 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl
+  artifactKey: Guid(8169b68b201d74e3597abae6c06c4264) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl using Guid(8169b68b201d74e3597abae6c06c4264) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '6447dc965389b2823478ee7ace0a20df') in 0.0198801 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 77.917806 seconds.
+  path: Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl
+  artifactKey: Guid(8169b68b201d74e3597abae6c06c4264) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Shaders/WaterCommon.hlsl using Guid(8169b68b201d74e3597abae6c06c4264) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9c42ac8776c6a3d6cb3a9e599e3a9b95') in 0.0255302 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 364.206485 seconds.
+  path: Assets/Assets/com.verasl.water-system/Scripts/Data/WaterSurfaceData.asset
+  artifactKey: Guid(846f3dc3b5341447a86687211f741bc7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Assets/com.verasl.water-system/Scripts/Data/WaterSurfaceData.asset using Guid(846f3dc3b5341447a86687211f741bc7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ab8cb5939951e17b5d6f0ca303859d72') in 0.0210652 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+- Loaded All Assemblies, in  0.943 seconds
+Refreshing native plugins compatible for Editor in 0.57 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.847 seconds
+Domain Reload Profiling: 1793ms
+	BeginReloadAssembly (377ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (56ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (124ms)
+	RebuildCommonClasses (36ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (485ms)
+		LoadAssemblies (384ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (207ms)
+			TypeCache.Refresh (14ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (178ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (847ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (677ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (11ms)
+			BeforeProcessingInitializeOnLoad (181ms)
+			ProcessInitializeOnLoadAttributes (413ms)
+			ProcessInitializeOnLoadMethodAttributes (69ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 1.04 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6496 unused Assets / (4.3 MB). Loaded Objects now: 7373.
+Memory consumption went from 160.5 MB to 156.2 MB.
+Total: 14.093700 ms (FindLiveObjects: 0.837000 ms CreateObjectMapping: 0.914700 ms MarkObjects: 9.429900 ms  DeleteObjects: 2.910400 ms)
+
+Prepare: number of updated asset objects reloaded= 4
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+- Loaded All Assemblies, in  0.680 seconds
+Refreshing native plugins compatible for Editor in 0.87 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.815 seconds
+Domain Reload Profiling: 1499ms
+	BeginReloadAssembly (209ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (51ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (26ms)
+	LoadAllAssembliesAndSetupDomain (403ms)
+		LoadAssemblies (319ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (179ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (155ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (816ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (667ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (1ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (133ms)
+			ProcessInitializeOnLoadAttributes (449ms)
+			ProcessInitializeOnLoadMethodAttributes (76ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 1.16 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6495 unused Assets / (4.4 MB). Loaded Objects now: 7373.
+Memory consumption went from 160.1 MB to 155.6 MB.
+Total: 14.021300 ms (FindLiveObjects: 1.060100 ms CreateObjectMapping: 1.239900 ms MarkObjects: 8.444100 ms  DeleteObjects: 3.275400 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 176.914948 seconds.
+  path: Assets/IgniteCoders
+  artifactKey: Guid(cba5807dc9c2c4e4fab3a9b659856fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders using Guid(cba5807dc9c2c4e4fab3a9b659856fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '71f37dabc86f015ffdf7105b1598267b') in 0.0425253 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.728279 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader
+  artifactKey: Guid(3422402e1f87a8c499e137c3ef43989e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader using Guid(3422402e1f87a8c499e137c3ef43989e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c86f3dc905f52f3005c4120bd7dce253') in 0.0007224 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 39.696723 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Info
+  artifactKey: Guid(632838a6d3dbd974195a1f7f34ded3f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Info using Guid(632838a6d3dbd974195a1f7f34ded3f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ee422acc71fc15683bda4d03978b87e9') in 0.0006146 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.393714 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Prefabs
+  artifactKey: Guid(659a758b0bea88342a8f7d3812ab9415) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Prefabs using Guid(659a758b0bea88342a8f7d3812ab9415) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fe5a99003f5c59c6fc014b0a9a354cd9') in 0.0006965 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.168837 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Resources
+  artifactKey: Guid(dc77ad855be57214eb39fd06212f2ce4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Resources using Guid(dc77ad855be57214eb39fd06212f2ce4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '66d45e1f60c0d6ceb292dc0d1eeea998') in 0.0007518 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+- Loaded All Assemblies, in  0.719 seconds
+Refreshing native plugins compatible for Editor in 0.62 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.939 seconds
+Domain Reload Profiling: 1662ms
+	BeginReloadAssembly (228ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (63ms)
+	RebuildCommonClasses (43ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (23ms)
+	LoadAllAssembliesAndSetupDomain (416ms)
+		LoadAssemblies (319ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (198ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (177ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (940ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (770ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (1ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (185ms)
+			ProcessInitializeOnLoadAttributes (477ms)
+			ProcessInitializeOnLoadMethodAttributes (98ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (19ms)
+Refreshing native plugins compatible for Editor in 1.03 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6495 unused Assets / (3.8 MB). Loaded Objects now: 7376.
+Memory consumption went from 160.1 MB to 156.3 MB.
+Total: 14.022900 ms (FindLiveObjects: 0.813500 ms CreateObjectMapping: 0.983600 ms MarkObjects: 8.484800 ms  DeleteObjects: 3.738500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 184.893862 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Resources/WaterReflection.cs
+  artifactKey: Guid(dfbe97460f8acd1488a82178305cdf59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Resources/WaterReflection.cs using Guid(dfbe97460f8acd1488a82178305cdf59) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'edd28b20f550caf306047aa4164b185b') in 0.0097943 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.588932 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Resources/WaterBlock_50m.mesh
+  artifactKey: Guid(3da23cdf512599b42881988944f3918c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Resources/WaterBlock_50m.mesh using Guid(3da23cdf512599b42881988944f3918c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '23d1dc78111e7856d7acdc38b9efa2d3') in 0.0963549 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.274197 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Resources/WaterSurface_atlas.tif
+  artifactKey: Guid(2ed3d41b7c655bf4daa77f71b994f6ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Resources/WaterSurface_atlas.tif using Guid(2ed3d41b7c655bf4daa77f71b994f6ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd5efa5e481bcf463b4623363f4fb1e90') in 0.035655 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.743173 seconds.
+  path: Assets/IgniteCoders/Simple Water Shader/Resources/WaterShader.shadergraph
+  artifactKey: Guid(dd97de70edf8a4141bee758a2efe7ff8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IgniteCoders/Simple Water Shader/Resources/WaterShader.shadergraph using Guid(dd97de70edf8a4141bee758a2efe7ff8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bf96fd52d70ca443bb584eaf3ec8c930') in 3.7714692 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.086392 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3fc3dc8df2da83350327967e162d6daa') in 0.0006277 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+- Loaded All Assemblies, in  1.764 seconds
+Refreshing native plugins compatible for Editor in 0.56 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.771 seconds
+Domain Reload Profiling: 2540ms
+	BeginReloadAssembly (778ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (117ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (157ms)
+	RebuildCommonClasses (88ms)
+	RebuildNativeTypeToScriptingClass (212ms)
+	initialDomainReloadingComplete (77ms)
+	LoadAllAssembliesAndSetupDomain (613ms)
+		LoadAssemblies (640ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (246ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (218ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (772ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (625ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (132ms)
+			ProcessInitializeOnLoadAttributes (416ms)
+			ProcessInitializeOnLoadMethodAttributes (68ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (14ms)
+Refreshing native plugins compatible for Editor in 1.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6495 unused Assets / (3.7 MB). Loaded Objects now: 7436.
+Memory consumption went from 161.6 MB to 157.9 MB.
+Total: 13.097800 ms (FindLiveObjects: 0.784000 ms CreateObjectMapping: 0.995200 ms MarkObjects: 8.094600 ms  DeleteObjects: 3.222300 ms)
+
+Prepare: number of updated asset objects reloaded= 1
+========================================================================
+Received Import Request.
+  Time since last request: 57.981440 seconds.
+  path: Assets/Assets/IgniteCoders/Simple Water Shader/Prefabs/WaterBlock_50m.prefab
+  artifactKey: Guid(7097ba7ba649e1f41bba232312bdcbd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Prefabs/WaterBlock_50m.prefab using Guid(7097ba7ba649e1f41bba232312bdcbd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6132164b4d357ab405e1cc9431fbaceb') in 0.6382377 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.875161 seconds.
+  path: Assets/Assets/IgniteCoders/Simple Water Shader/Prefabs/WaterReflectionCamera.prefab
+  artifactKey: Guid(838c0bef810bfe94d8e33947c3cba7c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Prefabs/WaterReflectionCamera.prefab using Guid(838c0bef810bfe94d8e33947c3cba7c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'baa17b4cd3ced2255023c15416336fee') in 0.0034122 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.393816 seconds.
+  path: Assets/Assets/IgniteCoders/Simple Water Shader/Demo
+  artifactKey: Guid(5cf5e68041eae4043bf96b2329047f84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Demo using Guid(5cf5e68041eae4043bf96b2329047f84) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1c3cfc5dbc546e3223d5b1f3c19d2077') in 0.0006111 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
