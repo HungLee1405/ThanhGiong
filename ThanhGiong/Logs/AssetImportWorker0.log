@@ -1,4 +1,5 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
+<<<<<<< HEAD
 [Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-09T04:42:19.4174463Z"
 Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 16104 MB
@@ -6,6 +7,15 @@ BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
 Date: 2026-06-09T04:42:19Z
+=======
+Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-06T00:35:13.0424469Z"
+OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'vi' Physical Memory: 16118 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-06-06T00:35:13Z
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\Unity Hub\6000.3.10f1\Editor\Unity.exe
@@ -19,7 +29,11 @@ D:/Unity/VietNamVillage
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
+<<<<<<< HEAD
 60077
+=======
+51006
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 -licensingIpc
 LicenseClient-pc
 -job-worker-count
@@ -67,6 +81,7 @@ D:/Unity/VietNamVillage
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
+<<<<<<< HEAD
 Player connection [71280]  Target information:
 
 Player connection [71280]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 358263939 [EditorId] 358263939 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
@@ -76,6 +91,15 @@ Player connection [71280]  * "[IP] 192.168.2.125 [Port] 0 [Flags] 2 [Guid] 35826
 Player connection [71280] Host joined multi-casting on [225.0.0.222:54997]...
 Player connection [71280] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 5
+=======
+Player connection [23120]  Target information:
+
+Player connection [23120]  * "[IP] 10.87.32.191 [Port] 0 [Flags] 2 [Guid] 292396590 [EditorId] 292396590 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [23120] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [23120] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 1
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
@@ -86,7 +110,11 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
+<<<<<<< HEAD
 Refreshing native plugins compatible for Editor in 3.34 ms, found 3 plugins.
+=======
+Refreshing native plugins compatible for Editor in 5116.18 ms, found 3 plugins.
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
 [Subsystems] Discovering subsystems at path D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Resources/UnitySubsystems

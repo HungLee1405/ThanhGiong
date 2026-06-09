@@ -1,11 +1,16 @@
-[Licensing::Module] Trying to connect to existing licensing client channel...
 Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 16104 MB
 [Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-09T04:42:19.4077663Z"
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
+<<<<<<< HEAD
 Date: 2026-06-09T04:42:19Z
+=======
+Date: 2026-06-06T00:38:46Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-06T00:38:46.687555Z"
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\Unity Hub\6000.3.10f1\Editor\Unity.exe
@@ -19,7 +24,11 @@ D:/Unity/VietNamVillage
 -logFile
 Logs/AssetImportWorker2.log
 -srvPort
+<<<<<<< HEAD
 60077
+=======
+51006
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 -licensingIpc
 LicenseClient-pc
 -job-worker-count
@@ -67,6 +76,7 @@ D:/Unity/VietNamVillage
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
+<<<<<<< HEAD
 Player connection [57664]  Target information:
 
 Player connection [57664]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 1402547973 [EditorId] 1402547973 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
@@ -76,6 +86,15 @@ Player connection [57664]  * "[IP] 192.168.2.125 [Port] 0 [Flags] 2 [Guid] 14025
 Player connection [57664] Host joined multi-casting on [225.0.0.222:54997]...
 Player connection [57664] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 5
+=======
+Player connection [23860]  Target information:
+
+Player connection [23860]  * "[IP] 10.87.32.191 [Port] 0 [Flags] 2 [Guid] 679260489 [EditorId] 679260489 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [23860] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [23860] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 1
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
@@ -86,14 +105,20 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
+<<<<<<< HEAD
 Refreshing native plugins compatible for Editor in 3.47 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
+=======
+Refreshing native plugins compatible for Editor in 238.02 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.01 ms.
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
 Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
 [Subsystems] Discovering subsystems at path D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path D:/Unity/VietNamVillage/Assets
 GfxDevice: creating device client; kGfxThreadingModeNonThreaded
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
+<<<<<<< HEAD
     Renderer: NVIDIA GeForce RTX 4050 Laptop GPU (ID=0x28a1)
     Vendor:   NVIDIA
     VRAM:     5921 MB
@@ -282,3 +307,18 @@ Received Import Request.
 Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Resources/WaterSurface_single.tif using Guid(11154d936b05e66498f68fa178c5cfbb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '8014990848a34d34b24bb99dfabe427e') in 0.0274957 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
+=======
+    Renderer: Intel(R) UHD Graphics (ID=0x9a78)
+    Vendor:   Intel
+    VRAM:     8059 MB
+    Driver:   32.0.101.7084
+Initialize mono
+Mono path[0] = 'F:/GameDev/Unity/Editor/Editor/Data/Managed'
+Mono path[1] = 'F:/GameDev/Unity/Editor/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'F:/GameDev/Unity/Editor/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56948
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: F:/GameDev/Unity/Editor/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 1.211165 seconds.
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')

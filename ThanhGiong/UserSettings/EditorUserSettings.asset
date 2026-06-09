@@ -8,6 +8,7 @@ EditorUserSettings:
     RecentlyUsedSceneGuid-0:
       value: 5a08575f5207595a0f5d59741173094444164f7d7d2a23317c7a4465bbe1646d
       flags: 0
+<<<<<<< HEAD
     UnityEditor.ShaderGraph.Blackboard:
       value: 18135939215a0a5004000b0e15254b524c030a3f2964643d120d1230e9e93a3fd6e826abbd3c3e302a07a37e0901373ae01e0008f707250d171df81a53a5405d419548954a9b474d9f4f45999f4b84b5878398a8d5d4cfd7ccd6bafdfae4eff4daf7a3e8afbcbe9af2e1aefdedcff8f7c8d0b28696dd8bdff8888383ee9d829f9bcfc78c8dd788958990bd
       flags: 0
@@ -17,6 +18,8 @@ EditorUserSettings:
     UnityEditor.ShaderGraph.InspectorWindow:
       value: 18135939215a0a5004000b0e15254b524c1119263f2d6a722016393ce1eb3d36e5d339f9a5602b2e2c07a37e0901373ae01e0008f707250d171df81a53a5485d41895ac825e0100ec20313c0d91cddccd3d0c7efcca9bd8f9086f9abada3b6a1a3a5fdaff9ffa98ce8a2c182a6d8c2869bd1f5dc8e9c9a97ea9c819ffcca90898b81d0988bd7888b88dff2ddf5c0f4f5c1f6b98b
       flags: 0
+=======
+>>>>>>> parent of 7da9289 (Merge remote-tracking branch 'origin/feature/NPC-talking-and-Quest')
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0
