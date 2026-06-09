@@ -1,11 +1,11 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
 Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 16104 MB
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-09T05:32:58.0207864Z"
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-09T06:26:55.1606781Z"
 System  architecture: x64
 Process architecture: x64
-Date: 2026-06-09T05:32:58Z
+Date: 2026-06-09T06:26:55Z
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\Unity Hub\6000.3.10f1\Editor\Unity.exe
@@ -19,7 +19,7 @@ D:/Unity/ThanhGiong/ThanhGiong
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-49942
+62680
 -licensingIpc
 LicenseClient-pc
 -job-worker-count
@@ -67,14 +67,14 @@ D:/Unity/ThanhGiong/ThanhGiong
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
-Player connection [22384]  Target information:
+Player connection [11028]  Target information:
 
-Player connection [22384]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 3179323736 [EditorId] 3179323736 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [11028]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 2777291692 [EditorId] 2777291692 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [22384]  * "[IP] 192.168.2.125 [Port] 0 [Flags] 2 [Guid] 3179323736 [EditorId] 3179323736 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [11028]  * "[IP] 192.168.2.125 [Port] 0 [Flags] 2 [Guid] 2777291692 [EditorId] 2777291692 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [22384] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [22384] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [11028] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [11028] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 5
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -86,7 +86,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 2.37 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 3.32 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
 [Subsystems] Discovering subsystems at path D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Resources/UnitySubsystems
@@ -102,44 +102,44 @@ Initialize mono
 Mono path[0] = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56280
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56368
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Unity/Unity Hub/6000.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000993 seconds.
-- Loaded All Assemblies, in  0.587 seconds
+Registered in 0.001004 seconds.
+- Loaded All Assemblies, in  0.515 seconds
 Native extension for WindowsStandalone target not found
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.734 seconds
-Domain Reload Profiling: 1321ms
-	BeginReloadAssembly (192ms)
+- Finished resetting the current domain, in  0.652 seconds
+Domain Reload Profiling: 1167ms
+	BeginReloadAssembly (182ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (65ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (56ms)
-	LoadAllAssembliesAndSetupDomain (258ms)
-		LoadAssemblies (189ms)
+	RebuildCommonClasses (54ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (205ms)
+		LoadAssemblies (182ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (253ms)
-			TypeCache.Refresh (251ms)
-				TypeCache.ScanAssembly (231ms)
+		AnalyzeDomain (201ms)
+			TypeCache.Refresh (199ms)
+				TypeCache.ScanAssembly (184ms)
 			BuildScriptInfoCaches (0ms)
-			ResolveRequiredComponents (1ms)
-	FinalizeReload (735ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (653ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (677ms)
+		SetupLoadedEditorAssemblies (611ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (78ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (168ms)
-			ProcessInitializeOnLoadAttributes (309ms)
-			ProcessInitializeOnLoadMethodAttributes (116ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (167ms)
+			ProcessInitializeOnLoadAttributes (259ms)
+			ProcessInitializeOnLoadMethodAttributes (101ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -151,22 +151,22 @@ Begin MonoManager ReloadAssembly
 [Licensing::Module] Licensing is not yet initialized.
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.17.4+4293ba1
-  Session Id:              6972228ede7440a8905771b22f7ae8de
+  Session Id:              f5b7f392526d41e6a770df31e9d32c44
   Correlation Id:          d397fd4cb74217156075ca11d5caa725
-  External correlation Id: 5688727486197261308
+  External correlation Id: 3119081968639812569
   Machine Id:              kL/tlNYam4nZ1oSlVMDU6iMuKso=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-pc" (connect: 0.00s, validation: 0.01s, handshake: 2.94s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc-notifications" at "2026-06-09T05:33:00.9670194Z"
-[Licensing::Module] Licensing Background thread has ended after 2.95s
-[Licensing::Module] Licensing is initialized (took 0.25s).
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-pc" (connect: 0.00s, validation: 0.00s, handshake: 2.48s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc-notifications" at "2026-06-09T06:26:57.6417492Z"
+[Licensing::Module] Licensing Background thread has ended after 2.48s
+[Licensing::Module] Licensing is initialized (took 0.20s).
 [Licensing::Client] Successfully resolved entitlement details
 [Licensing::Module] License group:
   Id: 18968328452681-UnityPersXXXX
   Product: Unity Personal
   Type: Assigned
   Expiration: Unlimited
-- Loaded All Assemblies, in  1.058 seconds
-Refreshing native plugins compatible for Editor in 0.56 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.926 seconds
+Refreshing native plugins compatible for Editor in 0.52 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
@@ -177,590 +177,382 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.988 seconds
-Domain Reload Profiling: 2045ms
-	BeginReloadAssembly (456ms)
+- Finished resetting the current domain, in  0.856 seconds
+Domain Reload Profiling: 1781ms
+	BeginReloadAssembly (373ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (43ms)
-	RebuildCommonClasses (37ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (34ms)
 	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (35ms)
-	LoadAllAssembliesAndSetupDomain (517ms)
-		LoadAssemblies (340ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (471ms)
+		LoadAssemblies (323ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (275ms)
-			TypeCache.Refresh (195ms)
-				TypeCache.ScanAssembly (180ms)
-			BuildScriptInfoCaches (65ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (988ms)
+		AnalyzeDomain (246ms)
+			TypeCache.Refresh (173ms)
+				TypeCache.ScanAssembly (160ms)
+			BuildScriptInfoCaches (59ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (856ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (783ms)
+		SetupLoadedEditorAssemblies (677ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (2ms)
 			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (168ms)
-			ProcessInitializeOnLoadAttributes (523ms)
-			ProcessInitializeOnLoadMethodAttributes (81ms)
-			AfterProcessingInitializeOnLoad (2ms)
+			BeforeProcessingInitializeOnLoad (145ms)
+			ProcessInitializeOnLoadAttributes (455ms)
+			ProcessInitializeOnLoadMethodAttributes (68ms)
+			AfterProcessingInitializeOnLoad (1ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.17 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.44 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6562 unused Assets / (4.4 MB). Loaded Objects now: 7390.
-Memory consumption went from 153.0 MB to 148.6 MB.
-Total: 16.103000 ms (FindLiveObjects: 1.898300 ms CreateObjectMapping: 1.182100 ms MarkObjects: 8.931200 ms  DeleteObjects: 4.089600 ms)
+Unloading 6561 unused Assets / (5.2 MB). Loaded Objects now: 7387.
+Memory consumption went from 152.8 MB to 147.6 MB.
+Total: 15.126100 ms (FindLiveObjects: 0.977400 ms CreateObjectMapping: 1.250000 ms MarkObjects: 8.962000 ms  DeleteObjects: 3.934400 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 583055.769302 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown
-  artifactKey: Guid(0beebb378610b93419967730f7b117a6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown using Guid(0beebb378610b93419967730f7b117a6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a627af17a300135f500e96bd95604615') in 0.0993798 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Tree_01.fbx
-  artifactKey: Guid(6c7eaede4efc960409fb9ef2dfb77f29) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Tree_01.fbx using Guid(6c7eaede4efc960409fb9ef2dfb77f29) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '91179ca6af2d33204e9ba79a18099994') in 0.1589568 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees/Tree_Red.mat
-  artifactKey: Guid(716894934161a9743a9b36ca1870436e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees/Tree_Red.mat using Guid(716894934161a9743a9b36ca1870436e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '15fcdf422cc50fbb794aa82d6cf6bb21') in 0.0612862 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Assets/model_3D/nha_la_3.glb
-  artifactKey: Guid(10c71e0a4b5bb95458779c49ad613883) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/model_3D/nha_la_3.glb using Guid(10c71e0a4b5bb95458779c49ad613883) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '8d46856558452109f02e3f8f16c4d81e') in 0.6609958 seconds
+  Time since last request: 586292.191540 seconds.
+  path: Assets/New Terrain.asset
+  artifactKey: Guid(9b48b1e31074eb947bd9c8dc9ca36203) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/New Terrain.asset using Guid(9b48b1e31074eb947bd9c8dc9ca36203) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9a9d453a4a4d7e049d6b466376cded9f') in 0.2429206 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000058 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Textures/ColorPalette.png
-  artifactKey: Guid(56775c6f419d9174882a7256bb965d35) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Textures/ColorPalette.png using Guid(56775c6f419d9174882a7256bb965d35) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'c9f74401a78cb7f08a140b044dae1346') in 0.0793932 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Palms/palm_straight.prefab
-  artifactKey: Guid(a8e4af1ab9b87aa4f9aa08f7db34a6d1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Palms/palm_straight.prefab using Guid(a8e4af1ab9b87aa4f9aa08f7db34a6d1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '0394727897e64f4181449a82b9d0cdb3') in 0.0300595 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees/Tree_Blue.mat
-  artifactKey: Guid(9f74bdde84b98b343b12f6dad8f14b48) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees/Tree_Blue.mat using Guid(9f74bdde84b98b343b12f6dad8f14b48) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'be4dd68d1c3f58a1b970fca71367765d') in 0.0245473 seconds
+  Time since last request: 681.494382 seconds.
+  path: Assets/Assets/SimpleNaturePack/Textures/brown.png
+  artifactKey: Guid(3d2495ca04637a04d9235d2f32197b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Textures/brown.png using Guid(3d2495ca04637a04d9235d2f32197b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '81a129f103f50a59d9bf06ba19df2a55') in 0.0727209 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models
-  artifactKey: Guid(16e946501a62a0f4f9df1703622fdc62) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models using Guid(16e946501a62a0f4f9df1703622fdc62) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ecb81d238f409f585157f572361ad437') in 0.0197965 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees
-  artifactKey: Guid(5b069632b15c7ea488ab4991e4daf58e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees using Guid(5b069632b15c7ea488ab4991e4daf58e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'd1b03a53827bb7b1c3f5f5df478bb8b1') in 0.0263389 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bushes/bush.prefab
-  artifactKey: Guid(6cf45777d3d45e543a04f1b9228da534) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bushes/bush.prefab using Guid(6cf45777d3d45e543a04f1b9228da534) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e93876448da5b60e2111f9cf0bc20dd5') in 0.0259835 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models
-  artifactKey: Guid(f2460ba6bbb1eee41b63499dcba676dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models using Guid(f2460ba6bbb1eee41b63499dcba676dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '204a2ff91af92d2895f52ecce69db950') in 0.0210584 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_1_short.prefab
-  artifactKey: Guid(62beaaa4b15291e489612f9c4df4d4ba) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_1_short.prefab using Guid(62beaaa4b15291e489612f9c4df4d4ba) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'de7a0fe63171b3dd84b7f6e47b106fdb') in 0.0320608 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Rock_03.prefab
-  artifactKey: Guid(0fde05fa0f3321942a21896ff4f0856f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Rock_03.prefab using Guid(0fde05fa0f3321942a21896ff4f0856f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'f4bcf0bd1c1a5abe086fea5486840d3d') in 0.0299581 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_mid.prefab
-  artifactKey: Guid(2ea78d3b69ba46e4b8a672cd79a346a5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_mid.prefab using Guid(2ea78d3b69ba46e4b8a672cd79a346a5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '17749bd4fc56d5d94d84b16213f19916') in 0.0245641 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_long.prefab
-  artifactKey: Guid(bef352b25cc7d42468167bb4bdbcdbcc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_long.prefab using Guid(bef352b25cc7d42468167bb4bdbcdbcc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e3ef564d2e816ca6750d0526db971369') in 0.0263015 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/model_3D/texture_pbr_20250901_normal.png
-  artifactKey: Guid(e5a805c09457cce42a755c7d9df10048) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/model_3D/texture_pbr_20250901_normal.png using Guid(e5a805c09457cce42a755c7d9df10048) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'd931fc4d4321fc05eb5e0a639fc04a3a') in 0.0291876 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange/tree_pine_mid_orange.prefab
-  artifactKey: Guid(209e1b7e312d41049851e2c0abf631fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange/tree_pine_mid_orange.prefab using Guid(209e1b7e312d41049851e2c0abf631fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '02251e64b78226466ebde85f2379493b') in 0.0341269 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 23
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Other/General.mat
-  artifactKey: Guid(77e0b06ce21324f41ad1a2105879f748) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Other/General.mat using Guid(77e0b06ce21324f41ad1a2105879f748) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3e498163739c9759d832e6aaeda13e49') in 0.0257691 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Textures
-  artifactKey: Guid(157e0e19c9efe834095da7611fa52cd0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Textures using Guid(157e0e19c9efe834095da7611fa52cd0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'c4cd36719efa9efa12d2a700d0e13c7b') in 0.0202696 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Assets/SimpleNaturePack/Textures/dirt.png
-  artifactKey: Guid(998b4f42a2847114ab0ee639566a4084) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Textures/dirt.png using Guid(998b4f42a2847114ab0ee639566a4084) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ea5afa7fbe4d4951ab384a01b9534ef1') in 0.0274487 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_mid_white.prefab
-  artifactKey: Guid(c93db69c166335443a020b965bbbff62) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_mid_white.prefab using Guid(c93db69c166335443a020b965bbbff62) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '62e3d95bbb37b3c76b964c598b0c9835') in 0.0273795 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 23
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/default_trees.fbx
-  artifactKey: Guid(b4cb5efe60a834e4e9776d4de5d4ad89) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/default_trees.fbx using Guid(b4cb5efe60a834e4e9776d4de5d4ad89) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a0d9f094a816dd6172b77852231f3c33') in 0.0385709 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 99
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms
-  artifactKey: Guid(1b6b2ea25b16d2040ba8c4e2c1a04cc0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms using Guid(1b6b2ea25b16d2040ba8c4e2c1a04cc0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9acdc75224c5be65a6d6ea6f2627e2d0') in 0.0181343 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trunk/trunk.prefab
-  artifactKey: Guid(3c889f11ff89e2442aae624b598c1f92) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trunk/trunk.prefab using Guid(3c889f11ff89e2442aae624b598c1f92) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '45b17194976042a26c759a6f97427efb') in 0.0215814 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_trunk_short_white.prefab
-  artifactKey: Guid(4b6eb51b9f225d24183db3d6d22e32f9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/White/tree_pine_trunk_short_white.prefab using Guid(4b6eb51b9f225d24183db3d6d22e32f9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '076ad328fd5c87b2eb908151790e5155') in 0.0249032 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 23
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green
-  artifactKey: Guid(58257af3fbf40694b998497881844a9b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green using Guid(58257af3fbf40694b998497881844a9b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'f18759d04f6aa5899a409b3f84b2cba1') in 0.0168543 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000036 seconds.
-  path: Assets/Assets/SimpleNaturePack/SimpleNaturePack_2020.3_URP_v1.24.unitypackage
-  artifactKey: Guid(f58d25b9e504a4f41ab4a71cf87c1845) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/SimpleNaturePack_2020.3_URP_v1.24.unitypackage using Guid(f58d25b9e504a4f41ab4a71cf87c1845) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a228139ab2d38347dc12c999ab4e2704') in 0.0191661 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_05.prefab
-  artifactKey: Guid(60f79905accf3b24fa0114b941f1aac0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_05.prefab using Guid(60f79905accf3b24fa0114b941f1aac0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ebfbcc47e7d183712854209db9f77e5c') in 0.0219584 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Materials/Sand.mat
-  artifactKey: Guid(1385abac5e4efbc40a2240a639917e83) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Materials/Sand.mat using Guid(1385abac5e4efbc40a2240a639917e83) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '864f4db2febf3c0fee335e1b476153c8') in 0.0247212 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Stump_01.fbx
-  artifactKey: Guid(768be665aba8b4e4aae7a973ae9616cf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Stump_01.fbx using Guid(768be665aba8b4e4aae7a973ae9616cf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '68988b873d86512cc42aea36bd16f139') in 0.0230052 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_mid.prefab
-  artifactKey: Guid(3dabd40529e4d79469fe56719b4f9bbe) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_5_mid.prefab using Guid(3dabd40529e4d79469fe56719b4f9bbe) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'fb933e8fa2c8737d39ee1482aa0725ec') in 0.0230816 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Models/ground2.fbx
-  artifactKey: Guid(204c471bac201db4eba11a39b20759df) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Models/ground2.fbx using Guid(204c471bac201db4eba11a39b20759df) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'cceb4f9401b17b85d01132d8ed93296b') in 0.0249314 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_03.prefab
-  artifactKey: Guid(c60edd51c065ceb46b345849a03bc106) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_03.prefab using Guid(c60edd51c065ceb46b345849a03bc106) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'b624568474b90d874d39e80abaa0f9be') in 0.0376099 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_mid.prefab
-  artifactKey: Guid(a140fcf3354ffb94da005a76f7cabdab) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_3_mid.prefab using Guid(a140fcf3354ffb94da005a76f7cabdab) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a1833246fe2eb4ef47c386d05478e622') in 0.0309308 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bushes/bush_fruit.prefab
-  artifactKey: Guid(4d67764c4b973f040923a85e6b817fdd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bushes/bush_fruit.prefab using Guid(4d67764c4b973f040923a85e6b817fdd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '16172a2df30685f5ed05d8cfa53b3339') in 0.027554 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red_multiple.prefab
-  artifactKey: Guid(30eef463851679d4b83b1fe0e484898b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red_multiple.prefab using Guid(30eef463851679d4b83b1fe0e484898b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '14f82866c532fb05628bdc5cc6198e21') in 0.0242782 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000033 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_01.prefab
-  artifactKey: Guid(ff62b58c5a9ea164fa8ddf8038e10cd1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_01.prefab using Guid(ff62b58c5a9ea164fa8ddf8038e10cd1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '58a9c2fd6d7c5dd548ef8d986f748e1f') in 0.0240785 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/sunflower.prefab
-  artifactKey: Guid(6b1899bfd265594449eff0f595aa1a7a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/sunflower.prefab using Guid(6b1899bfd265594449eff0f595aa1a7a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '94aae6b22ffd11eb5e00574ce97b7026') in 0.0231262 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Materials/Pink.mat
-  artifactKey: Guid(5e343b3b946247d469958a27e94baa86) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Materials/Pink.mat using Guid(5e343b3b946247d469958a27e94baa86) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'bd2373c3284af5705013194b8eadc191') in 0.0171484 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000062 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_long.prefab
-  artifactKey: Guid(48fb43682d712ef46bd5ce1d8ca77723) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_long.prefab using Guid(48fb43682d712ef46bd5ce1d8ca77723) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'dfe1b8201bc578e91fc786baacc5eedf') in 0.0252438 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Assets/model_3D/nha_la_2.glb
-  artifactKey: Guid(4ff5c5dc0b219494a972aa9949b7081c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/model_3D/nha_la_2.glb using Guid(4ff5c5dc0b219494a972aa9949b7081c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '514989bf85032f3af9ebe796c9396ec1') in 0.3562734 seconds
+  Time since last request: 439.596761 seconds.
+  path: Assets/Assets/model_3D/bamboo_bush.glb
+  artifactKey: Guid(bd50fb25efce0ed4a8e35f72d2f056a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/model_3D/bamboo_bush.glb using Guid(bd50fb25efce0ed4a8e35f72d2f056a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '100695d1a8fc9b0f6cf51153d2143bb5') in 1.7350673 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Assets/SimpleNaturePack/Textures/NewLayer 1.terrainlayer
-  artifactKey: Guid(aa2270e3fc347734f860a9202e70d553) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Textures/NewLayer 1.terrainlayer using Guid(aa2270e3fc347734f860a9202e70d553) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'bd0ec950f5735ab6a7661130f6b802d8') in 0.0284129 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Reeds/reed_multiple.prefab
-  artifactKey: Guid(970ff20b48a9a884298122e1919eefb2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Reeds/reed_multiple.prefab using Guid(970ff20b48a9a884298122e1919eefb2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '66b7e5c7aa8de6b36e372512eeb67f27') in 0.0308769 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Reeds/reed_single.prefab
-  artifactKey: Guid(afeab98dd8b71b44e88918cd5c206aec) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Reeds/reed_single.prefab using Guid(afeab98dd8b71b44e88918cd5c206aec) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e5705e8f310a6af49fa21bbba4045d31') in 0.040928 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Branch_01.fbx
-  artifactKey: Guid(5528351815fd4c04abf537f22c7e18f1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Branch_01.fbx using Guid(5528351815fd4c04abf537f22c7e18f1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e36b9e247dc820a5b77252ca9ba8c746') in 0.0306977 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Bush_02.fbx
-  artifactKey: Guid(ba52853a69186a841a52a9cc2e9b77fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Bush_02.fbx using Guid(ba52853a69186a841a52a9cc2e9b77fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '5c35925216fc8f73abb67b7fef664d2d') in 0.0259284 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000033 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bamboo
-  artifactKey: Guid(cd73cceedf232a74e8e509d878385bf3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bamboo using Guid(cd73cceedf232a74e8e509d878385bf3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '1d32b585ac0731f10bc6cae6bbd11898') in 0.0161874 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Assets/model_3D/gia_lang.glb
-  artifactKey: Guid(96eda4034b357ef4c89aa00863605193) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/model_3D/gia_lang.glb using Guid(96eda4034b357ef4c89aa00863605193) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '303f6c19f5f4f9eb97d5657362f42a0b') in 0.4079033 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000038 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Bush_02.prefab
-  artifactKey: Guid(b71b0f8d2f881c743a85228f3030d1cb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Bush_02.prefab using Guid(b71b0f8d2f881c743a85228f3030d1cb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '06d1b02e3b723de5b52f71a431f34e93') in 0.0254242 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown.prefab
-  artifactKey: Guid(edcc85655939fb94e95079b9a46399e8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown.prefab using Guid(edcc85655939fb94e95079b9a46399e8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '10c97c3311daf444061b2a95bcefe8da') in 0.0227534 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Other
-  artifactKey: Guid(bee968074b7360e45b8113fd14e73d64) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Other using Guid(bee968074b7360e45b8113fd14e73d64) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'f36c9693cd67a72255c9e01b7f100c87') in 0.0186623 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Ground_03.fbx
-  artifactKey: Guid(661464e19c087564badb2bf5230c842c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Ground_03.fbx using Guid(661464e19c087564badb2bf5230c842c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '48ce3ec66a1523a98e9ac2a29479c2da') in 0.0218364 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical
-  artifactKey: Guid(96371a3482c65e54cbfdde0437799ba8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical using Guid(96371a3482c65e54cbfdde0437799ba8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '5f57f460743733bdb426a06c51eecf92') in 0.0205403 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Ground_03.prefab
-  artifactKey: Guid(3f9b178ccd3b86f4ebbfc1f5a2815e56) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Ground_03.prefab using Guid(3f9b178ccd3b86f4ebbfc1f5a2815e56) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '21bcbc8595f2224550a1b38aeae6e376') in 0.0231033 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Flowers_01.fbx
-  artifactKey: Guid(b5a80b3e2a089b841b155d7c7f461e7c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Flowers_01.fbx using Guid(b5a80b3e2a089b841b155d7c7f461e7c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'd21e09d6c6e5d778d376e13cf0455945') in 0.0281824 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green/tree_pine_long_green.prefab
-  artifactKey: Guid(c18dc6081393df642a9484e0a8baab08) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Green/tree_pine_long_green.prefab using Guid(c18dc6081393df642a9484e0a8baab08) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '36724740934a4c63bf2ae3ccb2c04b0c') in 0.0228873 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried1.prefab
-  artifactKey: Guid(39d3fb8f52794fd4188b360a25845c18) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried1.prefab using Guid(39d3fb8f52794fd4188b360a25845c18) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '839ae910f2a9a83beedac50744f670e9') in 0.0176553 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_short.prefab
-  artifactKey: Guid(0491ec90cca31c548ace8392b7527da0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Capsulıc/tree_4_short.prefab using Guid(0491ec90cca31c548ace8392b7527da0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '22f0bedf908545cba32b4a34ade3285b') in 0.0206495 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees/Tree_Pink.mat
-  artifactKey: Guid(2323c4ec23f6e4844a2046e92cc97d63) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Materials/Trees/Tree_Pink.mat using Guid(2323c4ec23f6e4844a2046e92cc97d63) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3f8321667e17675aa2b158fd7f5acf75') in 0.0222005 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees
-  artifactKey: Guid(40e782924e6bc014db5851f6120636d5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees using Guid(40e782924e6bc014db5851f6120636d5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '44cf5e0dc6f8ebe3b6150b4f6e4e83a5') in 0.0164217 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried0.prefab
-  artifactKey: Guid(71bf2f0a83fee7f49b3fc680ff1c38bd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Dried/tree_dried0.prefab using Guid(71bf2f0a83fee7f49b3fc680ff1c38bd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '97f9cd0549d649cc7f7a67f641ba4995') in 0.0203251 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.004431 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/palm.fbx
-  artifactKey: Guid(21e8df12c1dd43740bdb4603b8deb93c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/palm.fbx using Guid(21e8df12c1dd43740bdb4603b8deb93c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'd7114383cb9d65df3088234b057cb8bb') in 0.0258055 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Materials/Ground.mat
-  artifactKey: Guid(c18867a560cab0243aea55f9f023ecda) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Materials/Ground.mat using Guid(c18867a560cab0243aea55f9f023ecda) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '4ead33078af4008e10bdf4335f7665b8') in 0.0204346 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000054 seconds.
-  path: Assets/Assets/SimpleNaturePack/Materials/SimpleNaturePack_Texture_01.mat
-  artifactKey: Guid(93caadf4359ae8143aad35b3145d31af) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Materials/SimpleNaturePack_Texture_01.mat using Guid(93caadf4359ae8143aad35b3145d31af) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '0a747a16b04a72933b5edb2843686a5e') in 0.0241441 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+  path: Assets/Assets/model_3D/c81da598c92f5f6971e53a24141ea69f.obj
+  artifactKey: Guid(6835d7c63ea121f45b440be1cf35b437) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/model_3D/c81da598c92f5f6971e53a24141ea69f.obj using Guid(6835d7c63ea121f45b440be1cf35b437) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '54ec9a99085a5ca996dfbb7737377d3c') in 0.0697676 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Bush_03.fbx
-  artifactKey: Guid(7b5a098d913a3c74692a2a9963dbd3ba) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Bush_03.fbx using Guid(7b5a098d913a3c74692a2a9963dbd3ba) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '936450824819d639c1f3916e62deec96') in 0.0249236 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000069 seconds.
-  path: Assets/Assets/SimpleNaturePack/Models/Ground_01.fbx
-  artifactKey: Guid(d4ad967689295ba4eaf8baeaebc8721b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Models/Ground_01.fbx using Guid(d4ad967689295ba4eaf8baeaebc8721b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'e420b1ac3eca3b42263987d7bd6ccded') in 0.027433 seconds
+  Time since last request: 0.000064 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Rock_02.fbx
+  artifactKey: Guid(3a775dc2c1a334b45a5667a56fe92c23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Rock_02.fbx using Guid(3a775dc2c1a334b45a5667a56fe92c23) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2d7a39c0633e3a3f40ca51bffec0251d') in 0.0326576 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Branch_01.prefab
-  artifactKey: Guid(b9de24523a11d714db3851b5f0f9d527) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Branch_01.prefab using Guid(b9de24523a11d714db3851b5f0f9d527) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'c68aa294a8af4f0aa0820e3656308ef0') in 0.0268202 seconds
+  Time since last request: 0.000042 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Reeds/reed_multiple.prefab
+  artifactKey: Guid(970ff20b48a9a884298122e1919eefb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Reeds/reed_multiple.prefab using Guid(970ff20b48a9a884298122e1919eefb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7798b5793ea55cdfef122e1c871b4955') in 3.8265119 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange
-  artifactKey: Guid(d8aea2a8618f3a44eba5e341146b5819) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Pines/Orange using Guid(d8aea2a8618f3a44eba5e341146b5819) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '63c38039c38f3e31962e41fb1bc765aa') in 0.0159022 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+  Time since last request: 0.000072 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Bush_03.prefab
+  artifactKey: Guid(34d3f526198dae440bb2ce6005d86055) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Bush_03.prefab using Guid(34d3f526198dae440bb2ce6005d86055) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e81aa2d3f52034ee038fba4e6d5e6edb') in 0.0321047 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/plant_lilypad.fbx
+  artifactKey: Guid(b7e2ec112c8dd444ea054273843f12d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/plant_lilypad.fbx using Guid(b7e2ec112c8dd444ea054273843f12d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2ff8394c700d1186493f5695882eb4ad') in 0.0472355 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_02.prefab
+  artifactKey: Guid(494f6d43e170e9145bc7865d243ee00b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_02.prefab using Guid(494f6d43e170e9145bc7865d243ee00b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b81b411978d593ebe845df881b713dad') in 0.0272073 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/palm.fbx
+  artifactKey: Guid(21e8df12c1dd43740bdb4603b8deb93c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/palm.fbx using Guid(21e8df12c1dd43740bdb4603b8deb93c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7e5bcea1c6a49f96b14cb5587842761a') in 0.0802446 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown_multiple.prefab
+  artifactKey: Guid(d24a2e215c6a37f4ab97648c27fdfd0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Brown/mushroom_brown_multiple.prefab using Guid(d24a2e215c6a37f4ab97648c27fdfd0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '33f1a1cadab1cc64891df956306a171b') in 0.0260873 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/Assets/model_3D/nha_la_1.glb
+  artifactKey: Guid(3a9ca28947bd11e4c86c8719a0bfe954) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/model_3D/nha_la_1.glb using Guid(3a9ca28947bd11e4c86c8719a0bfe954) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'af6efb2884ae65d2bc6835ca7fc26425') in 0.4786987 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000138 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Rock_01.fbx
+  artifactKey: Guid(e9089b1db16b58f4282a94e020b9c0e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Rock_01.fbx using Guid(e9089b1db16b58f4282a94e020b9c0e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '25d634a40d6abe2d3e38d80718b31926') in 0.0450382 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Bush_02.fbx
+  artifactKey: Guid(ba52853a69186a841a52a9cc2e9b77fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Bush_02.fbx using Guid(ba52853a69186a841a52a9cc2e9b77fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '688aea7463a772a5847107ae1ccf305d') in 0.0677565 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Grass_02.prefab
+  artifactKey: Guid(ffbddc4ef9676cc419e81e06aaa836d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Grass_02.prefab using Guid(ffbddc4ef9676cc419e81e06aaa836d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1ddd8fe0d1a5afc97c3196c345b6966d') in 0.0323424 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Palms/palm_curved.prefab
+  artifactKey: Guid(1817a9975b36c7c4e8a45fcee2bc24ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Palms/palm_curved.prefab using Guid(1817a9975b36c7c4e8a45fcee2bc24ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5916fde9ccc8d7d595ee504d54ba7c40') in 0.0419238 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000057 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/bush.fbx
+  artifactKey: Guid(d9d072b7ec5b5ab499b4cd9d4ff5e271) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/bush.fbx using Guid(d9d072b7ec5b5ab499b4cd9d4ff5e271) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c0ea45222d4717f530001cf7e010342b') in 0.0603272 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 19
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Models/ground.fbx
+  artifactKey: Guid(71adc36c61aa1814a86cf0cd42f6d1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Models/ground.fbx using Guid(71adc36c61aa1814a86cf0cd42f6d1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1be01fa6222037631699c704362ca575') in 0.0378656 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000062 seconds.
+  path: Assets/Assets/model_3D/me_giong.glb
+  artifactKey: Guid(1e7742d9ffbfb234b86680f4b2c0663c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/model_3D/me_giong.glb using Guid(1e7742d9ffbfb234b86680f4b2c0663c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a32f774d1ad42b4593acd5eebcc7edb0') in 0.5794883 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Rock_03.fbx
+  artifactKey: Guid(14125b656fb71fd4d9d65bfe344107ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Rock_03.fbx using Guid(14125b656fb71fd4d9d65bfe344107ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '50c5111e7f11e81f1c63fe477ebc422a') in 0.0436118 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Models/ground2.fbx
+  artifactKey: Guid(204c471bac201db4eba11a39b20759df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Demo/Models/ground2.fbx using Guid(204c471bac201db4eba11a39b20759df) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8d331dd1b1873e8c743f6e2469006d36') in 0.0326609 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/pine.fbx
+  artifactKey: Guid(b7ff1d6db53a3da4c8044d84a43f8e3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/pine.fbx using Guid(b7ff1d6db53a3da4c8044d84a43f8e3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '76337cc359767fc4c8f44b26508aeae4') in 0.1044639 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 38
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Lilypad/lilypad_flower.prefab
+  artifactKey: Guid(6f6ab4b025f90da49a4ddbd66cdec253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Lilypad/lilypad_flower.prefab using Guid(6f6ab4b025f90da49a4ddbd66cdec253) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2faf3ad80b8a383b25a7eb3b0d573c35') in 0.0278787 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Ground_02.fbx
+  artifactKey: Guid(57d3eed6d2253d24994d5ad37e00aedc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Ground_02.fbx using Guid(57d3eed6d2253d24994d5ad37e00aedc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0d9dd4c8c90edd591f2a2db51b14f310') in 0.0430147 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Ground_01.prefab
+  artifactKey: Guid(ebee340de387f334f9ac44e044abd8fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Ground_01.prefab using Guid(ebee340de387f334f9ac44e044abd8fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c485b291c703ac721a4f8a6224a3b970') in 0.0257564 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bamboo/bamboo_noleaves.prefab
+  artifactKey: Guid(6f0672dc4c9a93a4e862b9286ac7c875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Bamboo/bamboo_noleaves.prefab using Guid(6f0672dc4c9a93a4e862b9286ac7c875) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c8b1d79130fe5e3a953c7cc1360f0048') in 0.0319056 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red_multiple.prefab
+  artifactKey: Guid(30eef463851679d4b83b1fe0e484898b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Mushrooms/Red/mushroom_red_multiple.prefab using Guid(30eef463851679d4b83b1fe0e484898b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '730f4659cb8c19df453b315164174966') in 0.0229423 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000076 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/mushrooms.fbx
+  artifactKey: Guid(9be1c9482bfb33940a6e859b678da52a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/mushrooms.fbx using Guid(9be1c9482bfb33940a6e859b678da52a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '449548fb078cf41046d0e83c94f5bdaa') in 0.0919692 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 34
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Ground_03.prefab
+  artifactKey: Guid(3f9b178ccd3b86f4ebbfc1f5a2815e56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Ground_03.prefab using Guid(3f9b178ccd3b86f4ebbfc1f5a2815e56) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f38f7e1d3be70582ce4f5292ea80c7a7') in 0.0241012 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/Assets/model_3D/kitchen.glb
+  artifactKey: Guid(b25dcfcf6a36a5a48a175f3801cd1b95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/model_3D/kitchen.glb using Guid(b25dcfcf6a36a5a48a175f3801cd1b95) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6be5ba26ea1a484249634386d30dab1f') in 0.5332833 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Assets/Assets/model_3D/gia_lang.glb
+  artifactKey: Guid(96eda4034b357ef4c89aa00863605193) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/model_3D/gia_lang.glb using Guid(96eda4034b357ef4c89aa00863605193) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '71324156787f94a5d7e43aa61c689c2f') in 0.4993481 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000077 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Branch_01.fbx
+  artifactKey: Guid(5528351815fd4c04abf537f22c7e18f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Branch_01.fbx using Guid(5528351815fd4c04abf537f22c7e18f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b00d08b59bceb33e3fd40d1cc99fb4e') in 0.0498631 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.811775 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Rock_05.prefab
+  artifactKey: Guid(a778b631c6253a04899cb31bad047c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Rock_05.prefab using Guid(a778b631c6253a04899cb31bad047c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3f9445bbf34c14560981b2a2579dd937') in 0.0294067 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/sunflower.prefab
+  artifactKey: Guid(6b1899bfd265594449eff0f595aa1a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/sunflower.prefab using Guid(6b1899bfd265594449eff0f595aa1a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '164db7b0ba1bcb028cf59e3c2a6379fb') in 0.0279411 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Stump_01.prefab
+  artifactKey: Guid(eebb56c82efbd8d4bb0eb6bd925a0e9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Stump_01.prefab using Guid(eebb56c82efbd8d4bb0eb6bd925a0e9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c3b4c6475533034f659031d1d918f807') in 0.0269604 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Models/sunflower.fbx
+  artifactKey: Guid(3496aa4ed102b6d4f91425c5540ab55e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Models/sunflower.fbx using Guid(3496aa4ed102b6d4f91425c5540ab55e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c1d3c80b4457896e5014a8cd73ff6848') in 0.0412472 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_mid.prefab
+  artifactKey: Guid(2ea78d3b69ba46e4b8a672cd79a346a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_0_mid.prefab using Guid(2ea78d3b69ba46e4b8a672cd79a346a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c21f786792cfccd4d4c65a857a2d72eb') in 0.0245619 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_04.prefab
+  artifactKey: Guid(f0c16f0ea935ea64297ca1d4d55d9746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_04.prefab using Guid(f0c16f0ea935ea64297ca1d4d55d9746) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8ca76440e674f563519778cdd5ea9b77') in 0.023716 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Tree_03.fbx
+  artifactKey: Guid(69f0af3a0a6c73b4ab4b89eb82cdc488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Tree_03.fbx using Guid(69f0af3a0a6c73b4ab4b89eb82cdc488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7ff188486cf6b07c199cacbd51712aec') in 0.0470084 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_03.prefab
+  artifactKey: Guid(c60edd51c065ceb46b345849a03bc106) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_03.prefab using Guid(c60edd51c065ceb46b345849a03bc106) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '649284c118edc3fcfe713c34a75c4520') in 0.0259581 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Assets/SimpleNaturePack/Models/Tree_02.fbx
+  artifactKey: Guid(4471b1f7f824e4d44887e1364c6fc61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/SimpleNaturePack/Models/Tree_02.fbx using Guid(4471b1f7f824e4d44887e1364c6fc61a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6540a2064b8bd061d1e050d517de88b4') in 0.0467225 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_long.prefab
+  artifactKey: Guid(bef352b25cc7d42468167bb4bdbcdbcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Prefabs/Trees/Spherical/tree_2_long.prefab using Guid(bef352b25cc7d42468167bb4bdbcdbcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f8f575557a81da3ebd5ff9adc0f5b71f') in 0.0233166 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
