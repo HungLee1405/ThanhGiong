@@ -1,37 +1,59 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
 Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
+<<<<<<< HEAD
 OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'en' Physical Memory: 16104 MB
 [Licensing::IpcConnector] Successfully connected to: "LicenseClient-pc" at "2026-06-09T04:57:22.4270148Z"
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
 Date: 2026-06-09T04:57:22Z
+=======
+OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'vi' Physical Memory: 16118 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-06-08T14:37:24Z
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-08T14:37:24.633049Z"
+>>>>>>> parent of ce2e54a (map update)
 
 COMMAND LINE ARGUMENTS:
-D:\Unity\Unity Hub\6000.3.10f1\Editor\Unity.exe
+F:\GameDev\Unity\Editor\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker2
 -projectPath
+<<<<<<< HEAD
 D:/Unity/ThanhGiong/ThanhGiong
 -logFile
 Logs/AssetImportWorker2.log
 -srvPort
 53337
+=======
+F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+51200
+>>>>>>> parent of ce2e54a (map update)
 -licensingIpc
-LicenseClient-pc
+LicenseClient-Uyen Nguyen
 -job-worker-count
-5
+1
 -background-job-worker-count
 8
 -gc-helper-count
 1
 -name
 AssetImport
+<<<<<<< HEAD
 Successfully changed project path to: D:/Unity/ThanhGiong/ThanhGiong
 D:/Unity/ThanhGiong/ThanhGiong
+=======
+Successfully changed project path to: F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
+F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
+>>>>>>> parent of ce2e54a (map update)
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
     "memorysetup-temp-allocator-size-audio-worker=65536"
@@ -67,6 +89,7 @@ D:/Unity/ThanhGiong/ThanhGiong
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
+<<<<<<< HEAD
 Player connection [43048]  Target information:
 
 Player connection [43048]  * "[IP] 26.48.253.243 [Port] 0 [Flags] 2 [Guid] 3690029401 [EditorId] 3690029401 [Version] 1048832 [Id] WindowsEditor(7,MAB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
@@ -76,6 +99,15 @@ Player connection [43048]  * "[IP] 192.168.2.125 [Port] 0 [Flags] 2 [Guid] 36900
 Player connection [43048] Host joined multi-casting on [225.0.0.222:54997]...
 Player connection [43048] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 5
+=======
+Player connection [44444]  Target information:
+
+Player connection [44444]  * "[IP] 192.168.0.116 [Port] 0 [Flags] 2 [Guid] 2770297833 [EditorId] 2770297833 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [44444] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [44444] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 1
+>>>>>>> parent of ce2e54a (map update)
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
@@ -86,6 +118,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
+<<<<<<< HEAD
 Refreshing native plugins compatible for Editor in 2.70 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
@@ -397,3 +430,11 @@ Received Import Request.
 Start importing Assets/Assets/ToonTastic - Vegetation & Plants/Shaders/Standart(Double Sided).shader using Guid(8d5e8abbf57d4ce49b172772b659ea16) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'c103bfb9c7c873298c3617975b80b563') in 0.0263712 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
+=======
+Refreshing native plugins compatible for Editor in 20220.13 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.01 ms.
+Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
+[Subsystems] Discovering subsystems at path F:/GameDev/Unity/Editor/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+>>>>>>> parent of ce2e54a (map update)
