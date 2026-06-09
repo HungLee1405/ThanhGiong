@@ -1,11 +1,11 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-08T14:42:42.8389199Z"
 Built from '6000.3/staging' branch; Version is '6000.3.10f1 (e35f0c77bd8e) revision 14901004'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'vi' Physical Memory: 16118 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-06-06T00:39:29Z
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-06T00:39:29.7287622Z"
+Date: 2026-06-08T14:42:45Z
 
 COMMAND LINE ARGUMENTS:
 F:\GameDev\Unity\Editor\Editor\Unity.exe
@@ -19,7 +19,7 @@ F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
 -logFile
 Logs/AssetImportWorker4.log
 -srvPort
-51006
+51200
 -licensingIpc
 LicenseClient-Uyen Nguyen
 -job-worker-count
@@ -67,12 +67,12 @@ F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
-Player connection [6744]  Target information:
+Player connection [26344]  Target information:
 
-Player connection [6744]  * "[IP] 10.87.32.191 [Port] 0 [Flags] 2 [Guid] 1679807760 [EditorId] 1679807760 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [26344]  * "[IP] 192.168.0.116 [Port] 0 [Flags] 2 [Guid] 3049570102 [EditorId] 3049570102 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [6744] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [6744] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [26344] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [26344] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 1
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -84,8 +84,8 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 13.74 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
+Refreshing native plugins compatible for Editor in 610.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.01 ms.
 Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
 [Subsystems] Discovering subsystems at path F:/GameDev/Unity/Editor/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong/Assets
@@ -100,10 +100,10 @@ Initialize mono
 Mono path[0] = 'F:/GameDev/Unity/Editor/Editor/Data/Managed'
 Mono path[1] = 'F:/GameDev/Unity/Editor/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'F:/GameDev/Unity/Editor/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56256
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56164
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: F:/GameDev/Unity/Editor/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 2.665757 seconds.
-- Loaded All Assemblies, in 117.319 seconds
+Registered in 2.503256 seconds.
+- Loaded All Assemblies, in 123.495 seconds
 Native extension for WindowsStandalone target not found
