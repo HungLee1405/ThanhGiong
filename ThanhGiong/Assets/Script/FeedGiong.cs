@@ -5,13 +5,15 @@ public class FeedGiong : MonoBehaviour
 {
     [Header("References")]
     public GiongHunger giongHunger;
+    public InteractionUI interactionUI;
 
-    [Header("Food Settings")]
+    [Header("Feed Settings")]
+    public float feedTime = 1.5f;
     public float cookedRiceRestoreAmount = 15f;
 
-    [Header("Interaction Settings")]
-    public float feedTime = 1.5f;
-    public InteractionUI interactionUI;
+    [Header("Quest Settings")]
+    public bool reportQuestProgress = false;
+    public string targetItemId = "cooked_rice";
 
     private bool playerInRange = false;
     private bool isFeeding = false;
@@ -56,6 +58,7 @@ public class FeedGiong : MonoBehaviour
             if (interactionUI != null)
             {
                 interactionUI.Show("Đang đưa cơm cho mẹ Gióng...");
+                interactionUI.SetProgress(0f);
             }
         }
 
@@ -80,6 +83,8 @@ public class FeedGiong : MonoBehaviour
 
         if (!hasFood)
         {
+            ResetFeeding();
+
             if (interactionUI != null)
             {
                 interactionUI.Show("Bạn chưa có cơm để đưa cho mẹ Gióng");
@@ -96,8 +101,9 @@ public class FeedGiong : MonoBehaviour
 
         Debug.Log("Đã đưa cơm cho mẹ Gióng.");
 
-        isFeeding = false;
-        feedTimer = 0f;
+        TryReportQuestProgress();
+
+        ResetFeeding();
 
         if (interactionUI != null)
         {
@@ -106,49 +112,71 @@ public class FeedGiong : MonoBehaviour
         }
     }
 
+    private void TryReportQuestProgress()
+    {
+        if (!reportQuestProgress) return;
+
+        QuestManager questManager = FindFirstObjectByType<QuestManager>();
+
+        if (questManager == null) return;
+
+        QuestStep currentStep = questManager.GetCurrentStep();
+
+        if (currentStep == null) return;
+
+        if (currentStep.stepType != QuestStepType.FeedGiong)
+        {
+            return;
+        }
+
+        questManager.AddProgress(QuestStepType.FeedGiong, targetItemId, 1);
+    }
+
     private void CancelFeeding()
     {
-        isFeeding = false;
-        feedTimer = 0f;
+        if (!isFeeding) return;
+
+        ResetFeeding();
 
         if (interactionUI != null)
         {
+            interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
             interactionUI.SetProgress(0f);
-
-            if (playerInRange)
-            {
-                interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
-            }
         }
+    }
+
+    private void ResetFeeding()
+    {
+        isFeeding = false;
+        feedTimer = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInventory = other.GetComponent<PlayerInventory>();
-            playerInRange = true;
+        if (!other.CompareTag("Player")) return;
 
-            if (interactionUI != null)
-            {
-                interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
-            }
+        playerInventory = other.GetComponent<PlayerInventory>();
+        playerInRange = true;
+
+        if (interactionUI != null)
+        {
+            interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
+            interactionUI.SetProgress(0f);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        playerInventory = null;
+        playerInRange = false;
+
+        ResetFeeding();
+
+        if (interactionUI != null)
         {
-            CancelFeeding();
-
-            playerInventory = null;
-            playerInRange = false;
-
-            if (interactionUI != null)
-            {
-                interactionUI.Hide();
-            }
+            interactionUI.Hide();
         }
     }
 }

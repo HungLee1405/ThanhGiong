@@ -78,6 +78,13 @@ public class CookingPot : MonoBehaviour
         {
             Debug.Log("Nấu cơm thành công!");
 
+            QuestManager questManager = FindFirstObjectByType<QuestManager>();
+
+            if (questManager != null)
+            {
+                questManager.AddProgress(QuestStepType.CookRice, "cooked_rice", 1);
+            }
+
             if (interactionUI != null)
             {
                 interactionUI.Show("Nấu cơm xong!");

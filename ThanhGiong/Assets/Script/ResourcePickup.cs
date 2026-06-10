@@ -65,21 +65,34 @@ public class ResourcePickup : MonoBehaviour
     private void FinishCollecting()
     {
         bool success = false;
+        QuestStepType questStepType = QuestStepType.CollectWater;
+        string targetId = "";
 
         switch (resourceType)
         {
             case ResourceType.Rice:
                 success = playerInventory.AddRice(amount);
+                questStepType = QuestStepType.CollectRice;
+                targetId = "rice";
                 break;
 
             case ResourceType.Water:
                 success = playerInventory.AddWater(amount);
+                questStepType = QuestStepType.CollectWater;
+                targetId = "water";
                 break;
         }
 
         if (success)
         {
             Debug.Log("Đã lấy " + resourceType);
+
+            QuestManager questManager = FindFirstObjectByType<QuestManager>();
+
+            if (questManager != null)
+            {
+                questManager.AddProgress(questStepType, targetId, amount);
+            }
         }
         else
         {

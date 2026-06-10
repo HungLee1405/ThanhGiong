@@ -4,13 +4,8 @@ OS: 'Windows 11  (10.0.26200) CoreSingleLanguage' Language: 'vi' Physical Memory
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-06-09T17:48:31Z
-[Licensing::IpcConnector] Error: Connection to channel: "LicenseClient-Uyen Nguyen" failed; code: "0x80000009"
-[Licensing::Module] Unknown status, channelName: "LicenseClient-Uyen Nguyen"
-[Licensing::Module] LicensingClient has failed validation; ignoring
-[Licensing::Client] Error: "Licensing::LicensingClient::SendReceiveAndDeserialize" was called, but Editor is not connected to Licensing Client
-[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-Uyen Nguyen"
-[Licensing::IpcConnector] Channel LicenseClient-Uyen Nguyen-6000.3.10 doesn't exist
+Date: 2026-06-10T00:22:42Z
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-10T00:22:42.9808393Z"
 
 COMMAND LINE ARGUMENTS:
 F:\GameDev\Unity\Editor\Editor\Unity.exe
@@ -24,7 +19,7 @@ F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-49331
+53310
 -licensingIpc
 LicenseClient-Uyen Nguyen
 -job-worker-count
@@ -72,26 +67,25 @@ F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
-Player connection [44028]  Target information:
+Player connection [34964]  Target information:
 
-Player connection [44028]  * "[IP] 192.168.0.116 [Port] 0 [Flags] 2 [Guid] 913756641 [EditorId] 913756641 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [34964]  * "[IP] 10.87.32.191 [Port] 0 [Flags] 2 [Guid] 3378412727 [EditorId] 3378412727 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-L9JQ268) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [44028] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [44028] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [34964] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [34964] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 1
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
 Library Redirect Path: Library/
-[Licensing::Module] Successfully launched the LicensingClient (PId: 2956)
 [Physics::Module] Selected backend.
 [Physics::Module] Name: PhysX
 [Physics::Module] Id: 0xf2b8ea05
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 479.63 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.01 ms.
+Refreshing native plugins compatible for Editor in 745.93 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
 [Subsystems] Discovering subsystems at path F:/GameDev/Unity/Editor/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path F:/GameDev/Project/ThanhGiong-2026-06-05-21-53-22/ThanhGiong/Assets
@@ -106,44 +100,53 @@ Initialize mono
 Mono path[0] = 'F:/GameDev/Unity/Editor/Editor/Data/Managed'
 Mono path[1] = 'F:/GameDev/Unity/Editor/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'F:/GameDev/Unity/Editor/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56856
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56824
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: F:/GameDev/Unity/Editor/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.073760 seconds.
-- Loaded All Assemblies, in 17.707 seconds
+Registered in 0.004071 seconds.
+- Loaded All Assemblies, in 13.286 seconds
 Native extension for WindowsStandalone target not found
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              fca43f7a593c492aa3d2ac23f22a0c47
+  Correlation Id:          a405a676dc5f1c8e6be6da7737f0e455
+  External correlation Id: 7284536111478629641
+  Machine Id:              McNQbxrAexYBzWumsTU5zBSeDYc=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-Uyen Nguyen" (connect: 0.04s, validation: 0.01s, handshake: 42.48s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen-notifications" at "2026-06-10T00:23:25.4951181Z"
+[Licensing::Module] Licensing Background thread has ended after 42.55s
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in 11.973 seconds
-Domain Reload Profiling: 30114ms
-	BeginReloadAssembly (10276ms)
+- Finished resetting the current domain, in 22.969 seconds
+Domain Reload Profiling: 36252ms
+	BeginReloadAssembly (2458ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (2581ms)
-	RebuildCommonClasses (501ms)
-	RebuildNativeTypeToScriptingClass (46ms)
-	initialDomainReloadingComplete (2774ms)
-	LoadAllAssembliesAndSetupDomain (4543ms)
-		LoadAssemblies (8198ms)
+		CreateAndSetChildDomain (5ms)
+	RebuildCommonClasses (323ms)
+	RebuildNativeTypeToScriptingClass (74ms)
+	initialDomainReloadingComplete (470ms)
+	LoadAllAssembliesAndSetupDomain (9956ms)
+		LoadAssemblies (2464ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (3569ms)
-			TypeCache.Refresh (3557ms)
-				TypeCache.ScanAssembly (3442ms)
-			BuildScriptInfoCaches (1ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (11974ms)
+		AnalyzeDomain (9936ms)
+			TypeCache.Refresh (9930ms)
+				TypeCache.ScanAssembly (9304ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (22970ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (11316ms)
+		SetupLoadedEditorAssemblies (21958ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (754ms)
-			SetLoadedEditorAssemblies (239ms)
-			BeforeProcessingInitializeOnLoad (1189ms)
-			ProcessInitializeOnLoadAttributes (4851ms)
-			ProcessInitializeOnLoadMethodAttributes (4282ms)
+			InitializePlatformSupportModulesInManaged (590ms)
+			SetLoadedEditorAssemblies (33ms)
+			BeforeProcessingInitializeOnLoad (1426ms)
+			ProcessInitializeOnLoadAttributes (1082ms)
+			ProcessInitializeOnLoadMethodAttributes (18827ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -151,63 +154,20 @@ Domain Reload Profiling: 30114ms
 ========================================================================
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
-[Licensing::IpcConnector] Channel LicenseClient-Uyen Nguyen-6000.3.10 doesn't exist
-[Licensing::Module] Timed-out after 61.39s, waiting for channel: "LicenseClient-Uyen Nguyen-6000.3.10"
-[Licensing::Module] Error: Licensing initialization failed after 85.37s
 Begin MonoManager ReloadAssembly
-[Licensing::Module] Error: The connection with the Unity Licensing Client has been lost. Attempting to reconnect.
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen" at "2026-06-09T17:50:07.9179179Z"
-Failed to acquire global mutex Unity-LicenseClient-Uyen Nguyen-6000.3.10.
-Another instance of Unity.Licensing.Client is already running.
-Unhandled exception. System.ObjectDisposedException: Cannot access a disposed object.
-Object name: 'IServiceProvider'.
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ThrowHelper.ThrowObjectDisposedException()
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
-   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
-   at Unity.Licensing.Analytics.AnalyticBuilder.BuildTraceProvider()
-   at Unity.Licensing.Analytics.DependencyInjection.<>c.<AddAnalytics>b__0_4(IServiceProvider p)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(Type serviceType)
-   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
-   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
-   at Unity.Licensing.Client.CommandExecutors.Startup.ProgramInitializer.InitializeImpl()
-   at Unity.Licensing.Client.CommandExecutors.Startup.BaseInitializer.<Initialize>b__8_0()
-[Licensing::Client] Handshaking with LicensingClient:
-  Version:                 1.17.4+4293ba1
-  Session Id:              f4f7e2ab332d4ab3bacf8adb6cada8ce
-  Correlation Id:          c11da758a96df49ad4f5c48b3239425a
-  External correlation Id: 8582590286902670452
-  Machine Id:              McNQbxrAexYBzWumsTU5zBSeDYc=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-Uyen Nguyen" (connect: 0.00s, validation: 0.69s, handshake: 871.68s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Uyen Nguyen-notifications" at "2026-06-09T18:04:40.3682104Z"
-[Licensing::Module] The re-connection attempt was successful.
 [Licensing::Client] Successfully resolved entitlement details
 [Licensing::Module] License group:
   Id: F4-4NHA-X586-XBBN-ZF9Q-XXXX
   Product: Unity Personal
   Type: ULF
-  Expiration: 2026-07-16T18:49:48Z
+  Expiration: 2026-07-17T01:20:17Z
 [Licensing::Module] License group:
   Id: 18968329531353-UnityPersXXXX
   Product: Unity Personal
   Type: Assigned
   Expiration: Unlimited
-[Licensing::Client] Successfully resolved entitlement details
-[Licensing::Module] License group:
-  Id: F4-4NHA-X586-XBBN-ZF9Q-XXXX
-  Product: Unity Personal
-  Type: ULF
-  Expiration: 2026-07-16T18:49:48Z
-[Licensing::Module] License group:
-  Id: 18968329531353-UnityPersXXXX
-  Product: Unity Personal
-  Type: Assigned
-  Expiration: Unlimited
-- Loaded All Assemblies, in 1055.428 seconds
-Refreshing native plugins compatible for Editor in 882.64 ms, found 3 plugins.
+- Loaded All Assemblies, in 26.077 seconds
+Refreshing native plugins compatible for Editor in 67.00 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
@@ -218,142 +178,46 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in 69.816 seconds
-Domain Reload Profiling: 1124745ms
-	BeginReloadAssembly (974486ms)
-		ExecutionOrderSort (1ms)
-		DisableScriptedObjects (587ms)
+- Finished resetting the current domain, in 20.543 seconds
+Domain Reload Profiling: 46630ms
+	BeginReloadAssembly (6308ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (14ms)
 		BackupInstance (0ms)
-		ReleaseScriptingObjects (81ms)
-		CreateAndSetChildDomain (3235ms)
-	RebuildCommonClasses (1064ms)
-	RebuildNativeTypeToScriptingClass (129ms)
-	initialDomainReloadingComplete (6586ms)
-	LoadAllAssembliesAndSetupDomain (72660ms)
-		LoadAssemblies (161942ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (150ms)
+	RebuildCommonClasses (162ms)
+	RebuildNativeTypeToScriptingClass (47ms)
+	initialDomainReloadingComplete (166ms)
+	LoadAllAssembliesAndSetupDomain (19394ms)
+		LoadAssemblies (19435ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (1719ms)
-			TypeCache.Refresh (1337ms)
-				TypeCache.ScanAssembly (1184ms)
-			BuildScriptInfoCaches (320ms)
-			ResolveRequiredComponents (32ms)
-	FinalizeReload (69821ms)
+		AnalyzeDomain (5718ms)
+			TypeCache.Refresh (4664ms)
+				TypeCache.ScanAssembly (4434ms)
+			BuildScriptInfoCaches (839ms)
+			ResolveRequiredComponents (151ms)
+	FinalizeReload (20553ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (52412ms)
+		SetupLoadedEditorAssemblies (9095ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (8ms)
-			SetLoadedEditorAssemblies (68ms)
-			BeforeProcessingInitializeOnLoad (35095ms)
-			ProcessInitializeOnLoadAttributes (15017ms)
-			ProcessInitializeOnLoadMethodAttributes (2212ms)
-			AfterProcessingInitializeOnLoad (10ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (19ms)
+			BeforeProcessingInitializeOnLoad (3802ms)
+			ProcessInitializeOnLoadAttributes (4363ms)
+			ProcessInitializeOnLoadMethodAttributes (879ms)
+			AfterProcessingInitializeOnLoad (21ms)
 			EditorAssembliesLoaded (1ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (68ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 17.02 seconds
-Refreshing native plugins compatible for Editor in 13.43 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (109ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.21 seconds
+Refreshing native plugins compatible for Editor in 6.48 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 16 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6561 unused Assets / (8.9 MB). Loaded Objects now: 7389.
-Memory consumption went from 144.9 MB to 136.0 MB.
-Total: 55.448500 ms (FindLiveObjects: 1.978000 ms CreateObjectMapping: 2.048300 ms MarkObjects: 24.358900 ms  DeleteObjects: 27.061500 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 15746.136942 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Flowers_02.prefab
-  artifactKey: Guid(299e7a1cb6456cf4fa6079cf5978df9b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Flowers_02.prefab using Guid(299e7a1cb6456cf4fa6079cf5978df9b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a3b61faa9d930d6fc4221a3fed4a416f') in 6.0150819 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000086 seconds.
-  path: Assets/Assets/model_3D/gieng.glb
-  artifactKey: Guid(17cab8fb572e6ca4c81f5c7ae5f50b10) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/model_3D/gieng.glb using Guid(17cab8fb572e6ca4c81f5c7ae5f50b10) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '6c67c4542f0b5a436e7337d2b7d1b10b') in 30.7453218 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000057 seconds.
-  path: Assets/Assets/IgniteCoders/Simple Water Shader/Resources/WaterReflection.renderTexture
-  artifactKey: Guid(4ae8ae7350b67b44785d874c413a2e03) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Resources/WaterReflection.renderTexture using Guid(4ae8ae7350b67b44785d874c413a2e03) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9d4e0c2eb349619d7a5dd64c9f1e3386') in 1.9183261 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000055 seconds.
-  path: Assets/Assets/IgniteCoders/Simple Water Shader/Info
-  artifactKey: Guid(632838a6d3dbd974195a1f7f34ded3f1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Info using Guid(632838a6d3dbd974195a1f7f34ded3f1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '43fa73c1a6a4c70cb04807522030fa65') in 1.0961915 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000281 seconds.
-  path: Assets/Assets/IgniteCoders/Simple Water Shader/Demo.unity
-  artifactKey: Guid(d1c3109bdb54ad54c8a2b2838528e640) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Demo.unity using Guid(d1c3109bdb54ad54c8a2b2838528e640) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '25ea7e48d9dc372f594b64aa5dcd7800') in 1.3444725 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000059 seconds.
-  path: Assets/Assets/model_3D/Idle.fbx
-  artifactKey: Guid(ecf88a06d3f6c91419318c92bec92dc3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/model_3D/Idle.fbx using Guid(ecf88a06d3f6c91419318c92bec92dc3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '6ab85969a483680901e20e3088329315') in 6.9013988 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 93
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Scenes/SampleScene.unity
-  artifactKey: Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Scenes/SampleScene.unity using Guid(99c9720ab356a0642a771bea13969a05) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '1cbf1323db756aa7c5662607539fbde3') in 0.3512057 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Assets/IgniteCoders/Simple Water Shader/Resources/Water_mat_03.mat
-  artifactKey: Guid(19ac4fcfcf42b4344a6c7d97a5cd61fc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Resources/Water_mat_03.mat using Guid(19ac4fcfcf42b4344a6c7d97a5cd61fc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '73fd1c0bf8bc9c117e3e8440f8b71a55') in 1.2717656 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/Assets/IgniteCoders/Simple Water Shader/Demo/LightingData.asset
-  artifactKey: Guid(61dbc3ce640d7cd4a8871b7afba747bf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/IgniteCoders/Simple Water Shader/Demo/LightingData.asset using Guid(61dbc3ce640d7cd4a8871b7afba747bf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a38e21070a1e0bef563dbf569ba36a0e') in 0.6040649 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_02.prefab
-  artifactKey: Guid(494f6d43e170e9145bc7865d243ee00b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Mushroom_02.prefab using Guid(494f6d43e170e9145bc7865d243ee00b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9a5ac6f13fa79887b56e1bc8eb229ea6') in 1.6060671 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Tree_01.prefab
-  artifactKey: Guid(88f2fd29f58b9734683512546acec310) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Tree_01.prefab using Guid(88f2fd29f58b9734683512546acec310) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'dd2b9f607c5733203bd3e073e8ca4181') in 2.2181909 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Assets/SimpleNaturePack/Prefabs/Flowers_01.prefab
-  artifactKey: Guid(ac8efb728f1fb9b4092c4df591c827ca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Assets/SimpleNaturePack/Prefabs/Flowers_01.prefab using Guid(ac8efb728f1fb9b4092c4df591c827ca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ded1b9bbe9807d8efdcacb5a92e903ef') in 0.9109074 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 16
+Unloading 6568 unused Assets / (3.0 MB). Loaded Objects now: 7396.
+Memory consumption went from 144.8 MB to 141.8 MB.
+Total: 90.727700 ms (FindLiveObjects: 9.314300 ms CreateObjectMapping: 7.067900 ms MarkObjects: 49.906900 ms  DeleteObjects: 24.436200 ms)
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server

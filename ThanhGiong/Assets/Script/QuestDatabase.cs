@@ -106,6 +106,16 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 1,
                 questName = "Nhiệm vụ ngày 1",
+                questDescription = "Đưa cơm cho mẹ Gióng.",
+                stepType = QuestStepType.FeedGiong,
+                targetItemId = "cooked_rice",
+                requiredAmount = 1
+            },
+
+            new QuestStep
+            {
+                day = 1,
+                questName = "Nhiệm vụ ngày 1",
                 questDescription = "Nói chuyện lại với mẹ Gióng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "giong_mother",

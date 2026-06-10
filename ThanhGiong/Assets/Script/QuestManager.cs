@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
     public QuestDatabase questDatabase;
     public PlayerHubUI playerHubUI;
     public GameDayManager gameDayManager;
+    public GiongHunger giongHunger;
 
     [Header("Runtime")]
     public int currentDay = 1;
@@ -192,6 +193,29 @@ public class QuestManager : MonoBehaviour
         }
 
         RefreshQuestUI();
+        CheckStartDayCountdown();
+    }
+
+    private void CheckStartDayCountdown()
+    {
+        QuestStep step = GetCurrentStep();
+
+        if (step == null) return;
+
+        if (step.stepType == QuestStepType.SurviveUntilDayEnd)
+        {
+            if (gameDayManager != null)
+            {
+                gameDayManager.StartDayCountdown();
+            }
+
+            if (giongHunger != null)
+            {
+                giongHunger.StartHungerDrain();
+            }
+
+            Debug.Log("Đã vào giai đoạn sinh tồn. Đồng hồ và thanh đói bắt đầu chạy.");
+        }
     }
 
     private void CompleteDayQuest()
@@ -244,4 +268,5 @@ public class QuestManager : MonoBehaviour
             "- " + step.questDescription + progressText
         );
     }
+
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class GameDayManager : MonoBehaviour
 {
     [Header("Day Settings")]
@@ -10,18 +9,27 @@ public class GameDayManager : MonoBehaviour
 
     [Header("Runtime")]
     public float remainingTime;
-    public bool isDayRunning = true;
+    public bool isDayRunning = false;
 
     [Header("References")]
     public PlayerHubUI playerHubUI;
     public QuestManager questManager;
+    public GiongHunger giongHunger;
+
+    private bool hasStartedCountdownThisDay = false;
 
     private void Start()
     {
         remainingTime = dayDuration;
+        isDayRunning = false;
+        hasStartedCountdownThisDay = false;
+
+        if (giongHunger != null)
+        {
+            giongHunger.ResetForNewDay();
+        }
 
         UpdateDayUI();
-        UpdateQuestByDay();
     }
 
     private void Update()
@@ -30,13 +38,36 @@ public class GameDayManager : MonoBehaviour
 
         remainingTime -= Time.deltaTime;
 
-        if (remainingTime <= 0)
+        if (remainingTime <= 0f)
         {
-            remainingTime = 0;
+            remainingTime = 0f;
+            UpdateDayUI();
             EndCurrentDay();
+            return;
         }
 
         UpdateDayUI();
+    }
+
+    public void StartDayCountdown()
+    {
+        if (hasStartedCountdownThisDay)
+        {
+            return;
+        }
+
+        remainingTime = dayDuration;
+        isDayRunning = true;
+        hasStartedCountdownThisDay = true;
+
+        Debug.Log("Bắt đầu đếm ngược ngày " + currentDay);
+
+        UpdateDayUI();
+    }
+
+    public void StopDayCountdown()
+    {
+        isDayRunning = false;
     }
 
     private void UpdateDayUI()
@@ -51,7 +82,32 @@ public class GameDayManager : MonoBehaviour
     {
         isDayRunning = false;
 
-        Debug.Log("Day " + currentDay + " ended.");
+        Debug.Log("Ngày " + currentDay + " đã kết thúc.");
+
+        if (giongHunger != null)
+        {
+            giongHunger.StopHungerDrain();
+
+            if (!giongHunger.IsDaySuccess())
+            {
+                Debug.Log("Thất bại! Thanh đói của Gióng dưới 80%.");
+
+                if (playerHubUI != null)
+                {
+                    playerHubUI.UpdateQuestUI(
+                        "Thất bại",
+                        "Thanh đói của Gióng đã xuống dưới 80%. Hãy chơi lại ngày này."
+                    );
+                }
+
+                return;
+            }
+        }
+
+        if (questManager != null)
+        {
+            questManager.CompleteSurviveStep();
+        }
 
         if (currentDay < maxDay)
         {
@@ -67,17 +123,24 @@ public class GameDayManager : MonoBehaviour
     {
         currentDay++;
         remainingTime = dayDuration;
-        isDayRunning = true;
+        isDayRunning = false;
+        hasStartedCountdownThisDay = false;
 
-        Debug.Log("Start Day " + currentDay);
+        Debug.Log("Bắt đầu ngày " + currentDay);
 
         UpdateDayUI();
+
+        if (giongHunger != null)
+        {
+            giongHunger.ResetForNewDay();
+        }
 
         if (questManager != null)
         {
             questManager.LoadDay(currentDay);
         }
     }
+    
 
     private void FinishGame()
     {
@@ -89,63 +152,6 @@ public class GameDayManager : MonoBehaviour
                 "Hoàn thành",
                 "Thánh Gióng đã sẵn sàng xuất trận!"
             );
-        }
-    }
-
-    private void UpdateQuestByDay()
-    {
-        if (playerHubUI == null) return;
-
-        switch (currentDay)
-        {
-            case 1:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 1",
-                    "- Nói chuyện với Già Làng\n- Học cách lấy gạo và nước\n- Chuẩn bị nuôi Thánh Gióng"
-                );
-                break;
-
-            case 2:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 2",
-                    "- Tiếp tục nấu cơm trắng\n- Giữ thanh đói của Gióng trên 80%"
-                );
-                break;
-
-            case 3:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 3",
-                    "- Bắt gà xổng chuồng\n- Mở khóa món Cơm Gà\n- Tiếp tục nuôi Thánh Gióng"
-                );
-                break;
-
-            case 4:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 4",
-                    "- Khai thác quặng sắt\n- Tích trữ sắt cho Thợ Rèn\n- Vẫn phải giữ Gióng no bụng"
-                );
-                break;
-
-            case 5:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 5",
-                    "- Thu hoạch tre\n- Mở khóa món Cơm Lam\n- Chuẩn bị vật liệu phòng thủ"
-                );
-                break;
-
-            case 6:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 6",
-                    "- Tổng lực dự trữ gạo, nước, sắt và tre\n- Giữ thanh đói của Gióng trên 80%"
-                );
-                break;
-
-            case 7:
-                playerHubUI.UpdateQuestUI(
-                    "Nhiệm vụ Ngày 7",
-                    "- Hỗ trợ Thợ Rèn\n- Làm nguội vũ khí bằng nước\n- Cho Gióng ăn liên tục trước giờ xuất trận"
-                );
-                break;
         }
     }
 }

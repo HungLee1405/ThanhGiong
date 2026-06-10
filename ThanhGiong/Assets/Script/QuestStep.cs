@@ -6,6 +6,7 @@ public class QuestStep
 {
     public int day;
     public string questName;
+
     [TextArea(2, 5)]
     public string questDescription;
 
