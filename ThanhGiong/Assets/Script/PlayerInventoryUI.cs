@@ -8,6 +8,8 @@ public class PlayerInventoryUI : MonoBehaviour
     [Header("Slots")]
     public ItemSlotUI[] slots;
 
+    private int highlightedSlotIndex = -1;
+
     private void Start()
     {
         if (playerInventory == null)
@@ -26,6 +28,7 @@ public class PlayerInventoryUI : MonoBehaviour
         }
 
         UpdateUI();
+        HighlightSlot(-1);
     }
 
     private void OnDestroy()
@@ -44,14 +47,35 @@ public class PlayerInventoryUI : MonoBehaviour
         {
             if (slots[i] == null) continue;
 
-            if (playerInventory != null && i < playerInventory.items.Count)
+            InventoryItem item = null;
+
+            if (playerInventory != null)
             {
-                slots[i].SetSlot(playerInventory.items[i], i + 1);
+                item = playerInventory.GetItemAtSlot(i);
             }
-            else
+
+            slots[i].SetSlot(item, i + 1);
+            slots[i].SetHighlight(i == highlightedSlotIndex);
+        }
+    }
+
+    public void HighlightSlot(int slotIndex)
+    {
+        highlightedSlotIndex = slotIndex;
+
+        if (slots == null) return;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i] != null)
             {
-                slots[i].ClearSlot(i + 1);
+                slots[i].SetHighlight(i == highlightedSlotIndex);
             }
         }
+    }
+
+    public void ClearHighlight()
+    {
+        HighlightSlot(-1);
     }
 }

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: bamboo
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemId: bamboo
-  itemName: Tree
-  icon: {fileID: 21300000, guid: 48434c973d92285418902992409f6da9, type: 3}
+  itemName: Tre
+  itemIcon: {fileID: 21300000, guid: 48434c973d92285418902992409f6da9, type: 3}
   stackable: 1
   maxStack: 5
+  handPrefab: {fileID: 0}

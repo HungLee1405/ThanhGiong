@@ -13,20 +13,16 @@ public class NPCDialogue : MonoBehaviour
 
     [Header("References")]
     public QuestManager questManager;
+    public DialogueManager dialogueManager;
 
     [Header("UI References")]
     public GameObject interactionTextObject;
-    public TextMeshProUGUI interactionText;
+    public TMP_Text interactionText;
 
-    public GameObject dialoguePanel;
-    public TextMeshProUGUI npcNameText;
-    public TextMeshProUGUI dialogueContentText;
+    [Header("World Name")]
+    public TMP_Text worldNameText;
 
     private bool playerInRange = false;
-    private bool dialogueOpen = false;
-
-    private string[] currentDialogueLines;
-    private int currentLineIndex = 0;
 
     private void Start()
     {
@@ -35,25 +31,29 @@ public class NPCDialogue : MonoBehaviour
             questManager = FindFirstObjectByType<QuestManager>();
         }
 
+        if (dialogueManager == null)
+        {
+            dialogueManager = FindFirstObjectByType<DialogueManager>();
+        }
+
+        if (worldNameText != null)
+        {
+            worldNameText.text = npcName;
+            worldNameText.gameObject.SetActive(true);
+        }
+
         HideInteractionText();
-        HideDialogue();
     }
 
     private void Update()
     {
         if (Keyboard.current == null) return;
         if (!playerInRange) return;
+        if (dialogueManager != null && dialogueManager.IsTalking()) return;
 
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (!dialogueOpen)
-            {
-                TryOpenDialogue();
-            }
-            else
-            {
-                NextDialogueLine();
-            }
+            TryOpenDialogue();
         }
     }
 
@@ -65,76 +65,41 @@ public class NPCDialogue : MonoBehaviour
             return;
         }
 
+        if (dialogueManager == null)
+        {
+            Debug.LogWarning("NPCDialogue chưa tìm thấy DialogueManager.");
+            return;
+        }
+
         if (!questManager.CanTalkToNPC(npcId))
         {
             Debug.Log("NPC này không phải mục tiêu nhiệm vụ hiện tại: " + npcId);
             return;
         }
 
-        currentDialogueLines = questManager.GetCurrentDialogueForNPC(npcId);
+        string[] dialogueLines = questManager.GetCurrentDialogueForNPC(npcId);
 
-        if (currentDialogueLines == null || currentDialogueLines.Length == 0)
+        if (dialogueLines == null || dialogueLines.Length == 0)
         {
             Debug.LogWarning("NPC không có lời thoại cho nhiệm vụ hiện tại: " + npcId);
             return;
         }
 
-        dialogueOpen = true;
-        currentLineIndex = 0;
-
         HideInteractionText();
-        ShowDialogueLine();
-    }
 
-    private void ShowDialogueLine()
-    {
-        if (dialoguePanel != null)
-        {
-            dialoguePanel.SetActive(true);
-        }
-
-        if (npcNameText != null)
-        {
-            npcNameText.text = npcName;
-        }
-
-        if (dialogueContentText != null)
-        {
-            dialogueContentText.text = currentDialogueLines[currentLineIndex];
-        }
-    }
-
-    private void NextDialogueLine()
-    {
-        currentLineIndex++;
-
-        if (currentDialogueLines != null && currentLineIndex < currentDialogueLines.Length)
-        {
-            ShowDialogueLine();
-            return;
-        }
-
-        FinishDialogue();
-    }
-
-    private void FinishDialogue()
-    {
-        dialogueOpen = false;
-        HideDialogue();
-
-        if (questManager != null)
+        dialogueManager.StartDialogue(npcName, dialogueLines, () =>
         {
             questManager.CompleteTalkToNPC(npcId);
-        }
 
-        if (playerInRange && questManager != null && questManager.CanTalkToNPC(npcId))
-        {
-            ShowInteractionText();
-        }
-        else
-        {
-            HideInteractionText();
-        }
+            if (playerInRange && questManager.CanTalkToNPC(npcId))
+            {
+                ShowInteractionText();
+            }
+            else
+            {
+                HideInteractionText();
+            }
+        });
     }
 
     private void ShowInteractionText()
@@ -158,14 +123,6 @@ public class NPCDialogue : MonoBehaviour
         }
     }
 
-    private void HideDialogue()
-    {
-        if (dialoguePanel != null)
-        {
-            dialoguePanel.SetActive(false);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -183,9 +140,6 @@ public class NPCDialogue : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         playerInRange = false;
-        dialogueOpen = false;
-
         HideInteractionText();
-        HideDialogue();
     }
 }

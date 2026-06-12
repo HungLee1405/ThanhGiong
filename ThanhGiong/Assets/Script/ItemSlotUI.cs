@@ -10,6 +10,9 @@ public class ItemSlotUI : MonoBehaviour
     public TextMeshProUGUI amountText;
     public TextMeshProUGUI hotkeyText;
 
+    [Header("Highlight")]
+    public GameObject highlightObject;
+
     public void SetSlot(InventoryItem inventoryItem, int slotNumber)
     {
         if (inventoryItem == null || inventoryItem.itemData == null || inventoryItem.amount <= 0)
@@ -26,26 +29,24 @@ public class ItemSlotUI : MonoBehaviour
         if (itemIcon != null)
         {
             itemIcon.gameObject.SetActive(true);
-            itemIcon.sprite = inventoryItem.itemData.icon;
+            itemIcon.enabled = true;
+            itemIcon.sprite = inventoryItem.itemData.itemIcon;
             itemIcon.preserveAspect = true;
+
+            Color color = itemIcon.color;
+            color.a = 1f;
+            itemIcon.color = color;
         }
 
         if (amountText != null)
         {
-            if (inventoryItem.itemData.stackable)
-            {
-                amountText.gameObject.SetActive(true);
-                amountText.text = inventoryItem.amount.ToString();
-            }
-            else
-            {
-                amountText.gameObject.SetActive(false);
-                amountText.text = "";
-            }
+            amountText.gameObject.SetActive(false);
+            amountText.text = "";
         }
 
         if (hotkeyText != null)
         {
+            hotkeyText.gameObject.SetActive(true);
             hotkeyText.text = slotNumber.ToString();
         }
     }
@@ -60,6 +61,7 @@ public class ItemSlotUI : MonoBehaviour
         if (itemIcon != null)
         {
             itemIcon.sprite = null;
+            itemIcon.enabled = false;
             itemIcon.gameObject.SetActive(false);
         }
 
@@ -71,7 +73,16 @@ public class ItemSlotUI : MonoBehaviour
 
         if (hotkeyText != null)
         {
+            hotkeyText.gameObject.SetActive(true);
             hotkeyText.text = slotNumber.ToString();
+        }
+    }
+
+    public void SetHighlight(bool active)
+    {
+        if (highlightObject != null)
+        {
+            highlightObject.SetActive(active);
         }
     }
 }

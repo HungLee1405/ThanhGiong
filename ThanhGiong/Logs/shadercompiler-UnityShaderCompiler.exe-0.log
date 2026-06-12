@@ -1,3 +1,4 @@
 Base path: 'F:/GameDev/Unity/Editor/Editor/Data', plugins path 'F:/GameDev/Unity/Editor/Editor/Data/PlaybackEngines', jobs: y
 Cmd: initializeCompiler
 
+Cmd: shutdown

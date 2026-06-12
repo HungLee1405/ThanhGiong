@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class GameDayManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class GameDayManager : MonoBehaviour
     [Header("Runtime")]
     public float remainingTime;
     public bool isDayRunning = false;
+    public bool isTransitioningDay = false;
+
+    [Header("Transition")]
+    public DayTransitionUI dayTransitionUI;
 
     [Header("References")]
     public PlayerHubUI playerHubUI;
@@ -22,25 +27,24 @@ public class GameDayManager : MonoBehaviour
     {
         remainingTime = dayDuration;
         isDayRunning = false;
+        isTransitioningDay = false;
         hasStartedCountdownThisDay = false;
 
-        if (giongHunger != null)
-        {
-            giongHunger.ResetForNewDay();
-        }
-
+        ResetGiongHunger();
         UpdateDayUI();
+        LoadQuestForCurrentDay();
     }
 
     private void Update()
     {
         if (!isDayRunning) return;
+        if (isTransitioningDay) return;
 
         remainingTime -= Time.deltaTime;
 
-        if (remainingTime <= 0f)
+        if (remainingTime <= 0)
         {
-            remainingTime = 0f;
+            remainingTime = 0;
             UpdateDayUI();
             EndCurrentDay();
             return;
@@ -70,6 +74,52 @@ public class GameDayManager : MonoBehaviour
         isDayRunning = false;
     }
 
+    public void EndCurrentDay()
+    {
+        if (isTransitioningDay) return;
+
+        StartCoroutine(EndCurrentDayRoutine());
+    }
+
+    private IEnumerator EndCurrentDayRoutine()
+    {
+        isTransitioningDay = true;
+        isDayRunning = false;
+
+        if (currentDay >= maxDay)
+        {
+            FinishGame();
+            isTransitioningDay = false;
+            yield break;
+        }
+
+        int nextDay = currentDay + 1;
+
+        if (dayTransitionUI != null)
+        {
+            yield return StartCoroutine(dayTransitionUI.PlayDayTransition(nextDay));
+        }
+
+        GoToNextDay(nextDay);
+
+        isTransitioningDay = false;
+    }
+
+    private void GoToNextDay(int nextDay)
+    {
+        currentDay = nextDay;
+        remainingTime = dayDuration;
+
+        isDayRunning = false;
+        hasStartedCountdownThisDay = false;
+
+        Debug.Log("Bắt đầu ngày " + currentDay);
+
+        ResetGiongHunger();
+        UpdateDayUI();
+        LoadQuestForCurrentDay();
+    }
+
     private void UpdateDayUI()
     {
         if (playerHubUI != null)
@@ -78,73 +128,28 @@ public class GameDayManager : MonoBehaviour
         }
     }
 
-    private void EndCurrentDay()
+    private void LoadQuestForCurrentDay()
     {
-        isDayRunning = false;
-
-        Debug.Log("Ngày " + currentDay + " đã kết thúc.");
-
-        if (giongHunger != null)
-        {
-            giongHunger.StopHungerDrain();
-
-            if (!giongHunger.IsDaySuccess())
-            {
-                Debug.Log("Thất bại! Thanh đói của Gióng dưới 80%.");
-
-                if (playerHubUI != null)
-                {
-                    playerHubUI.UpdateQuestUI(
-                        "Thất bại",
-                        "Thanh đói của Gióng đã xuống dưới 80%. Hãy chơi lại ngày này."
-                    );
-                }
-
-                return;
-            }
-        }
-
-        if (questManager != null)
-        {
-            questManager.CompleteSurviveStep();
-        }
-
-        if (currentDay < maxDay)
-        {
-            GoToNextDay();
-        }
-        else
-        {
-            FinishGame();
-        }
-    }
-
-    private void GoToNextDay()
-    {
-        currentDay++;
-        remainingTime = dayDuration;
-        isDayRunning = false;
-        hasStartedCountdownThisDay = false;
-
-        Debug.Log("Bắt đầu ngày " + currentDay);
-
-        UpdateDayUI();
-
-        if (giongHunger != null)
-        {
-            giongHunger.ResetForNewDay();
-        }
-
         if (questManager != null)
         {
             questManager.LoadDay(currentDay);
         }
     }
-    
+
+    private void ResetGiongHunger()
+    {
+        if (giongHunger != null)
+        {
+            giongHunger.ResetForNewDay();
+        }
+    }
 
     private void FinishGame()
     {
         Debug.Log("Game finished after Day " + maxDay);
+
+        isDayRunning = false;
+        isTransitioningDay = false;
 
         if (playerHubUI != null)
         {

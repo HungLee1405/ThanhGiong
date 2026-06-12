@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -22,6 +23,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!isTalking) return;
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            NextLine();
+        }
+    }
+
     public void StartDialogue(string npcName, string[] newLines, Action onEnd = null)
     {
         if (newLines == null || newLines.Length == 0)
@@ -35,17 +47,31 @@ public class DialogueManager : MonoBehaviour
         isTalking = true;
         onDialogueEnd = onEnd;
 
-        dialoguePanel.SetActive(true);
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(true);
+        }
 
         if (dialogueNpcNameText != null)
         {
             dialogueNpcNameText.text = npcName;
         }
+        else
+        {
+            Debug.LogWarning("Chưa gắn dialogueNpcNameText trong DialogueManager.");
+        }
 
-        dialogueText.text = lines[index];
+        if (dialogueText != null)
+        {
+            dialogueText.text = lines[index];
+        }
+        else
+        {
+            Debug.LogWarning("Chưa gắn dialogueText trong DialogueManager.");
+        }
     }
 
-    public void NextLine()
+    private void NextLine()
     {
         if (!isTalking) return;
 
@@ -53,7 +79,10 @@ public class DialogueManager : MonoBehaviour
 
         if (index < lines.Length)
         {
-            dialogueText.text = lines[index];
+            if (dialogueText != null)
+            {
+                dialogueText.text = lines[index];
+            }
         }
         else
         {
