@@ -1,21 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum ResourceType
-{
-    Rice,
-    Water
-}
-
 public class ResourcePickup : MonoBehaviour
 {
-    [Header("Resource Settings")]
-    public ResourceType resourceType;
+    [Header("Item Settings")]
+    public ItemData itemData;
     public int amount = 1;
 
     [Header("Interaction Settings")]
     public float collectTime = 2f;
     public InteractionUI interactionUI;
+
+    [Header("Quest Settings")]
+    public bool reportQuestProgress = true;
 
     private bool playerInRange = false;
     private bool isCollecting = false;
@@ -41,6 +38,8 @@ public class ResourcePickup : MonoBehaviour
 
     private void StartCollecting()
     {
+        if (itemData == null) return;
+
         if (!isCollecting)
         {
             isCollecting = true;
@@ -49,11 +48,9 @@ public class ResourcePickup : MonoBehaviour
 
         collectTimer += Time.deltaTime;
 
-        float progress = collectTimer / collectTime;
-
         if (interactionUI != null)
         {
-            interactionUI.SetProgress(progress);
+            interactionUI.SetProgress(collectTimer / collectTime);
         }
 
         if (collectTimer >= collectTime)
@@ -64,54 +61,69 @@ public class ResourcePickup : MonoBehaviour
 
     private void FinishCollecting()
     {
-        bool success = false;
-        QuestStepType questStepType = QuestStepType.CollectWater;
-        string targetId = "";
-
-        switch (resourceType)
+        if (itemData == null)
         {
-            case ResourceType.Rice:
-                success = playerInventory.AddRice(amount);
-                questStepType = QuestStepType.CollectRice;
-                targetId = "rice";
-                break;
-
-            case ResourceType.Water:
-                success = playerInventory.AddWater(amount);
-                questStepType = QuestStepType.CollectWater;
-                targetId = "water";
-                break;
+            ResetCollecting();
+            return;
         }
+
+        bool success = playerInventory.AddItem(itemData, amount);
 
         if (success)
         {
-            Debug.Log("Đã lấy " + resourceType);
+            Debug.Log("Đã lấy: " + itemData.itemName);
 
-            QuestManager questManager = FindFirstObjectByType<QuestManager>();
-
-            if (questManager != null)
+            if (reportQuestProgress)
             {
-                questManager.AddProgress(questStepType, targetId, amount);
+                ReportQuestProgress();
             }
         }
         else
         {
-            Debug.Log("Không thể lấy thêm " + resourceType);
+            Debug.Log("Không thể lấy thêm: " + itemData.itemName);
         }
 
-        isCollecting = false;
-        collectTimer = 0f;
+        ResetCollecting();
 
         if (interactionUI != null)
         {
             interactionUI.SetProgress(0f);
+        }
+    }
+
+    private void ReportQuestProgress()
+    {
+        QuestManager questManager = FindFirstObjectByType<QuestManager>();
+
+        if (questManager == null || itemData == null) return;
+
+        switch (itemData.itemId)
+        {
+            case "water":
+                questManager.AddProgress(QuestStepType.CollectWater, "water", amount);
+                break;
+
+            case "rice":
+                questManager.AddProgress(QuestStepType.CollectRice, "rice", amount);
+                break;
+
+            case "iron_ore":
+                questManager.AddProgress(QuestStepType.CollectIron, "iron_ore", amount);
+                break;
+
+            case "bamboo":
+                questManager.AddProgress(QuestStepType.CollectBamboo, "bamboo", amount);
+                break;
+
+            case "chicken":
+                questManager.AddProgress(QuestStepType.CatchChicken, "chicken", amount);
+                break;
         }
     }
 
     private void CancelCollecting()
     {
-        isCollecting = false;
-        collectTimer = 0f;
+        ResetCollecting();
 
         if (interactionUI != null)
         {
@@ -119,48 +131,38 @@ public class ResourcePickup : MonoBehaviour
         }
     }
 
-    private string GetInteractionMessage()
+    private void ResetCollecting()
     {
-        switch (resourceType)
-        {
-            case ResourceType.Rice:
-                return "Nhấn giữ E để lấy gạo";
-
-            case ResourceType.Water:
-                return "Nhấn giữ E để lấy nước";
-
-            default:
-                return "Nhấn giữ E để tương tác";
-        }
+        isCollecting = false;
+        collectTimer = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInventory = other.GetComponent<PlayerInventory>();
-            playerInRange = true;
+        if (!other.CompareTag("Player")) return;
 
-            if (interactionUI != null)
-            {
-                interactionUI.Show(GetInteractionMessage());
-            }
+        playerInventory = other.GetComponent<PlayerInventory>();
+        playerInRange = true;
+
+        if (interactionUI != null && itemData != null)
+        {
+            interactionUI.Show("Nhấn giữ E để lấy " + itemData.itemName);
+            interactionUI.SetProgress(0f);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        playerInventory = null;
+        playerInRange = false;
+
+        ResetCollecting();
+
+        if (interactionUI != null)
         {
-            CancelCollecting();
-
-            playerInRange = false;
-            playerInventory = null;
-
-            if (interactionUI != null)
-            {
-                interactionUI.Hide();
-            }
+            interactionUI.Hide();
         }
     }
 }

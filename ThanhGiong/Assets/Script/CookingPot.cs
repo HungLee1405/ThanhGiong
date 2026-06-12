@@ -3,6 +3,15 @@ using UnityEngine.InputSystem;
 
 public class CookingPot : MonoBehaviour
 {
+    [Header("Recipe")]
+    public ItemData riceItem;
+    public ItemData waterItem;
+    public ItemData cookedRiceItem;
+
+    public int riceCost = 1;
+    public int waterCost = 1;
+    public int cookedRiceAmount = 1;
+
     [Header("Cooking Settings")]
     public float cookTime = 8f;
 
@@ -35,11 +44,11 @@ public class CookingPot : MonoBehaviour
     {
         if (!isCooking)
         {
-            if (!playerInventory.CanCookRice())
+            if (!CanCook())
             {
                 if (interactionUI != null)
                 {
-                    interactionUI.Show("Cần 1 gạo + 1 nước để nấu cơm");
+                    interactionUI.Show("Cần gạo và nước để nấu cơm");
                     interactionUI.SetProgress(0f);
                 }
 
@@ -57,11 +66,9 @@ public class CookingPot : MonoBehaviour
 
         cookingTimer += Time.deltaTime;
 
-        float progress = cookingTimer / cookTime;
-
         if (interactionUI != null)
         {
-            interactionUI.SetProgress(progress);
+            interactionUI.SetProgress(cookingTimer / cookTime);
         }
 
         if (cookingTimer >= cookTime)
@@ -70,25 +77,33 @@ public class CookingPot : MonoBehaviour
         }
     }
 
+    private bool CanCook()
+    {
+        if (riceItem == null || waterItem == null || cookedRiceItem == null) return false;
+
+        return playerInventory.HasItem(riceItem.itemId, riceCost)
+            && playerInventory.HasItem(waterItem.itemId, waterCost);
+    }
+
     private void FinishCooking()
     {
-        bool cooked = playerInventory.CookRice();
-
-        if (cooked)
+        if (!CanCook())
         {
-            Debug.Log("Nấu cơm thành công!");
+            CancelCooking();
+            return;
+        }
 
-            QuestManager questManager = FindFirstObjectByType<QuestManager>();
+        playerInventory.RemoveItem(riceItem.itemId, riceCost);
+        playerInventory.RemoveItem(waterItem.itemId, waterCost);
+        playerInventory.AddItem(cookedRiceItem, cookedRiceAmount);
 
-            if (questManager != null)
-            {
-                questManager.AddProgress(QuestStepType.CookRice, "cooked_rice", 1);
-            }
+        Debug.Log("Nấu cơm thành công!");
 
-            if (interactionUI != null)
-            {
-                interactionUI.Show("Nấu cơm xong!");
-            }
+        QuestManager questManager = FindFirstObjectByType<QuestManager>();
+
+        if (questManager != null)
+        {
+            questManager.AddProgress(QuestStepType.CookRice, "cooked_rice", 1);
         }
 
         isCooking = false;
@@ -96,17 +111,13 @@ public class CookingPot : MonoBehaviour
 
         if (interactionUI != null)
         {
+            interactionUI.Show("Nấu cơm xong!");
             interactionUI.SetProgress(0f);
         }
     }
 
     private void CancelCooking()
     {
-        if (isCooking)
-        {
-            Debug.Log("Đã dừng nấu cơm.");
-        }
-
         isCooking = false;
         cookingTimer = 0f;
 
@@ -123,31 +134,30 @@ public class CookingPot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInventory = other.GetComponent<PlayerInventory>();
-            playerInRange = true;
+        if (!other.CompareTag("Player")) return;
 
-            if (interactionUI != null)
-            {
-                interactionUI.Show("Nhấn giữ E để nấu cơm");
-            }
+        playerInventory = other.GetComponent<PlayerInventory>();
+        playerInRange = true;
+
+        if (interactionUI != null)
+        {
+            interactionUI.Show("Nhấn giữ E để nấu cơm");
+            interactionUI.SetProgress(0f);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        playerInventory = null;
+        playerInRange = false;
+
+        CancelCooking();
+
+        if (interactionUI != null)
         {
-            CancelCooking();
-
-            playerInventory = null;
-            playerInRange = false;
-
-            if (interactionUI != null)
-            {
-                interactionUI.Hide();
-            }
+            interactionUI.Hide();
         }
     }
 }

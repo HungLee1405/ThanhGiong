@@ -6,6 +6,10 @@ public class FeedGiong : MonoBehaviour
     [Header("References")]
     public GiongHunger giongHunger;
     public InteractionUI interactionUI;
+    public QuestManager questManager;
+
+    [Header("Food Item")]
+    public ItemData cookedRiceItem;
 
     [Header("Feed Settings")]
     public float feedTime = 1.5f;
@@ -21,9 +25,40 @@ public class FeedGiong : MonoBehaviour
     private float feedTimer = 0f;
     private PlayerInventory playerInventory;
 
+    private void Start()
+    {
+        if (questManager == null)
+        {
+            questManager = FindFirstObjectByType<QuestManager>();
+        }
+
+        if (interactionUI != null)
+        {
+            interactionUI.Hide();
+        }
+    }
+
     private void Update()
     {
         if (Keyboard.current == null) return;
+
+        if (!CanShowFeedInteraction())
+        {
+            ResetFeeding();
+
+            if (interactionUI != null)
+            {
+                interactionUI.Hide();
+            }
+
+            return;
+        }
+
+        if (playerInRange && interactionUI != null && !isFeeding)
+        {
+            interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
+        }
+
         if (!playerInRange || playerInventory == null) return;
 
         if (Keyboard.current.eKey.isPressed)
@@ -37,21 +72,33 @@ public class FeedGiong : MonoBehaviour
         }
     }
 
+    private bool CanShowFeedInteraction()
+    {
+        if (!playerInRange) return false;
+        if (playerInventory == null) return false;
+        if (cookedRiceItem == null) return false;
+
+        if (!playerInventory.HasItem(cookedRiceItem.itemId, 1)) return false;
+
+        if (questManager == null)
+        {
+            return true;
+        }
+
+        QuestStep currentStep = questManager.GetCurrentStep();
+
+        if (currentStep == null) return false;
+
+        return currentStep.stepType == QuestStepType.SurviveUntilDayEnd
+            || currentStep.stepType == QuestStepType.FeedGiong;
+    }
+
     private void StartFeeding()
     {
+        if (!CanShowFeedInteraction()) return;
+
         if (!isFeeding)
         {
-            if (playerInventory.cookedRice <= 0)
-            {
-                if (interactionUI != null)
-                {
-                    interactionUI.Show("Bạn chưa có cơm để đưa cho mẹ Gióng");
-                    interactionUI.SetProgress(0f);
-                }
-
-                return;
-            }
-
             isFeeding = true;
             feedTimer = 0f;
 
@@ -64,11 +111,9 @@ public class FeedGiong : MonoBehaviour
 
         feedTimer += Time.deltaTime;
 
-        float progress = feedTimer / feedTime;
-
         if (interactionUI != null)
         {
-            interactionUI.SetProgress(progress);
+            interactionUI.SetProgress(feedTimer / feedTime);
         }
 
         if (feedTimer >= feedTime)
@@ -79,16 +124,21 @@ public class FeedGiong : MonoBehaviour
 
     private void FinishFeeding()
     {
-        bool hasFood = playerInventory.UseCookedRice();
+        if (cookedRiceItem == null)
+        {
+            ResetFeeding();
+            return;
+        }
 
-        if (!hasFood)
+        bool removed = playerInventory.RemoveItem(cookedRiceItem.itemId, 1);
+
+        if (!removed)
         {
             ResetFeeding();
 
             if (interactionUI != null)
             {
-                interactionUI.Show("Bạn chưa có cơm để đưa cho mẹ Gióng");
-                interactionUI.SetProgress(0f);
+                interactionUI.Hide();
             }
 
             return;
@@ -107,27 +157,20 @@ public class FeedGiong : MonoBehaviour
 
         if (interactionUI != null)
         {
-            interactionUI.Show("Đã đưa cơm cho mẹ Gióng");
-            interactionUI.SetProgress(0f);
+            interactionUI.Hide();
         }
     }
 
     private void TryReportQuestProgress()
     {
         if (!reportQuestProgress) return;
-
-        QuestManager questManager = FindFirstObjectByType<QuestManager>();
-
         if (questManager == null) return;
 
         QuestStep currentStep = questManager.GetCurrentStep();
 
         if (currentStep == null) return;
 
-        if (currentStep.stepType != QuestStepType.FeedGiong)
-        {
-            return;
-        }
+        if (currentStep.stepType != QuestStepType.FeedGiong) return;
 
         questManager.AddProgress(QuestStepType.FeedGiong, targetItemId, 1);
     }
@@ -140,8 +183,16 @@ public class FeedGiong : MonoBehaviour
 
         if (interactionUI != null)
         {
-            interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
             interactionUI.SetProgress(0f);
+
+            if (CanShowFeedInteraction())
+            {
+                interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
+            }
+            else
+            {
+                interactionUI.Hide();
+            }
         }
     }
 
@@ -158,7 +209,7 @@ public class FeedGiong : MonoBehaviour
         playerInventory = other.GetComponent<PlayerInventory>();
         playerInRange = true;
 
-        if (interactionUI != null)
+        if (CanShowFeedInteraction() && interactionUI != null)
         {
             interactionUI.Show("Nhấn giữ E để đưa cơm cho mẹ Gióng");
             interactionUI.SetProgress(0f);

@@ -1,58 +1,96 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [Header("Resources")]
-    public int rice = 0;
-    public int water = 0;
-    public int cookedRice = 0;
+    [Header("Inventory")]
+    public List<InventoryItem> items = new List<InventoryItem>();
 
-    [Header("Limits")]
-    public int maxRice = 5;
-    public int maxWater = 5;
-    public int maxCookedRice = 5;
+    public System.Action OnInventoryChanged;
 
-    public bool AddRice(int amount)
+    public bool AddItem(ItemData itemData, int amount)
     {
-        if (rice >= maxRice) return false;
+        if (itemData == null || amount <= 0) return false;
 
-        rice = Mathf.Min(rice + amount, maxRice);
-        Debug.Log("Gạo: " + rice);
+        InventoryItem existingItem = FindItem(itemData.itemId);
+
+        if (existingItem != null && itemData.stackable)
+        {
+            int newAmount = existingItem.amount + amount;
+
+            if (newAmount > itemData.maxStack)
+            {
+                existingItem.amount = itemData.maxStack;
+            }
+            else
+            {
+                existingItem.amount = newAmount;
+            }
+
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
+        if (existingItem != null && !itemData.stackable)
+        {
+            return false;
+        }
+
+        items.Add(new InventoryItem(itemData, amount));
+        OnInventoryChanged?.Invoke();
+
         return true;
     }
 
-    public bool AddWater(int amount)
+    public bool RemoveItem(string itemId, int amount)
     {
-        if (water >= maxWater) return false;
+        if (string.IsNullOrEmpty(itemId) || amount <= 0) return false;
 
-        water = Mathf.Min(water + amount, maxWater);
-        Debug.Log("Nước: " + water);
+        InventoryItem existingItem = FindItem(itemId);
+
+        if (existingItem == null) return false;
+        if (existingItem.amount < amount) return false;
+
+        existingItem.amount -= amount;
+
+        if (existingItem.amount <= 0)
+        {
+            items.Remove(existingItem);
+        }
+
+        OnInventoryChanged?.Invoke();
+
         return true;
     }
 
-    public bool CanCookRice()
+    public bool HasItem(string itemId, int amount)
     {
-        return rice >= 1 && water >= 1 && cookedRice < maxCookedRice;
+        InventoryItem existingItem = FindItem(itemId);
+
+        if (existingItem == null) return false;
+
+        return existingItem.amount >= amount;
     }
 
-    public bool CookRice()
+    public int GetItemAmount(string itemId)
     {
-        if (!CanCookRice()) return false;
+        InventoryItem existingItem = FindItem(itemId);
 
-        rice -= 1;
-        water -= 1;
-        cookedRice += 1;
+        if (existingItem == null) return 0;
 
-        Debug.Log("Đã nấu xong cơm. Cơm hiện có: " + cookedRice);
-        return true;
+        return existingItem.amount;
     }
 
-    public bool UseCookedRice()
+    public InventoryItem FindItem(string itemId)
     {
-        if (cookedRice <= 0) return false;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].itemData != null && items[i].itemData.itemId == itemId)
+            {
+                return items[i];
+            }
+        }
 
-        cookedRice -= 1;
-        Debug.Log("Đã dùng 1 cơm. Còn: " + cookedRice);
-        return true;
+        return null;
     }
 }
