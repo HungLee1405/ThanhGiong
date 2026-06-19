@@ -16,6 +16,7 @@ public class QuestStep
     public string targetItemId;
 
     public int requiredAmount = 1;
+    [HideInInspector] public int baseRequiredAmount = 0;
     public int currentAmount = 0;
 
     [TextArea(2, 5)]
