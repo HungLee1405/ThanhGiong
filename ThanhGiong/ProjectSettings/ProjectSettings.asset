@@ -934,11 +934,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 94ad7de1-610c-411a-9daa-6a5290be40ac
+  cloudProjectId: 5054bd1b-9cc1-4f9f-9ceb-91825aa1dc65
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: VietNamVillage
-  organizationId: huynhhuuhau0300305
+  organizationId: quochungle2005
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

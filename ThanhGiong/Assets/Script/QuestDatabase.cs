@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestDatabase : MonoBehaviour
@@ -188,7 +188,7 @@ public class QuestDatabase : MonoBehaviour
                 {
                     "Hôm qua cậu làm tốt lắm.",
                     "Nhiệm vụ hôm nay cũng giống vậy.",
-                    "À mà hình như lão Năm đang gặp khó khăn gì đó.",
+                    "À mà hình như Bác Ba đang gặp khó khăn gì đó.",
                     "Cậu hãy ghé thăm kiểm tra xem."
                 }
             },
@@ -197,13 +197,13 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 3,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Gặp lão Năm.",
+                questDescription = "Gặp Bác Ba.",
                 stepType = QuestStepType.TalkToNPC,
-                targetNPCId = "old_man_nam",
+                targetNPCId = "bac_ba",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Ui gia, lão đây đã già rồi, sức đâu mà làm mấy chuyện này chứ.",
+                    "Ui gia, bác đây đã già rồi, sức đâu mà làm mấy chuyện này chứ.",
                     "À, cậu có phải là người mà Già Làng đã nói không?",
                     "Đám gà nhà tôi đã xổng chuồng chạy mất tiêu rồi.",
                     "Cậu hãy giúp tôi bắt chúng lại và bỏ vào khu vực chuồng được chứ.",
@@ -215,7 +215,7 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 3,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Giúp lão Năm bắt 3 con gà.",
+                questDescription = "Giúp Bác Ba bắt 3 con gà.",
                 stepType = QuestStepType.CatchChicken,
                 targetItemId = "chicken",
                 requiredAmount = 3

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,6 +39,7 @@ public class ResourcePickup : MonoBehaviour
     private bool lockedUntilPlayerExit = false;
 
     private float collectTimer = 0f;
+    private Coroutine respawnCoroutine;
 
     private PlayerInventory playerInventory;
     private PlayerHandController playerHandController;
@@ -88,11 +89,15 @@ public class ResourcePickup : MonoBehaviour
 
     private bool CanInteract()
     {
-        if (isRespawning) return false;
         if (lockedUntilPlayerExit) return false;
         if (!playerInRange) return false;
         if (playerInventory == null) return false;
         if (itemData == null) return false;
+
+        if (isRespawning)
+        {
+            return CanReturnItem();
+        }
 
         return true;
     }
@@ -101,7 +106,8 @@ public class ResourcePickup : MonoBehaviour
     {
         if (!CanInteract()) return;
 
-        if (!CanCollectWithCurrentTool())
+        // Chỉ kiểm tra công cụ nếu không phải là hành động trả lại
+        if (!CanReturnItem() && !CanCollectWithCurrentTool())
         {
             ResetCollecting();
 
@@ -138,6 +144,12 @@ public class ResourcePickup : MonoBehaviour
         if (!CanInteract())
         {
             ResetCollecting();
+            return;
+        }
+
+        if (CanReturnItem())
+        {
+            ReturnItem();
             return;
         }
 
@@ -186,7 +198,7 @@ public class ResourcePickup : MonoBehaviour
 
         if (respawnAfterCollect)
         {
-            StartCoroutine(RespawnRoutine());
+            respawnCoroutine = StartCoroutine(RespawnRoutine());
             return;
         }
 
@@ -350,11 +362,71 @@ public class ResourcePickup : MonoBehaviour
         collectTimer = 0f;
     }
 
+    private bool CanReturnItem()
+    {
+        if (playerInventory == null || itemData == null) return false;
+
+        // Chỉ cho phép lấy tối đa 1 axe hoặc 1 pickaxe
+        if (itemData.itemId == "axe" && playerInventory.HasItem("axe", 1))
+        {
+            return true;
+        }
+        if (itemData.itemId == "pickaxe" && playerInventory.HasItem("pickaxe", 1))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void ReturnItem()
+    {
+        if (playerInventory == null || itemData == null) return;
+
+        bool success = playerInventory.RemoveItem(itemData.itemId, 1);
+
+        ResetCollecting();
+
+        if (interactionUI != null)
+        {
+            interactionUI.SetProgress(0f);
+        }
+
+        if (!success)
+        {
+            Debug.LogWarning("Không thể trả lại vật phẩm: " + itemData.itemName);
+            return;
+        }
+
+        Debug.Log("Đã trả lại vật phẩm: " + itemData.itemName);
+
+        if (respawnCoroutine != null)
+        {
+            StopCoroutine(respawnCoroutine);
+            respawnCoroutine = null;
+        }
+
+        isRespawning = false;
+        lockedUntilPlayerExit = false;
+
+        SetObjectVisible(true);
+
+        if (interactionUI != null)
+        {
+            interactionUI.Show(GetInteractionMessage());
+        }
+    }
+
     private string GetInteractionMessage()
     {
         if (itemData == null)
         {
             return "";
+        }
+
+        if (CanReturnItem())
+        {
+            return "Nhấn giữ E để trả lại " + itemData.itemName;
         }
 
         return "Nhấn giữ E để lấy " + itemData.itemName;
