@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -14,7 +15,13 @@ public class QuestManager : MonoBehaviour
     public int currentStepIndex = 0;
     public bool isDayQuestCompleted = false;
 
+    [Header("Multiplayer")]
+    public bool scaleSharedObjectivesWithPlayers = true;
+    public int maxSharedQuestPlayers = 6;
+
     private List<QuestStep> currentSteps = new List<QuestStep>();
+    private bool applyingSharedState;
+    private int lastScaledPlayerCount = -1;
 
     private void Start()
     {
@@ -24,6 +31,23 @@ public class QuestManager : MonoBehaviour
         }
 
         LoadDay(currentDay);
+    }
+
+    private void Update()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        int playerCount = GetSharedQuestPlayerCount();
+
+        if (playerCount != lastScaledPlayerCount)
+        {
+            ApplyMultiplayerRequirements();
+            RefreshQuestUI();
+            SharedQuestNetwork.PublishState(this);
+        }
     }
 
     public void LoadDay(int day)
@@ -39,6 +63,8 @@ public class QuestManager : MonoBehaviour
         }
 
         currentSteps = questDatabase.GetQuestStepsForDay(day);
+        InitializeBaseRequiredAmounts();
+        ApplyMultiplayerRequirements();
 
         if (currentSteps == null || currentSteps.Count == 0)
         {
@@ -48,6 +74,7 @@ public class QuestManager : MonoBehaviour
 
         Debug.Log("Đã load nhiệm vụ cho ngày " + day);
         RefreshQuestUI();
+        SharedQuestNetwork.PublishState(this);
     }
 
     public QuestStep GetCurrentStep()
@@ -112,10 +139,20 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        CompleteCurrentStep();
+        AddProgress(QuestStepType.TalkToNPC, npcId, 1);
     }
 
     public void AddProgress(QuestStepType type, string targetId, int amount)
+    {
+        if (!applyingSharedState && SharedQuestNetwork.RequestProgress(type, targetId, amount))
+        {
+            return;
+        }
+
+        ApplySharedProgress(type, targetId, amount);
+    }
+
+    public void ApplySharedProgress(QuestStepType type, string targetId, int amount)
     {
         QuestStep step = GetCurrentStep();
 
@@ -137,6 +174,12 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
+        if (!string.IsNullOrEmpty(step.targetNPCId) && step.targetNPCId != targetId)
+        {
+            Debug.Log("Sai target NPC. Cần: " + step.targetNPCId + ", nhưng nhận: " + targetId);
+            return;
+        }
+
         step.currentAmount += amount;
 
         if (step.currentAmount > step.requiredAmount)
@@ -151,23 +194,16 @@ public class QuestManager : MonoBehaviour
         if (step.IsCompleted())
         {
             CompleteCurrentStep();
+            SharedQuestNetwork.PublishState(this);
+            return;
         }
+
+        SharedQuestNetwork.PublishState(this);
     }
 
     public void CompleteSurviveStep()
     {
-        QuestStep step = GetCurrentStep();
-
-        if (step == null)
-        {
-            return;
-        }
-
-        if (step.stepType == QuestStepType.SurviveUntilDayEnd)
-        {
-            step.currentAmount = step.requiredAmount;
-            CompleteCurrentStep();
-        }
+        AddProgress(QuestStepType.SurviveUntilDayEnd, "survive", 1);
     }
 
     public void CompleteForgeProgress(int amount)
@@ -194,6 +230,102 @@ public class QuestManager : MonoBehaviour
 
         RefreshQuestUI();
         CheckStartDayCountdown();
+        SharedQuestNetwork.PublishState(this);
+    }
+
+    public void ApplySharedState(int day, int stepIndex, int currentAmount, int requiredAmount, bool completed)
+    {
+        applyingSharedState = true;
+
+        if (currentDay != day || currentSteps == null || currentSteps.Count == 0)
+        {
+            LoadDay(day);
+        }
+
+        currentDay = day;
+        currentStepIndex = Mathf.Clamp(stepIndex, 0, Mathf.Max(0, currentSteps.Count));
+        isDayQuestCompleted = completed;
+
+        QuestStep step = GetCurrentStep();
+
+        if (step != null)
+        {
+            step.requiredAmount = Mathf.Max(1, requiredAmount);
+            step.currentAmount = Mathf.Clamp(currentAmount, 0, step.requiredAmount);
+        }
+
+        RefreshQuestUI();
+        applyingSharedState = false;
+    }
+
+    private void InitializeBaseRequiredAmounts()
+    {
+        if (currentSteps == null)
+            return;
+
+        for (int i = 0; i < currentSteps.Count; i++)
+        {
+            if (currentSteps[i] != null)
+            {
+                currentSteps[i].baseRequiredAmount = Mathf.Max(1, currentSteps[i].requiredAmount);
+            }
+        }
+    }
+
+    private void ApplyMultiplayerRequirements()
+    {
+        if (currentSteps == null || !scaleSharedObjectivesWithPlayers)
+            return;
+
+        int playerCount = GetSharedQuestPlayerCount();
+        lastScaledPlayerCount = playerCount;
+
+        for (int i = 0; i < currentSteps.Count; i++)
+        {
+            QuestStep step = currentSteps[i];
+
+            if (step == null)
+                continue;
+
+            if (step.baseRequiredAmount <= 0)
+            {
+                step.baseRequiredAmount = Mathf.Max(1, step.requiredAmount);
+            }
+
+            step.requiredAmount = ShouldScaleAsSharedObjective(step)
+                ? Mathf.Max(1, step.baseRequiredAmount * playerCount)
+                : step.baseRequiredAmount;
+
+            step.currentAmount = Mathf.Clamp(step.currentAmount, 0, step.requiredAmount);
+        }
+    }
+
+    private int GetSharedQuestPlayerCount()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+            return 1;
+
+        return Mathf.Clamp(networkManager.ConnectedClientsIds.Count, 1, maxSharedQuestPlayers);
+    }
+
+    private bool ShouldScaleAsSharedObjective(QuestStep step)
+    {
+        switch (step.stepType)
+        {
+            case QuestStepType.CollectWater:
+            case QuestStepType.CollectRice:
+            case QuestStepType.CookRice:
+            case QuestStepType.FeedGiong:
+            case QuestStepType.CatchChicken:
+            case QuestStepType.CollectIron:
+            case QuestStepType.CollectBamboo:
+                return true;
+
+            default:
+                return false;
+        }
     }
 
     private void CheckStartDayCountdown()

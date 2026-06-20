@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public class PlayerInventoryUI : MonoBehaviour
 {
@@ -12,23 +13,26 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private void Start()
     {
+        PlayerInventory inventoryToBind = playerInventory;
+
         if (playerInventory == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-            if (player != null)
-            {
-                playerInventory = player.GetComponent<PlayerInventory>();
-            }
+            inventoryToBind = FindLocalPlayerInventory();
         }
 
-        if (playerInventory != null)
-        {
-            playerInventory.OnInventoryChanged += UpdateUI;
-        }
+        playerInventory = null;
+        BindInventory(inventoryToBind);
 
         UpdateUI();
         HighlightSlot(-1);
+    }
+
+    private void Update()
+    {
+        if (playerInventory != null)
+            return;
+
+        BindInventory(FindLocalPlayerInventory());
     }
 
     private void OnDestroy()
@@ -77,5 +81,50 @@ public class PlayerInventoryUI : MonoBehaviour
     public void ClearHighlight()
     {
         HighlightSlot(-1);
+    }
+
+    private void BindInventory(PlayerInventory inventory)
+    {
+        if (inventory == null || playerInventory == inventory)
+            return;
+
+        if (playerInventory != null)
+        {
+            playerInventory.OnInventoryChanged -= UpdateUI;
+        }
+
+        playerInventory = inventory;
+        playerInventory.OnInventoryChanged += UpdateUI;
+        UpdateUI();
+    }
+
+    private PlayerInventory FindLocalPlayerInventory()
+    {
+        PlayerInventory[] inventories = FindObjectsByType<PlayerInventory>(FindObjectsSortMode.None);
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        for (int i = 0; i < inventories.Length; i++)
+        {
+            if (inventories[i] == null) continue;
+
+            if (networkManager != null && networkManager.IsListening)
+            {
+                NetworkObject networkObject = inventories[i].GetComponent<NetworkObject>();
+
+                if (networkObject != null && networkObject.IsOwner)
+                {
+                    return inventories[i];
+                }
+
+                continue;
+            }
+
+            if (inventories[i].CompareTag("Player"))
+            {
+                return inventories[i];
+            }
+        }
+
+        return null;
     }
 }

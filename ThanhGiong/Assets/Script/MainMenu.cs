@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -67,7 +67,11 @@ public class MainMenu : MonoBehaviour
 
         fadeGroup.alpha = 1f;
         Debug.Log("Đã thoát game!");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     // Hàm này được gọi khi bấm nút Options

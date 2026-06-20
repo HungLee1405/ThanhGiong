@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
@@ -29,14 +30,36 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (CanUseLocalInput() && !MultiplayerConnector.IsRoomMenuOpen)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void Update()
     {
+        if (!CanUseLocalInput())
+            return;
+
+        if (MultiplayerConnector.IsRoomMenuOpen)
+            return;
+
+        if (NetworkPlayerAppearance.IsLocalSelectionOpen)
+            return;
+
         HandleMouseLook();
         HandleMovement();
+    }
+
+    private bool CanUseLocalInput()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+            return true;
+
+        return !IsSpawned || IsOwner;
     }
 
     void HandleMouseLook()

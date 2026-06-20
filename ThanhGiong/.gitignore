@@ -6,12 +6,14 @@ Build/
 Builds/
 Logs/
 UserSettings/
+Assets/_Recovery/
 
 # Visual Studio / Rider
 .vs/
 .idea/
 *.csproj
 *.sln
+*.slnx
 *.user
 *.userprefs
 *.pidb

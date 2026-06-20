@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class PlayerHandController : MonoBehaviour
+public class PlayerHandController : NetworkBehaviour
 {
     [Header("References")]
     public PlayerInventory playerInventory;
@@ -37,8 +38,10 @@ public class PlayerHandController : MonoBehaviour
         DeselectSlot();
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (playerInventory != null)
         {
             playerInventory.OnInventoryChanged -= OnInventoryChanged;
@@ -47,10 +50,22 @@ public class PlayerHandController : MonoBehaviour
 
     private void Update()
     {
+        if (!CanUseLocalInput()) return;
+        if (NetworkPlayerAppearance.IsLocalSelectionOpen) return;
         if (Keyboard.current == null) return;
 
         HandleHotkeys();
         HandlePutItem();
+    }
+
+    private bool CanUseLocalInput()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+            return true;
+
+        return !IsSpawned || IsOwner;
     }
 
     private void HandleHotkeys()
