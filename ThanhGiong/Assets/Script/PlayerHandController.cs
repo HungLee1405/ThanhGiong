@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
@@ -14,6 +14,7 @@ public class PlayerHandController : NetworkBehaviour
     [Header("Runtime")]
     public int selectedSlotIndex = -1;
     public InventoryItem selectedItem;
+    public ChickenController carriedChicken;
 
     private GameObject currentHandObject;
     private IItemReceiver currentReceiver;
@@ -52,6 +53,7 @@ public class PlayerHandController : NetworkBehaviour
     {
         if (!CanUseLocalInput()) return;
         if (NetworkPlayerAppearance.IsLocalSelectionOpen) return;
+        if (CookingMenuUI.IsMenuOpen) return;
         if (Keyboard.current == null) return;
 
         HandleHotkeys();
@@ -70,6 +72,11 @@ public class PlayerHandController : NetworkBehaviour
 
     private void HandleHotkeys()
     {
+        if (selectedItem != null && selectedItem.itemData != null && selectedItem.itemData.itemId == "chicken")
+        {
+            return; // Khóa đổi slot nếu đang cầm gà
+        }
+
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
             ToggleSlot(0);
@@ -179,6 +186,21 @@ public class PlayerHandController : NetworkBehaviour
 
         ItemData itemToPut = selectedItem.itemData;
 
+        if (currentReceiver is ChickenCoop coop && itemToPut.itemId == "chicken" && carriedChicken != null)
+        {
+            bool success = coop.TryReceiveChicken(this);
+            if (!success)
+            {
+                Debug.Log("Không thể đưa gà vào chuồng.");
+            }
+            else
+            {
+                Debug.Log("Đã bỏ gà vào chuồng.");
+                RefreshSelectedItem();
+            }
+            return;
+        }
+
         bool accepted = currentReceiver.ReceiveItem(itemToPut, 1);
 
         if (!accepted)
@@ -285,5 +307,42 @@ public class PlayerHandController : NetworkBehaviour
         if (heldItem == null) return false;
 
         return heldItem.itemId == itemId;
+    }
+
+    public void ClearSelectedSlot()
+    {
+        DeselectSlot();
+    }
+
+    public void RefreshHeldItem()
+    {
+        RefreshSelectedItem();
+    }
+
+    public InventoryItem GetHeldItem()
+    {
+        return selectedItem;
+    }
+
+    public bool HasHeldItem(string itemId)
+    {
+        return IsHoldingItem(itemId);
+    }
+
+    public bool TryConsumeHeldItem(int amount)
+    {
+        if (selectedSlotIndex < 0 || playerInventory == null) return false;
+
+        bool success = playerInventory.RemoveItemAtSlot(selectedSlotIndex, amount);
+        if (success)
+        {
+            RefreshSelectedItem();
+            
+            if (playerInventoryUI != null)
+            {
+                playerInventoryUI.HighlightSlot(selectedSlotIndex);
+            }
+        }
+        return success;
     }
 }

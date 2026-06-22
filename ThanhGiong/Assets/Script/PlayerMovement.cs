@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
@@ -46,6 +46,9 @@ public class PlayerMovement : NetworkBehaviour
             return;
 
         if (NetworkPlayerAppearance.IsLocalSelectionOpen)
+            return;
+
+        if (CookingMenuUI.IsMenuOpen)
             return;
 
         HandleMouseLook();
@@ -125,5 +128,10 @@ public class PlayerMovement : NetworkBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void ResetVelocity()
+    {
+        velocity = Vector3.zero;
     }
 }

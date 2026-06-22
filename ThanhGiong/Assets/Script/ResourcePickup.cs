@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -42,6 +42,7 @@ public class ResourcePickup : MonoBehaviour
 
     private PlayerInventory playerInventory;
     private PlayerHandController playerHandController;
+    private QuestManager cachedQuestManager;
 
     private Renderer[] renderers;
     private Collider[] colliders;
@@ -59,6 +60,8 @@ public class ResourcePickup : MonoBehaviour
             triggerCollider.isTrigger = true;
             triggerCollider.enabled = true;
         }
+
+        cachedQuestManager = FindFirstObjectByType<QuestManager>();
     }
 
     private void Update()
@@ -297,30 +300,33 @@ public class ResourcePickup : MonoBehaviour
 
     private void ReportQuestProgress(int collectedAmount)
     {
-        QuestManager questManager = FindFirstObjectByType<QuestManager>();
+        if (cachedQuestManager == null)
+        {
+            cachedQuestManager = FindFirstObjectByType<QuestManager>();
+        }
 
-        if (questManager == null || itemData == null) return;
+        if (cachedQuestManager == null || itemData == null) return;
 
         switch (itemData.itemId)
         {
             case "water":
-                questManager.AddProgress(QuestStepType.CollectWater, "water", collectedAmount);
+                cachedQuestManager.AddProgress(QuestStepType.CollectWater, "water", collectedAmount);
                 break;
 
             case "rice":
-                questManager.AddProgress(QuestStepType.CollectRice, "rice", collectedAmount);
+                cachedQuestManager.AddProgress(QuestStepType.CollectRice, "rice", collectedAmount);
                 break;
 
             case "iron_ore":
-                questManager.AddProgress(QuestStepType.CollectIron, "iron_ore", collectedAmount);
+                cachedQuestManager.AddProgress(QuestStepType.CollectIron, "iron_ore", collectedAmount);
                 break;
 
             case "bamboo":
-                questManager.AddProgress(QuestStepType.CollectBamboo, "bamboo", collectedAmount);
+                cachedQuestManager.AddProgress(QuestStepType.CollectBamboo, "bamboo", collectedAmount);
                 break;
 
             case "chicken":
-                questManager.AddProgress(QuestStepType.CatchChicken, "chicken", collectedAmount);
+                cachedQuestManager.AddProgress(QuestStepType.CatchChicken, "chicken", collectedAmount);
                 break;
         }
     }
@@ -355,6 +361,34 @@ public class ResourcePickup : MonoBehaviour
         if (itemData == null)
         {
             return "";
+        }
+
+        if (cachedQuestManager == null)
+        {
+            cachedQuestManager = FindFirstObjectByType<QuestManager>();
+        }
+
+        if (cachedQuestManager != null)
+        {
+            QuestStep currentStep = cachedQuestManager.GetCurrentStep();
+            if (currentStep != null && !cachedQuestManager.isDayQuestCompleted)
+            {
+                if (currentStep.targetItemId == itemData.itemId)
+                {
+                    if (currentStep.IsCompleted())
+                    {
+                        return "(Đã đủ nhiệm vụ) Nhấn giữ E để lấy thêm " + itemData.itemName;
+                    }
+                }
+                else if (itemData.itemId == "chicken" && currentStep.stepType != QuestStepType.CatchChicken)
+                {
+                    return "(Chưa cần tới) Nhấn giữ E để bắt " + itemData.itemName;
+                }
+                else
+                {
+                    return "(Chưa cần tới) Nhấn giữ E để lấy " + itemData.itemName;
+                }
+            }
         }
 
         return "Nhấn giữ E để lấy " + itemData.itemName;

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -19,6 +19,10 @@ public class QuestManager : MonoBehaviour
     public bool scaleSharedObjectivesWithPlayers = true;
     public int maxSharedQuestPlayers = 6;
 
+    public event System.Action OnQuestStepChanged;
+
+    public HashSet<QuestStepType> completedStepTypes = new HashSet<QuestStepType>();
+
     private List<QuestStep> currentSteps = new List<QuestStep>();
     private bool applyingSharedState;
     private int lastScaledPlayerCount = -1;
@@ -30,7 +34,22 @@ public class QuestManager : MonoBehaviour
             currentDay = gameDayManager.currentDay;
         }
 
+        VillageStorage storage = FindFirstObjectByType<VillageStorage>();
+        if (storage != null)
+        {
+            storage.OnStorageChanged += RefreshQuestUI;
+        }
+
         LoadDay(currentDay);
+    }
+
+    private void OnDestroy()
+    {
+        VillageStorage storage = FindFirstObjectByType<VillageStorage>();
+        if (storage != null)
+        {
+            storage.OnStorageChanged -= RefreshQuestUI;
+        }
     }
 
     private void Update()
@@ -73,7 +92,15 @@ public class QuestManager : MonoBehaviour
         }
 
         Debug.Log("Đã load nhiệm vụ cho ngày " + day);
+        
+        QuestStep firstStep = GetCurrentStep();
+        if (firstStep != null)
+        {
+            TryGrantReward(firstStep, RewardTiming.StartOfStep);
+        }
+
         RefreshQuestUI();
+        OnQuestStepChanged?.Invoke();
         SharedQuestNetwork.PublishState(this);
     }
 
@@ -139,6 +166,12 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
+        QuestStep step = GetCurrentStep();
+        if (!TryGrantReward(step, RewardTiming.TalkToNPC))
+        {
+            return; // Túi đầy, không cho nhận quest
+        }
+
         AddProgress(QuestStepType.TalkToNPC, npcId, 1);
     }
 
@@ -194,16 +227,35 @@ public class QuestManager : MonoBehaviour
         if (step.IsCompleted())
         {
             CompleteCurrentStep();
+            OnQuestStepChanged?.Invoke();
             SharedQuestNetwork.PublishState(this);
             return;
         }
 
+        OnQuestStepChanged?.Invoke();
         SharedQuestNetwork.PublishState(this);
     }
 
-    public void CompleteSurviveStep()
+    public bool CompleteSurviveStep()
     {
+        QuestStep step = GetCurrentStep();
+        if (step != null && step.storageRequirements != null && step.storageRequirements.Count > 0)
+        {
+            VillageStorage storage = FindFirstObjectByType<VillageStorage>();
+            if (storage != null)
+            {
+                foreach (var req in step.storageRequirements)
+                {
+                    if (storage.GetAmount(req.targetItemId) < req.requiredAmount)
+                    {
+                        Debug.Log("Chưa đủ tài nguyên trong kho! Ngày thất bại.");
+                        return false; // Chưa đạt yêu cầu kho
+                    }
+                }
+            }
+        }
         AddProgress(QuestStepType.SurviveUntilDayEnd, "survive", 1);
+        return true;
     }
 
     public void CompleteForgeProgress(int amount)
@@ -217,6 +269,11 @@ public class QuestManager : MonoBehaviour
 
         if (step != null)
         {
+            if (!TryGrantReward(step, RewardTiming.CompletionOfStep))
+            {
+                return; // Túi đầy, không cho qua bước
+            }
+            completedStepTypes.Add(step.stepType);
             Debug.Log("Hoàn thành bước nhiệm vụ: " + step.questDescription);
         }
 
@@ -228,7 +285,14 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
+        QuestStep nextStep = GetCurrentStep();
+        if (nextStep != null)
+        {
+            TryGrantReward(nextStep, RewardTiming.StartOfStep);
+        }
+
         RefreshQuestUI();
+        OnQuestStepChanged?.Invoke();
         CheckStartDayCountdown();
         SharedQuestNetwork.PublishState(this);
     }
@@ -395,10 +459,68 @@ public class QuestManager : MonoBehaviour
             progressText = "\nTiến độ: " + step.currentAmount + "/" + step.requiredAmount;
         }
 
+        if (step.storageRequirements != null && step.storageRequirements.Count > 0)
+        {
+            VillageStorage storage = FindFirstObjectByType<VillageStorage>();
+            if (storage != null)
+            {
+                foreach (var req in step.storageRequirements)
+                {
+                    int has = storage.GetAmount(req.targetItemId);
+                    progressText += $"\nKho - {req.targetItemId}: {has}/{req.requiredAmount}";
+                }
+            }
+        }
+
         playerHubUI.UpdateQuestUI(
             step.questName,
             "- " + step.questDescription + progressText
         );
     }
 
+    private bool TryGrantReward(QuestStep step, RewardTiming timing)
+    {
+        if (step == null || step.rewardItem == null || step.rewardReceived || step.rewardTiming != timing)
+            return true;
+
+        PlayerInventory inventory = FindFirstObjectByType<PlayerInventory>();
+        if (inventory == null) return false;
+
+        int amountToGrant = step.rewardAmount > 0 ? step.rewardAmount : 1;
+        if (step.requireInventorySpace && !inventory.CanAddItem(step.rewardItem, amountToGrant))
+        {
+            if (playerHubUI != null)
+            {
+                playerHubUI.UpdateQuestUI("Túi đồ đầy!", "Vui lòng dọn trống ít nhất " + amountToGrant + " ô trong túi để nhận thưởng nhiệm vụ.");
+            }
+            return false;
+        }
+
+        bool added = inventory.AddItem(step.rewardItem, amountToGrant);
+        if (added)
+        {
+            step.rewardReceived = true;
+            if (playerHubUI != null && !string.IsNullOrEmpty(step.rewardMessage))
+            {
+                playerHubUI.UpdateQuestUI("Nhận thưởng!", step.rewardMessage);
+            }
+            return true;
+        }
+        
+        return false;
+    }
+
+    public bool HasCompletedStepType(QuestStepType type)
+    {
+        return completedStepTypes.Contains(type);
+    }
+
+    public bool HasCompletedQuestType(string typeString)
+    {
+        if (System.Enum.TryParse(typeString, out QuestStepType type))
+        {
+            return completedStepTypes.Contains(type);
+        }
+        return false;
+    }
 }

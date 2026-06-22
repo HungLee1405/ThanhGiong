@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -29,17 +29,37 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public bool AddItem(ItemData itemData, int amount)
+    public bool CanAddItem(ItemData itemData, int amount)
     {
         if (itemData == null || amount <= 0) return false;
-
         EnsureSlotCount();
+        
+        int remainingAmount = amount;
+        
+        if (itemData.stackable)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i] != null && items[i].itemData != null && items[i].itemData.itemId == itemData.itemId)
+                {
+                    int space = itemData.maxStack - items[i].amount;
+                    if (space > 0)
+                    {
+                        remainingAmount -= space;
+                        if (remainingAmount <= 0) return true;
+                    }
+                }
+            }
+        }
+        
+        int emptySlots = CountEmptySlots();
+        int slotsNeeded = Mathf.CeilToInt((float)remainingAmount / Mathf.Max(1, itemData.maxStack));
+        return emptySlots >= slotsNeeded;
+    }
 
-        // Mỗi slot chỉ chứa 1 món.
-        // Vì vậy cần kiểm tra còn đủ slot trống không.
-        int emptySlotCount = CountEmptySlots();
-
-        if (emptySlotCount < amount)
+    public bool AddItem(ItemData itemData, int amount)
+    {
+        if (!CanAddItem(itemData, amount))
         {
             OnInventoryChanged?.Invoke();
             return false;
@@ -47,12 +67,36 @@ public class PlayerInventory : MonoBehaviour
 
         int remainingAmount = amount;
 
+        if (itemData.stackable)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i] != null && items[i].itemData != null && items[i].itemData.itemId == itemData.itemId)
+                {
+                    int space = itemData.maxStack - items[i].amount;
+                    if (space > 0)
+                    {
+                        int add = Mathf.Min(space, remainingAmount);
+                        items[i].amount += add;
+                        remainingAmount -= add;
+
+                        if (remainingAmount <= 0)
+                        {
+                            OnInventoryChanged?.Invoke();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
         for (int i = 0; i < items.Count; i++)
         {
             if (IsSlotEmpty(i))
             {
-                items[i] = new InventoryItem(itemData, 1);
-                remainingAmount--;
+                int add = Mathf.Min(remainingAmount, Mathf.Max(1, itemData.maxStack));
+                items[i] = new InventoryItem(itemData, add);
+                remainingAmount -= add;
 
                 if (remainingAmount <= 0)
                 {

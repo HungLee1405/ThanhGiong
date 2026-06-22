@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CookingPot : MonoBehaviour
@@ -21,6 +21,15 @@ public class CookingPot : MonoBehaviour
     private bool playerInRange = false;
     private bool isCooking = false;
 
+    [Header("Menu System")]
+    public CookingMenuUI cookingMenuUI;
+    public bool useDataDrivenMenu = true;
+    private CookingRecipe currentRecipe;
+
+    private ItemData pendingOutputItem;
+    private int pendingOutputAmount;
+    private string pendingRecipeId;
+
     private float cookingTimer = 0f;
     private PlayerInventory playerInventory;
 
@@ -38,14 +47,55 @@ public class CookingPot : MonoBehaviour
             return;
         }
 
-        if (Keyboard.current.eKey.isPressed)
+        if (!isCooking)
         {
-            TryCook();
-        }
+            if (pendingOutputItem != null)
+            {
+                if (Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    TryTakePendingOutput();
+                }
+                return;
+            }
 
-        if (Keyboard.current.eKey.wasReleasedThisFrame)
+            if (useDataDrivenMenu)
+            {
+                if (Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    if (cookingMenuUI != null)
+                    {
+                        cookingMenuUI.OpenMenu(this, playerInventory);
+                    }
+                }
+            }
+            else
+            {
+                if (Keyboard.current.eKey.isPressed)
+                {
+                    TryCook();
+                }
+
+                if (Keyboard.current.eKey.wasReleasedThisFrame)
+                {
+                    CancelCooking();
+                }
+            }
+        }
+        else
         {
-            CancelCooking();
+            // Update cooking timer
+            cookingTimer += Time.deltaTime;
+
+            if (interactionUI != null)
+            {
+                float targetTime = currentRecipe != null ? currentRecipe.cookTime : cookTime;
+                interactionUI.SetProgress(cookingTimer / targetTime);
+            }
+
+            if (cookingTimer >= (currentRecipe != null ? currentRecipe.cookTime : cookTime))
+            {
+                FinishCooking();
+            }
         }
     }
 
@@ -55,6 +105,25 @@ public class CookingPot : MonoBehaviour
         if (playerInventory == null) return false;
 
         return true;
+    }
+
+    public void StartDataDrivenCooking(CookingRecipe recipe)
+    {
+        if (isCooking || pendingOutputItem != null) return;
+
+        foreach (var ing in recipe.ingredients)
+        {
+            playerInventory.RemoveItem(ing.item.itemId, ing.amount);
+        }
+
+        currentRecipe = recipe;
+        isCooking = true;
+        cookingTimer = 0f;
+
+        if (interactionUI != null)
+        {
+            interactionUI.Show("Đang nấu " + recipe.displayName + "...");
+        }
     }
 
     private void TryCook()
@@ -82,18 +151,6 @@ public class CookingPot : MonoBehaviour
                 interactionUI.Show("Đang nấu cơm...");
             }
         }
-
-        cookingTimer += Time.deltaTime;
-
-        if (interactionUI != null)
-        {
-            interactionUI.SetProgress(cookingTimer / cookTime);
-        }
-
-        if (cookingTimer >= cookTime)
-        {
-            FinishCooking();
-        }
     }
 
     private bool CanCook()
@@ -119,41 +176,50 @@ public class CookingPot : MonoBehaviour
             return;
         }
 
-        bool removedRice = playerInventory.RemoveItem(riceItem.itemId, riceCost);
-        bool removedWater = playerInventory.RemoveItem(waterItem.itemId, waterCost);
-
-        if (!removedRice || !removedWater)
+        if (useDataDrivenMenu && currentRecipe != null)
         {
-            Debug.LogWarning("Không thể trừ nguyên liệu nấu cơm.");
-            CancelCooking();
-            return;
-        }
-
-        bool addedCookedRice = playerInventory.AddItem(cookedRiceItem, cookedRiceAmount);
-
-        if (!addedCookedRice)
-        {
-            Debug.LogWarning("Inventory đầy, không thể nhận cơm.");
-
-            // Trả lại nguyên liệu nếu nấu xong nhưng không thêm được cơm.
-            playerInventory.AddItem(riceItem, riceCost);
-            playerInventory.AddItem(waterItem, waterCost);
-
-            CancelCooking();
-
-            if (interactionUI != null)
+            bool addedOutput = playerInventory.AddItem(currentRecipe.outputItem, currentRecipe.outputAmount);
+            if (!addedOutput)
             {
-                interactionUI.Show("Inventory đầy");
+                pendingOutputItem = currentRecipe.outputItem;
+                pendingOutputAmount = currentRecipe.outputAmount;
+                pendingRecipeId = currentRecipe.recipeId;
+
+                ResetCooking();
+                if (interactionUI != null) interactionUI.Show("Thành phẩm đang chờ (Nhấn E để lấy)");
+                return;
+            }
+            
+            ReportQuestProgress(currentRecipe.recipeId);
+        }
+        else
+        {
+            bool removedRice = playerInventory.RemoveItem(riceItem.itemId, riceCost);
+            bool removedWater = playerInventory.RemoveItem(waterItem.itemId, waterCost);
+
+            if (!removedRice || !removedWater)
+            {
+                Debug.LogWarning("Không thể trừ nguyên liệu nấu cơm.");
+                CancelCooking();
+                return;
             }
 
-            return;
+            ReportQuestProgress("cook_rice_legacy");
+            bool addedCookedRice = playerInventory.AddItem(cookedRiceItem, cookedRiceAmount);
+
+            if (!addedCookedRice)
+            {
+                pendingOutputItem = cookedRiceItem;
+                pendingOutputAmount = cookedRiceAmount;
+                ResetCooking();
+                if (interactionUI != null) interactionUI.Show("Thành phẩm đang chờ (Nhấn E để lấy)");
+                return;
+            }
+            
+            ResetCooking();
         }
 
         Debug.Log("Nấu cơm thành công!");
-
-        ReportQuestProgress();
-
-        ResetCooking();
 
         if (interactionUI != null)
         {
@@ -162,12 +228,36 @@ public class CookingPot : MonoBehaviour
         }
     }
 
-    private void ReportQuestProgress()
+    private void TryTakePendingOutput()
+    {
+        if (playerInventory == null) return;
+        
+        bool added = playerInventory.AddItem(pendingOutputItem, pendingOutputAmount);
+        if (added)
+        {
+            // Do NOT report progress here anymore
+            pendingOutputItem = null;
+            pendingOutputAmount = 0;
+            pendingRecipeId = null;
+
+            if (interactionUI != null)
+            {
+                interactionUI.Show(useDataDrivenMenu ? "Nhấn E mở Menu nấu ăn" : "Nhấn giữ E để nấu cơm");
+            }
+        }
+        else
+        {
+            if (interactionUI != null) interactionUI.Show("Túi đồ đầy!");
+        }
+    }
+
+    private void ReportQuestProgress(string recipeId)
     {
         QuestManager questManager = FindFirstObjectByType<QuestManager>();
 
         if (questManager != null)
         {
+            // Default backward compatibility
             questManager.AddProgress(QuestStepType.CookRice, "cooked_rice", 1);
         }
     }
@@ -225,7 +315,14 @@ public class CookingPot : MonoBehaviour
 
         if (interactionUI != null && !isCooking)
         {
-            interactionUI.Show("Nhấn giữ E để nấu cơm");
+            if (pendingOutputItem != null)
+            {
+                interactionUI.Show("Thành phẩm đang chờ (Nhấn E để lấy)");
+            }
+            else
+            {
+                interactionUI.Show(useDataDrivenMenu ? "Nhấn E mở Menu nấu ăn" : "Nhấn giữ E để nấu cơm");
+            }
         }
     }
 

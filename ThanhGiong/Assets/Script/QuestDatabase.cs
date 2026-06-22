@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestDatabase : MonoBehaviour
 {
+    [Header("Item Rewards")]
+    public ItemData axeItem;
+    public ItemData pickaxeItem;
+
     public List<QuestStep> GetQuestStepsForDay(int day)
     {
         switch (day)
@@ -262,6 +266,11 @@ public class QuestDatabase : MonoBehaviour
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "blacksmith",
                 requiredAmount = 1,
+                rewardItem = pickaxeItem,
+                rewardAmount = 1,
+                rewardTiming = RewardTiming.TalkToNPC,
+                rewardMessage = "Nhận được Cuốc Chim!",
+                requireInventorySpace = true,
                 dialogueLines = new string[]
                 {
                     "Cậu ắt hẳn là người mà Già Làng nhắc đến.",
@@ -304,6 +313,11 @@ public class QuestDatabase : MonoBehaviour
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
+                rewardItem = axeItem,
+                rewardAmount = 1,
+                rewardTiming = RewardTiming.TalkToNPC,
+                rewardMessage = "Nhận được Rìu!",
+                requireInventorySpace = true,
                 dialogueLines = new string[]
                 {
                     "Tình hình nguy cấp rồi cậu trẻ ơi!",
