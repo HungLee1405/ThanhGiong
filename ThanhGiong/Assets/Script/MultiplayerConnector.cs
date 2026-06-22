@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
@@ -10,6 +11,8 @@ using UnityEngine.SceneManagement;
 public class MultiplayerConnector : MonoBehaviour
 {
     public static bool IsRoomMenuOpen { get; private set; }
+    public static string ActiveRoomCode { get; private set; } = "";
+    private static string pendingMenuMessage = "";
 
     private enum MenuPage
     {
@@ -33,6 +36,10 @@ public class MultiplayerConnector : MonoBehaviour
     private string currentRoomCode = "";
     private string statusMessage = "";
     private bool isStartingOnline;
+    private bool connectedAsClient;
+    private bool intentionalLeave;
+    private bool returningToMenu;
+    private NetworkManager callbackManager;
     private MenuPage menuPage = MenuPage.ModeSelect;
 
     private GUIStyle overlayStyle;
@@ -53,6 +60,14 @@ public class MultiplayerConnector : MonoBehaviour
     private void Start()
     {
         EnsureNetworkManagerExists();
+        RegisterNetworkCallbacks(NetworkManager.Singleton);
+
+        if (!string.IsNullOrWhiteSpace(pendingMenuMessage))
+        {
+            statusMessage = pendingMenuMessage;
+            pendingMenuMessage = "";
+            menuPage = MenuPage.ModeSelect;
+        }
     }
 
     private void EnsureNetworkManagerExists()
@@ -61,6 +76,7 @@ public class MultiplayerConnector : MonoBehaviour
         {
             EnsureTransport(NetworkManager.Singleton.gameObject);
             SharedQuestNetwork.EnsureExists(NetworkManager.Singleton.gameObject);
+            NetworkLobbyCoordinator.EnsureExists(NetworkManager.Singleton.gameObject);
             ConfigureNetworkPrefabs(NetworkManager.Singleton);
             return;
         }
@@ -69,6 +85,7 @@ public class MultiplayerConnector : MonoBehaviour
         NetworkManager manager = networkObject.AddComponent<NetworkManager>();
         EnsureTransport(networkObject);
         SharedQuestNetwork.EnsureExists(networkObject);
+        NetworkLobbyCoordinator.EnsureExists(networkObject);
         ConfigureNetworkPrefabs(manager);
         DontDestroyOnLoad(networkObject);
     }
@@ -81,6 +98,8 @@ public class MultiplayerConnector : MonoBehaviour
         {
             transport = networkObject.AddComponent<UnityTransport>();
         }
+
+        transport.DisconnectTimeoutMS = 5000;
 
         NetworkManager manager = networkObject.GetComponent<NetworkManager>();
 
@@ -159,6 +178,12 @@ public class MultiplayerConnector : MonoBehaviour
             {
                 menuPage = MenuPage.Online;
                 statusMessage = "";
+            }
+
+            if (!string.IsNullOrWhiteSpace(statusMessage))
+            {
+                GUILayout.Space(16f);
+                GUILayout.Label(statusMessage, labelStyle);
             }
 
             GUILayout.FlexibleSpace();
@@ -240,6 +265,11 @@ public class MultiplayerConnector : MonoBehaviour
 
     private void Update()
     {
+        if (callbackManager != NetworkManager.Singleton)
+        {
+            RegisterNetworkCallbacks(NetworkManager.Singleton);
+        }
+
         UpdateRoomMenuCursor();
     }
 
@@ -250,6 +280,7 @@ public class MultiplayerConnector : MonoBehaviour
 
     private void OnDestroy()
     {
+        UnregisterNetworkCallbacks();
         DestroyGuiTexture(overlayTexture);
         DestroyGuiTexture(panelTexture);
         DestroyGuiTexture(goldTexture);
@@ -273,6 +304,7 @@ public class MultiplayerConnector : MonoBehaviour
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(Mathf.Max(1, maxPlayers - 1));
             currentRoomCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             joinCode = currentRoomCode;
+            ActiveRoomCode = currentRoomCode;
 
             UnityTransport transport = manager.GetComponent<UnityTransport>();
 
@@ -282,6 +314,9 @@ public class MultiplayerConnector : MonoBehaviour
             }
 
             bool started = manager.StartHost();
+            connectedAsClient = false;
+            intentionalLeave = false;
+            returningToMenu = false;
             menuPage = started ? MenuPage.InGame : MenuPage.Online;
             if (started)
             {
@@ -331,6 +366,7 @@ public class MultiplayerConnector : MonoBehaviour
             ConfigureNetworkPrefabs(manager);
 
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+            ActiveRoomCode = joinCode;
             UnityTransport transport = manager.GetComponent<UnityTransport>();
 
             if (transport != null)
@@ -339,6 +375,9 @@ public class MultiplayerConnector : MonoBehaviour
             }
 
             bool started = manager.StartClient();
+            connectedAsClient = started;
+            intentionalLeave = false;
+            returningToMenu = false;
             menuPage = started ? MenuPage.InGame : MenuPage.Online;
             if (started)
             {
@@ -423,11 +462,13 @@ public class MultiplayerConnector : MonoBehaviour
         NetworkManager manager = NetworkManager.Singleton;
         int connectedCount = manager != null ? manager.ConnectedClientsIds.Count : 0;
 
-        response.Approved = connectedCount < maxPlayers;
+        response.Approved = connectedCount < maxPlayers && !NetworkLobbyCoordinator.MatchStarted;
         response.CreatePlayerObject = response.Approved;
         response.Position = GetSpawnPosition(connectedCount);
         response.Rotation = Quaternion.identity;
-        response.Reason = response.Approved ? "" : "Room is full.";
+        response.Reason = response.Approved
+            ? ""
+            : NetworkLobbyCoordinator.MatchStarted ? "The match has already started." : "Room is full.";
     }
 
     private Vector3 GetSpawnPosition(int playerIndex)
@@ -513,9 +554,85 @@ public class MultiplayerConnector : MonoBehaviour
     private void LeaveSession(NetworkManager manager)
     {
         Debug.Log("Multiplayer: leaving online room.");
-        manager.Shutdown();
+        intentionalLeave = true;
+        string message = manager.IsHost ? "You closed the room." : "You left the room.";
+        BeginReturnToModeSelect(message, manager);
+    }
+
+    private void RegisterNetworkCallbacks(NetworkManager manager)
+    {
+        if (manager == null || callbackManager == manager)
+            return;
+
+        UnregisterNetworkCallbacks();
+        callbackManager = manager;
+        callbackManager.OnClientDisconnectCallback += OnClientDisconnected;
+    }
+
+    private void UnregisterNetworkCallbacks()
+    {
+        if (callbackManager != null)
+        {
+            callbackManager.OnClientDisconnectCallback -= OnClientDisconnected;
+        }
+
+        callbackManager = null;
+    }
+
+    private void OnClientDisconnected(ulong disconnectedClientId)
+    {
+        if (returningToMenu || intentionalLeave || !connectedAsClient)
+            return;
+
+        NetworkManager manager = callbackManager != null ? callbackManager : NetworkManager.Singleton;
+
+        if (manager != null && manager.IsHost)
+            return;
+
+        if (manager != null && disconnectedClientId != manager.LocalClientId)
+            return;
+
+        Debug.LogWarning(
+            "Multiplayer: host connection lost. Returning client " + disconnectedClientId + " to the mode menu.");
+        BeginReturnToModeSelect("Host left the room. You have left the online session.", manager);
+    }
+
+    private void BeginReturnToModeSelect(string message, NetworkManager manager)
+    {
+        if (returningToMenu)
+            return;
+
+        returningToMenu = true;
+        connectedAsClient = false;
+        ActiveRoomCode = "";
+        currentRoomCode = "";
+        joinCode = "";
+        pendingMenuMessage = message;
+
+        if (manager != null && manager.IsListening)
+        {
+            manager.Shutdown();
+        }
+
+        StartCoroutine(ReloadCurrentScene());
+    }
+
+    private IEnumerator ReloadCurrentScene()
+    {
+        yield return null;
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.buildIndex);
+    }
+
+    public static void LeaveCurrentSession()
+    {
+        MultiplayerConnector connector = FindFirstObjectByType<MultiplayerConnector>();
+        NetworkManager manager = NetworkManager.Singleton;
+
+        if (connector != null && manager != null && manager.IsListening)
+        {
+            connector.LeaveSession(manager);
+        }
     }
 
     private void EnsureGuiStyles()

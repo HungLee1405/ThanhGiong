@@ -1086,6 +1086,95 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NetworkPlayerAppearance
   ShowTopMostFoldoutHeaderGroup: 1
+  colorIndex:
+    m_InternalValue: 0
+  ready:
+    m_InternalValue: 0
+  playerName:
+    m_InternalValue:
+      utf8LengthInBytes: 0
+      bytes:
+        offset0000:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        offset0016:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        offset0032:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0048: 0
+        byte0049: 0
+        byte0050: 0
+        byte0051: 0
+        byte0052: 0
+        byte0053: 0
+        byte0054: 0
+        byte0055: 0
+        byte0056: 0
+        byte0057: 0
+        byte0058: 0
+        byte0059: 0
+        byte0060: 0
+        byte0061: 0
+  showSelectionPanel: 1
+  tintSkinnedMeshOnly: 1
+  useClothingOverlay: 1
+  visualGroundSink: 0.18
+  footBoneGroundClearance: 0.035
+  nameTagClearance: 0.14
+  redCharacterPrefab: {fileID: 919132149155446097, guid: ddf96bb9d88e5a749bb6e74b82f69b12, type: 3}
+  redCharacterMaterial: {fileID: 2100000, guid: 32436f48adf88d24f8b85f54f6c93f71, type: 2}
+  greenCharacterPrefab: {fileID: 919132149155446097, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
+  greenCharacterMaterial: {fileID: 2100000, guid: 97e38916b7ce47b43be163b2309daf8a, type: 2}
+  purpleCharacterPrefab: {fileID: 919132149155446097, guid: 58b20c43e4b4ee540800ff799bfd9a43, type: 3}
+  purpleCharacterMaterial: {fileID: 2100000, guid: d8a83d46f0951dc41a696dc4dddd6816, type: 2}
+  brownCharacterPrefab: {fileID: 919132149155446097, guid: 47e34f653682eb745948be73c3205adc, type: 3}
+  brownCharacterMaterial: {fileID: 2100000, guid: ebfce6348cd9dfb4b8fce6fd188fefa2, type: 2}
+  yellowCharacterPrefab: {fileID: 919132149155446097, guid: 41ad43f31277feb4d838c6d9d9f98c71, type: 3}
+  yellowCharacterMaterial: {fileID: 2100000, guid: a85a00d03a761aa43b48f2a04407da7b, type: 2}
 --- !u!1 &5323214172659039573
 GameObject:
   m_ObjectHideFlags: 0

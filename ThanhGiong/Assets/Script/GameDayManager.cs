@@ -37,6 +37,7 @@ public class GameDayManager : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (!isDayRunning) return;
         if (isTransitioningDay) return;
 

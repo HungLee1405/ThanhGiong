@@ -63,6 +63,7 @@ public class ResourcePickup : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (Keyboard.current == null) return;
 
         if (!CanInteract())
