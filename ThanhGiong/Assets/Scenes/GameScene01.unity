@@ -8913,8 +8913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 7.5, y: 0}
-  m_SizeDelta: {x: -15, y: 20}
+  m_AnchoredPosition: {x: 12.5, y: 100}
+  m_SizeDelta: {x: -25, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &590998090
 MonoBehaviour:
@@ -25579,7 +25579,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -700, y: 150}
-  m_SizeDelta: {x: 500, y: 300}
+  m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649220953
 MonoBehaviour:
@@ -26216,8 +26216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130, y: -30}
-  m_SizeDelta: {x: 230, y: 20}
+  m_AnchoredPosition: {x: 270, y: -30}
+  m_SizeDelta: {x: 500, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1690153855
 MonoBehaviour:
@@ -26266,8 +26266,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -28505,15 +28505,15 @@ MonoBehaviour:
   interactionUI: {fileID: 1442244191}
   questManager: {fileID: 786098323}
   acceptedFoods:
-  - itemId: chicken_rice
+  - itemId: chickenRice
     restoreAmount: 40
-  - itemId: bamboo_rice
+  - itemId: bambooRice
     restoreAmount: 25
-  - itemId: cooked_rice
+  - itemId: cookedRice
     restoreAmount: 15
   feedTime: 1.5
   reportQuestProgress: 1
-  targetItemId: cooked_rice
+  targetItemId: cookedRice
 --- !u!114 &1795596459
 MonoBehaviour:
   m_ObjectHideFlags: 0
