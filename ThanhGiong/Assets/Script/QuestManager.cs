@@ -86,8 +86,23 @@ public class QuestManager : MonoBehaviour
         }
 
         List<QuestStep> allSteps = questDatabase.GetQuestStepsForDay(day);
+        
+        // Giữ lại các nhiệm vụ phụ chưa hoàn thành từ ngày cũ
+        List<QuestStep> leftoverSideSteps = new List<QuestStep>();
+        if (sideQuestSteps != null && currentSideStepIndex >= 0 && currentSideStepIndex < sideQuestSteps.Count)
+        {
+            for (int i = currentSideStepIndex; i < sideQuestSteps.Count; i++)
+            {
+                if (!sideQuestSteps[i].IsCompleted())
+                {
+                    sideQuestSteps[i].unlockAtMainStepIndex = 0; // Xóa block
+                    leftoverSideSteps.Add(sideQuestSteps[i]);
+                }
+            }
+        }
+
         currentSteps = new List<QuestStep>();
-        sideQuestSteps = new List<QuestStep>();
+        sideQuestSteps = new List<QuestStep>(leftoverSideSteps);
 
         if (allSteps != null)
         {
@@ -163,7 +178,15 @@ public class QuestManager : MonoBehaviour
             return null;
         }
 
-        return sideQuestSteps[currentSideStepIndex];
+        QuestStep sideStep = sideQuestSteps[currentSideStepIndex];
+
+        // Block side quest until main quest reaches the required step
+        if (currentStepIndex < sideStep.unlockAtMainStepIndex)
+        {
+            return null;
+        }
+
+        return sideStep;
     }
 
     public List<QuestStep> GetActiveSteps()
@@ -424,6 +447,13 @@ public class QuestManager : MonoBehaviour
             TryGrantReward(nextStep, RewardTiming.StartOfStep);
         }
 
+        // Check if a side quest just unlocked
+        QuestStep activeSideStep = GetCurrentSideStep();
+        if (activeSideStep != null && activeSideStep.unlockAtMainStepIndex == currentStepIndex)
+        {
+            TryGrantReward(activeSideStep, RewardTiming.StartOfStep);
+        }
+
         RefreshQuestUI();
         OnQuestStepChanged?.Invoke();
         CheckStartDayCountdown();
@@ -490,7 +520,7 @@ public class QuestManager : MonoBehaviour
         {
             for (int i = 0; i < currentSteps.Count; i++)
             {
-                if (currentSteps[i] != null)
+                if (currentSteps[i] != null && currentSteps[i].baseRequiredAmount <= 0)
                 {
                     currentSteps[i].baseRequiredAmount = Mathf.Max(1, currentSteps[i].requiredAmount);
                 }
@@ -501,7 +531,7 @@ public class QuestManager : MonoBehaviour
         {
             for (int i = 0; i < sideQuestSteps.Count; i++)
             {
-                if (sideQuestSteps[i] != null)
+                if (sideQuestSteps[i] != null && sideQuestSteps[i].baseRequiredAmount <= 0)
                 {
                     sideQuestSteps[i].baseRequiredAmount = Mathf.Max(1, sideQuestSteps[i].requiredAmount);
                 }
@@ -658,7 +688,13 @@ public class QuestManager : MonoBehaviour
                 foreach (var req in mainStep.storageRequirements)
                 {
                     int has = storage.GetAmount(req.targetItemId);
-                    mainProgress += $"\nKho - {req.targetItemId}: {has}/{req.requiredAmount}";
+                    string itemName = req.targetItemId;
+                    if (itemName == "iron_ore") itemName = "Sắt";
+                    else if (itemName == "bamboo") itemName = "Tre";
+                    else if (itemName == "rice") itemName = "Gạo";
+                    else if (itemName == "water") itemName = "Nước";
+
+                    mainProgress += $"\nKho - {itemName}: {has}/{req.requiredAmount}";
                 }
             }
         }

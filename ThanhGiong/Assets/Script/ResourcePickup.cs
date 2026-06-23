@@ -323,14 +323,6 @@ public class ResourcePickup : MonoBehaviour
                 questManager.AddProgress(QuestStepType.CollectRice, "rice", collectedAmount);
                 break;
 
-            case "iron_ore":
-                questManager.AddProgress(QuestStepType.CollectIron, "iron_ore", collectedAmount);
-                break;
-
-            case "bamboo":
-                questManager.AddProgress(QuestStepType.CollectBamboo, "bamboo", collectedAmount);
-                break;
-
             case "chick":
                 questManager.AddProgress(QuestStepType.CatchChicken, "chick", collectedAmount);
                 break;

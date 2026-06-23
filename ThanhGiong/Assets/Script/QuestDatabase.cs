@@ -216,6 +216,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "bac_ba",
                 requiredAmount = 1,
                 isSideQuest = true,
+                unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
                 {
                     "Chào cậu trẻ, ta là lão Năm.",
@@ -233,7 +234,8 @@ public class QuestDatabase : MonoBehaviour
                 stepType = QuestStepType.CatchChicken,
                 targetItemId = "chick",
                 requiredAmount = 3,
-                isSideQuest = true
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1
             },
 
             new QuestStep
@@ -245,6 +247,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "bac_ba",
                 requiredAmount = 1,
                 isSideQuest = true,
+                unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
                 {
                     "Ôi cậu làm tốt quá, cảm ơn cậu nhiều nhé!",
@@ -284,6 +287,8 @@ public class QuestDatabase : MonoBehaviour
                 questDescription = "Gặp Bác Thợ Rèn.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "blacksmith",
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1,
                 requiredAmount = 1,
                 rewardItem = pickaxeItem,
                 rewardAmount = 1,
@@ -303,10 +308,12 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 4,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Khai thác 5 quặng sắt.",
+                questDescription = "Khai thác 5 quặng sắt và mang về kho",
                 stepType = QuestStepType.CollectIron,
                 targetItemId = "iron_ore",
-                requiredAmount = 5
+                requiredAmount = 5,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1
             },
 
             new QuestStep
@@ -355,7 +362,9 @@ public class QuestDatabase : MonoBehaviour
                 questDescription = "Chặt 5 bó tre mang về kho.",
                 stepType = QuestStepType.CollectBamboo,
                 targetItemId = "bamboo",
-                requiredAmount = 5
+                requiredAmount = 5,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1
             },
 
             new QuestStep
@@ -397,7 +406,12 @@ public class QuestDatabase : MonoBehaviour
                 questName = "Nhiệm vụ ngày 6",
                 questDescription = "Giữ thanh đói trên 80%, tích trữ ít nhất 10 quặng sắt và 10 bó tre.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
-                requiredAmount = 1
+                requiredAmount = 1,
+                storageRequirements = new List<QuestRequirement>
+                {
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 10 },
+                    new QuestRequirement { targetItemId = "bamboo", requiredAmount = 10 }
+                }
             }
         };
     }
@@ -430,9 +444,13 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 7,
                 questName = "Nhiệm vụ ngày 7",
-                questDescription = "Giữ thanh đói trên 80% và hoàn thành vũ khí 100%.",
-                stepType = QuestStepType.ForgeWeapon,
-                requiredAmount = 100
+                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 15 quặng sắt.",
+                stepType = QuestStepType.SurviveUntilDayEnd,
+                requiredAmount = 1,
+                storageRequirements = new List<QuestRequirement>
+                {
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 15 }
+                }
             }
         };
     }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FeedGiong : MonoBehaviour
@@ -8,12 +8,22 @@ public class FeedGiong : MonoBehaviour
     public InteractionUI interactionUI;
     public QuestManager questManager;
 
-    [Header("Food Item")]
-    public ItemData cookedRiceItem;
+    [System.Serializable]
+    public class FoodRestoreInfo
+    {
+        public string itemId;
+        public float restoreAmount;
+    }
 
-    [Header("Feed Settings")]
+    [Header("Food Settings")]
+    public List<FoodRestoreInfo> acceptedFoods = new List<FoodRestoreInfo>
+    {
+        new FoodRestoreInfo { itemId = "chicken_rice", restoreAmount = 40f },
+        new FoodRestoreInfo { itemId = "bamboo_rice", restoreAmount = 25f },
+        new FoodRestoreInfo { itemId = "cooked_rice", restoreAmount = 15f }
+    };
+
     public float feedTime = 1.5f;
-    public float cookedRiceRestoreAmount = 15f;
 
     [Header("Quest Settings")]
     public bool reportQuestProgress = false;
@@ -24,6 +34,7 @@ public class FeedGiong : MonoBehaviour
 
     private float feedTimer = 0f;
     private PlayerInventory playerInventory;
+    private PlayerHandController playerHandController;
 
     private void Start()
     {
@@ -76,9 +87,38 @@ public class FeedGiong : MonoBehaviour
     {
         if (!playerInRange) return false;
         if (playerInventory == null) return false;
-        if (cookedRiceItem == null) return false;
 
-        if (!playerInventory.HasItem(cookedRiceItem.itemId, 1)) return false;
+        bool hasFood = false;
+
+        if (playerHandController != null)
+        {
+            ItemData heldItem = playerHandController.GetHeldItemData();
+            if (heldItem != null)
+            {
+                foreach (var food in acceptedFoods)
+                {
+                    if (heldItem.itemId == food.itemId)
+                    {
+                        hasFood = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!hasFood)
+        {
+            foreach (var food in acceptedFoods)
+            {
+                if (playerInventory.HasItem(food.itemId, 1))
+                {
+                    hasFood = true;
+                    break;
+                }
+            }
+        }
+
+        if (!hasFood) return false;
 
         if (questManager == null)
         {
@@ -124,13 +164,56 @@ public class FeedGiong : MonoBehaviour
 
     private void FinishFeeding()
     {
-        if (cookedRiceItem == null)
+        string foodToConsume = null;
+        float restoreAmount = 0f;
+        bool consumedFromHand = false;
+
+        if (playerHandController != null)
+        {
+            ItemData heldItem = playerHandController.GetHeldItemData();
+            if (heldItem != null)
+            {
+                foreach (var food in acceptedFoods)
+                {
+                    if (heldItem.itemId == food.itemId)
+                    {
+                        foodToConsume = food.itemId;
+                        restoreAmount = food.restoreAmount;
+                        consumedFromHand = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (foodToConsume == null)
+        {
+            foreach (var food in acceptedFoods)
+            {
+                if (playerInventory.HasItem(food.itemId, 1))
+                {
+                    foodToConsume = food.itemId;
+                    restoreAmount = food.restoreAmount;
+                    break; 
+                }
+            }
+        }
+
+        if (foodToConsume == null)
         {
             ResetFeeding();
             return;
         }
 
-        bool removed = playerInventory.RemoveItem(cookedRiceItem.itemId, 1);
+        bool removed = false;
+        if (consumedFromHand)
+        {
+            removed = playerHandController.TryConsumeHeldItem(1);
+        }
+        else
+        {
+            removed = playerInventory.RemoveItem(foodToConsume, 1);
+        }
 
         if (!removed)
         {
@@ -146,10 +229,10 @@ public class FeedGiong : MonoBehaviour
 
         if (giongHunger != null)
         {
-            giongHunger.Feed(cookedRiceRestoreAmount);
+            giongHunger.Feed(restoreAmount);
         }
 
-        Debug.Log("Đã đưa cơm cho mẹ Gióng.");
+        Debug.Log("Đã đưa " + foodToConsume + " cho mẹ Gióng.");
 
         TryReportQuestProgress();
 
@@ -207,6 +290,7 @@ public class FeedGiong : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         playerInventory = other.GetComponent<PlayerInventory>();
+        playerHandController = other.GetComponent<PlayerHandController>();
         playerInRange = true;
 
         if (CanShowFeedInteraction() && interactionUI != null)
@@ -221,6 +305,7 @@ public class FeedGiong : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         playerInventory = null;
+        playerHandController = null;
         playerInRange = false;
 
         ResetFeeding();

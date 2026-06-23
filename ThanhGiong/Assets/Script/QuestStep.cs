@@ -30,6 +30,7 @@ public class QuestStep
     [Header("Parallel / Side Quest")]
     public bool isSideQuest = false;
     public bool isRequiredForDayCompletion = false;
+    public int unlockAtMainStepIndex = 0;
 
     public List<QuestRequirement> storageRequirements = new List<QuestRequirement>();
 

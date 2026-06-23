@@ -164,11 +164,19 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
         }
     }
 
+    private PlayerHandController GetPlayerHandController(Collider other)
+    {
+        if (!other.CompareTag("Player")) return null;
+
+        PlayerHandController hand = other.GetComponent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInParent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInChildren<PlayerHandController>();
+        return hand;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        PlayerHandController hand =
-            other.GetComponentInParent<PlayerHandController>();
-
+        PlayerHandController hand = GetPlayerHandController(other);
         if (hand == null) return;
 
         activePlayerHand = hand;
@@ -180,20 +188,19 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
 
     private void OnTriggerStay(Collider other)
     {
-        PlayerHandController hand =
-            other.GetComponentInParent<PlayerHandController>();
+        if (activePlayerHand != null) return;
 
+        PlayerHandController hand = GetPlayerHandController(other);
         if (hand == null) return;
 
         activePlayerHand = hand;
         hand.SetCurrentReceiver(this);
+        UpdateInteractionUI(hand);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerHandController hand =
-            other.GetComponentInParent<PlayerHandController>();
-
+        PlayerHandController hand = GetPlayerHandController(other);
         if (hand == null) return;
 
         if (activePlayerHand == hand)

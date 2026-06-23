@@ -214,6 +214,7 @@ public class ChickenController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            BindPlayer(other);
             playerInRange = true;
             if (CanCatch())
             {
@@ -229,6 +230,24 @@ public class ChickenController : MonoBehaviour
                 {
                     interactionUI.Hide();
                 }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (playerInventory == null || playerHandController == null)
+            {
+                BindPlayer(other);
+            }
+
+            playerInRange = true;
+
+            if (CanCatch() && interactionUI != null && !isCatching)
+            {
+                interactionUI.Show("Nhấn giữ E để bắt gà");
             }
         }
     }
@@ -261,5 +280,22 @@ public class ChickenController : MonoBehaviour
         }
         isCaught = false;
         gameObject.SetActive(true);
+    }
+
+    private void BindPlayer(Collider other)
+    {
+        if (playerInventory == null)
+        {
+            playerInventory = other.GetComponent<PlayerInventory>();
+            if (playerInventory == null) playerInventory = other.GetComponentInParent<PlayerInventory>();
+            if (playerInventory == null) playerInventory = other.GetComponentInChildren<PlayerInventory>();
+        }
+
+        if (playerHandController == null)
+        {
+            playerHandController = other.GetComponent<PlayerHandController>();
+            if (playerHandController == null) playerHandController = other.GetComponentInParent<PlayerHandController>();
+            if (playerHandController == null) playerHandController = other.GetComponentInChildren<PlayerHandController>();
+        }
     }
 }
