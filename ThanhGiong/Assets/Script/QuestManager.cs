@@ -35,6 +35,9 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive)
+            return;
+
         NetworkManager networkManager = NetworkManager.Singleton;
 
         if (networkManager == null || !networkManager.IsServer)

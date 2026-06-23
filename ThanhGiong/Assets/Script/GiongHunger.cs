@@ -31,6 +31,7 @@ public class GiongHunger : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (!isHungerRunning) return;
 
         decreaseTimer += Time.deltaTime;
