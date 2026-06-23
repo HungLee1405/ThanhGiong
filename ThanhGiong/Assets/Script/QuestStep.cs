@@ -27,6 +27,10 @@ public class QuestStep
     [HideInInspector] public int baseRequiredAmount = 0;
     public int currentAmount = 0;
 
+    [Header("Parallel / Side Quest")]
+    public bool isSideQuest = false;
+    public bool isRequiredForDayCompletion = false;
+
     public List<QuestRequirement> storageRequirements = new List<QuestRequirement>();
 
     [TextArea(2, 5)]

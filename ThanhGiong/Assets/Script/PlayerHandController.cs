@@ -72,7 +72,7 @@ public class PlayerHandController : NetworkBehaviour
 
     private void HandleHotkeys()
     {
-        if (selectedItem != null && selectedItem.itemData != null && selectedItem.itemData.itemId == "chicken")
+        if (selectedItem != null && selectedItem.itemData != null && selectedItem.itemData.itemId == "chick")
         {
             return; // Khóa đổi slot nếu đang cầm gà
         }
@@ -186,7 +186,7 @@ public class PlayerHandController : NetworkBehaviour
 
         ItemData itemToPut = selectedItem.itemData;
 
-        if (currentReceiver is ChickenCoop coop && itemToPut.itemId == "chicken" && carriedChicken != null)
+        if (currentReceiver is ChickenCoop coop && itemToPut.itemId == "chick" && carriedChicken != null)
         {
             bool success = coop.TryReceiveChicken(this);
             if (!success)

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: chicken
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemId: chicken
-  itemName: "G\xE0"
+  itemName: "Th\u1ECBt g\xE0"
   itemIcon: {fileID: 21300000, guid: 7c4a22eeaa4fe4a4f9f174124916dc55, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}

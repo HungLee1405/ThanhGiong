@@ -819,11 +819,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1950082184219601680}
   - component: {fileID: 808866823472859173}
+  - component: {fileID: 4725253242452365487}
   - component: {fileID: 4076376122089073877}
   - component: {fileID: 1053746475908573888}
   - component: {fileID: 1365010792303845082}
   - component: {fileID: 3346900956054533131}
-  - component: {fileID: 4725253242452365487}
   - component: {fileID: 7228259985323572038}
   - component: {fileID: 4318603033396234985}
   - component: {fileID: 6177585072448710964}
@@ -842,8 +842,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5043462630792453779}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7020897, z: -0, w: 0.7120886}
-  m_LocalPosition: {x: -47.19, y: 9.96, z: 140.79}
+  m_LocalRotation: {x: -0, y: 0.30410102, z: -0, w: 0.9526398}
+  m_LocalPosition: {x: 92.51, y: 11.27, z: 15.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -853,7 +853,7 @@ Transform:
   - {fileID: 6073630589892864384}
   - {fileID: 3303445268802641298}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.19, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 35.408, z: 0}
 --- !u!143 &808866823472859173
 CharacterController:
   m_ObjectHideFlags: 0
@@ -879,6 +879,31 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &4725253242452365487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043462630792453779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 1552656320
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &4076376122089073877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,7 +921,7 @@ MonoBehaviour:
   jumpHeight: 2
   gravity: -25
   playerCamera: {fileID: 2095957581433434940}
-  mouseSensitivity: 0.2
+  mouseSensitivity: 0.1
   maxLookAngle: 80
   groundCheck: {fileID: 4496563275138983203}
   groundDistance: 0.3
@@ -986,31 +1011,7 @@ MonoBehaviour:
   selectedItem:
     itemData: {fileID: 0}
     amount: 0
---- !u!114 &4725253242452365487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5043462630792453779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3254623533
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
+  carriedChicken: {fileID: 0}
 --- !u!114 &7228259985323572038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,6 +1087,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NetworkPlayerAppearance
   ShowTopMostFoldoutHeaderGroup: 1
+  colorIndex:
+    m_InternalValue: 0
+  ready:
+    m_InternalValue: 0
+  showSelectionPanel: 1
+  tintSkinnedMeshOnly: 1
+  useClothingOverlay: 1
 --- !u!1 &5323214172659039573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1665,7 @@ Transform:
   m_GameObject: {fileID: 7517820599327229894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.89, z: 0}
+  m_LocalPosition: {x: 0.008, y: -0.001, z: 0.023}
   m_LocalScale: {x: 270, y: 270, z: 270}
   m_ConstrainProportionsScale: 0
   m_Children:

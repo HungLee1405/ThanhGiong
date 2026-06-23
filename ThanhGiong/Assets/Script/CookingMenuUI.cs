@@ -1,29 +1,74 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 
 public class CookingMenuUI : MonoBehaviour
 {
-    [Header("UI Elements")]
-    public GameObject menuPanel;
+    [Header("UI Elements - Visual Container")]
+    public GameObject visualContainer;
+    public GameObject menuPanel; // Legacy mapping
+    public GameObject darkOverlay;
+
+    [Header("Main Panel Elements")]
+    public GameObject mainPanel;
+    public Button closeButton;
     
-    [Header("Recipes")]
+    [Header("Recipes List")]
     public List<CookingRecipe> availableRecipes;
-    
-    [Header("UI Prefabs")]
     public GameObject recipeRowPrefab;
     public Transform recipeListContent;
+
+    [Header("Detail Panel")]
+    public Image recipeIcon;
+    public TextMeshProUGUI recipeNameText;
+    public TextMeshProUGUI recipeDescriptionText;
+    public Transform ingredientListContent;
+    public GameObject ingredientRowPrefab;
+    public TextMeshProUGUI cookTimeText;
+    public TextMeshProUGUI effectText;
+    public TextMeshProUGUI lockedHintText;
+    public Button cookButton;
+
+    [Header("Progress Panel")]
+    public GameObject progressPanel;
+    public TextMeshProUGUI progressTitleText;
+    public Image progressFillImage;
+    public TextMeshProUGUI progressText;
+
+    [Header("Pending Output Panel")]
+    public GameObject pendingOutputPanel;
+    public Image pendingOutputIcon;
+    public TextMeshProUGUI pendingOutputText;
+    public Button takeOutputButton;
 
     public static bool IsMenuOpen = false;
 
     private CookingPot currentPot;
     private PlayerInventory currentInventory;
+    private CookingRecipe selectedRecipe;
+
+    private void Awake()
+    {
+        if (closeButton != null) closeButton.onClick.AddListener(CloseMenu);
+        if (cookButton != null) cookButton.onClick.AddListener(OnCookButtonClicked);
+        if (takeOutputButton != null) takeOutputButton.onClick.AddListener(OnTakeOutputClicked);
+    }
 
     private void Start()
     {
-        if (menuPanel != null)
-        {
-            menuPanel.SetActive(false);
-        }
+        HideAllPanels();
+    }
+
+    private void HideAllPanels()
+    {
+        if (visualContainer != null) visualContainer.SetActive(false);
+        if (darkOverlay != null) darkOverlay.SetActive(false);
+        if (mainPanel != null) mainPanel.SetActive(false);
+        if (progressPanel != null) progressPanel.SetActive(false);
+        if (pendingOutputPanel != null) pendingOutputPanel.SetActive(false);
+        
+        if (menuPanel != null && menuPanel != mainPanel) menuPanel.SetActive(false);
     }
 
     public void OpenMenu(CookingPot pot, PlayerInventory inventory)
@@ -31,26 +76,34 @@ public class CookingMenuUI : MonoBehaviour
         currentPot = pot;
         currentInventory = inventory;
         
-        if (menuPanel != null)
-        {
-            menuPanel.SetActive(true);
-        }
-        
         IsMenuOpen = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        RefreshUI();
+        if (visualContainer != null) visualContainer.SetActive(true);
+        if (darkOverlay != null) darkOverlay.SetActive(true);
+
+        // Determine which panel to show based on pot state
+        if (pot.HasPendingOutput)
+        {
+            ShowPendingOutputPanel();
+        }
+        else if (pot.IsCooking)
+        {
+            ShowProgressPanel();
+        }
+        else
+        {
+            ShowMainPanel();
+        }
     }
 
     public void CloseMenu()
     {
-        if (menuPanel != null)
-        {
-            menuPanel.SetActive(false);
-        }
+        HideAllPanels();
         
         IsMenuOpen = false;
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -60,9 +113,71 @@ public class CookingMenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (menuPanel != null && menuPanel.activeSelf && UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (IsMenuOpen && UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             CloseMenu();
+        }
+
+        if (IsMenuOpen && currentPot != null)
+        {
+            if (currentPot.IsCooking && progressPanel != null && progressPanel.activeSelf)
+            {
+                if (progressFillImage != null) progressFillImage.fillAmount = currentPot.CookingProgress;
+                if (progressText != null) progressText.text = Mathf.FloorToInt(currentPot.CookingProgress * 100f) + "%";
+                if (progressTitleText != null) progressTitleText.text = "Đang nấu " + currentPot.CurrentRecipeName + "...";
+            }
+            else if (progressPanel != null && progressPanel.activeSelf)
+            {
+                if (currentPot.HasPendingOutput)
+                {
+                    // Cooking finished while menu was open, and inventory is full (pending output)
+                    ShowPendingOutputPanel();
+                }
+                else if (!currentPot.IsCooking)
+                {
+                    // Cooking finished successfully and item was placed directly in inventory
+                    CloseMenu();
+                }
+            }
+        }
+    }
+
+    private void ShowMainPanel()
+    {
+        if (mainPanel != null) mainPanel.SetActive(true);
+        if (menuPanel != null && menuPanel != mainPanel) menuPanel.SetActive(true);
+        
+        if (progressPanel != null) progressPanel.SetActive(false);
+        if (pendingOutputPanel != null) pendingOutputPanel.SetActive(false);
+        
+        RefreshUI();
+    }
+
+    private void ShowProgressPanel()
+    {
+        if (mainPanel != null) mainPanel.SetActive(false);
+        if (menuPanel != null && menuPanel != mainPanel) menuPanel.SetActive(false);
+        
+        if (progressPanel != null) progressPanel.SetActive(true);
+        if (pendingOutputPanel != null) pendingOutputPanel.SetActive(false);
+    }
+
+    private void ShowPendingOutputPanel()
+    {
+        if (mainPanel != null) mainPanel.SetActive(false);
+        if (menuPanel != null && menuPanel != mainPanel) menuPanel.SetActive(false);
+        
+        if (progressPanel != null) progressPanel.SetActive(false);
+        if (pendingOutputPanel != null) pendingOutputPanel.SetActive(true);
+
+        if (pendingOutputIcon != null && currentPot.PendingOutputItem != null)
+        {
+            pendingOutputIcon.sprite = currentPot.PendingOutputItem.itemIcon;
+            pendingOutputIcon.gameObject.SetActive(true);
+        }
+        if (pendingOutputText != null && currentPot.PendingOutputItem != null)
+        {
+            pendingOutputText.text = "Nhận " + currentPot.PendingOutputAmount + " " + currentPot.PendingOutputItem.itemName;
         }
     }
 
@@ -81,6 +196,7 @@ public class CookingMenuUI : MonoBehaviour
 
         if (currentInventory == null) return;
 
+        bool first = true;
         foreach (var recipe in availableRecipes)
         {
             if (recipe == null) continue;
@@ -91,10 +207,85 @@ public class CookingMenuUI : MonoBehaviour
             {
                 rowUI.Setup(recipe, this, currentInventory);
             }
+
+            if (first)
+            {
+                SelectRecipe(recipe);
+                first = false;
+            }
         }
     }
 
-    // Called by UI Button
+    public void SelectRecipe(CookingRecipe recipe)
+    {
+        selectedRecipe = recipe;
+        if (recipeIcon != null) { recipeIcon.sprite = recipe.icon; recipeIcon.gameObject.SetActive(true); }
+        if (recipeNameText != null) recipeNameText.text = recipe.displayName;
+        if (recipeDescriptionText != null) recipeDescriptionText.text = recipe.description;
+        if (cookTimeText != null) cookTimeText.text = "Thời gian nấu: " + recipe.cookTime + "s";
+        if (effectText != null) effectText.text = "Thành phẩm: " + (recipe.outputItem != null ? recipe.outputItem.itemName : "N/A");
+        
+        bool unlocked = IsRecipeUnlocked(recipe);
+        if (lockedHintText != null)
+        {
+            lockedHintText.gameObject.SetActive(!unlocked);
+            lockedHintText.text = recipe.lockedHint;
+        }
+        if (recipeIcon != null)
+        {
+            var color = recipeIcon.color;
+            color.a = unlocked ? 1f : 0.5f;
+            recipeIcon.color = color;
+        }
+
+        bool canCook = unlocked;
+
+        if (ingredientListContent != null)
+        {
+            foreach (Transform child in ingredientListContent)
+            {
+                Destroy(child.gameObject);
+            }
+
+            if (ingredientRowPrefab != null && currentInventory != null)
+            {
+                foreach (var ing in recipe.ingredients)
+                {
+                    GameObject go = Instantiate(ingredientRowPrefab, ingredientListContent);
+                    IngredientRowUI rowUI = go.GetComponent<IngredientRowUI>();
+                    int has = currentInventory.GetItemAmount(ing.item.itemId);
+                    if (rowUI != null)
+                    {
+                        rowUI.Setup(ing.item, ing.amount, has);
+                    }
+                    if (has < ing.amount) canCook = false;
+                }
+            }
+        }
+
+        if (cookButton != null)
+        {
+            cookButton.interactable = canCook;
+        }
+    }
+
+    private void OnCookButtonClicked()
+    {
+        if (selectedRecipe != null)
+        {
+            StartCooking(selectedRecipe);
+        }
+    }
+
+    private void OnTakeOutputClicked()
+    {
+        if (currentPot != null && currentPot.HasPendingOutput)
+        {
+            currentPot.TryTakePendingOutput();
+            CloseMenu();
+        }
+    }
+
     public void StartCooking(CookingRecipe recipe)
     {
         if (currentPot == null || currentInventory == null) return;
@@ -115,7 +306,7 @@ public class CookingMenuUI : MonoBehaviour
         }
 
         currentPot.StartDataDrivenCooking(recipe);
-        CloseMenu();
+        ShowProgressPanel();
     }
 
     public bool IsRecipeUnlocked(CookingRecipe recipe)
@@ -123,7 +314,6 @@ public class CookingMenuUI : MonoBehaviour
         QuestManager qm = FindFirstObjectByType<QuestManager>();
         if (qm == null) return true;
 
-        // Không khóa lại khi qua ngày mới vì điều kiện đã đạt
         if (recipe.requireCompletedStep)
         {
             if (qm.HasCompletedStepType(recipe.requiredStepType)) return true;

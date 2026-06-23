@@ -33,6 +33,13 @@ public class CookingPot : MonoBehaviour
     private float cookingTimer = 0f;
     private PlayerInventory playerInventory;
 
+    public bool IsCooking => isCooking;
+    public float CookingProgress => isCooking ? cookingTimer / (currentRecipe != null ? currentRecipe.cookTime : cookTime) : 0f;
+    public bool HasPendingOutput => pendingOutputItem != null;
+    public ItemData PendingOutputItem => pendingOutputItem;
+    public int PendingOutputAmount => pendingOutputAmount;
+    public string CurrentRecipeName => currentRecipe != null ? currentRecipe.displayName : "Cơm";
+
     private void Update()
     {
         if (Keyboard.current == null) return;
@@ -170,12 +177,6 @@ public class CookingPot : MonoBehaviour
             return;
         }
 
-        if (!CanCook())
-        {
-            CancelCooking();
-            return;
-        }
-
         if (useDataDrivenMenu && currentRecipe != null)
         {
             bool addedOutput = playerInventory.AddItem(currentRecipe.outputItem, currentRecipe.outputAmount);
@@ -191,9 +192,16 @@ public class CookingPot : MonoBehaviour
             }
             
             ReportQuestProgress(currentRecipe.recipeId);
+            ResetCooking();
         }
         else
         {
+            if (!CanCook())
+            {
+                CancelCooking();
+                return;
+            }
+
             bool removedRice = playerInventory.RemoveItem(riceItem.itemId, riceCost);
             bool removedWater = playerInventory.RemoveItem(waterItem.itemId, waterCost);
 
@@ -219,16 +227,16 @@ public class CookingPot : MonoBehaviour
             ResetCooking();
         }
 
-        Debug.Log("Nấu cơm thành công!");
+        Debug.Log("Nấu ăn thành công!");
 
         if (interactionUI != null)
         {
-            interactionUI.Show("Nấu cơm xong!");
+            interactionUI.Show("Nấu xong!");
             interactionUI.SetProgress(0f);
         }
     }
 
-    private void TryTakePendingOutput()
+    public void TryTakePendingOutput()
     {
         if (playerInventory == null) return;
         

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8cf13893a214948baa2b67ef5fcb1f, type: 3}
+  m_Name: ChickenRiceRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::CookingRecipe
+  recipeId: 2
+  displayName: "C\u01A1m G\xE0"
+  description: 
+  icon: {fileID: 21300000, guid: 6e8d125e3f67a534db80b833d1f2e0bd, type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: ad22aad29202f8b41a66f96d1ef46d4d, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 10b1d25f7cc43074180979d8734f4857, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c0664833d242f9241b5b0a15b39e4b94, type: 2}
+    amount: 1
+  outputItem: {fileID: 11400000, guid: c9277671103629b44a2d203333a7067f, type: 2}
+  outputAmount: 1
+  cookTime: 12
+  hungerRestore: 10
+  unlockDay: 3
+  requireCompletedStep: 1
+  requiredStepType: 5
+  unlockQuestType: 
+  lockedHint: "Ch\u01B0a m\u1EDF kh\xF3a c\xF4ng th\u1EE9c n\xE0y"

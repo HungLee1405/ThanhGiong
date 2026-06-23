@@ -34,26 +34,8 @@ public class PlayerInventory : MonoBehaviour
         if (itemData == null || amount <= 0) return false;
         EnsureSlotCount();
         
-        int remainingAmount = amount;
-        
-        if (itemData.stackable)
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i] != null && items[i].itemData != null && items[i].itemData.itemId == itemData.itemId)
-                {
-                    int space = itemData.maxStack - items[i].amount;
-                    if (space > 0)
-                    {
-                        remainingAmount -= space;
-                        if (remainingAmount <= 0) return true;
-                    }
-                }
-            }
-        }
-        
         int emptySlots = CountEmptySlots();
-        int slotsNeeded = Mathf.CeilToInt((float)remainingAmount / Mathf.Max(1, itemData.maxStack));
+        int slotsNeeded = amount; // Force 1 item per slot (maxStack = 1)
         return emptySlots >= slotsNeeded;
     }
 
@@ -67,34 +49,11 @@ public class PlayerInventory : MonoBehaviour
 
         int remainingAmount = amount;
 
-        if (itemData.stackable)
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i] != null && items[i].itemData != null && items[i].itemData.itemId == itemData.itemId)
-                {
-                    int space = itemData.maxStack - items[i].amount;
-                    if (space > 0)
-                    {
-                        int add = Mathf.Min(space, remainingAmount);
-                        items[i].amount += add;
-                        remainingAmount -= add;
-
-                        if (remainingAmount <= 0)
-                        {
-                            OnInventoryChanged?.Invoke();
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-
         for (int i = 0; i < items.Count; i++)
         {
             if (IsSlotEmpty(i))
             {
-                int add = Mathf.Min(remainingAmount, Mathf.Max(1, itemData.maxStack));
+                int add = 1; // Force 1 item per slot
                 items[i] = new InventoryItem(itemData, add);
                 remainingAmount -= add;
 

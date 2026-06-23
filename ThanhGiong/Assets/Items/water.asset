@@ -15,6 +15,6 @@ MonoBehaviour:
   itemId: water
   itemName: "N\u01B0\u1EDBc"
   itemIcon: {fileID: 21300000, guid: 85821bc0ce89d4c4dbcb8ccbf8b6a77a, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}

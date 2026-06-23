@@ -15,6 +15,6 @@ MonoBehaviour:
   itemId: iron
   itemName: "S\u1EAFt"
   itemIcon: {fileID: 21300000, guid: 38e20f5888d1d37458e094e5c5444072, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}

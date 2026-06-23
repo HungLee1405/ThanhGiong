@@ -3,12 +3,25 @@ using UnityEngine;
 public class ChickenCoop : MonoBehaviour, IItemReceiver
 {
     [Tooltip("ID của vật phẩm được phép bỏ vào (vd: chicken)")]
-    public string acceptedItemId = "chicken";
+    public string acceptedItemId = "chick";
 
     [Tooltip("Các object model gà sẽ được bật lên khi bỏ gà vào chuồng")]
     public GameObject[] chickenVisuals;
+
+    [Header("Interaction UI")]
+    [SerializeField] private InteractionUI interactionUI;
+    [SerializeField] private string noChickenMessage = "Bạn cần bắt và cầm một con gà.";
+    [SerializeField] private string putChickenMessage = "Nhấn R để bỏ gà vào chuồng.";
+    [SerializeField] private string questInactiveMessage = "Hiện chưa có nhiệm vụ bắt gà.";
+    [SerializeField] private string coopFullMessage = "Chuồng đã đủ gà.";
+
+    [Header("Quest Settings")]
+    [SerializeField] private QuestManager questManager;
+    [SerializeField] private int requiredChickenCount = 3;
     
     private int chickenCount = 0;
+    private PlayerHandController activePlayerHand;
+    private string lastMessage = "";
 
     private void Start()
     {
@@ -35,7 +48,7 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
         QuestManager questManager = FindFirstObjectByType<QuestManager>();
         if (questManager != null)
         {
-            questManager.AddProgress(QuestStepType.CatchChicken, "chicken", 1);
+            questManager.AddProgress(QuestStepType.CatchChicken, "chick", 1);
         }
 
         return true;
@@ -43,7 +56,32 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
 
     public bool CanReceiveItem(ItemData itemData, int amount)
     {
-        if (itemData == null || itemData.itemId != acceptedItemId) return false;
+        if (questManager == null)
+        {
+            questManager = FindFirstObjectByType<QuestManager>();
+        }
+
+        if (questManager == null) return false;
+
+        if (!questManager.IsStepActive(QuestStepType.CatchChicken))
+            return false;
+
+        if (itemData == null)
+            return false;
+
+        if (itemData.itemId != acceptedItemId)
+            return false;
+
+        int reqAmount = requiredChickenCount;
+        QuestStep step = questManager.GetActiveStep(QuestStepType.CatchChicken);
+        if (step != null)
+        {
+            reqAmount = step.requiredAmount;
+        }
+
+        if (chickenCount >= reqAmount)
+            return false;
+
         return true;
     }
 
@@ -65,5 +103,106 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
             hand.carriedChicken.isDelivered = false;
             return false;
         }
+    }
+
+    private void Update()
+    {
+        if (activePlayerHand != null)
+        {
+            UpdateInteractionUI(activePlayerHand);
+        }
+    }
+
+    private void UpdateInteractionUI(PlayerHandController hand)
+    {
+        if (interactionUI == null) return;
+        if (hand == null)
+        {
+            interactionUI.Hide();
+            lastMessage = "";
+            return;
+        }
+
+        if (questManager == null)
+        {
+            questManager = FindFirstObjectByType<QuestManager>();
+        }
+
+        string message = "";
+
+        if (questManager == null || !questManager.IsStepActive(QuestStepType.CatchChicken))
+        {
+            message = questInactiveMessage;
+        }
+        else
+        {
+            int reqAmount = requiredChickenCount;
+            QuestStep step = questManager.GetActiveStep(QuestStepType.CatchChicken);
+            if (step != null)
+            {
+                reqAmount = step.requiredAmount;
+            }
+
+            if (chickenCount >= reqAmount)
+            {
+                message = coopFullMessage;
+            }
+            else if (hand.carriedChicken == null || !hand.IsHoldingItem(acceptedItemId))
+            {
+                message = noChickenMessage;
+            }
+            else
+            {
+                message = putChickenMessage;
+            }
+        }
+
+        if (message != lastMessage)
+        {
+            lastMessage = message;
+            interactionUI.Show(message);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerHandController hand =
+            other.GetComponentInParent<PlayerHandController>();
+
+        if (hand == null) return;
+
+        activePlayerHand = hand;
+        hand.SetCurrentReceiver(this);
+        UpdateInteractionUI(hand);
+
+        Debug.Log("Người chơi đã vào vùng chuồng gà.");
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        PlayerHandController hand =
+            other.GetComponentInParent<PlayerHandController>();
+
+        if (hand == null) return;
+
+        activePlayerHand = hand;
+        hand.SetCurrentReceiver(this);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayerHandController hand =
+            other.GetComponentInParent<PlayerHandController>();
+
+        if (hand == null) return;
+
+        if (activePlayerHand == hand)
+        {
+            activePlayerHand = null;
+        }
+        hand.ClearCurrentReceiver(this);
+        UpdateInteractionUI(null);
+
+        Debug.Log("Người chơi đã rời vùng chuồng gà.");
     }
 }

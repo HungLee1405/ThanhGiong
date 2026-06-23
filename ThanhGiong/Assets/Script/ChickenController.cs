@@ -20,6 +20,7 @@ public class ChickenController : MonoBehaviour
     private Transform player;
     private PlayerInventory playerInventory;
     private PlayerHandController playerHandController;
+    private QuestManager questManager;
 
     private float timer;
     private bool playerInRange;
@@ -35,6 +36,8 @@ public class ChickenController : MonoBehaviour
         timer = wanderInterval;
         spawnPosition = transform.position;
 
+        questManager = FindFirstObjectByType<QuestManager>();
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -42,6 +45,15 @@ public class ChickenController : MonoBehaviour
             playerInventory = playerObj.GetComponent<PlayerInventory>();
             playerHandController = playerObj.GetComponent<PlayerHandController>();
         }
+    }
+
+    private bool CanCatch()
+    {
+        if (questManager == null)
+        {
+            questManager = FindFirstObjectByType<QuestManager>();
+        }
+        return questManager != null && questManager.IsStepActive(QuestStepType.CatchChicken);
     }
 
     private void Update()
@@ -100,6 +112,19 @@ public class ChickenController : MonoBehaviour
         {
             if (isCatching) CancelCatching();
             return;
+        }
+
+        if (!CanCatch())
+        {
+            if (isCatching) CancelCatching();
+            if (interactionUI != null) interactionUI.Hide();
+            return;
+        }
+
+        if (!isCatching && interactionUI != null && interactionUI.root != null && !interactionUI.root.activeSelf)
+        {
+            interactionUI.Show("Nhấn giữ E để bắt gà");
+            interactionUI.SetProgress(0f);
         }
 
         if (Keyboard.current.eKey.isPressed)
@@ -178,7 +203,7 @@ public class ChickenController : MonoBehaviour
     {
         isCatching = false;
         catchTimer = 0f;
-        if (interactionUI != null && playerInRange)
+        if (interactionUI != null && playerInRange && CanCatch())
         {
             interactionUI.SetProgress(0f);
             interactionUI.Show("Nhấn giữ E để bắt gà");
@@ -190,10 +215,20 @@ public class ChickenController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (interactionUI != null)
+            if (CanCatch())
             {
-                interactionUI.Show("Nhấn giữ E để bắt gà");
-                interactionUI.SetProgress(0f);
+                if (interactionUI != null)
+                {
+                    interactionUI.Show("Nhấn giữ E để bắt gà");
+                    interactionUI.SetProgress(0f);
+                }
+            }
+            else
+            {
+                if (interactionUI != null)
+                {
+                    interactionUI.Hide();
+                }
             }
         }
     }

@@ -15,6 +15,6 @@ MonoBehaviour:
   itemId: rice
   itemName: "G\u1EA1o"
   itemIcon: {fileID: 21300000, guid: f488ff02b6567c144a75b6d10a9231d7, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}

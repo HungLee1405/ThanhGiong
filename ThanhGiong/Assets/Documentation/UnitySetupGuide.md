@@ -36,8 +36,12 @@ Sau khi cập nhật Script từ Giai đoạn 1 đến Giai đoạn 7, bạn c�
 ## 6. Cấu hình Nấu Ăn (Giai đoạn 6)
 - Chuột phải ở cửa sổ Project `Create > Cooking > Recipe` để tạo dữ liệu món ăn (VD: Cơm trắng, Cơm gà, Cơm lam).
 - Cấu hình từng Recipe: Kéo các `ItemData` vào list Ingredients và Output. Chỉnh thời gian nấu (`cookTime`) và `unlockDay`.
-- Gắn `CookingMenuUI` vào Canvas. Kéo Panel menu vào trường `menuPanel` và các Recipe vào `availableRecipes`. Cấu hình UI nút bấm sẽ gọi hàm `StartCooking(recipe)` nếu cần.
-- Ở GameObject `CookingPot` hiện tại, bật cờ `Use Data Driven Menu` = `true` và kéo object chứa `CookingMenuUI` vào.
+- **Tạo UI Tự Động**: Chạy menu `Tools > Thánh Gióng > Create Cooking Menu UI`. Script sẽ tự động tìm `GameScene`, tạo toàn bộ Hierarchy giao diện nồi nấu ăn (bao gồm MainPanel, ProgressPanel, PendingOutputPanel), gán Inspector, và liên kết các `CookingPot` có sẵn trong scene với UI này.
+- **Tuỳ chỉnh UI**:
+  - Hình nền, icon, và viền nằm trong Hierarchy `CookingMenuPanel` ở Canvas.
+  - Bạn có thể chỉnh màu sắc hoặc gắn Sprite tuỳ thích trên Image component. Các TextMeshProUGUI cũng có thể đổi font dễ dàng.
+  - Nếu muốn xóa UI cũ để tạo lại, chạy `Tools > Thánh Gióng > Remove Generated Cooking Menu UI` rồi chạy lại lệnh Create.
+- Nếu bạn tạo thêm nồi nấu ăn mới, hãy kéo object chứa `CookingMenuUI` vào `cookingMenuUI` của nồi đó và tích `Use Data Driven Menu = true`.
 
 ## 7. Cấu hình Kho Làng (Giai đoạn 7)
 - Tạo một GameObject Kho làng, gắn BoxCollider (để bắt TriggerEnter).

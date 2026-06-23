@@ -331,8 +331,8 @@ public class ResourcePickup : MonoBehaviour
                 questManager.AddProgress(QuestStepType.CollectBamboo, "bamboo", collectedAmount);
                 break;
 
-            case "chicken":
-                questManager.AddProgress(QuestStepType.CatchChicken, "chicken", collectedAmount);
+            case "chick":
+                questManager.AddProgress(QuestStepType.CatchChicken, "chick", collectedAmount);
                 break;
         }
     }

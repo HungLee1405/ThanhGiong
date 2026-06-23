@@ -15,6 +15,6 @@ MonoBehaviour:
   itemId: cookedRice
   itemName: "C\u01A1m"
   itemIcon: {fileID: 21300000, guid: f9f634625374b6f4f987ff5bb7658cc9, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}
