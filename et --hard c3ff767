@@ -1,0 +1,55 @@
+[33mcommit c3ff7679ed0893b6cba4429f37f8d81a0a189f99[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmerge-branch[m[33m)[m
+Author: Uyen Nguyen <chienguyen1212@gmail.com>
+Date:   Wed Jun 24 01:14:30 2026 +0700
+
+    Add full quest 7 days
+
+[33mcommit a394091f8d3a5454a877e56b5ed4d5d9530c83dc[m
+Author: Uyen Nguyen <chienguyen1212@gmail.com>
+Date:   Tue Jun 23 23:26:01 2026 +0700
+
+    Add Chicken Event
+
+[33mcommit bdc6b6613e5841920120d5dcc2b530174b0352c4[m
+Merge: 34c402a dcb6bd6
+Author: Uyen Nguyen <chienguyen1212@gmail.com>
+Date:   Mon Jun 22 11:58:01 2026 +0700
+
+    Merge branch 'merge-branch' of https://github.com/HungLee1405/ThanhGiong into merge-branch
+
+[33mcommit 34c402af7edafbfe3236dbf64f2bafc27f71470a[m
+Author: Uyen Nguyen <chienguyen1212@gmail.com>
+Date:   Mon Jun 22 11:56:21 2026 +0700
+
+    Add Script
+
+[33mcommit dcb6bd657d32168943f78666492d3c9b5e601f8f[m
+Author: HungLNQ <quochungle2005@gmail.com>
+Date:   Sat Jun 20 17:58:41 2026 +0700
+
+    thêm npc thợ rèn
+
+[33mcommit fd9ced27702eb3272a5a91c269e124097dbff208[m
+Merge: b25861c d73d1fc
+Author: qoochng <unghung102@gmail.com>
+Date:   Sat Jun 20 09:05:56 2026 +0700
+
+    Merge branch 'merge-branch' of https://github.com/HungLee1405/ThanhGiong into merge-branch
+
+[33mcommit b25861c6d06cee455be27b732d352adf0a2cc774[m
+Author: qoochng <unghung102@gmail.com>
+Date:   Sat Jun 20 09:03:50 2026 +0700
+
+    Update Option Menu
+
+[33mcommit d73d1fc8a3497d53bdc44ecc45aa6483c332bc0c[m
+Author: HungLNQ <quochungle2005@gmail.com>
+Date:   Sat Jun 20 07:41:42 2026 +0700
+
+    add npc thợ rèn
+
+[33mcommit 62d0d7c93278da699b55e36d5b67be0ce114b903[m
+Author: huuhau30 <huynhhuuhau0300305@gmail.com>
+Date:   Fri Jun 19 23:48:45 2026 +0700
+
+    feat: add Unity Relay multiplayer and game mode menu

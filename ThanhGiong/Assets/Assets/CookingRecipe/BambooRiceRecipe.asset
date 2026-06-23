@@ -27,7 +27,7 @@ MonoBehaviour:
   outputAmount: 1
   cookTime: 10
   hungerRestore: 10
-  unlockDay: 1
+  unlockDay: 5
   requireCompletedStep: 1
   requiredStepType: 7
   unlockQuestType: 
