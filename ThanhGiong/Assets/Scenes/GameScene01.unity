@@ -4854,7 +4854,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       propertyPath: m_Name
-      value: Kho tre
+      value: Kho
       objectReference: {fileID: 0}
     - target: {fileID: 5362053972117396951, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       propertyPath: m_LocalScale.x
@@ -4917,13 +4917,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 367554650}
-    - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 367554649}
     - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
       insertIndex: -1
       addedObject: {fileID: 367554653}
+    - targetCorrespondingSourceObject: {fileID: 4028456399711218789, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 367554656}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
 --- !u!4 &367554647 stripped
 Transform:
@@ -4956,27 +4956,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.90782917, y: 1.0697286, z: 0.6802521}
   m_Center: {x: -0.007230515, y: 0.19124664, z: -0.34012604}
---- !u!65 &367554650
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367554648}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6922898, y: 0.6044475, z: 0.6802521}
-  m_Center: {x: 0.04386616, y: -0.00032565588, z: -0.34012604}
 --- !u!114 &367554653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4997,6 +4976,28 @@ MonoBehaviour:
   bambooAmount: 0
   waterAmount: 0
   riceAmount: 0
+--- !u!64 &367554656
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367554648}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1901923605265949594, guid: 3a9ca28947bd11e4c86c8719a0bfe954, type: 3}
 --- !u!1001 &371639629
 PrefabInstance:
   m_ObjectHideFlags: 0
