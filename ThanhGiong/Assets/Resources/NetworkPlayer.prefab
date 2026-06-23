@@ -903,6 +903,10 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  characterAnimator: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: a0b8e35fc6c0d654b9465998bb915ebc, type: 2}
+  avatar: {fileID: 9000000, guid: ecf88a06d3f6c91419318c92bec92dc3, type: 3}
+  runSpeedThreshold: 0.75
 --- !u!23 &1053746475908573888
 MeshRenderer:
   m_ObjectHideFlags: 0

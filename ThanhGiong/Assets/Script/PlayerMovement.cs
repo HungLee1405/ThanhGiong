@@ -20,15 +20,26 @@ public class PlayerMovement : NetworkBehaviour
     public float groundDistance = 0.3f;
     public LayerMask groundMask;
 
+    [Header("Animation")]
+    [SerializeField] private Animator characterAnimator;
+    [SerializeField] private RuntimeAnimatorController animatorController;
+    [SerializeField] private Avatar avatar;
+    [SerializeField] private float runSpeedThreshold = 0.75f;
+
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
 
     private float cameraPitch = 0f;
 
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    private static readonly int IsRunningHash = Animator.StringToHash("IsRunning");
+    private static readonly int JumpHash = Animator.StringToHash("Jump");
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        InitializeAnimator();
 
         if (CanUseLocalInput() && !MultiplayerConnector.IsRoomMenuOpen)
         {
@@ -43,10 +54,16 @@ public class PlayerMovement : NetworkBehaviour
             return;
 
         if (MultiplayerConnector.IsRoomMenuOpen)
+        {
+            UpdateMovementAnimation(Vector2.zero, false);
             return;
+        }
 
         if (NetworkPlayerAppearance.IsLocalSelectionOpen)
+        {
+            UpdateMovementAnimation(Vector2.zero, false);
             return;
+        }
 
         HandleMouseLook();
         HandleMovement();
@@ -113,11 +130,20 @@ public class PlayerMovement : NetworkBehaviour
 
             input = input.normalized;
 
+            bool wantsToRun = Keyboard.current.leftShiftKey.isPressed
+                || Keyboard.current.rightShiftKey.isPressed;
+            UpdateMovementAnimation(input, wantsToRun);
+
             // Nhảy bằng phím Space
             if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                TriggerJumpAnimation();
             }
+        }
+        else
+        {
+            UpdateMovementAnimation(Vector2.zero, false);
         }
 
         Vector3 move = transform.right * input.x + transform.forward * input.y;
@@ -125,5 +151,71 @@ public class PlayerMovement : NetworkBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void InitializeAnimator()
+    {
+        if (characterAnimator == null)
+        {
+            characterAnimator = GetComponentInChildren<Animator>(true);
+        }
+
+        if (characterAnimator == null)
+        {
+            SkinnedMeshRenderer skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>(true);
+            if (skinnedMesh != null)
+            {
+                Transform animatorRoot = FindAnimatorRoot(skinnedMesh);
+                characterAnimator = animatorRoot.gameObject.AddComponent<Animator>();
+            }
+        }
+
+        if (characterAnimator == null)
+            return;
+
+        if (animatorController != null)
+        {
+            characterAnimator.runtimeAnimatorController = animatorController;
+        }
+
+        if (avatar != null)
+        {
+            characterAnimator.avatar = avatar;
+        }
+
+        characterAnimator.applyRootMotion = false;
+        characterAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+    }
+
+    private Transform FindAnimatorRoot(SkinnedMeshRenderer skinnedMesh)
+    {
+        Transform animatorRoot = skinnedMesh.rootBone != null ? skinnedMesh.rootBone : skinnedMesh.transform;
+
+        while (animatorRoot.parent != null && animatorRoot.parent != transform)
+        {
+            animatorRoot = animatorRoot.parent;
+        }
+
+        return animatorRoot;
+    }
+
+    private void UpdateMovementAnimation(Vector2 input, bool wantsToRun)
+    {
+        if (characterAnimator == null)
+            return;
+
+        float speed = input.magnitude;
+        bool isRunning = speed >= runSpeedThreshold && wantsToRun;
+
+        characterAnimator.SetFloat(SpeedHash, speed);
+        characterAnimator.SetBool(IsRunningHash, isRunning);
+    }
+
+    private void TriggerJumpAnimation()
+    {
+        if (characterAnimator == null)
+            return;
+
+        characterAnimator.SetTrigger(JumpHash);
     }
 }
