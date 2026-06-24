@@ -19,24 +19,34 @@ public class PlayerMovement : NetworkBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.3f;
     public LayerMask groundMask;
+    [SerializeField] private float groundedGraceTime = 0.12f;
 
-    [Header("Footstep Audio (Vòng lặp)")]
-    public AudioSource footstepSource;    // Nguồn phát tiếng bước chân (đã bật Loop)
+    [Header("Footstep Audio")]
+    public AudioSource footstepSource;
     public AudioClip footstepClip;
-    public float fadeSpeed = 10f;         // Tốc độ tăng/giảm âm lượng để tiếng ngắt mượt mà
+    public float fadeSpeed = 10f;
 
     [Header("Landing Audio")]
-    public AudioClip landingClip;         // File âm thanh tiếng tiếp đất
-    private bool wasGrounded;
+    public AudioClip landingClip;
+
+    [Header("Animation")]
+    [SerializeField] private Animator characterAnimator;
+    [SerializeField] private RuntimeAnimatorController animatorController;
+    [SerializeField] private Avatar avatar;
+    [SerializeField] private float runSpeedThreshold = 0.75f;
 
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
-
-    private float cameraPitch = 0f;
+    private float lastGroundedTime;
+    private float cameraPitch;
     private Vector3 lastObservedPosition;
 
-    void Start()
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    private static readonly int IsRunningHash = Animator.StringToHash("IsRunning");
+    private static readonly int JumpHash = Animator.StringToHash("Jump");
+
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
 
@@ -45,60 +55,8 @@ public class PlayerMovement : NetworkBehaviour
             gameObject.AddComponent<PlayerRespawnController>();
         }
 
-        // Prefer a dedicated footstep source when a clip is configured. This also
-        // avoids accidentally reusing the player's music or UI AudioSource.
-        if (footstepSource == null && footstepClip != null)
-        {
-            GameObject audioChild = new GameObject("FootstepAudio");
-            audioChild.transform.SetParent(transform, false);
-            footstepSource = audioChild.AddComponent<AudioSource>();
-            footstepSource.spatialBlend = 1f;
-            footstepSource.volume = 0f;
-        }
-
-        // Tự tìm AudioSource nếu chưa được gán trong Inspector
-        // Ưu tiên AudioSource đã có clip (footstep loop)
-        if (footstepSource == null)
-        {
-            AudioSource[] sources = GetComponentsInChildren<AudioSource>(true);
-            foreach (AudioSource src in sources)
-            {
-                if (src.loop || src.clip != null)
-                {
-                    footstepSource = src;
-                    break;
-                }
-            }
-
-            // Nếu không có loop/clip, lấy cái đầu tiên
-            if (footstepSource == null && sources.Length > 0)
-            {
-                footstepSource = sources[0];
-            }
-        }
-
-        // Nếu vẫn không có (NetworkPlayer prefab chưa có AudioSource),
-        // tự tạo một AudioSource mới
-        if (footstepSource == null)
-        {
-            GameObject audioChild = new GameObject("FootstepAudio");
-            audioChild.transform.SetParent(transform, false);
-            footstepSource = audioChild.AddComponent<AudioSource>();
-            footstepSource.loop = true;
-            footstepSource.spatialBlend = 1f; // 3D sound
-            footstepSource.volume = 0f;
-            footstepSource.playOnAwake = false;
-        }
-
-        // NetworkPlayer is generated separately from the offline player. Keep the
-        // clip here as a fallback so a runtime AudioSource is never left empty.
-        if (footstepSource.clip == null && footstepClip != null)
-        {
-            footstepSource.clip = footstepClip;
-        }
-
-        footstepSource.loop = true;
-        footstepSource.playOnAwake = false;
+        InitializeFootstepSource();
+        InitializeAnimator();
         lastObservedPosition = transform.position;
 
         if (CanUseLocalInput() && !MultiplayerConnector.IsRoomMenuOpen)
@@ -108,49 +66,159 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (PauseMenuManager.isPaused)
             return;
 
         if (!CanUseLocalInput())
         {
-            HandleRemoteFootsteps();
+            HandleRemotePresentation();
             return;
         }
 
-        if (MultiplayerConnector.IsRoomMenuOpen)
+        if (MultiplayerConnector.IsRoomMenuOpen ||
+            NetworkPlayerAppearance.IsLocalSelectionOpen ||
+            CookingMenuUI.IsMenuOpen)
+        {
+            UpdateMovementAnimation(Vector2.zero, false);
+            UpdateFootstepAudio(false);
             return;
-
-        if (NetworkPlayerAppearance.IsLocalSelectionOpen)
-            return;
-
-        if (CookingMenuUI.IsMenuOpen)
-            return;
+        }
 
         HandleMouseLook();
         HandleMovement();
     }
 
-    private void HandleRemoteFootsteps()
+    private bool CanUseLocalInput()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening)
+            return true;
+
+        return !IsSpawned || IsOwner;
+    }
+
+    private void HandleMouseLook()
+    {
+        if (Mouse.current == null || playerCamera == null)
+            return;
+
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+        float mouseX = mouseDelta.x * mouseSensitivity * Time.deltaTime * 50f;
+        float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime * 50f;
+
+        transform.Rotate(Vector3.up * mouseX);
+        cameraPitch = Mathf.Clamp(cameraPitch - mouseY, -maxLookAngle, maxLookAngle);
+        playerCamera.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+    }
+
+    private void HandleMovement()
+    {
+        isGrounded = IsGrounded();
+
+        if (isGrounded && velocity.y < 0f)
+        {
+            velocity.y = -2f;
+            lastGroundedTime = Time.time;
+        }
+
+        Vector2 input = ReadMoveInput();
+        bool wantsToRun = Keyboard.current != null &&
+            (Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed);
+
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame &&
+            Time.time - lastGroundedTime <= groundedGraceTime)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            lastGroundedTime = float.NegativeInfinity;
+            TriggerJumpAnimation();
+        }
+
+        UpdateMovementAnimation(input, wantsToRun);
+
+        Vector3 move = transform.right * input.x + transform.forward * input.y;
+        controller.Move(move * moveSpeed * Time.deltaTime);
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+        UpdateFootstepAudio(isGrounded && input.sqrMagnitude > 0.01f);
+        lastObservedPosition = transform.position;
+    }
+
+    private void HandleRemotePresentation()
     {
         Vector3 displacement = transform.position - lastObservedPosition;
         displacement.y = 0f;
         lastObservedPosition = transform.position;
 
-        bool remoteGrounded = groundCheck != null && Physics.CheckSphere(
-            groundCheck.position,
-            groundDistance,
-            groundMask);
+        float speed = Time.deltaTime > 0f ? displacement.magnitude / Time.deltaTime : 0f;
+        bool moving = speed > 0.05f;
+        bool running = speed > moveSpeed * runSpeedThreshold;
+        bool remoteGrounded = IsGrounded();
 
-        UpdateFootstepAudio(remoteGrounded && displacement.sqrMagnitude > 0.000001f);
+        UpdateMovementAnimation(moving ? Vector2.up : Vector2.zero, running);
+        UpdateFootstepAudio(remoteGrounded && moving);
+    }
+
+    private Vector2 ReadMoveInput()
+    {
+        Vector2 input = Vector2.zero;
+        if (Keyboard.current == null) return input;
+
+        if (Keyboard.current.aKey.isPressed) input.x -= 1f;
+        if (Keyboard.current.dKey.isPressed) input.x += 1f;
+        if (Keyboard.current.wKey.isPressed) input.y += 1f;
+        if (Keyboard.current.sKey.isPressed) input.y -= 1f;
+        return input.normalized;
+    }
+
+    private bool IsGrounded()
+    {
+        bool controllerGrounded = controller != null && controller.isGrounded;
+        if (groundCheck == null) return controllerGrounded;
+
+        int collisionMask = groundMask.value != 0 ? groundMask.value : Physics.DefaultRaycastLayers;
+        return controllerGrounded || Physics.CheckSphere(
+            groundCheck.position,
+            Mathf.Max(groundDistance, 0.05f),
+            collisionMask,
+            QueryTriggerInteraction.Ignore);
+    }
+
+    private void InitializeFootstepSource()
+    {
+        if (footstepSource == null && footstepClip != null)
+        {
+            GameObject audioChild = new GameObject("FootstepAudio");
+            audioChild.transform.SetParent(transform, false);
+            footstepSource = audioChild.AddComponent<AudioSource>();
+        }
+
+        if (footstepSource == null)
+        {
+            footstepSource = GetComponent<AudioSource>();
+        }
+
+        if (footstepSource == null)
+        {
+            footstepSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (footstepSource.clip == null && footstepClip != null)
+        {
+            footstepSource.clip = footstepClip;
+        }
+
+        footstepSource.playOnAwake = false;
+        footstepSource.loop = true;
+        footstepSource.spatialBlend = 1f;
+        footstepSource.volume = 0f;
     }
 
     private void UpdateFootstepAudio(bool shouldPlay)
     {
-        if (footstepSource == null) return;
-
-        float targetVolume = shouldPlay ? 1f : 0f;
+        if (footstepSource == null || footstepSource.clip == null) return;
 
         if (shouldPlay && !footstepSource.isPlaying)
         {
@@ -159,7 +227,7 @@ public class PlayerMovement : NetworkBehaviour
 
         footstepSource.volume = Mathf.MoveTowards(
             footstepSource.volume,
-            targetVolume,
+            shouldPlay ? 1f : 0f,
             Time.deltaTime * fadeSpeed);
 
         if (!shouldPlay && footstepSource.volume <= 0f && footstepSource.isPlaying)
@@ -168,82 +236,52 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    private bool CanUseLocalInput()
+    private void InitializeAnimator()
     {
-        NetworkManager networkManager = NetworkManager.Singleton;
-
-        if (networkManager == null || !networkManager.IsListening)
-            return true;
-
-        return !IsSpawned || IsOwner;
-    }
-
-    void HandleMouseLook()
-    {
-        if (Mouse.current == null || playerCamera == null)
-            return;
-
-        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-
-        float mouseX = mouseDelta.x * mouseSensitivity * Time.deltaTime * 50f;
-        float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime * 50f;
-
-        // Xoay thân Player trái/phải
-        transform.Rotate(Vector3.up * mouseX);
-
-        // Xoay Camera lên/xuống
-        cameraPitch -= mouseY;
-        cameraPitch = Mathf.Clamp(cameraPitch, -maxLookAngle, maxLookAngle);
-
-        playerCamera.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
-    }
-
-    void HandleMovement()
-    {
-        isGrounded = Physics.CheckSphere(
-            groundCheck.position,
-            groundDistance,
-            groundMask
-        );
-
-        if (isGrounded && velocity.y < 0)
+        if (characterAnimator == null)
         {
-            velocity.y = -2f;
+            characterAnimator = GetComponentInChildren<Animator>(true);
         }
 
-        Vector2 input = Vector2.zero;
+        ConfigureAnimator(true);
+    }
 
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.aKey.isPressed)
-                input.x -= 1f;
+    public void BindCharacterAnimator(Animator animator)
+    {
+        if (animator == null) return;
+        characterAnimator = animator;
+        ConfigureAnimator(false);
+    }
 
-            if (Keyboard.current.dKey.isPressed)
-                input.x += 1f;
+    private void ConfigureAnimator(bool allowSerializedAvatar)
+    {
+        if (characterAnimator == null) return;
 
-            if (Keyboard.current.wKey.isPressed)
-                input.y += 1f;
+        if (animatorController != null)
+            characterAnimator.runtimeAnimatorController = animatorController;
 
-            if (Keyboard.current.sKey.isPressed)
-                input.y -= 1f;
+        if (avatar != null && allowSerializedAvatar)
+            characterAnimator.avatar = avatar;
 
-            input = input.normalized;
+        characterAnimator.applyRootMotion = false;
+        characterAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        characterAnimator.Rebind();
+        characterAnimator.Update(0f);
+    }
 
-            // Nhảy bằng phím Space
-            if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            }
-        }
+    private void UpdateMovementAnimation(Vector2 input, bool wantsToRun)
+    {
+        if (characterAnimator == null) return;
 
-        Vector3 move = transform.right * input.x + transform.forward * input.y;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        float speed = input.magnitude;
+        characterAnimator.SetFloat(SpeedHash, speed);
+        characterAnimator.SetBool(IsRunningHash, speed >= runSpeedThreshold && wantsToRun);
+    }
 
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-
-        UpdateFootstepAudio(isGrounded && input.sqrMagnitude > 0.01f);
-        lastObservedPosition = transform.position;
+    private void TriggerJumpAnimation()
+    {
+        if (characterAnimator != null)
+            characterAnimator.SetTrigger(JumpHash);
     }
 
     public void ResetVelocity()

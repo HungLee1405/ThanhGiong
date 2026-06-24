@@ -432,11 +432,11 @@ public class QuestDatabase : MonoBehaviour
                 {
                     "Giặc đã đến đầu làng rồi!",
                     "Thời khắc quyết định đã đến!",
-                    "Một mình ta không thể vừa đập búa vừa làm nguội vũ khí kịp.",
+                    "Tuy nhiên chúng ta thiếu quá nhiều sắt.",
                     "Cậu trẻ hãy giúp ta một tay.",
-                    "Liên tục bưng Sắt vào lò, múc Nước đổ vào bể làm nguội.",
-                    "Và đẩy bễ lò rèn thật đều tay để ta đúc xong ngựa sắt, roi sắt!",
-                    "Song song đó, dân làng vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân đấy!"
+                    "Hãy đào và mang 20 viên sắt vào kho.",
+                    "Để ta đúc ngựa sắt, roi sắt!",
+                    "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân nhé!"
                 }
             },
 
@@ -444,12 +444,12 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 7,
                 questName = "Nhiệm vụ ngày 7",
-                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 15 quặng sắt.",
+                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 20 quặng sắt.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1,
                 storageRequirements = new List<QuestRequirement>
                 {
-                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 15 }
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 20 }
                 }
             }
         };

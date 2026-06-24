@@ -124,6 +124,11 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         previewColorIndex = Mathf.Clamp(colorIndex.Value, 0, ShirtColors.Length - 1);
     }
 
+    private void Start()
+    {
+        ApplyOwnerVisibility();
+    }
+
     public override void OnNetworkSpawn()
     {
         colorIndex.OnValueChanged += OnColorChanged;
@@ -823,6 +828,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
                         : useYellowCharacter
                             ? yellowCharacterInstance.transform
                             : defaultVisualModelRoot;
+        BindMovementAnimatorToCurrentModel();
         RefreshVisualReferences();
         renderers = GetComponentsInChildren<Renderer>(true);
         SetClothingOverlayVisible(
@@ -831,6 +837,27 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             (!IsSpawned || !IsOwner));
 
         return useCustomCharacter;
+    }
+
+    private void BindMovementAnimatorToCurrentModel()
+    {
+        if (visualModelRoot == null)
+            return;
+
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        if (movement == null)
+            return;
+
+        Animator animator = visualModelRoot.GetComponentInChildren<Animator>(true);
+        if (animator != null)
+        {
+            movement.BindCharacterAnimator(animator);
+            return;
+        }
+
+        Debug.LogWarning(
+            $"No Animator found under '{visualModelRoot.name}'. Add an Animator to the visible character model and assign its own Avatar plus the shared PlayerAnimator controller.",
+            visualModelRoot);
     }
 
     private void EnsureRedCharacterInstance()
@@ -898,7 +925,6 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         instanceTransform.localScale = Vector3.one;
 
         ApplyCharacterMaterial(instanceTransform, characterMaterial);
-        CopyDefaultPoseToVariant(instanceTransform);
         MatchVariantToDefaultModel(instanceTransform);
 
         return instance;
@@ -1045,10 +1071,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
     private void ApplyOwnerVisibility()
     {
-        if (!IsSpawned)
-            return;
-
-        bool showWorldModel = !IsOwner;
+        bool showWorldModel = IsSpawned && !IsOwner;
 
         if (renderers == null || renderers.Length == 0)
         {
