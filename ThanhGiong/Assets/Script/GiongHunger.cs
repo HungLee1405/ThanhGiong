@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GiongHunger : MonoBehaviour
@@ -18,11 +18,17 @@ public class GiongHunger : MonoBehaviour
     [Header("UI")]
     public Slider hungerSlider;
     public GameObject hungerUIObject;
+    public Text hungerText;
 
     private float decreaseTimer = 0f;
 
     private void Start()
     {
+        if (hungerSlider == null)
+        {
+            CreateDefaultUI();
+        }
+
         ResetHunger();
         StopHungerDrain();
 
@@ -31,6 +37,7 @@ public class GiongHunger : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (!isHungerRunning) return;
 
         decreaseTimer += Time.deltaTime;
@@ -118,5 +125,76 @@ public class GiongHunger : MonoBehaviour
         {
             hungerSlider.value = currentHunger / maxHunger;
         }
+
+        if (hungerText != null)
+        {
+            hungerText.text = $"Độ no của Gióng: {Mathf.CeilToInt(currentHunger)} / {Mathf.CeilToInt(maxHunger)}";
+        }
+    }
+
+    private void CreateDefaultUI()
+    {
+        GameObject canvasObj = new GameObject("GiongHungerCanvas");
+        Canvas canvas = canvasObj.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 10; // Đặt lên trên cùng
+        canvasObj.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvasObj.AddComponent<GraphicRaycaster>();
+        
+        hungerUIObject = new GameObject("HungerPanel");
+        hungerUIObject.transform.SetParent(canvasObj.transform, false);
+        RectTransform panelRect = hungerUIObject.AddComponent<RectTransform>();
+        panelRect.anchorMin = new Vector2(0.5f, 1f);
+        panelRect.anchorMax = new Vector2(0.5f, 1f);
+        panelRect.pivot = new Vector2(0.5f, 1f);
+        panelRect.anchoredPosition = new Vector2(0, -30f); 
+        panelRect.sizeDelta = new Vector2(400, 40);
+
+        GameObject bgObj = new GameObject("Background");
+        bgObj.transform.SetParent(hungerUIObject.transform, false);
+        RectTransform bgRect = bgObj.AddComponent<RectTransform>();
+        bgRect.anchorMin = Vector2.zero;
+        bgRect.anchorMax = Vector2.one;
+        bgRect.sizeDelta = Vector2.zero;
+        Image bgImage = bgObj.AddComponent<Image>();
+        bgImage.color = new Color(0.1f, 0.1f, 0.1f, 0.9f);
+
+        GameObject fillArea = new GameObject("Fill Area");
+        fillArea.transform.SetParent(hungerUIObject.transform, false);
+        RectTransform fillAreaRect = fillArea.AddComponent<RectTransform>();
+        fillAreaRect.anchorMin = Vector2.zero;
+        fillAreaRect.anchorMax = Vector2.one;
+        fillAreaRect.sizeDelta = new Vector2(-10, -10);
+        
+        GameObject fillObj = new GameObject("Fill");
+        fillObj.transform.SetParent(fillArea.transform, false);
+        RectTransform fillRect = fillObj.AddComponent<RectTransform>();
+        fillRect.anchorMin = Vector2.zero;
+        fillRect.anchorMax = Vector2.one;
+        fillRect.sizeDelta = Vector2.zero;
+        Image fillImage = fillObj.AddComponent<Image>();
+        fillImage.color = new Color(0.8f, 0.2f, 0.2f, 1f); // Màu đỏ
+
+        hungerSlider = hungerUIObject.AddComponent<Slider>();
+        hungerSlider.interactable = false;
+        hungerSlider.transition = Selectable.Transition.None;
+        hungerSlider.fillRect = fillRect;
+        
+        GameObject textObj = new GameObject("HungerText");
+        textObj.transform.SetParent(hungerUIObject.transform, false);
+        RectTransform textRect = textObj.AddComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.sizeDelta = Vector2.zero;
+        
+        hungerText = textObj.AddComponent<Text>();
+        hungerText.alignment = TextAnchor.MiddleCenter;
+        hungerText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        hungerText.color = Color.white;
+        hungerText.fontSize = 20;
+        hungerText.fontStyle = FontStyle.Bold;
+
+        // Ẩn UI lúc ban đầu, chỉ hiện khi gọi StartHungerDrain
+        hungerUIObject.SetActive(false);
     }
 }

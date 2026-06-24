@@ -15,6 +15,6 @@ MonoBehaviour:
   itemId: axe
   itemName: "R\xECu"
   itemIcon: {fileID: 21300000, guid: aa8518292f13a0d49aceb4815f2ca6f9, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}

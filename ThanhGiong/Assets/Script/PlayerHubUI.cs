@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 
 public class PlayerHubUI : MonoBehaviour
@@ -9,6 +9,10 @@ public class PlayerHubUI : MonoBehaviour
     [Header("Quest UI")]
     public TMP_Text questText;
     public TMP_Text questNameText;
+
+    [Header("Parallel Quest UI (Optional)")]
+    public TMP_Text mainQuestText;
+    public TMP_Text sideQuestText;
 
     public void UpdateDayUI(int currentDay, float remainingTime)
     {

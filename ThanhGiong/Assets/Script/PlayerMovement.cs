@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
@@ -56,6 +56,8 @@ public class PlayerMovement : NetworkBehaviour
         if (NetworkPlayerAppearance.IsLocalSelectionOpen)
             return;
 
+        if (CookingMenuUI.IsMenuOpen)
+            return;
 
         HandleMouseLook();
         HandleMovement();
@@ -157,5 +159,10 @@ public class PlayerMovement : NetworkBehaviour
                 footstepSource.Stop();
             }
         }
+    }
+
+    public void ResetVelocity()
+    {
+        velocity = Vector3.zero;
     }
 }

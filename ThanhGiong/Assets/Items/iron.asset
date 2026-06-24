@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c093b57863e7751479605f5a2c138857, type: 3}
   m_Name: iron
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemId: iron
+  itemId: iron_ore
   itemName: "S\u1EAFt"
   itemIcon: {fileID: 21300000, guid: 38e20f5888d1d37458e094e5c5444072, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}

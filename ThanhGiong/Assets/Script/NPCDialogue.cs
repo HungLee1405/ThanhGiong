@@ -47,6 +47,7 @@ public class NPCDialogue : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (Keyboard.current == null) return;
         if (!playerInRange) return;
         if (dialogueManager != null && dialogueManager.IsTalking()) return;

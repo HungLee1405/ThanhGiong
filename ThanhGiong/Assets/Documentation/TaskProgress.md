@@ -1,0 +1,15 @@
+# Danh sách tác vụ
+
+- [x] Giai đoạn 1: Hoàn thiện hệ thống cầm vật phẩm. (Static Review Passed)
+- [x] Giai đoạn 2: Cơ chế nhận item theo quest. (Static Review Passed)
+- [x] Giai đoạn 3: Chỉ đường thế giới & UI nhiệm vụ. (Static Review Passed)
+- [x] Giai đoạn 4: Cảnh báo thu thập dư thừa. (Static Review Passed)
+- [x] Giai đoạn 5: AI gà và Chuồng gà. (Static Review Passed)
+- [ ] Mở rộng: Nước (WaterKillZone & Respawn). (Static Review Passed)
+- [ ] Giai đoạn 6: Menu nấu ăn dữ liệu hóa. (Unity Compile Passed)
+- [ ] Giai đoạn 7: Kho tài nguyên làng. (Unity Compile Passed)
+- [ ] Giai đoạn 8: Rèn mở rộng ngày 7. (Not Run)
+- [ ] Giai đoạn 9: Mở rộng tương tác môi trường (Water respawn). (Not Run)
+- [ ] Giai đoạn 10: Tinh chỉnh Survive & Đói. (Not Run)
+- [ ] Giai đoạn 11: Đánh trùm và kết thúc. (Not Run)
+- [ ] Giai đoạn 12: Polish và Bug Fixing. (Not Run)

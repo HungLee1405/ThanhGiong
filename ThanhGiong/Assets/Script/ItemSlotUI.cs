@@ -40,8 +40,16 @@ public class ItemSlotUI : MonoBehaviour
 
         if (amountText != null)
         {
-            amountText.gameObject.SetActive(false);
-            amountText.text = "";
+            if (inventoryItem.amount > 1)
+            {
+                amountText.gameObject.SetActive(true);
+                amountText.text = inventoryItem.amount.ToString();
+            }
+            else
+            {
+                amountText.gameObject.SetActive(false);
+                amountText.text = "";
+            }
         }
 
         if (hotkeyText != null)

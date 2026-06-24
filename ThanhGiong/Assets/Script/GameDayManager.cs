@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GameDayManager : MonoBehaviour
@@ -37,6 +37,7 @@ public class GameDayManager : MonoBehaviour
 
     private void Update()
     {
+        if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (!isDayRunning) return;
         if (isTransitioningDay) return;
 
@@ -46,6 +47,32 @@ public class GameDayManager : MonoBehaviour
         {
             remainingTime = 0;
             UpdateDayUI();
+            
+            bool success = true;
+            if (giongHunger != null && !giongHunger.IsDaySuccess())
+            {
+                Debug.Log("Gióng chưa đủ no! Ngày thất bại.");
+                success = false;
+            }
+
+            if (questManager != null)
+            {
+                if (!questManager.CompleteSurviveStep())
+                {
+                    success = false;
+                }
+            }
+
+            if (!success)
+            {
+                isDayRunning = false;
+                if (playerHubUI != null)
+                {
+                    playerHubUI.UpdateQuestUI("Thất bại", "Không đạt điều kiện qua ngày. Hãy nạp lại Scene hoặc Load Game!");
+                }
+                return;
+            }
+
             EndCurrentDay();
             return;
         }

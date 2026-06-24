@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -29,17 +29,19 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public bool AddItem(ItemData itemData, int amount)
+    public bool CanAddItem(ItemData itemData, int amount)
     {
         if (itemData == null || amount <= 0) return false;
-
         EnsureSlotCount();
+        
+        int emptySlots = CountEmptySlots();
+        int slotsNeeded = amount; // Force 1 item per slot (maxStack = 1)
+        return emptySlots >= slotsNeeded;
+    }
 
-        // Mỗi slot chỉ chứa 1 món.
-        // Vì vậy cần kiểm tra còn đủ slot trống không.
-        int emptySlotCount = CountEmptySlots();
-
-        if (emptySlotCount < amount)
+    public bool AddItem(ItemData itemData, int amount)
+    {
+        if (!CanAddItem(itemData, amount))
         {
             OnInventoryChanged?.Invoke();
             return false;
@@ -51,8 +53,9 @@ public class PlayerInventory : MonoBehaviour
         {
             if (IsSlotEmpty(i))
             {
-                items[i] = new InventoryItem(itemData, 1);
-                remainingAmount--;
+                int add = 1; // Force 1 item per slot
+                items[i] = new InventoryItem(itemData, add);
+                remainingAmount -= add;
 
                 if (remainingAmount <= 0)
                 {

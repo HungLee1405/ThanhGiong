@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestDatabase : MonoBehaviour
 {
+    [Header("Item Rewards")]
+    public ItemData axeItem;
+    public ItemData pickaxeItem;
+
     public List<QuestStep> GetQuestStepsForDay(int day)
     {
         switch (day)
@@ -187,38 +191,10 @@ public class QuestDatabase : MonoBehaviour
                 dialogueLines = new string[]
                 {
                     "Hôm qua cậu làm tốt lắm.",
-                    "Nhiệm vụ hôm nay cũng giống vậy.",
-                    "À mà hình như lão Năm đang gặp khó khăn gì đó.",
-                    "Cậu hãy ghé thăm kiểm tra xem."
+                    "Ta tin tưởng vào cậu hôm nay.",
+                    "À mà, bác Ba có vẻ gặp khó khăn.",
+                    "Nếu được hãy ghé qua giúp ông ấy một tay nhé."
                 }
-            },
-
-            new QuestStep
-            {
-                day = 3,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Gặp lão Năm.",
-                stepType = QuestStepType.TalkToNPC,
-                targetNPCId = "old_man_nam",
-                requiredAmount = 1,
-                dialogueLines = new string[]
-                {
-                    "Ui gia, lão đây đã già rồi, sức đâu mà làm mấy chuyện này chứ.",
-                    "À, cậu có phải là người mà Già Làng đã nói không?",
-                    "Đám gà nhà tôi đã xổng chuồng chạy mất tiêu rồi.",
-                    "Cậu hãy giúp tôi bắt chúng lại và bỏ vào khu vực chuồng được chứ.",
-                    "Sau khi làm xong thì cậu có thể bắt gà nhà tôi mà nấu cơm gà cho Gióng ăn."
-                }
-            },
-
-            new QuestStep
-            {
-                day = 3,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Giúp lão Năm bắt 3 con gà.",
-                stepType = QuestStepType.CatchChicken,
-                targetItemId = "chicken",
-                requiredAmount = 3
             },
 
             new QuestStep
@@ -227,7 +203,57 @@ public class QuestDatabase : MonoBehaviour
                 questName = "Nhiệm vụ ngày 3",
                 questDescription = "Nấu cơm và giữ cho thanh đói của Gióng trên 80% khi ngày kết thúc.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
-                requiredAmount = 1
+                requiredAmount = 1,
+                isSideQuest = false
+            },
+
+            new QuestStep
+            {
+                day = 3,
+                questName = "Nhiệm vụ phụ",
+                questDescription = "Đến gặp lão Năm.",
+                stepType = QuestStepType.TalkToNPC,
+                targetNPCId = "bac_ba",
+                requiredAmount = 1,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1,
+                dialogueLines = new string[]
+                {
+                    "Chào cậu trẻ, ta là lão Năm.",
+                    "Lũ gà của ta nghịch ngợm quá, đã xổng chuồng chạy đi khắp nơi rồi.",
+                    "Cậu giúp ta bắt 3 con gà bỏ lại vào chuồng được không?",
+                    "Sau đó ta sẽ truyền lại bí quyết nấu món Cơm Gà để giúp Gióng mau lớn!"
+                }
+            },
+
+            new QuestStep
+            {
+                day = 3,
+                questName = "Nhiệm vụ phụ",
+                questDescription = "Bắt gà và đưa về chuồng.",
+                stepType = QuestStepType.CatchChicken,
+                targetItemId = "chick",
+                requiredAmount = 3,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1
+            },
+
+            new QuestStep
+            {
+                day = 3,
+                questName = "Nhiệm vụ phụ",
+                questDescription = "Nói chuyện lại với lão Năm.",
+                stepType = QuestStepType.TalkToNPC,
+                targetNPCId = "bac_ba",
+                requiredAmount = 1,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1,
+                dialogueLines = new string[]
+                {
+                    "Ôi cậu làm tốt quá, cảm ơn cậu nhiều nhé!",
+                    "Lũ gà giờ đã ở yên trong chuồng rồi.",
+                    "Ta đã chuẩn bị công thức nấu Cơm Gà cho cậu rồi đấy, hãy dùng nó để cho Gióng ăn nhé!"
+                }
             }
         };
     }
@@ -261,7 +287,14 @@ public class QuestDatabase : MonoBehaviour
                 questDescription = "Gặp Bác Thợ Rèn.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "blacksmith",
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1,
                 requiredAmount = 1,
+                rewardItem = pickaxeItem,
+                rewardAmount = 1,
+                rewardTiming = RewardTiming.TalkToNPC,
+                rewardMessage = "Nhận được Cuốc Chim!",
+                requireInventorySpace = true,
                 dialogueLines = new string[]
                 {
                     "Cậu ắt hẳn là người mà Già Làng nhắc đến.",
@@ -275,10 +308,12 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 4,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Khai thác 5 quặng sắt.",
+                questDescription = "Khai thác 5 quặng sắt và mang về kho",
                 stepType = QuestStepType.CollectIron,
                 targetItemId = "iron_ore",
-                requiredAmount = 5
+                requiredAmount = 5,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1
             },
 
             new QuestStep
@@ -304,6 +339,11 @@ public class QuestDatabase : MonoBehaviour
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
+                rewardItem = axeItem,
+                rewardAmount = 1,
+                rewardTiming = RewardTiming.TalkToNPC,
+                rewardMessage = "Nhận được Rìu!",
+                requireInventorySpace = true,
                 dialogueLines = new string[]
                 {
                     "Tình hình nguy cấp rồi cậu trẻ ơi!",
@@ -322,7 +362,9 @@ public class QuestDatabase : MonoBehaviour
                 questDescription = "Chặt 5 bó tre mang về kho.",
                 stepType = QuestStepType.CollectBamboo,
                 targetItemId = "bamboo",
-                requiredAmount = 5
+                requiredAmount = 5,
+                isSideQuest = true,
+                unlockAtMainStepIndex = 1
             },
 
             new QuestStep
@@ -364,7 +406,12 @@ public class QuestDatabase : MonoBehaviour
                 questName = "Nhiệm vụ ngày 6",
                 questDescription = "Giữ thanh đói trên 80%, tích trữ ít nhất 10 quặng sắt và 10 bó tre.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
-                requiredAmount = 1
+                requiredAmount = 1,
+                storageRequirements = new List<QuestRequirement>
+                {
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 10 },
+                    new QuestRequirement { targetItemId = "bamboo", requiredAmount = 10 }
+                }
             }
         };
     }
@@ -397,9 +444,13 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 7,
                 questName = "Nhiệm vụ ngày 7",
-                questDescription = "Giữ thanh đói trên 80% và hoàn thành vũ khí 100%.",
-                stepType = QuestStepType.ForgeWeapon,
-                requiredAmount = 100
+                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 15 quặng sắt.",
+                stepType = QuestStepType.SurviveUntilDayEnd,
+                requiredAmount = 1,
+                storageRequirements = new List<QuestRequirement>
+                {
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 15 }
+                }
             }
         };
     }

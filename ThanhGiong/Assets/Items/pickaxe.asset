@@ -15,6 +15,6 @@ MonoBehaviour:
   itemId: pickaxe
   itemName: "Cu\u1ED1c"
   itemIcon: {fileID: 21300000, guid: e5ad545a0c12bf647bee49f492bdcf76, type: 3}
-  stackable: 1
+  stackable: 0
   maxStack: 5
   handPrefab: {fileID: 0}
