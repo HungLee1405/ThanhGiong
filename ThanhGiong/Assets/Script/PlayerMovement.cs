@@ -137,26 +137,29 @@ public class PlayerMovement : NetworkBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (isGrounded && input.sqrMagnitude > 0.01f)
+        if (footstepSource != null)
         {
-            // Nếu loa đang bị tắt (hoặc game vừa mở), cho loa phát lại
-            if (!footstepSource.isPlaying)
+            if (isGrounded && input.sqrMagnitude > 0.01f)
             {
-                footstepSource.Play();
+                // Nếu loa đang bị tắt (hoặc game vừa mở), cho loa phát lại
+                if (!footstepSource.isPlaying)
+                {
+                    footstepSource.Play();
+                }
+
+                // Tăng dần âm lượng lên 1 (To tối đa) một cách mượt mà
+                footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 1f, Time.deltaTime * fadeSpeed);
             }
-
-            // Tăng dần âm lượng lên 1 (To tối đa) một cách mượt mà
-            footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 1f, Time.deltaTime * fadeSpeed);
-        }
-        else
-        {
-            // Nếu đứng im hoặc đang trên không: Giảm dần âm lượng về 0
-            footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 0f, Time.deltaTime * fadeSpeed);
-
-            // Khi âm lượng đã về hẳn bằng 0 thì tạm dừng loa để tiết kiệm tài nguyên
-            if (footstepSource.volume <= 0f && footstepSource.isPlaying)
+            else
             {
-                footstepSource.Stop();
+                // Nếu đứng im hoặc đang trên không: Giảm dần âm lượng về 0
+                footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 0f, Time.deltaTime * fadeSpeed);
+
+                // Khi âm lượng đã về hẳn bằng 0 thì tạm dừng loa để tiết kiệm tài nguyên
+                if (footstepSource.volume <= 0f && footstepSource.isPlaying)
+                {
+                    footstepSource.Stop();
+                }
             }
         }
     }
