@@ -20,6 +20,14 @@ public class PlayerMovement : NetworkBehaviour
     public float groundDistance = 0.3f;
     public LayerMask groundMask;
 
+    [Header("Footstep Audio (Vòng lặp)")]
+    public AudioSource footstepSource;    // Nguồn phát tiếng bước chân (đã bật Loop)
+    public float fadeSpeed = 10f;         // Tốc độ tăng/giảm âm lượng để tiếng ngắt mượt mà
+
+    [Header("Landing Audio")]
+    public AudioClip landingClip;         // File âm thanh tiếng tiếp đất
+    private bool wasGrounded;
+
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
@@ -47,6 +55,7 @@ public class PlayerMovement : NetworkBehaviour
 
         if (NetworkPlayerAppearance.IsLocalSelectionOpen)
             return;
+
 
         HandleMouseLook();
         HandleMovement();
@@ -125,5 +134,28 @@ public class PlayerMovement : NetworkBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        if (isGrounded && input.sqrMagnitude > 0.01f)
+        {
+            // Nếu loa đang bị tắt (hoặc game vừa mở), cho loa phát lại
+            if (!footstepSource.isPlaying)
+            {
+                footstepSource.Play();
+            }
+
+            // Tăng dần âm lượng lên 1 (To tối đa) một cách mượt mà
+            footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 1f, Time.deltaTime * fadeSpeed);
+        }
+        else
+        {
+            // Nếu đứng im hoặc đang trên không: Giảm dần âm lượng về 0
+            footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 0f, Time.deltaTime * fadeSpeed);
+
+            // Khi âm lượng đã về hẳn bằng 0 thì tạm dừng loa để tiết kiệm tài nguyên
+            if (footstepSource.volume <= 0f && footstepSource.isPlaying)
+            {
+                footstepSource.Stop();
+            }
+        }
     }
 }

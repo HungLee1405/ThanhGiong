@@ -7206,6 +7206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 652109482}
   - component: {fileID: 652109481}
+  - component: {fileID: 652109486}
   - component: {fileID: 652109480}
   - component: {fileID: 652109483}
   - component: {fileID: 652109484}
@@ -7229,6 +7230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e13923c0fc96f743a22ebdef0d5d3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 10
   jumpHeight: 2
   gravity: -25
@@ -7360,6 +7362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d3b5eb83d087848ad83badd8a7af6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHandController
+  ShowTopMostFoldoutHeaderGroup: 1
   playerInventory: {fileID: 652109484}
   playerInventoryUI: {fileID: 1298370678}
   handPoint: {fileID: 1602757279}
@@ -7367,6 +7370,31 @@ MonoBehaviour:
   selectedItem:
     itemData: {fileID: 0}
     amount: 0
+--- !u!114 &652109486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652109479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 4136466771
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &673082186
 GameObject:
   m_ObjectHideFlags: 0
@@ -15658,6 +15686,8 @@ MonoBehaviour:
   currentDay: 1
   currentStepIndex: 0
   isDayQuestCompleted: 0
+  scaleSharedObjectivesWithPlayers: 1
+  maxSharedQuestPlayers: 6
 --- !u!4 &1455899181
 Transform:
   m_ObjectHideFlags: 0

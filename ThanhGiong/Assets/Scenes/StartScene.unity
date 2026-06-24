@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f283fb1f88ad624fbf25304adaf9496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlobalClickSound
-  clickAudio: {fileID: 1504999378}
+  clickSource: {fileID: 1504999378}
 --- !u!82 &1504999378
 AudioSource:
   m_ObjectHideFlags: 0
