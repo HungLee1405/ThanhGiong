@@ -21,6 +21,11 @@ public class BillboardUI : MonoBehaviour
 
     void LateUpdate()
     {
+        if (mainCamera == null || !mainCamera.isActiveAndEnabled)
+        {
+            mainCamera = Camera.main;
+        }
+
         if (mainCamera == null) return;
 
         if (followCameraSide && target != null)

@@ -929,6 +929,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   footstepSource: {fileID: 0}
+  footstepClip: {fileID: 8300000, guid: 0930fc4a0ad5b6c43bdafd2ba7aaeb64, type: 3}
   fadeSpeed: 10
   landingClip: {fileID: 0}
 --- !u!23 &1053746475908573888

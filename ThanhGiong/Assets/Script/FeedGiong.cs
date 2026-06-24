@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Unity.Netcode;
 
 public class FeedGiong : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class FeedGiong : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.isPaused) return;
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (Keyboard.current == null) return;
 
@@ -287,9 +289,36 @@ public class FeedGiong : MonoBehaviour
         feedTimer = 0f;
     }
 
+    // Kiểm tra xem collider có phải là local player không.
+    // Trong offline: chấp nhận mọi Player. Trong online: chỉ chấp nhận local owner.
+    private bool IsLocalPlayer(Collider other)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+            return true;
+
+        PlayerMovement movement = other.GetComponent<PlayerMovement>();
+        if (movement == null) movement = other.GetComponentInParent<PlayerMovement>();
+        if (movement == null) movement = other.GetComponentInChildren<PlayerMovement>();
+
+        if (movement != null && movement.IsSpawned)
+            return movement.IsOwner;
+
+        PlayerHandController hand = other.GetComponent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInParent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInChildren<PlayerHandController>();
+
+        if (hand != null && hand.IsSpawned)
+            return hand.IsOwner;
+
+        return true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         playerInventory = other.GetComponent<PlayerInventory>();
         playerHandController = other.GetComponent<PlayerHandController>();
@@ -305,6 +334,7 @@ public class FeedGiong : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         playerInventory = null;
         playerHandController = null;

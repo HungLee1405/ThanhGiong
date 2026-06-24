@@ -192,6 +192,19 @@ public class QuestManager : MonoBehaviour
         return sideStep;
     }
 
+    public int CurrentSideStepIndex => currentSideStepIndex;
+
+    public ulong GetCompletedStepMask()
+    {
+        ulong mask = 0;
+        foreach (QuestStepType type in completedStepTypes)
+        {
+            int bit = (int)type;
+            if (bit >= 0 && bit < 64) mask |= 1UL << bit;
+        }
+        return mask;
+    }
+
     public List<QuestStep> GetActiveSteps()
     {
         List<QuestStep> active = new List<QuestStep>();
@@ -492,7 +505,16 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void ApplySharedState(int day, int stepIndex, int currentAmount, int requiredAmount, bool completed)
+    public void ApplySharedState(
+        int day,
+        int stepIndex,
+        int currentAmount,
+        int requiredAmount,
+        bool completed,
+        int sideStepIndex,
+        int sideCurrentAmount,
+        int sideRequiredAmount,
+        ulong completedMask)
     {
         applyingSharedState = true;
 
@@ -503,6 +525,7 @@ public class QuestManager : MonoBehaviour
 
         currentDay = day;
         currentStepIndex = Mathf.Clamp(stepIndex, 0, Mathf.Max(0, currentSteps.Count));
+        currentSideStepIndex = Mathf.Clamp(sideStepIndex, -1, Mathf.Max(-1, sideQuestSteps.Count));
         isDayQuestCompleted = completed;
 
         QuestStep step = GetCurrentStep();
@@ -511,6 +534,24 @@ public class QuestManager : MonoBehaviour
         {
             step.requiredAmount = Mathf.Max(1, requiredAmount);
             step.currentAmount = Mathf.Clamp(currentAmount, 0, step.requiredAmount);
+        }
+
+
+        QuestStep sideStep = GetCurrentSideStep();
+        if (sideStep != null)
+        {
+            sideStep.requiredAmount = Mathf.Max(1, sideRequiredAmount);
+            sideStep.currentAmount = Mathf.Clamp(sideCurrentAmount, 0, sideStep.requiredAmount);
+        }
+
+        completedStepTypes.Clear();
+        foreach (QuestStepType type in System.Enum.GetValues(typeof(QuestStepType)))
+        {
+            int bit = (int)type;
+            if (bit >= 0 && bit < 64 && (completedMask & (1UL << bit)) != 0)
+            {
+                completedStepTypes.Add(type);
+            }
         }
 
         RefreshQuestUI();
@@ -750,10 +791,25 @@ public class QuestManager : MonoBehaviour
         if (step == null || step.rewardItem == null || step.rewardReceived || step.rewardTiming != timing)
             return true;
 
+        NetworkManager networkManager = NetworkManager.Singleton;
+        int amountToGrant = step.rewardAmount > 0 ? step.rewardAmount : 1;
+
+        if (networkManager != null && networkManager.IsListening)
+        {
+            // The server grants shared quest rewards to every player's local inventory.
+            // Clients mark their local quest copy and wait for the authoritative reward message.
+            if (networkManager.IsServer)
+            {
+                SharedQuestNetwork.GrantRewardToAll(step.rewardItem.itemId, amountToGrant);
+            }
+
+            step.rewardReceived = true;
+            return true;
+        }
+
         PlayerInventory inventory = FindFirstObjectByType<PlayerInventory>();
         if (inventory == null) return false;
 
-        int amountToGrant = step.rewardAmount > 0 ? step.rewardAmount : 1;
         if (step.requireInventorySpace && !inventory.CanAddItem(step.rewardItem, amountToGrant))
         {
             if (playerHubUI != null)
@@ -775,6 +831,18 @@ public class QuestManager : MonoBehaviour
         }
         
         return false;
+    }
+
+    public void PrepareSharedActionReward(QuestStepType type, string targetId)
+    {
+        if (type != QuestStepType.TalkToNPC) return;
+
+        foreach (QuestStep step in GetActiveSteps())
+        {
+            if (step.stepType != type) continue;
+            if (!string.IsNullOrEmpty(step.targetNPCId) && step.targetNPCId != targetId) continue;
+            TryGrantReward(step, RewardTiming.TalkToNPC);
+        }
     }
 
     public bool HasCompletedStepType(QuestStepType type)

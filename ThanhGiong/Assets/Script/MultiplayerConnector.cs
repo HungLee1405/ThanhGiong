@@ -37,6 +37,7 @@ public class MultiplayerConnector : MonoBehaviour
     private string statusMessage = "";
     private bool isStartingOnline;
     private bool connectedAsClient;
+    private bool clientConnectionConfirmed;
     private bool intentionalLeave;
     private bool returningToMenu;
     private NetworkManager callbackManager;
@@ -315,6 +316,7 @@ public class MultiplayerConnector : MonoBehaviour
 
             bool started = manager.StartHost();
             connectedAsClient = false;
+            clientConnectionConfirmed = false;
             intentionalLeave = false;
             returningToMenu = false;
             menuPage = started ? MenuPage.InGame : MenuPage.Online;
@@ -376,6 +378,7 @@ public class MultiplayerConnector : MonoBehaviour
 
             bool started = manager.StartClient();
             connectedAsClient = started;
+            clientConnectionConfirmed = false;
             intentionalLeave = false;
             returningToMenu = false;
             menuPage = started ? MenuPage.InGame : MenuPage.Online;
@@ -566,6 +569,7 @@ public class MultiplayerConnector : MonoBehaviour
 
         UnregisterNetworkCallbacks();
         callbackManager = manager;
+        callbackManager.OnClientConnectedCallback += OnClientConnected;
         callbackManager.OnClientDisconnectCallback += OnClientDisconnected;
     }
 
@@ -573,10 +577,22 @@ public class MultiplayerConnector : MonoBehaviour
     {
         if (callbackManager != null)
         {
+            callbackManager.OnClientConnectedCallback -= OnClientConnected;
             callbackManager.OnClientDisconnectCallback -= OnClientDisconnected;
         }
 
         callbackManager = null;
+    }
+
+    private void OnClientConnected(ulong connectedClientId)
+    {
+        NetworkManager manager = callbackManager != null ? callbackManager : NetworkManager.Singleton;
+        if (manager != null && manager.IsClient && !manager.IsHost
+            && connectedClientId == manager.LocalClientId)
+        {
+            clientConnectionConfirmed = true;
+            statusMessage = "Connected to online room " + joinCode + ".";
+        }
     }
 
     private void OnClientDisconnected(ulong disconnectedClientId)
@@ -592,9 +608,27 @@ public class MultiplayerConnector : MonoBehaviour
         if (manager != null && disconnectedClientId != manager.LocalClientId)
             return;
 
+        string disconnectReason = manager != null ? manager.DisconnectReason : "";
+        string message;
+
+        if (!clientConnectionConfirmed)
+        {
+            message = string.IsNullOrWhiteSpace(disconnectReason)
+                ? "Could not connect to the room. Check that host and client use the same build."
+                : "Join rejected: " + disconnectReason;
+        }
+        else
+        {
+            message = string.IsNullOrWhiteSpace(disconnectReason)
+                ? "Connection to the host was lost."
+                : "Connection lost: " + disconnectReason;
+        }
+
         Debug.LogWarning(
-            "Multiplayer: host connection lost. Returning client " + disconnectedClientId + " to the mode menu.");
-        BeginReturnToModeSelect("Host left the room. You have left the online session.", manager);
+            "Multiplayer: client disconnected. ClientId=" + disconnectedClientId
+            + ", confirmed=" + clientConnectionConfirmed
+            + ", reason=" + disconnectReason);
+        BeginReturnToModeSelect(message, manager);
     }
 
     private void BeginReturnToModeSelect(string message, NetworkManager manager)
@@ -604,6 +638,7 @@ public class MultiplayerConnector : MonoBehaviour
 
         returningToMenu = true;
         connectedAsClient = false;
+        clientConnectionConfirmed = false;
         ActiveRoomCode = "";
         currentRoomCode = "";
         joinCode = "";

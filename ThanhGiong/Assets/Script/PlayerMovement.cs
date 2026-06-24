@@ -22,6 +22,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Footstep Audio (Vòng lặp)")]
     public AudioSource footstepSource;    // Nguồn phát tiếng bước chân (đã bật Loop)
+    public AudioClip footstepClip;
     public float fadeSpeed = 10f;         // Tốc độ tăng/giảm âm lượng để tiếng ngắt mượt mà
 
     [Header("Landing Audio")]
@@ -33,10 +34,72 @@ public class PlayerMovement : NetworkBehaviour
     private bool isGrounded;
 
     private float cameraPitch = 0f;
+    private Vector3 lastObservedPosition;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        if (GetComponent<PlayerRespawnController>() == null)
+        {
+            gameObject.AddComponent<PlayerRespawnController>();
+        }
+
+        // Prefer a dedicated footstep source when a clip is configured. This also
+        // avoids accidentally reusing the player's music or UI AudioSource.
+        if (footstepSource == null && footstepClip != null)
+        {
+            GameObject audioChild = new GameObject("FootstepAudio");
+            audioChild.transform.SetParent(transform, false);
+            footstepSource = audioChild.AddComponent<AudioSource>();
+            footstepSource.spatialBlend = 1f;
+            footstepSource.volume = 0f;
+        }
+
+        // Tự tìm AudioSource nếu chưa được gán trong Inspector
+        // Ưu tiên AudioSource đã có clip (footstep loop)
+        if (footstepSource == null)
+        {
+            AudioSource[] sources = GetComponentsInChildren<AudioSource>(true);
+            foreach (AudioSource src in sources)
+            {
+                if (src.loop || src.clip != null)
+                {
+                    footstepSource = src;
+                    break;
+                }
+            }
+
+            // Nếu không có loop/clip, lấy cái đầu tiên
+            if (footstepSource == null && sources.Length > 0)
+            {
+                footstepSource = sources[0];
+            }
+        }
+
+        // Nếu vẫn không có (NetworkPlayer prefab chưa có AudioSource),
+        // tự tạo một AudioSource mới
+        if (footstepSource == null)
+        {
+            GameObject audioChild = new GameObject("FootstepAudio");
+            audioChild.transform.SetParent(transform, false);
+            footstepSource = audioChild.AddComponent<AudioSource>();
+            footstepSource.loop = true;
+            footstepSource.spatialBlend = 1f; // 3D sound
+            footstepSource.volume = 0f;
+            footstepSource.playOnAwake = false;
+        }
+
+        // NetworkPlayer is generated separately from the offline player. Keep the
+        // clip here as a fallback so a runtime AudioSource is never left empty.
+        if (footstepSource.clip == null && footstepClip != null)
+        {
+            footstepSource.clip = footstepClip;
+        }
+
+        footstepSource.loop = true;
+        footstepSource.playOnAwake = false;
+        lastObservedPosition = transform.position;
 
         if (CanUseLocalInput() && !MultiplayerConnector.IsRoomMenuOpen)
         {
@@ -47,8 +110,14 @@ public class PlayerMovement : NetworkBehaviour
 
     void Update()
     {
-        if (!CanUseLocalInput())
+        if (PauseMenuManager.isPaused)
             return;
+
+        if (!CanUseLocalInput())
+        {
+            HandleRemoteFootsteps();
+            return;
+        }
 
         if (MultiplayerConnector.IsRoomMenuOpen)
             return;
@@ -61,6 +130,42 @@ public class PlayerMovement : NetworkBehaviour
 
         HandleMouseLook();
         HandleMovement();
+    }
+
+    private void HandleRemoteFootsteps()
+    {
+        Vector3 displacement = transform.position - lastObservedPosition;
+        displacement.y = 0f;
+        lastObservedPosition = transform.position;
+
+        bool remoteGrounded = groundCheck != null && Physics.CheckSphere(
+            groundCheck.position,
+            groundDistance,
+            groundMask);
+
+        UpdateFootstepAudio(remoteGrounded && displacement.sqrMagnitude > 0.000001f);
+    }
+
+    private void UpdateFootstepAudio(bool shouldPlay)
+    {
+        if (footstepSource == null) return;
+
+        float targetVolume = shouldPlay ? 1f : 0f;
+
+        if (shouldPlay && !footstepSource.isPlaying)
+        {
+            footstepSource.Play();
+        }
+
+        footstepSource.volume = Mathf.MoveTowards(
+            footstepSource.volume,
+            targetVolume,
+            Time.deltaTime * fadeSpeed);
+
+        if (!shouldPlay && footstepSource.volume <= 0f && footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
     }
 
     private bool CanUseLocalInput()
@@ -137,28 +242,8 @@ public class PlayerMovement : NetworkBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (isGrounded && input.sqrMagnitude > 0.01f)
-        {
-            // Nếu loa đang bị tắt (hoặc game vừa mở), cho loa phát lại
-            if (!footstepSource.isPlaying)
-            {
-                footstepSource.Play();
-            }
-
-            // Tăng dần âm lượng lên 1 (To tối đa) một cách mượt mà
-            footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 1f, Time.deltaTime * fadeSpeed);
-        }
-        else
-        {
-            // Nếu đứng im hoặc đang trên không: Giảm dần âm lượng về 0
-            footstepSource.volume = Mathf.MoveTowards(footstepSource.volume, 0f, Time.deltaTime * fadeSpeed);
-
-            // Khi âm lượng đã về hẳn bằng 0 thì tạm dừng loa để tiết kiệm tài nguyên
-            if (footstepSource.volume <= 0f && footstepSource.isPlaying)
-            {
-                footstepSource.Stop();
-            }
-        }
+        UpdateFootstepAudio(isGrounded && input.sqrMagnitude > 0.01f);
+        lastObservedPosition = transform.position;
     }
 
     public void ResetVelocity()

@@ -13,6 +13,7 @@ public static class MultiplayerAutoSetup
     private const string GameScenePath = "Assets/Scenes/GameScene.unity";
     private const string ResourcesPath = "Assets/Resources";
     private const string PrefabPath = "Assets/Resources/NetworkPlayer.prefab";
+    private const string FootstepClipPath = "Assets/Assets/Sound/footstep_walk.wav";
     private const string RedCharacterPath = "Assets/Characters/Variants/Do_Rigged.fbx";
     private const string RedMaterialPath = "Assets/Characters/Variants/Materials/Do.mat";
     private const string RedBaseTexturePath = "Assets/Characters/Variants/Textures/Do/texture_pbr_20250901.png";
@@ -133,6 +134,7 @@ public static class MultiplayerAutoSetup
         }
 
         GameObject prefab = CreateOrUpdatePlayerPrefab(scenePlayer);
+        RemoveOfflineNetworkComponents(scenePlayer);
         EnsureComponent<OfflinePlayerDisabler>(scenePlayer);
         EnsureSceneNetworkManager(prefab);
         EditorSceneManager.SaveScene(scene);
@@ -203,11 +205,41 @@ public static class MultiplayerAutoSetup
         EnsureComponent<NetworkLocalPlayerSetup>(workingCopy);
         NetworkPlayerAppearance appearance = EnsureComponent<NetworkPlayerAppearance>(workingCopy);
         AssignCharacterVariants(appearance);
+        AssignPlayerAudio(workingCopy);
 
         GameObject prefab = PrefabUtility.SaveAsPrefabAsset(workingCopy, PrefabPath);
         Object.DestroyImmediate(workingCopy);
 
         return prefab;
+    }
+
+    private static void RemoveOfflineNetworkComponents(GameObject scenePlayer)
+    {
+        if (scenePlayer == null) return;
+
+        NetworkTransform networkTransform = scenePlayer.GetComponent<NetworkTransform>();
+        if (networkTransform != null) Object.DestroyImmediate(networkTransform);
+
+        NetworkObject networkObject = scenePlayer.GetComponent<NetworkObject>();
+        if (networkObject != null) Object.DestroyImmediate(networkObject);
+    }
+
+    private static void AssignPlayerAudio(GameObject player)
+    {
+        PlayerMovement movement = player != null ? player.GetComponent<PlayerMovement>() : null;
+        AudioClip footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>(FootstepClipPath);
+
+        if (movement == null || footstepClip == null)
+            return;
+
+        SerializedObject serializedMovement = new SerializedObject(movement);
+        SerializedProperty clipProperty = serializedMovement.FindProperty("footstepClip");
+
+        if (clipProperty != null)
+        {
+            clipProperty.objectReferenceValue = footstepClip;
+            serializedMovement.ApplyModifiedPropertiesWithoutUndo();
+        }
     }
 
     private static void AssignCharacterVariants(NetworkPlayerAppearance appearance)

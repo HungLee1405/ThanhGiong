@@ -1,12 +1,22 @@
-﻿using UnityEngine;
-using System.Collections; // Bắt buộc phải có để dùng vòng lặp thời gian
+using UnityEngine;
+using System.Collections;
+using Unity.Netcode;
 
+/// <summary>
+/// Chạy nhạc nền liên tục xuyên suốt game.
+/// - Tự động play khi start (nếu chưa play).
+/// - Hoạt động cả trong offline lẫn online (multiplayer).
+/// - Chỉ local owner player kích hoạt AudioListener → không bị nhiều listener conflict.
+/// </summary>
 public class PersistentBGM : MonoBehaviour
 {
     public static PersistentBGM instance;
 
     [Header("Kéo Loa Nhạc Nền vào đây")]
     public AudioSource bgmSource;
+
+    [Header("Kéo file MainMixer vào đây")]
+    public UnityEngine.Audio.AudioMixer mainMixer;
 
     void Awake()
     {
@@ -19,20 +29,26 @@ public class PersistentBGM : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
+        }
+
+        // Tự tìm AudioSource nếu chưa gán
+        if (bgmSource == null)
+        {
+            bgmSource = GetComponent<AudioSource>();
+        }
+        if (bgmSource == null)
+        {
+            bgmSource = GetComponentInChildren<AudioSource>();
         }
     }
 
-    [Header("Kéo file MainMixer vào đây")]
-    public UnityEngine.Audio.AudioMixer mainMixer;
-
     void Start()
     {
-        // 1. Tự động kiểm tra xem trong máy người chơi có dữ liệu âm lượng cũ không
-        // Nếu có thì lấy ra, nếu chưa có (chơi lần đầu) thì mặc định là 1f (to nhất)
+        // Áp dụng volume đã lưu
         float savedMusic = PlayerPrefs.GetFloat("MusicVol", 1f);
         float savedSFX = PlayerPrefs.GetFloat("SFXVol", 1f);
 
-        // 2. Ép Audio Mixer phải nhỏ xuống ngay lập tức bằng công thức Decibel
         if (mainMixer != null)
         {
             float musicdB = Mathf.Log10(Mathf.Max(savedMusic, 0.0001f)) * 20f;
@@ -42,11 +58,28 @@ public class PersistentBGM : MonoBehaviour
             mainMixer.SetFloat("SFXVol", sfxdB);
         }
 
-        // Tải trạng thái Mute (0 là không Mute, 1 là đang Mute)
+        // Áp dụng Mute
         bool isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
-
-        // Bật/tắt loa tổng toàn game ngay khi vừa mở lên
         AudioListener.volume = isMuted ? 0f : 1f;
+
+        // Đảm bảo nhạc nền đang phát
+        EnsureBGMPlaying();
+    }
+
+    private void Update()
+    {
+        // Nếu nhạc bị dừng vì lý do gì đó (scene reload, etc.), play lại
+        EnsureBGMPlaying();
+    }
+
+    private void EnsureBGMPlaying()
+    {
+        if (bgmSource == null) return;
+        if (bgmSource.clip == null) return;
+        if (bgmSource.isPlaying) return;
+
+        bgmSource.loop = true;
+        bgmSource.Play();
     }
 
     // Hàm gọi lệnh làm mờ nhạc
@@ -68,14 +101,39 @@ public class PersistentBGM : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             bgmSource.volume = Mathf.Lerp(startVolume, 0f, elapsedTime / fadeDuration);
-            yield return null; // Đợi frame tiếp theo để tạo độ mượt
+            yield return null;
         }
 
-        // Tắt hẳn nhạc nền
         bgmSource.volume = 0f;
         bgmSource.Stop();
+    }
 
-        // LƯU Ý: Lần này chúng ta KHÔNG dùng lệnh Destroy(gameObject) nữa. 
-        // Nhờ vậy, cái loa tiếng Click chuột vẫn sẽ sống sót và hoạt động trong màn chơi chính!
+    public void FadeInMusic(float fadeDuration, float targetVolume = 1f)
+    {
+        if (bgmSource != null)
+        {
+            StartCoroutine(FadeInCoroutine(fadeDuration, targetVolume));
+        }
+    }
+
+    private IEnumerator FadeInCoroutine(float fadeDuration, float targetVolume)
+    {
+        if (!bgmSource.isPlaying)
+        {
+            bgmSource.volume = 0f;
+            bgmSource.Play();
+        }
+
+        float startVolume = bgmSource.volume;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            bgmSource.volume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / fadeDuration);
+            yield return null;
+        }
+
+        bgmSource.volume = targetVolume;
     }
 }

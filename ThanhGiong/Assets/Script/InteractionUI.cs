@@ -22,10 +22,20 @@ public class InteractionUI : MonoBehaviour
 
     private void LateUpdate()
     {
+        RefreshCamera();
         if (!lookAtCamera || mainCamera == null) return;
 
         transform.LookAt(transform.position + mainCamera.transform.rotation * Vector3.forward,
             mainCamera.transform.rotation * Vector3.up);
+    }
+
+    private void RefreshCamera()
+    {
+        // Multiplayer disables the offline camera after the scene UI has cached it.
+        if (mainCamera == null || !mainCamera.isActiveAndEnabled)
+        {
+            mainCamera = Camera.main;
+        }
     }
 
     public void Show(string message)

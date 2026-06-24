@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class QuestWaypointUI : MonoBehaviour
@@ -18,12 +19,25 @@ public class QuestWaypointUI : MonoBehaviour
     private void Start()
     {
         questManager = FindFirstObjectByType<QuestManager>();
-        playerInventory = FindFirstObjectByType<PlayerInventory>();
 
-        if (playerTransform == null)
+        // Khi online: luôn tìm lại local owner player, bỏ qua Inspector assign
+        // (Inspector có thể trỏ vào offline player bị tắt khi online)
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager != null && networkManager.IsListening)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) playerTransform = player.transform;
+            playerTransform = null; // Reset để FindLocalPlayerTransform() tìm lại
+        }
+
+        if (playerTransform == null || !playerTransform.gameObject.activeInHierarchy)
+        {
+            playerTransform = FindLocalPlayerTransform();
+        }
+
+        // Tìm inventory của local player
+        if (playerTransform != null)
+        {
+            playerInventory = playerTransform.GetComponent<PlayerInventory>();
+            if (playerInventory == null) playerInventory = playerTransform.GetComponentInChildren<PlayerInventory>();
         }
 
         // Tự động tạo mũi tên 3D dưới chân nếu chưa gán
@@ -56,12 +70,24 @@ public class QuestWaypointUI : MonoBehaviour
     private void Update()
     {
         if (questManager == null) questManager = FindFirstObjectByType<QuestManager>();
-        if (playerInventory == null) playerInventory = FindFirstObjectByType<PlayerInventory>();
 
-        if (playerTransform == null)
+        // Cập nhật lại playerTransform nếu chưa có HOẶC đang trỏ vào object không active
+        // (trường hợp online: offline player bị tắt, cần tìm lại network player)
+        if (playerTransform == null || !playerTransform.gameObject.activeInHierarchy)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) playerTransform = player.transform;
+            playerTransform = FindLocalPlayerTransform();
+
+            if (playerTransform != null)
+            {
+                playerInventory = playerTransform.GetComponent<PlayerInventory>();
+                if (playerInventory == null) playerInventory = playerTransform.GetComponentInChildren<PlayerInventory>();
+            }
+        }
+
+        if (playerInventory == null && playerTransform != null)
+        {
+            playerInventory = playerTransform.GetComponent<PlayerInventory>();
+            if (playerInventory == null) playerInventory = playerTransform.GetComponentInChildren<PlayerInventory>();
         }
 
         if (questManager == null || playerTransform == null || pointerPivot == null) return;
@@ -76,6 +102,32 @@ public class QuestWaypointUI : MonoBehaviour
 
         pointerPivot.gameObject.SetActive(true);
         UpdatePointerPositionAndRotation();
+    }
+
+    // Tìm transform của local player.
+    // Offline: dùng FindGameObjectWithTag("Player") như cũ.
+    // Online: duyệt tất cả PlayerMovement, lọc lấy IsOwner == true.
+    private Transform FindLocalPlayerTransform()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+        {
+            // Offline mode
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            return player != null ? player.transform : null;
+        }
+
+        // Online mode: tìm PlayerMovement là local owner
+        PlayerMovement[] allMovements = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+        foreach (PlayerMovement movement in allMovements)
+        {
+            if (movement.IsSpawned && movement.IsOwner)
+                return movement.transform;
+        }
+
+        // Fallback: chờ thêm (chưa spawn xong)
+        return null;
     }
 
     private void UpdateTarget()

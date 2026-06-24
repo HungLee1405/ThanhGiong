@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.Netcode;
 
 public class NPCDialogue : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class NPCDialogue : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.isPaused) return;
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (Keyboard.current == null) return;
         if (!playerInRange) return;
@@ -127,6 +129,7 @@ public class NPCDialogue : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         playerInRange = true;
 
@@ -139,8 +142,18 @@ public class NPCDialogue : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         playerInRange = false;
         HideInteractionText();
+    }
+
+    private bool IsLocalPlayer(Collider other)
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        if (manager == null || !manager.IsListening) return true;
+
+        PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
+        return movement == null || !movement.IsSpawned || movement.IsOwner;
     }
 }

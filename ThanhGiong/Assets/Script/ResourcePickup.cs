@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
 public class ResourcePickup : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class ResourcePickup : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.isPaused) return;
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (Keyboard.current == null) return;
 
@@ -425,9 +427,39 @@ public class ResourcePickup : MonoBehaviour
         return "Nhấn giữ E để lấy " + itemData.itemName;
     }
 
+    // Kiểm tra xem collider có phải là local player không.
+    // Trong offline: chấp nhận mọi Player. Trong online: chỉ chấp nhận local owner.
+    private bool IsLocalPlayer(Collider other)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+            return true;
+
+        // Kiểm tra qua PlayerMovement (NetworkBehaviour)
+        PlayerMovement movement = other.GetComponent<PlayerMovement>();
+        if (movement == null) movement = other.GetComponentInParent<PlayerMovement>();
+        if (movement == null) movement = other.GetComponentInChildren<PlayerMovement>();
+
+        if (movement != null && movement.IsSpawned)
+            return movement.IsOwner;
+
+        // Fallback: kiểm tra qua PlayerHandController (NetworkBehaviour)
+        PlayerHandController hand = other.GetComponent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInParent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInChildren<PlayerHandController>();
+
+        if (hand != null && hand.IsSpawned)
+            return hand.IsOwner;
+
+        // Nếu không phải network object thì chấp nhận (offline scene)
+        return true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         BindPlayer(other);
 
@@ -443,6 +475,7 @@ public class ResourcePickup : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         // Sửa lỗi player lần đầu vào vùng nhưng component chưa cập nhật.
         if (playerInventory == null || playerHandController == null)
@@ -461,6 +494,7 @@ public class ResourcePickup : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
         playerInventory = null;
         playerHandController = null;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 public class GiongHunger : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class GiongHunger : MonoBehaviour
     private void Update()
     {
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
+        if (!CanSimulateSharedWorld()) return;
         if (!isHungerRunning) return;
 
         decreaseTimer += Time.deltaTime;
@@ -97,6 +99,8 @@ public class GiongHunger : MonoBehaviour
 
         UpdateUI();
 
+        SharedQuestNetwork.PublishWorldState();
+
         if (currentHunger <= 0f)
         {
             Debug.Log("Gióng quá đói! Game Over.");
@@ -106,12 +110,34 @@ public class GiongHunger : MonoBehaviour
 
     public void Feed(float amount)
     {
+        if (SharedQuestNetwork.RequestFeed(amount))
+            return;
+
+        ApplySharedFeed(amount);
+        SharedQuestNetwork.PublishWorldState();
+    }
+
+    public void ApplySharedFeed(float amount)
+    {
         currentHunger += amount;
         currentHunger = Mathf.Clamp(currentHunger, 0f, maxHunger);
 
         UpdateUI();
 
         Debug.Log("Đã cho Gióng ăn. Thanh đói hiện tại: " + currentHunger);
+    }
+
+    public void ApplySharedState(float hungerValue, bool running)
+    {
+        currentHunger = Mathf.Clamp(hungerValue, 0f, maxHunger);
+        isHungerRunning = running;
+        UpdateUI();
+    }
+
+    private static bool CanSimulateSharedWorld()
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        return manager == null || !manager.IsListening || manager.IsServer;
     }
 
     public bool IsDaySuccess()

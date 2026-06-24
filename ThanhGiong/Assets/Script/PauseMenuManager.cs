@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.Netcode;
 
 public class PauseMenuManager : MonoBehaviour
 {
@@ -82,7 +83,8 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuPanel.SetActive(true);
         mainPauseButtons.SetActive(true);
         inGameOptionsPanel.SetActive(false); // Luôn mở bảng 4 nút chính trước
-        Time.timeScale = 0f;
+        NetworkManager manager = NetworkManager.Singleton;
+        Time.timeScale = manager != null && manager.IsListening ? 1f : 0f;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

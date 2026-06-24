@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
 
 public class GameDayManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GameDayManager : MonoBehaviour
     public GiongHunger giongHunger;
 
     private bool hasStartedCountdownThisDay = false;
+    private float networkSyncTimer;
 
     private void Start()
     {
@@ -38,6 +40,15 @@ public class GameDayManager : MonoBehaviour
     private void Update()
     {
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
+        if (!CanSimulateSharedWorld()) return;
+
+        networkSyncTimer += Time.deltaTime;
+        if (networkSyncTimer >= 0.25f)
+        {
+            networkSyncTimer = 0f;
+            SharedQuestNetwork.PublishWorldState();
+        }
+
         if (!isDayRunning) return;
         if (isTransitioningDay) return;
 
@@ -94,11 +105,13 @@ public class GameDayManager : MonoBehaviour
         Debug.Log("Bắt đầu đếm ngược ngày " + currentDay);
 
         UpdateDayUI();
+        SharedQuestNetwork.PublishWorldState();
     }
 
     public void StopDayCountdown()
     {
         isDayRunning = false;
+        SharedQuestNetwork.PublishWorldState();
     }
 
     public void EndCurrentDay()
@@ -145,6 +158,7 @@ public class GameDayManager : MonoBehaviour
         ResetGiongHunger();
         UpdateDayUI();
         LoadQuestForCurrentDay();
+        SharedQuestNetwork.PublishWorldState();
     }
 
     private void UpdateDayUI()
@@ -185,5 +199,20 @@ public class GameDayManager : MonoBehaviour
                 "Thánh Gióng đã sẵn sàng xuất trận!"
             );
         }
+    }
+
+    public void ApplySharedState(int day, float timeRemaining, bool running, bool transitioning)
+    {
+        currentDay = Mathf.Clamp(day, 1, maxDay);
+        remainingTime = Mathf.Clamp(timeRemaining, 0f, dayDuration);
+        isDayRunning = running;
+        isTransitioningDay = transitioning;
+        UpdateDayUI();
+    }
+
+    private static bool CanSimulateSharedWorld()
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        return manager == null || !manager.IsListening || manager.IsServer;
     }
 }

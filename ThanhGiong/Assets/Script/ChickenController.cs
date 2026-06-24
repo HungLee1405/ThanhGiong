@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
 public class ChickenController : MonoBehaviour
 {
@@ -38,13 +39,7 @@ public class ChickenController : MonoBehaviour
 
         questManager = FindFirstObjectByType<QuestManager>();
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-        {
-            player = playerObj.transform;
-            playerInventory = playerObj.GetComponent<PlayerInventory>();
-            playerHandController = playerObj.GetComponent<PlayerHandController>();
-        }
+        FindLocalPlayer();
     }
 
     private bool CanCatch()
@@ -64,6 +59,11 @@ public class ChickenController : MonoBehaviour
 
     private void HandleAI()
     {
+        if (player == null || !player.gameObject.activeInHierarchy)
+        {
+            FindLocalPlayer();
+        }
+
         if (player == null || agent == null || !agent.isOnNavMesh) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -106,6 +106,7 @@ public class ChickenController : MonoBehaviour
 
     private void HandleInteraction()
     {
+        if (PauseMenuManager.isPaused) return;
         if (Keyboard.current == null || isCaught) return;
 
         if (!playerInRange)
@@ -212,7 +213,7 @@ public class ChickenController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && IsLocalPlayer(other))
         {
             BindPlayer(other);
             playerInRange = true;
@@ -236,7 +237,7 @@ public class ChickenController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && IsLocalPlayer(other))
         {
             if (playerInventory == null || playerHandController == null)
             {
@@ -254,7 +255,7 @@ public class ChickenController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && IsLocalPlayer(other))
         {
             playerInRange = false;
             CancelCatching();
@@ -297,5 +298,34 @@ public class ChickenController : MonoBehaviour
             if (playerHandController == null) playerHandController = other.GetComponentInParent<PlayerHandController>();
             if (playerHandController == null) playerHandController = other.GetComponentInChildren<PlayerHandController>();
         }
+    }
+
+    private void FindLocalPlayer()
+    {
+        PlayerMovement[] players = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+
+        foreach (PlayerMovement movement in players)
+        {
+            if (movement == null || !movement.gameObject.activeInHierarchy)
+                continue;
+
+            NetworkManager manager = NetworkManager.Singleton;
+            if (manager != null && manager.IsListening && movement.IsSpawned && !movement.IsOwner)
+                continue;
+
+            player = movement.transform;
+            playerInventory = movement.GetComponent<PlayerInventory>();
+            playerHandController = movement.GetComponent<PlayerHandController>();
+            return;
+        }
+    }
+
+    private bool IsLocalPlayer(Collider other)
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        if (manager == null || !manager.IsListening) return true;
+
+        PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
+        return movement == null || !movement.IsSpawned || movement.IsOwner;
     }
 }

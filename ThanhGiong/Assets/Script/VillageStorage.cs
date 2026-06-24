@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public class VillageStorage : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class VillageStorage : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.isPaused) return;
         if (!playerInRange || playerHandController == null || UnityEngine.InputSystem.Keyboard.current == null) return;
 
         bool isPressingStore = UnityEngine.InputSystem.Keyboard.current.rKey.isPressed || UnityEngine.InputSystem.Keyboard.current.eKey.isPressed;
@@ -108,29 +110,17 @@ public class VillageStorage : MonoBehaviour
             return;
         }
 
-        int amountStored = 0;
-
-        switch (heldData.itemId)
-        {
-            case "iron_ore":
-                ironOreAmount++; amountStored = 1; break;
-            case "bamboo":
-                bambooAmount++; amountStored = 1; break;
-            case "water":
-                waterAmount++; amountStored = 1; break;
-            case "rice":
-                riceAmount++; amountStored = 1; break;
-            default:
-                CancelStoring();
-                return;
-        }
-
         if (playerHandController.TryConsumeHeldItem(1))
         {
             Debug.Log("Đã gửi " + heldData.itemName + " vào kho.");
-            
-            OnStorageChanged?.Invoke();
-            ReportQuestProgress(heldData.itemId, amountStored);
+
+            if (!SharedQuestNetwork.RequestStorageDeposit(heldData.itemId, 1))
+            {
+                ApplySharedDeposit(heldData.itemId, 1);
+                SharedQuestNetwork.PublishWorldState();
+            }
+
+            ReportQuestProgress(heldData.itemId, 1);
         }
 
         // Reset để phải nhấn giữ lại cho món tiếp theo
@@ -141,6 +131,32 @@ public class VillageStorage : MonoBehaviour
             interactionUI.SetProgress(0f);
             interactionUI.Show(interactionMessage);
         }
+    }
+
+    public bool ApplySharedDeposit(string itemId, int amount)
+    {
+        if (amount <= 0) return false;
+
+        switch (itemId)
+        {
+            case "iron_ore": ironOreAmount += amount; break;
+            case "bamboo": bambooAmount += amount; break;
+            case "water": waterAmount += amount; break;
+            case "rice": riceAmount += amount; break;
+            default: return false;
+        }
+
+        OnStorageChanged?.Invoke();
+        return true;
+    }
+
+    public void ApplySharedState(int iron, int bamboo, int water, int rice)
+    {
+        ironOreAmount = Mathf.Max(0, iron);
+        bambooAmount = Mathf.Max(0, bamboo);
+        waterAmount = Mathf.Max(0, water);
+        riceAmount = Mathf.Max(0, rice);
+        OnStorageChanged?.Invoke();
     }
 
     private void CancelStoring()
@@ -173,12 +189,33 @@ public class VillageStorage : MonoBehaviour
         else if (itemId == "bamboo") qm.AddProgress(QuestStepType.CollectBamboo, itemId, amount);
     }
     
+    // Kiểm tra xem collider có phải là local player không.
+    // Offline: chấp nhận mọi Player. Online: chỉ chấp nhận local owner.
+    private bool IsLocalPlayer(Collider other)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening) return true;
+
+        PlayerMovement movement = other.GetComponent<PlayerMovement>();
+        if (movement == null) movement = other.GetComponentInParent<PlayerMovement>();
+        if (movement == null) movement = other.GetComponentInChildren<PlayerMovement>();
+        if (movement != null && movement.IsSpawned) return movement.IsOwner;
+
+        PlayerHandController hand = other.GetComponent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInParent<PlayerHandController>();
+        if (hand == null) hand = other.GetComponentInChildren<PlayerHandController>();
+        if (hand != null && hand.IsSpawned) return hand.IsOwner;
+
+        return true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        
+        if (!IsLocalPlayer(other)) return;
+
         BindPlayer(other);
-        
+
         playerInRange = true;
         if (interactionUI != null) interactionUI.Show(interactionMessage);
     }
@@ -186,15 +223,15 @@ public class VillageStorage : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
 
-        // Sửa lỗi player lần đầu vào vùng nhưng component chưa được nhận dạng
         if (playerHandController == null || playerInventory == null)
         {
             BindPlayer(other);
         }
 
         playerInRange = true;
-        
+
         if (interactionUI != null && !isStoring)
         {
             interactionUI.Show(interactionMessage);
@@ -204,10 +241,12 @@ public class VillageStorage : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (!IsLocalPlayer(other)) return;
+
         playerInRange = false;
         playerHandController = null;
         playerInventory = null;
-        
+
         CancelStoring();
 
         if (interactionUI != null) interactionUI.Hide();

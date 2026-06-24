@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
+using Unity.Collections;
 
 public class PlayerHandController : NetworkBehaviour
 {
@@ -18,6 +19,24 @@ public class PlayerHandController : NetworkBehaviour
 
     private GameObject currentHandObject;
     private IItemReceiver currentReceiver;
+    private readonly NetworkVariable<FixedString64Bytes> networkHeldItemId = new NetworkVariable<FixedString64Bytes>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
+
+    public override void OnNetworkSpawn()
+    {
+        networkHeldItemId.OnValueChanged += OnNetworkHeldItemChanged;
+        if (!IsOwner)
+        {
+            ApplyHandVisual(FindItemData(networkHeldItemId.Value.ToString()));
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        networkHeldItemId.OnValueChanged -= OnNetworkHeldItemChanged;
+    }
 
     private void Start()
     {
@@ -51,6 +70,7 @@ public class PlayerHandController : NetworkBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.isPaused) return;
         if (!CanUseLocalInput()) return;
         if (NetworkPlayerAppearance.IsLocalSelectionOpen) return;
         if (CookingMenuUI.IsMenuOpen) return;
@@ -256,6 +276,17 @@ public class PlayerHandController : NetworkBehaviour
 
     private void RefreshHandVisual()
     {
+        ItemData itemData = selectedItem != null ? selectedItem.itemData : null;
+        ApplyHandVisual(itemData);
+
+        if (IsSpawned && IsOwner)
+        {
+            PublishHeldItemServerRpc(itemData != null ? itemData.itemId : "");
+        }
+    }
+
+    private void ApplyHandVisual(ItemData itemData)
+    {
         if (currentHandObject != null)
         {
             Destroy(currentHandObject);
@@ -263,13 +294,12 @@ public class PlayerHandController : NetworkBehaviour
 
         currentHandObject = null;
 
-        if (selectedItem == null) return;
-        if (selectedItem.itemData == null) return;
-        if (selectedItem.itemData.handPrefab == null) return;
+        if (itemData == null) return;
+        if (itemData.handPrefab == null) return;
         if (handPoint == null) return;
 
         currentHandObject = Instantiate(
-            selectedItem.itemData.handPrefab,
+            itemData.handPrefab,
             handPoint.position,
             handPoint.rotation,
             handPoint
@@ -277,6 +307,30 @@ public class PlayerHandController : NetworkBehaviour
 
         currentHandObject.transform.localPosition = Vector3.zero;
         currentHandObject.transform.localRotation = Quaternion.identity;
+    }
+
+    [ServerRpc]
+    private void PublishHeldItemServerRpc(string itemId)
+    {
+        networkHeldItemId.Value = itemId ?? "";
+    }
+
+    private void OnNetworkHeldItemChanged(FixedString64Bytes previous, FixedString64Bytes current)
+    {
+        if (IsOwner) return;
+        ApplyHandVisual(FindItemData(current.ToString()));
+    }
+
+    private static ItemData FindItemData(string itemId)
+    {
+        if (string.IsNullOrEmpty(itemId)) return null;
+
+        ItemData[] items = Resources.FindObjectsOfTypeAll<ItemData>();
+        foreach (ItemData item in items)
+        {
+            if (item != null && item.itemId == itemId) return item;
+        }
+        return null;
     }
 
     public void SetCurrentReceiver(IItemReceiver receiver)

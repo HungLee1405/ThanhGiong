@@ -103,9 +103,10 @@ public class CookingMenuUI : MonoBehaviour
         HideAllPanels();
         
         IsMenuOpen = false;
-        
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
+        bool keepCursor = PauseMenuManager.isPaused || NetworkLobbyCoordinator.IsOnlineLobbyActive;
+        Cursor.lockState = keepCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = keepCursor;
 
         currentPot = null;
         currentInventory = null;
@@ -113,7 +114,14 @@ public class CookingMenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (IsMenuOpen && UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (IsMenuOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        if (IsMenuOpen && UnityEngine.InputSystem.Keyboard.current != null
+            && UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             CloseMenu();
         }

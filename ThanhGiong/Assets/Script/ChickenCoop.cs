@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public class ChickenCoop : MonoBehaviour, IItemReceiver
 {
@@ -107,9 +108,28 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
 
     private void Update()
     {
+        RefreshSharedChickenCount();
+
         if (activePlayerHand != null)
         {
             UpdateInteractionUI(activePlayerHand);
+        }
+    }
+
+    private void RefreshSharedChickenCount()
+    {
+        if (questManager == null) questManager = FindFirstObjectByType<QuestManager>();
+        QuestStep step = questManager != null ? questManager.GetActiveStep(QuestStepType.CatchChicken) : null;
+        if (step == null || step.currentAmount <= chickenCount) return;
+
+        chickenCount = step.currentAmount;
+        if (chickenVisuals == null) return;
+        for (int i = 0; i < chickenVisuals.Length; i++)
+        {
+            if (chickenVisuals[i] != null)
+            {
+                chickenVisuals[i].SetActive(i < chickenCount);
+            }
         }
     }
 
@@ -171,6 +191,11 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
         PlayerHandController hand = other.GetComponent<PlayerHandController>();
         if (hand == null) hand = other.GetComponentInParent<PlayerHandController>();
         if (hand == null) hand = other.GetComponentInChildren<PlayerHandController>();
+
+        NetworkManager manager = NetworkManager.Singleton;
+        if (manager != null && manager.IsListening && hand != null && hand.IsSpawned && !hand.IsOwner)
+            return null;
+
         return hand;
     }
 

@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.isPaused) return;
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (!isTalking) return;
         if (Keyboard.current == null) return;

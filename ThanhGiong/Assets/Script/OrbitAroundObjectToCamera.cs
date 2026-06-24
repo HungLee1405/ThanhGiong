@@ -22,6 +22,11 @@ public class OrbitAroundObjectToCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (targetCamera == null || !targetCamera.isActiveAndEnabled)
+        {
+            targetCamera = Camera.main;
+        }
+
         if (targetObject == null || targetCamera == null) return;
 
         // Lấy hướng từ object tới camera

@@ -25,7 +25,9 @@ public class TrashBin : MonoBehaviour, IItemReceiver
     {
         if (!other.CompareTag("Player")) return;
 
-        BindPlayer(other);
+        PlayerHandController handController = GetPlayerHandController(other);
+        if (handController == null) return;
+        currentPlayerHand = handController;
 
         if (currentPlayerHand != null)
         {
@@ -42,10 +44,13 @@ public class TrashBin : MonoBehaviour, IItemReceiver
     {
         if (!other.CompareTag("Player")) return;
 
+        PlayerHandController handController = GetPlayerHandController(other);
+        if (handController == null) return;
+
         // Phòng trường hợp OnTriggerEnter bị miss hoặc chưa lấy được component.
         if (currentPlayerHand == null)
         {
-            BindPlayer(other);
+            currentPlayerHand = handController;
         }
 
         if (currentPlayerHand != null)
@@ -64,6 +69,7 @@ public class TrashBin : MonoBehaviour, IItemReceiver
         if (!other.CompareTag("Player")) return;
 
         PlayerHandController handController = GetPlayerHandController(other);
+        if (handController == null) return;
 
         if (handController != null)
         {
@@ -102,6 +108,13 @@ public class TrashBin : MonoBehaviour, IItemReceiver
         if (handController == null)
         {
             handController = other.GetComponentInChildren<PlayerHandController>();
+        }
+
+        Unity.Netcode.NetworkManager manager = Unity.Netcode.NetworkManager.Singleton;
+        if (manager != null && manager.IsListening && handController != null
+            && handController.IsSpawned && !handController.IsOwner)
+        {
+            return null;
         }
 
         return handController;

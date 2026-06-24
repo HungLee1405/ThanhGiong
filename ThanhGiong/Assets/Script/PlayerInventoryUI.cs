@@ -13,6 +13,14 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private void Start()
     {
+        // Khi online: luôn tìm lại local owner inventory, bỏ qua Inspector assign
+        // (Inspector có thể trỏ vào offline player bị tắt khi online)
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager != null && networkManager.IsListening)
+        {
+            playerInventory = null; // Reset để FindLocalPlayerInventory() tìm lại
+        }
+
         PlayerInventory inventoryToBind = playerInventory;
 
         if (playerInventory == null)
@@ -29,10 +37,13 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private void Update()
     {
-        if (playerInventory != null)
-            return;
-
-        BindInventory(FindLocalPlayerInventory());
+        // Bind lại nếu chưa có HOẶC đang trỏ vào object không active (offline player bị tắt)
+        if (playerInventory == null ||
+            (playerInventory.gameObject != null && !playerInventory.gameObject.activeInHierarchy))
+        {
+            playerInventory = null; // force rebind
+            BindInventory(FindLocalPlayerInventory());
+        }
     }
 
     private void OnDestroy()
@@ -100,29 +111,29 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private PlayerInventory FindLocalPlayerInventory()
     {
-        PlayerInventory[] inventories = FindObjectsByType<PlayerInventory>(FindObjectsSortMode.None);
         NetworkManager networkManager = NetworkManager.Singleton;
 
-        for (int i = 0; i < inventories.Length; i++)
+        // Online mode: t\u00ecm qua PlayerMovement l\u00e0 local owner
+        if (networkManager != null && networkManager.IsListening)
         {
-            if (inventories[i] == null) continue;
-
-            if (networkManager != null && networkManager.IsListening)
+            PlayerMovement[] movements = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+            foreach (PlayerMovement movement in movements)
             {
-                NetworkObject networkObject = inventories[i].GetComponent<NetworkObject>();
+                if (!movement.IsSpawned || !movement.IsOwner) continue;
 
-                if (networkObject != null && networkObject.IsOwner)
-                {
-                    return inventories[i];
-                }
-
-                continue;
+                PlayerInventory inv = movement.GetComponent<PlayerInventory>();
+                if (inv == null) inv = movement.GetComponentInChildren<PlayerInventory>();
+                if (inv != null) return inv;
             }
+            return null;
+        }
 
-            if (inventories[i].CompareTag("Player"))
-            {
-                return inventories[i];
-            }
+        // Offline mode: t\u00ecm qua tag "Player"
+        PlayerInventory[] inventories = FindObjectsByType<PlayerInventory>(FindObjectsSortMode.None);
+        foreach (PlayerInventory inventory in inventories)
+        {
+            if (inventory != null && inventory.gameObject.CompareTag("Player"))
+                return inventory;
         }
 
         return null;

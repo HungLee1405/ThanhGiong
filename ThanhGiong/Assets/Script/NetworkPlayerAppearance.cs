@@ -556,8 +556,9 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
     private void SetCursorForSelection(bool isSelecting)
     {
-        Cursor.lockState = isSelecting ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isSelecting;
+        bool needsCursor = isSelecting || CookingMenuUI.IsMenuOpen || PauseMenuManager.isPaused;
+        Cursor.lockState = needsCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = needsCursor;
     }
 
     private void DrawPlayerNameInput()
