@@ -1172,19 +1172,34 @@ MonoBehaviour:
   showSelectionPanel: 1
   tintSkinnedMeshOnly: 1
   useClothingOverlay: 1
-  visualGroundSink: 0.18
+  characterAnimatorController: {fileID: 9100000, guid: a0b8e35fc6c0d654b9465998bb915ebc, type: 2}
   footBoneGroundClearance: 0.035
+  maxGroundSnapUp: 0.35
+  maxGroundSnapDown: 4
+  maxGroundHitAbovePlayer: 0.65
   nameTagClearance: 0.14
-  redCharacterPrefab: {fileID: 919132149155446097, guid: ddf96bb9d88e5a749bb6e74b82f69b12, type: 3}
+  buildRedCharacterFromStaticMesh: 0
+  redStaticCharacterResourcePath: Characters/Do
+  redStaticCharacterEulerOffset: {x: 0, y: 0, z: 0}
+  redStaticCharacterGroundLift: 0.04
+  redCharacterPrefab: {fileID: 919132149155446097, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
   redCharacterMaterial: {fileID: 2100000, guid: 32436f48adf88d24f8b85f54f6c93f71, type: 2}
+  redCharacterAvatar: {fileID: 9000000, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
+  blueCharacterPrefab: {fileID: 919132149155446097, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
+  blueCharacterMaterial: {fileID: 2100000, guid: c2a4a91f3e39404488fb5e7f34b7f52a, type: 2}
+  blueCharacterAvatar: {fileID: 9000000, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
   greenCharacterPrefab: {fileID: 919132149155446097, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
   greenCharacterMaterial: {fileID: 2100000, guid: 97e38916b7ce47b43be163b2309daf8a, type: 2}
+  greenCharacterAvatar: {fileID: 9000000, guid: 95312e64fafc4c36a904beaf1486774e, type: 3}
   purpleCharacterPrefab: {fileID: 919132149155446097, guid: 58b20c43e4b4ee540800ff799bfd9a43, type: 3}
   purpleCharacterMaterial: {fileID: 2100000, guid: d8a83d46f0951dc41a696dc4dddd6816, type: 2}
+  purpleCharacterAvatar: {fileID: 9000000, guid: 58b20c43e4b4ee540800ff799bfd9a43, type: 3}
   brownCharacterPrefab: {fileID: 919132149155446097, guid: 47e34f653682eb745948be73c3205adc, type: 3}
   brownCharacterMaterial: {fileID: 2100000, guid: ebfce6348cd9dfb4b8fce6fd188fefa2, type: 2}
+  brownCharacterAvatar: {fileID: 9000000, guid: 47e34f653682eb745948be73c3205adc, type: 3}
   yellowCharacterPrefab: {fileID: 919132149155446097, guid: 41ad43f31277feb4d838c6d9d9f98c71, type: 3}
   yellowCharacterMaterial: {fileID: 2100000, guid: a85a00d03a761aa43b48f2a04407da7b, type: 2}
+  yellowCharacterAvatar: {fileID: 9000000, guid: 41ad43f31277feb4d838c6d9d9f98c71, type: 3}
 --- !u!1 &5323214172659039573
 GameObject:
   m_ObjectHideFlags: 0

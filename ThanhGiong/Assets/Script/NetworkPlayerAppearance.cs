@@ -51,19 +51,34 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     public bool showSelectionPanel = true;
     public bool tintSkinnedMeshOnly = true;
     public bool useClothingOverlay = true;
-    [SerializeField] private float visualGroundSink = 0.18f;
+    [SerializeField] private RuntimeAnimatorController characterAnimatorController;
     [SerializeField] private float footBoneGroundClearance = 0.035f;
+    [SerializeField] private float maxGroundSnapUp = 0.35f;
+    [SerializeField] private float maxGroundSnapDown = 4f;
+    [SerializeField] private float maxGroundHitAbovePlayer = 0.65f;
     [SerializeField] private float nameTagClearance = 0.14f;
+    [SerializeField] private bool buildRedCharacterFromStaticMesh;
+    [SerializeField] private string redStaticCharacterResourcePath = "Characters/Do";
+    [SerializeField] private Vector3 redStaticCharacterEulerOffset = Vector3.zero;
+    [SerializeField] private float redStaticCharacterGroundLift = 0.04f;
     [SerializeField] private GameObject redCharacterPrefab;
     [SerializeField] private Material redCharacterMaterial;
+    [SerializeField] private Avatar redCharacterAvatar;
+    [SerializeField] private GameObject blueCharacterPrefab;
+    [SerializeField] private Material blueCharacterMaterial;
+    [SerializeField] private Avatar blueCharacterAvatar;
     [SerializeField] private GameObject greenCharacterPrefab;
     [SerializeField] private Material greenCharacterMaterial;
+    [SerializeField] private Avatar greenCharacterAvatar;
     [SerializeField] private GameObject purpleCharacterPrefab;
     [SerializeField] private Material purpleCharacterMaterial;
+    [SerializeField] private Avatar purpleCharacterAvatar;
     [SerializeField] private GameObject brownCharacterPrefab;
     [SerializeField] private Material brownCharacterMaterial;
+    [SerializeField] private Avatar brownCharacterAvatar;
     [SerializeField] private GameObject yellowCharacterPrefab;
     [SerializeField] private Material yellowCharacterMaterial;
+    [SerializeField] private Avatar yellowCharacterAvatar;
 
     private const int RedCharacterIndex = 0;
     private const int GreenCharacterIndex = 2;
@@ -75,6 +90,8 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private Transform defaultVisualModelRoot;
     private Transform visualModelRoot;
     private GameObject redCharacterInstance;
+    private Transform redStaticVisualRoot;
+    private GameObject blueCharacterInstance;
     private GameObject greenCharacterInstance;
     private GameObject purpleCharacterInstance;
     private GameObject brownCharacterInstance;
@@ -111,12 +128,15 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private Texture2D blackTexture;
     private Texture2D[] characterPortraits;
     private int appliedColorIndex;
+    private float nextGroundSnapTime;
+    private readonly Dictionary<Transform, Vector3> visualBaseLocalPositions = new Dictionary<Transform, Vector3>();
 
     private void Awake()
     {
         renderers = GetComponentsInChildren<Renderer>(true);
         defaultVisualModelRoot = transform.Find("Idle");
         visualModelRoot = defaultVisualModelRoot;
+        RememberVisualBasePosition(defaultVisualModelRoot);
         RefreshVisualReferences();
         LoadCharacterPortraits();
 
@@ -186,10 +206,19 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if (!IsSpawned || !IsOwner)
+        if (!IsSpawned)
             return;
 
-        SetCursorForSelection(NetworkLobbyCoordinator.IsOnlineLobbyActive);
+        if (NetworkLobbyCoordinator.MatchStarted && Time.unscaledTime >= nextGroundSnapTime)
+        {
+            nextGroundSnapTime = Time.unscaledTime + 0.5f;
+            ApplyVisualGroundSnap();
+        }
+
+        if (IsOwner)
+        {
+            SetCursorForSelection(NetworkLobbyCoordinator.IsOnlineLobbyActive);
+        }
     }
 
     private void OnGUI()
@@ -484,21 +513,19 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         if (visualModelRoot == null || !GetVisualModelBounds(out Bounds modelBounds))
             return;
 
-        Vector3 rayOrigin = transform.position + Vector3.up * 20f;
-
-        if (!Physics.Raycast(
-            rayOrigin,
-            Vector3.down,
-            out RaycastHit hit,
-            50f,
-            1 << 3,
-            QueryTriggerInteraction.Ignore))
+        if (!TryFindGroundBelowPlayer(out RaycastHit hit))
         {
             return;
         }
 
+        Vector3 baseLocalPosition = GetVisualBaseLocalPosition(visualModelRoot);
+        visualModelRoot.localPosition = baseLocalPosition;
+
+        if (!GetVisualModelBounds(out modelBounds))
+            return;
+
         float visualFootY = modelBounds.min.y;
-        float desiredFootY = hit.point.y - visualGroundSink;
+        float desiredFootY = hit.point.y + footBoneGroundClearance;
 
         if (leftToeBone != null || rightToeBone != null)
         {
@@ -506,19 +533,97 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
             if (leftToeBone != null) visualFootY = Mathf.Min(visualFootY, leftToeBone.position.y);
             if (rightToeBone != null) visualFootY = Mathf.Min(visualFootY, rightToeBone.position.y);
+            visualFootY = Mathf.Min(visualFootY, modelBounds.min.y);
 
             desiredFootY = hit.point.y + footBoneGroundClearance;
         }
 
         float worldCorrection = desiredFootY - visualFootY;
 
-        if (Mathf.Abs(worldCorrection) > 2f)
+        if (worldCorrection > maxGroundSnapUp || worldCorrection < -maxGroundSnapDown)
             return;
 
         Transform parent = visualModelRoot.parent;
         float parentScaleY = parent != null ? Mathf.Abs(parent.lossyScale.y) : 1f;
         parentScaleY = Mathf.Max(parentScaleY, 0.0001f);
-        visualModelRoot.localPosition += Vector3.up * (worldCorrection / parentScaleY);
+        visualModelRoot.localPosition = baseLocalPosition + Vector3.up * (worldCorrection / parentScaleY);
+    }
+
+    private void RememberVisualBasePosition(Transform visualRoot)
+    {
+        if (visualRoot == null)
+            return;
+
+        visualBaseLocalPositions[visualRoot] = visualRoot.localPosition;
+    }
+
+    private Vector3 GetVisualBaseLocalPosition(Transform visualRoot)
+    {
+        if (visualRoot != null && visualBaseLocalPositions.TryGetValue(visualRoot, out Vector3 basePosition))
+        {
+            return basePosition;
+        }
+
+        return visualRoot != null ? visualRoot.localPosition : Vector3.zero;
+    }
+
+    private bool TryFindGroundBelowPlayer(out RaycastHit result)
+    {
+        result = default;
+        Vector3 rayOrigin = transform.position + Vector3.up * 1.5f;
+        const float rayDistance = 8f;
+        bool found = false;
+        float bestY = float.NegativeInfinity;
+
+        if (Physics.Raycast(
+            rayOrigin,
+            Vector3.down,
+            out RaycastHit layerGroundHit,
+            rayDistance,
+            1 << 3,
+            QueryTriggerInteraction.Ignore))
+        {
+            if (IsUsableGroundHit(layerGroundHit, ref bestY))
+            {
+                result = layerGroundHit;
+                found = true;
+            }
+        }
+
+        RaycastHit[] hits = Physics.RaycastAll(
+            rayOrigin,
+            Vector3.down,
+            rayDistance,
+            Physics.DefaultRaycastLayers,
+            QueryTriggerInteraction.Ignore);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (!IsUsableGroundHit(hits[i], ref bestY))
+                continue;
+
+            result = hits[i];
+            found = true;
+        }
+
+        return found;
+    }
+
+    private bool IsUsableGroundHit(RaycastHit hit, ref float bestY)
+    {
+        if (hit.collider == null)
+            return false;
+
+        float maxAllowedY = transform.position.y + maxGroundHitAbovePlayer;
+
+        if (hit.point.y > maxAllowedY)
+            return false;
+
+        if (hit.point.y <= bestY)
+            return false;
+
+        bestY = hit.point.y;
+        return true;
     }
 
     private void OnMatchStarted()
@@ -542,7 +647,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         {
             Renderer targetRenderer = visualModelRenderers[i];
 
-            if (targetRenderer == null || targetRenderer is ParticleSystemRenderer)
+            if (targetRenderer == null || targetRenderer is ParticleSystemRenderer || targetRenderer.forceRenderingOff)
                 continue;
 
             if (!hasBounds)
@@ -748,6 +853,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private bool ApplyCharacterVariant(int index)
     {
         bool useRedCharacter = index == RedCharacterIndex && redCharacterPrefab != null;
+        bool useBlueCharacter = index == DefaultUntintedCharacterIndex && blueCharacterPrefab != null;
         bool useGreenCharacter = index == GreenCharacterIndex && greenCharacterPrefab != null;
         bool usePurpleCharacter = index == PurpleCharacterIndex && purpleCharacterPrefab != null;
         bool useBrownCharacter = index == BrownCharacterIndex && brownCharacterPrefab != null;
@@ -756,35 +862,41 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         if (useRedCharacter)
         {
             EnsureRedCharacterInstance();
-            useRedCharacter = redCharacterInstance != null;
+            useRedCharacter = IsCharacterInstanceUsable(redCharacterInstance);
+        }
+
+        if (useBlueCharacter)
+        {
+            EnsureBlueCharacterInstance();
+            useBlueCharacter = IsCharacterInstanceUsable(blueCharacterInstance);
         }
 
         if (useGreenCharacter)
         {
             EnsureGreenCharacterInstance();
-            useGreenCharacter = greenCharacterInstance != null;
+            useGreenCharacter = IsCharacterInstanceUsable(greenCharacterInstance);
         }
 
         if (usePurpleCharacter)
         {
             EnsurePurpleCharacterInstance();
-            usePurpleCharacter = purpleCharacterInstance != null;
+            usePurpleCharacter = IsCharacterInstanceUsable(purpleCharacterInstance);
         }
 
         if (useBrownCharacter)
         {
             EnsureBrownCharacterInstance();
-            useBrownCharacter = brownCharacterInstance != null;
+            useBrownCharacter = IsCharacterInstanceUsable(brownCharacterInstance);
         }
 
         if (useYellowCharacter)
         {
             EnsureYellowCharacterInstance();
-            useYellowCharacter = yellowCharacterInstance != null;
+            useYellowCharacter = IsCharacterInstanceUsable(yellowCharacterInstance);
         }
 
         bool useCustomCharacter =
-            useRedCharacter || useGreenCharacter || usePurpleCharacter ||
+            useRedCharacter || useBlueCharacter || useGreenCharacter || usePurpleCharacter ||
             useBrownCharacter || useYellowCharacter;
 
         if (defaultVisualModelRoot != null)
@@ -795,6 +907,11 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         if (redCharacterInstance != null)
         {
             redCharacterInstance.SetActive(useRedCharacter);
+        }
+
+        if (blueCharacterInstance != null)
+        {
+            blueCharacterInstance.SetActive(useBlueCharacter);
         }
 
         if (greenCharacterInstance != null)
@@ -819,21 +936,22 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
         visualModelRoot = useRedCharacter
             ? redCharacterInstance.transform
-            : useGreenCharacter
-                ? greenCharacterInstance.transform
-                : usePurpleCharacter
-                    ? purpleCharacterInstance.transform
-                    : useBrownCharacter
-                        ? brownCharacterInstance.transform
-                        : useYellowCharacter
-                            ? yellowCharacterInstance.transform
-                            : defaultVisualModelRoot;
+            : useBlueCharacter
+                ? blueCharacterInstance.transform
+                : useGreenCharacter
+                    ? greenCharacterInstance.transform
+                    : usePurpleCharacter
+                        ? purpleCharacterInstance.transform
+                        : useBrownCharacter
+                            ? brownCharacterInstance.transform
+                            : useYellowCharacter
+                                ? yellowCharacterInstance.transform
+                                : defaultVisualModelRoot;
         BindMovementAnimatorToCurrentModel();
         RefreshVisualReferences();
         renderers = GetComponentsInChildren<Renderer>(true);
         SetClothingOverlayVisible(
             !useCustomCharacter &&
-            index != DefaultUntintedCharacterIndex &&
             (!IsSpawned || !IsOwner));
 
         return useCustomCharacter;
@@ -860,15 +978,71 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             visualModelRoot);
     }
 
+    private bool IsCharacterInstanceUsable(GameObject instance)
+    {
+        if (instance == null)
+            return false;
+
+        Animator animator = instance.GetComponentInChildren<Animator>(true);
+        Avatar activeAvatar = animator != null ? animator.avatar : null;
+
+        if (activeAvatar == null || !activeAvatar.isValid || !activeAvatar.isHuman)
+        {
+            Avatar fallbackAvatar = GetSharedHumanoidAvatar();
+
+            if (animator != null && fallbackAvatar != null)
+            {
+                animator.avatar = fallbackAvatar;
+                activeAvatar = animator.avatar;
+            }
+        }
+
+        if (activeAvatar == null || !activeAvatar.isValid || !activeAvatar.isHuman)
+        {
+            Debug.LogWarning(
+                $"Character variant '{instance.name}' has no valid humanoid Avatar. Falling back to the default character visual so it does not appear broken in multiplayer.",
+                instance);
+            return false;
+        }
+
+        return true;
+    }
+
     private void EnsureRedCharacterInstance()
     {
-        if (redCharacterInstance != null || redCharacterPrefab == null)
+        if (redCharacterInstance != null)
+            return;
+
+        redStaticVisualRoot = null;
+
+        if (buildRedCharacterFromStaticMesh)
+        {
+            redCharacterInstance = CreateRiggedStaticRedCharacterInstance();
+
+            if (redCharacterInstance != null)
+                return;
+        }
+
+        if (redCharacterPrefab == null)
             return;
 
         redCharacterInstance = CreateCharacterInstance(
             redCharacterPrefab,
             redCharacterMaterial,
+            redCharacterAvatar,
             "Red Character Model");
+    }
+
+    private void EnsureBlueCharacterInstance()
+    {
+        if (blueCharacterInstance != null || blueCharacterPrefab == null)
+            return;
+
+        blueCharacterInstance = CreateCharacterInstance(
+            blueCharacterPrefab,
+            blueCharacterMaterial,
+            blueCharacterAvatar,
+            "Blue Character Model");
     }
 
     private void EnsureGreenCharacterInstance()
@@ -879,6 +1053,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         greenCharacterInstance = CreateCharacterInstance(
             greenCharacterPrefab,
             greenCharacterMaterial,
+            greenCharacterAvatar,
             "Green Character Model");
     }
 
@@ -890,6 +1065,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         yellowCharacterInstance = CreateCharacterInstance(
             yellowCharacterPrefab,
             yellowCharacterMaterial,
+            yellowCharacterAvatar,
             "Yellow Character Model");
     }
 
@@ -901,6 +1077,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         brownCharacterInstance = CreateCharacterInstance(
             brownCharacterPrefab,
             brownCharacterMaterial,
+            brownCharacterAvatar,
             "Brown Character Model");
     }
 
@@ -912,10 +1089,213 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         purpleCharacterInstance = CreateCharacterInstance(
             purpleCharacterPrefab,
             purpleCharacterMaterial,
+            purpleCharacterAvatar,
             "Purple Character Model");
     }
 
-    private GameObject CreateCharacterInstance(GameObject characterPrefab, Material characterMaterial, string instanceName)
+    private GameObject CreateRiggedStaticRedCharacterInstance()
+    {
+        if (redCharacterPrefab == null)
+            return null;
+
+        GameObject staticSourcePrefab = Resources.Load<GameObject>(redStaticCharacterResourcePath);
+
+        if (staticSourcePrefab == null)
+        {
+            Debug.LogWarning(
+                $"Could not load red character mesh resource '{redStaticCharacterResourcePath}'. Falling back to the assigned red character prefab.",
+                this);
+            return null;
+        }
+
+        GameObject instance = Instantiate(redCharacterPrefab, transform);
+        instance.name = "Red GLB Character Model";
+        Transform instanceTransform = instance.transform;
+        instanceTransform.localPosition = Vector3.zero;
+        instanceTransform.localRotation = Quaternion.identity;
+        instanceTransform.localScale = Vector3.one;
+
+        EnsureCharacterAnimator(instance, redCharacterAvatar);
+
+        if (!BuildStaticMeshCharacter(instanceTransform, staticSourcePrefab, redCharacterMaterial))
+        {
+            redStaticVisualRoot = null;
+            Destroy(instance);
+            return null;
+        }
+
+        MatchVariantToDefaultModel(instanceTransform);
+        RememberVisualBasePosition(instanceTransform);
+        return instance;
+    }
+
+    private bool BuildStaticMeshCharacter(Transform rigRoot, GameObject staticSourcePrefab, Material fallbackMaterial)
+    {
+        if (rigRoot == null || staticSourcePrefab == null)
+            return false;
+
+        Bounds targetBounds;
+        bool hasTargetBounds = GetHierarchyBoundsInPlayerSpace(rigRoot, out targetBounds);
+
+        Renderer[] rigRenderers = rigRoot.GetComponentsInChildren<Renderer>(true);
+
+        for (int i = 0; i < rigRenderers.Length; i++)
+        {
+            if (rigRenderers[i] != null && rigRenderers[i] is not ParticleSystemRenderer)
+            {
+                rigRenderers[i].forceRenderingOff = true;
+                rigRenderers[i].enabled = false;
+            }
+        }
+
+        GameObject sourceInstance = Instantiate(staticSourcePrefab, rigRoot);
+        sourceInstance.name = "Red GLB Source";
+        Transform sourceTransform = sourceInstance.transform;
+        redStaticVisualRoot = sourceTransform;
+        sourceTransform.localPosition = Vector3.zero;
+        sourceTransform.localRotation = Quaternion.Euler(redStaticCharacterEulerOffset);
+        sourceTransform.localScale = Vector3.one;
+
+        AutoOrientStaticCharacter(sourceTransform);
+
+        if (hasTargetBounds && GetHierarchyBoundsInPlayerSpace(sourceTransform, out Bounds sourceBounds) &&
+            sourceBounds.size.y > 0.0001f)
+        {
+            float uniformScale = targetBounds.size.y / sourceBounds.size.y;
+            sourceTransform.localScale = Vector3.one * uniformScale;
+
+            if (GetHierarchyBoundsInPlayerSpace(sourceTransform, out sourceBounds))
+            {
+                sourceTransform.localPosition += new Vector3(
+                    targetBounds.center.x - sourceBounds.center.x,
+                    targetBounds.min.y - sourceBounds.min.y + redStaticCharacterGroundLift,
+                    targetBounds.center.z - sourceBounds.center.z);
+            }
+        }
+
+        Renderer[] sourceRenderers = sourceInstance.GetComponentsInChildren<Renderer>(true);
+
+        if (sourceRenderers.Length == 0)
+        {
+            Debug.LogWarning("The red GLB source has no renderable meshes, so the generated red multiplayer character was not created.", this);
+            Destroy(sourceInstance);
+            return false;
+        }
+
+        sourceInstance.name = "Red GLB Visual";
+
+        for (int i = 0; i < sourceRenderers.Length; i++)
+        {
+            Renderer sourceRenderer = sourceRenderers[i];
+
+            if (sourceRenderer == null || sourceRenderer is ParticleSystemRenderer)
+                continue;
+
+            if (fallbackMaterial != null)
+            {
+                Material[] materials = sourceRenderer.sharedMaterials;
+
+                if (materials == null || materials.Length == 0)
+                {
+                    materials = new[] { fallbackMaterial };
+                }
+                else
+                {
+                    for (int materialIndex = 0; materialIndex < materials.Length; materialIndex++)
+                    {
+                        materials[materialIndex] = fallbackMaterial;
+                    }
+                }
+
+                sourceRenderer.sharedMaterials = materials;
+            }
+
+            sourceRenderer.forceRenderingOff = false;
+            sourceRenderer.enabled = true;
+        }
+
+        Animator[] sourceAnimators = sourceInstance.GetComponentsInChildren<Animator>(true);
+
+        for (int i = 0; i < sourceAnimators.Length; i++)
+        {
+            if (sourceAnimators[i] != null)
+            {
+                sourceAnimators[i].enabled = false;
+            }
+        }
+
+        Collider[] sourceColliders = sourceInstance.GetComponentsInChildren<Collider>(true);
+
+        for (int i = 0; i < sourceColliders.Length; i++)
+        {
+            if (sourceColliders[i] != null)
+            {
+                sourceColliders[i].enabled = false;
+            }
+        }
+
+        return true;
+    }
+
+    private void AutoOrientStaticCharacter(Transform sourceTransform)
+    {
+        if (sourceTransform == null)
+            return;
+
+        Quaternion baseRotation = sourceTransform.localRotation;
+        Quaternion[] candidateRotations =
+        {
+            baseRotation,
+            baseRotation * Quaternion.Euler(90f, 0f, 0f),
+            baseRotation * Quaternion.Euler(-90f, 0f, 0f),
+            baseRotation * Quaternion.Euler(0f, 90f, 0f),
+            baseRotation * Quaternion.Euler(0f, -90f, 0f),
+            baseRotation * Quaternion.Euler(0f, 0f, 90f),
+            baseRotation * Quaternion.Euler(0f, 0f, -90f),
+            baseRotation * Quaternion.Euler(90f, 0f, 90f),
+            baseRotation * Quaternion.Euler(-90f, 0f, 90f),
+            baseRotation * Quaternion.Euler(90f, 90f, 0f),
+            baseRotation * Quaternion.Euler(-90f, 90f, 0f),
+        };
+
+        Quaternion bestRotation = baseRotation;
+        Vector3 bestEuler = sourceTransform.localEulerAngles;
+        float bestScore = float.NegativeInfinity;
+
+        for (int i = 0; i < candidateRotations.Length; i++)
+        {
+            sourceTransform.localRotation = candidateRotations[i];
+
+            if (!GetHierarchyBoundsInPlayerSpace(sourceTransform, out Bounds bounds) ||
+                bounds.size.y <= 0.0001f)
+            {
+                continue;
+            }
+
+            float horizontalSize = Mathf.Max(bounds.size.x, bounds.size.z, 0.0001f);
+            float uprightRatio = bounds.size.y / horizontalSize;
+            float score = bounds.size.y + uprightRatio * 0.5f;
+
+            if (score > bestScore)
+            {
+                bestScore = score;
+                bestRotation = candidateRotations[i];
+                bestEuler = sourceTransform.localEulerAngles;
+            }
+        }
+
+        sourceTransform.localRotation = bestRotation;
+
+        Debug.Log(
+            $"Red GLB auto-orient selected local Euler {bestEuler} with score {bestScore:0.###}.",
+            sourceTransform);
+    }
+
+    private GameObject CreateCharacterInstance(
+        GameObject characterPrefab,
+        Material characterMaterial,
+        Avatar characterAvatar,
+        string instanceName)
     {
         GameObject instance = Instantiate(characterPrefab, transform);
         instance.name = instanceName;
@@ -924,10 +1304,74 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         instanceTransform.localRotation = Quaternion.identity;
         instanceTransform.localScale = Vector3.one;
 
+        EnsureCharacterAnimator(instance, characterAvatar);
         ApplyCharacterMaterial(instanceTransform, characterMaterial);
         MatchVariantToDefaultModel(instanceTransform);
+        RememberVisualBasePosition(instanceTransform);
 
         return instance;
+    }
+
+    private void EnsureCharacterAnimator(GameObject instance, Avatar characterAvatar)
+    {
+        if (instance == null)
+            return;
+
+        Animator animator = instance.GetComponentInChildren<Animator>(true);
+
+        if (animator == null)
+        {
+            animator = instance.AddComponent<Animator>();
+        }
+
+        if (characterAvatar != null)
+        {
+            animator.avatar = characterAvatar;
+        }
+
+        if ((animator.avatar == null || !animator.avatar.isValid || !animator.avatar.isHuman) &&
+            GetSharedHumanoidAvatar() != null)
+        {
+            animator.avatar = GetSharedHumanoidAvatar();
+        }
+
+        if (characterAnimatorController != null)
+        {
+            animator.runtimeAnimatorController = characterAnimatorController;
+        }
+
+        animator.enabled = true;
+        animator.applyRootMotion = false;
+        animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        animator.Rebind();
+
+        if (animator.gameObject.activeInHierarchy)
+        {
+            animator.Update(0f);
+        }
+    }
+
+    private Avatar GetSharedHumanoidAvatar()
+    {
+        if (blueCharacterAvatar != null && blueCharacterAvatar.isValid && blueCharacterAvatar.isHuman)
+            return blueCharacterAvatar;
+
+        if (greenCharacterAvatar != null && greenCharacterAvatar.isValid && greenCharacterAvatar.isHuman)
+            return greenCharacterAvatar;
+
+        if (redCharacterAvatar != null && redCharacterAvatar.isValid && redCharacterAvatar.isHuman)
+            return redCharacterAvatar;
+
+        if (purpleCharacterAvatar != null && purpleCharacterAvatar.isValid && purpleCharacterAvatar.isHuman)
+            return purpleCharacterAvatar;
+
+        if (brownCharacterAvatar != null && brownCharacterAvatar.isValid && brownCharacterAvatar.isHuman)
+            return brownCharacterAvatar;
+
+        if (yellowCharacterAvatar != null && yellowCharacterAvatar.isValid && yellowCharacterAvatar.isHuman)
+            return yellowCharacterAvatar;
+
+        return null;
     }
 
     private void ApplyCharacterMaterial(Transform characterRoot, Material characterMaterial)
@@ -1067,6 +1511,21 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             else if (modelBones[i].name == "mixamorig:LeftToeBase") leftToeBone = modelBones[i];
             else if (modelBones[i].name == "mixamorig:RightToeBase") rightToeBone = modelBones[i];
         }
+
+        if (IsUsingRedStaticVisual())
+        {
+            headTopBone = null;
+            leftToeBone = null;
+            rightToeBone = null;
+        }
+    }
+
+    private bool IsUsingRedStaticVisual()
+    {
+        return redCharacterInstance != null &&
+            redCharacterInstance.activeSelf &&
+            redStaticVisualRoot != null &&
+            redStaticVisualRoot.IsChildOf(redCharacterInstance.transform);
     }
 
     private void ApplyOwnerVisibility()
@@ -1088,6 +1547,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
         bool isUsingCustomCharacter =
             (redCharacterInstance != null && redCharacterInstance.activeSelf) ||
+            (blueCharacterInstance != null && blueCharacterInstance.activeSelf) ||
             (greenCharacterInstance != null && greenCharacterInstance.activeSelf) ||
             (purpleCharacterInstance != null && purpleCharacterInstance.activeSelf) ||
             (brownCharacterInstance != null && brownCharacterInstance.activeSelf) ||

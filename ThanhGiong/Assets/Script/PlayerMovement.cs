@@ -41,6 +41,7 @@ public class PlayerMovement : NetworkBehaviour
     private float lastGroundedTime;
     private float cameraPitch;
     private Vector3 lastObservedPosition;
+    private bool externallyBoundAnimator;
 
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
     private static readonly int IsRunningHash = Animator.StringToHash("IsRunning");
@@ -243,13 +244,14 @@ public class PlayerMovement : NetworkBehaviour
             characterAnimator = GetComponentInChildren<Animator>(true);
         }
 
-        ConfigureAnimator(true);
+        ConfigureAnimator(!externallyBoundAnimator);
     }
 
     public void BindCharacterAnimator(Animator animator)
     {
         if (animator == null) return;
         characterAnimator = animator;
+        externallyBoundAnimator = true;
         ConfigureAnimator(false);
     }
 
@@ -263,6 +265,7 @@ public class PlayerMovement : NetworkBehaviour
         if (avatar != null && allowSerializedAvatar)
             characterAnimator.avatar = avatar;
 
+        characterAnimator.enabled = true;
         characterAnimator.applyRootMotion = false;
         characterAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
         characterAnimator.Rebind();

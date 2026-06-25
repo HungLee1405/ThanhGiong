@@ -1,6 +1,7 @@
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class SharedQuestNetwork : MonoBehaviour
@@ -11,6 +12,7 @@ public class SharedQuestNetwork : MonoBehaviour
     private const string StorageMessage = "ThanhGiongStorageDeposit";
     private const string FeedMessage = "ThanhGiongFeed";
     private const string WorldStateMessage = "ThanhGiongWorldState";
+    private const string EndingSceneMessage = "ThanhGiongEndingScene";
 
     private static SharedQuestNetwork instance;
     private NetworkManager manager;
@@ -55,6 +57,7 @@ public class SharedQuestNetwork : MonoBehaviour
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(StorageMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(FeedMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(WorldStateMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(EndingSceneMessage);
             manager.OnClientConnectedCallback -= OnClientConnected;
         }
 
@@ -204,6 +207,37 @@ public class SharedQuestNetwork : MonoBehaviour
         }
     }
 
+    public static void LoadEndingSceneForAll(string sceneName)
+    {
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return;
+
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+        {
+            LoadEndingSceneLocal(sceneName);
+            return;
+        }
+
+        if (!networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        foreach (ulong clientId in networkManager.ConnectedClientsIds)
+        {
+            if (clientId == networkManager.LocalClientId)
+                continue;
+
+            using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+            writer.WriteValueSafe(sceneName);
+            networkManager.CustomMessagingManager.SendNamedMessage(EndingSceneMessage, clientId, writer);
+        }
+
+        LoadEndingSceneLocal(sceneName);
+    }
+
     private void RegisterMessages(NetworkManager networkManager)
     {
         if (networkManager == null || networkManager.CustomMessagingManager == null)
@@ -216,12 +250,14 @@ public class SharedQuestNetwork : MonoBehaviour
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(StorageMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(FeedMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(WorldStateMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(EndingSceneMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ProgressMessage, OnProgressMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StateMessage, OnStateMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(RewardMessage, OnRewardMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StorageMessage, OnStorageMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(FeedMessage, OnFeedMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(WorldStateMessage, OnWorldStateMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(EndingSceneMessage, OnEndingSceneMessage);
         networkManager.OnClientConnectedCallback -= OnClientConnected;
         networkManager.OnClientConnectedCallback += OnClientConnected;
         messagesRegistered = true;
@@ -335,6 +371,23 @@ public class SharedQuestNetwork : MonoBehaviour
         FindFirstObjectByType<VillageStorage>()?.ApplySharedState(iron, bamboo, water, rice);
         FindFirstObjectByType<GiongHunger>()?.ApplySharedState(hungerValue, hungerRunning);
         FindFirstObjectByType<GameDayManager>()?.ApplySharedState(dayValue, remainingTime, dayRunning, dayTransitioning);
+    }
+
+    private void OnEndingSceneMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string sceneName);
+        LoadEndingSceneLocal(sceneName);
+    }
+
+    private static void LoadEndingSceneLocal(string sceneName)
+    {
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return;
+
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     private void QueueReward(string itemId, int amount)

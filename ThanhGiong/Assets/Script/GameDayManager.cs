@@ -17,6 +17,10 @@ public class GameDayManager : MonoBehaviour
     [Header("Transition")]
     public DayTransitionUI dayTransitionUI;
 
+    [Header("Ending")]
+    [SerializeField] private string endingSceneName = "EndingScene";
+    [SerializeField] private float endingSceneDelay = 1.5f;
+
     [Header("References")]
     public PlayerHubUI playerHubUI;
     public QuestManager questManager;
@@ -24,6 +28,7 @@ public class GameDayManager : MonoBehaviour
 
     private bool hasStartedCountdownThisDay = false;
     private float networkSyncTimer;
+    private bool endingStarted;
 
     private void Start()
     {
@@ -187,6 +192,10 @@ public class GameDayManager : MonoBehaviour
 
     private void FinishGame()
     {
+        if (endingStarted)
+            return;
+
+        endingStarted = true;
         Debug.Log("Game finished after Day " + maxDay);
 
         isDayRunning = false;
@@ -199,6 +208,18 @@ public class GameDayManager : MonoBehaviour
                 "Thánh Gióng đã sẵn sàng xuất trận!"
             );
         }
+
+        StartCoroutine(LoadEndingSceneRoutine());
+    }
+
+    private IEnumerator LoadEndingSceneRoutine()
+    {
+        if (endingSceneDelay > 0f)
+        {
+            yield return new WaitForSecondsRealtime(endingSceneDelay);
+        }
+
+        SharedQuestNetwork.LoadEndingSceneForAll(endingSceneName);
     }
 
     public void ApplySharedState(int day, float timeRemaining, bool running, bool transitioning)
