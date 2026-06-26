@@ -22,7 +22,6 @@ public class EndingVideoPlayer : MonoBehaviour
     private AspectRatioFitter videoAspectFitter;
     private string statusMessage = "Đang tải video ending...";
     private bool isReturningToMenu;
-    private bool canSkip;
     private static bool sceneHookRegistered;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -49,58 +48,7 @@ public class EndingVideoPlayer : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(AllowSkipAfterDelay());
         SetupVideoPlayer();
-    }
-
-    private void Update()
-    {
-        if (!canSkip || isReturningToMenu)
-            return;
-
-        if (SkipPressedThisFrame())
-        {
-            ReturnToMenu();
-        }
-    }
-
-    private static bool SkipPressedThisFrame()
-    {
-#if ENABLE_INPUT_SYSTEM
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard != null &&
-            (keyboard.escapeKey.wasPressedThisFrame ||
-             keyboard.spaceKey.wasPressedThisFrame ||
-             keyboard.enterKey.wasPressedThisFrame ||
-             keyboard.numpadEnterKey.wasPressedThisFrame))
-        {
-            return true;
-        }
-
-        Mouse mouse = Mouse.current;
-        if (mouse != null && mouse.leftButton.wasPressedThisFrame)
-        {
-            return true;
-        }
-
-        Touchscreen touchscreen = Touchscreen.current;
-        if (touchscreen != null && touchscreen.primaryTouch.press.wasPressedThisFrame)
-        {
-            return true;
-        }
-#endif
-
-#if ENABLE_LEGACY_INPUT_MANAGER
-        if (Input.GetKeyDown(KeyCode.Escape) ||
-            Input.GetKeyDown(KeyCode.Space) ||
-            Input.GetKeyDown(KeyCode.Return) ||
-            Input.GetMouseButtonDown(0))
-        {
-            return true;
-        }
-#endif
-
-        return false;
     }
 
     private void OnGUI()
@@ -115,17 +63,6 @@ public class EndingVideoPlayer : MonoBehaviour
             };
             statusStyle.normal.textColor = Color.white;
             GUI.Label(new Rect(0f, Screen.height * 0.45f, Screen.width, 100f), statusMessage, statusStyle);
-        }
-
-        if (canSkip && !isReturningToMenu)
-        {
-            GUIStyle skipStyle = new GUIStyle(GUI.skin.label)
-            {
-                alignment = TextAnchor.LowerRight,
-                fontSize = 18
-            };
-            skipStyle.normal.textColor = new Color(1f, 1f, 1f, 0.65f);
-            GUI.Label(new Rect(0f, Screen.height - 48f, Screen.width - 24f, 32f), "Nhấn Esc / Space để bỏ qua", skipStyle);
         }
     }
 
@@ -326,11 +263,7 @@ public class EndingVideoPlayer : MonoBehaviour
         StartCoroutine(ReturnToMenuAfterError());
     }
 
-    private IEnumerator AllowSkipAfterDelay()
-    {
-        yield return new WaitForSecondsRealtime(1.5f);
-        canSkip = true;
-    }
+
 
     private IEnumerator ReturnToMenuAfterError()
     {
