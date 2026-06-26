@@ -129,7 +129,7 @@ public class QuestDatabase : MonoBehaviour
                     "Tuyệt vời, cậu làm tốt lắm.",
                     "Tuy nhiên nhiêu đây là chưa đủ, con tôi giờ đây đang ăn rất nhiều.",
                     "Hãy nấu và đưa cơm cho tôi để tôi đưa cho nó ăn.",
-                    "Đây là thanh đói, hãy giúp tôi giữ nó trên 80% khi hết ngày."
+                    "Bên phải màn hình là thanh đói, hãy giúp tôi giữ nó trên 80% khi hết ngày."
                 }
             },
 
@@ -211,7 +211,7 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 3,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Đến gặp lão Năm.",
+                questDescription = "Đến gặp bác Ba.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "bac_ba",
                 requiredAmount = 1,
@@ -219,7 +219,7 @@ public class QuestDatabase : MonoBehaviour
                 unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
                 {
-                    "Chào cậu trẻ, ta là lão Năm.",
+                    "Chào cậu trẻ, ta là bác Ba.",
                     "Lũ gà của ta nghịch ngợm quá, đã xổng chuồng chạy đi khắp nơi rồi.",
                     "Cậu giúp ta bắt 3 con gà bỏ lại vào chuồng được không?",
                     "Sau đó ta sẽ truyền lại bí quyết nấu món Cơm Gà để giúp Gióng mau lớn!"
@@ -242,7 +242,7 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 3,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Nói chuyện lại với lão Năm.",
+                questDescription = "Nói chuyện lại với bác Ba.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "bac_ba",
                 requiredAmount = 1,
@@ -308,10 +308,10 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 4,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Khai thác 5 quặng sắt và mang về kho",
+                questDescription = "Khai thác 2 quặng sắt và mang về kho",
                 stepType = QuestStepType.CollectIron,
                 targetItemId = "iron_ore",
-                requiredAmount = 5,
+                requiredAmount = 2,
                 isSideQuest = true,
                 unlockAtMainStepIndex = 1
             },

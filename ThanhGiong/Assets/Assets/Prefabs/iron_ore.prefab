@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BillboardUI
   target: {fileID: 2278034556775256485}
-  height: 2
+  height: 3
   radius: 2
   followCameraSide: 1
 --- !u!1 &7036636249347915817
