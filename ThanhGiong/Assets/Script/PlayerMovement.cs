@@ -6,7 +6,8 @@ using Unity.Netcode;
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 10f;
+    public float runSpeed = 15f;
     public float jumpHeight = 1.5f;
     public float gravity = -25f;
 
@@ -139,11 +140,12 @@ public class PlayerMovement : NetworkBehaviour
         UpdateMovementAnimation(input, wantsToRun);
 
         Vector3 move = transform.right * input.x + transform.forward * input.y;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        float currentSpeed = wantsToRun && input.sqrMagnitude > 0.01f ? runSpeed : moveSpeed;
+        controller.Move(move * currentSpeed * Time.deltaTime);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        UpdateFootstepAudio(isGrounded && input.sqrMagnitude > 0.01f);
+        UpdateFootstepAudio(isGrounded && input.sqrMagnitude > 0.01f, wantsToRun);
         lastObservedPosition = transform.position;
     }
 
@@ -155,11 +157,11 @@ public class PlayerMovement : NetworkBehaviour
 
         float speed = Time.deltaTime > 0f ? displacement.magnitude / Time.deltaTime : 0f;
         bool moving = speed > 0.05f;
-        bool running = speed > moveSpeed * runSpeedThreshold;
+        bool running = speed > (moveSpeed + runSpeed) * 0.5f * runSpeedThreshold;
         bool remoteGrounded = IsGrounded();
 
         UpdateMovementAnimation(moving ? Vector2.up : Vector2.zero, running);
-        UpdateFootstepAudio(remoteGrounded && moving);
+        UpdateFootstepAudio(remoteGrounded && moving, running);
     }
 
     private Vector2 ReadMoveInput()
@@ -217,7 +219,7 @@ public class PlayerMovement : NetworkBehaviour
         footstepSource.volume = 0f;
     }
 
-    private void UpdateFootstepAudio(bool shouldPlay)
+    private void UpdateFootstepAudio(bool shouldPlay, bool isRunning = false)
     {
         if (footstepSource == null || footstepSource.clip == null) return;
 
@@ -226,9 +228,17 @@ public class PlayerMovement : NetworkBehaviour
             footstepSource.Play();
         }
 
+        float targetVolume = shouldPlay ? (isRunning ? 1.0f : 0.7f) : 0f;
+        float targetPitch = isRunning ? 1.35f : 1.0f;
+
         footstepSource.volume = Mathf.MoveTowards(
             footstepSource.volume,
-            shouldPlay ? 1f : 0f,
+            targetVolume,
+            Time.deltaTime * fadeSpeed);
+
+        footstepSource.pitch = Mathf.MoveTowards(
+            footstepSource.pitch,
+            targetPitch,
             Time.deltaTime * fadeSpeed);
 
         if (!shouldPlay && footstepSource.volume <= 0f && footstepSource.isPlaying)
