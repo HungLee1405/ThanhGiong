@@ -24,6 +24,21 @@ public class PlayerRespawnController : MonoBehaviour
         if (isRespawning) return;
         isRespawning = true;
 
+        if (GameOverUI.Instance != null)
+        {
+            GameOverUI.Instance.ShowGameOver("Bạn đã chết!", "Hãy cẩn thận bước chân của mình...", true, () => 
+            {
+                DoRespawnLogic();
+            });
+        }
+        else
+        {
+            DoRespawnLogic();
+        }
+    }
+
+    private void DoRespawnLogic()
+    {
         if (characterController != null)
         {
             characterController.enabled = false;

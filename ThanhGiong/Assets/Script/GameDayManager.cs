@@ -86,6 +86,10 @@ public class GameDayManager : MonoBehaviour
                 {
                     playerHubUI.UpdateQuestUI("Thất bại", "Không đạt điều kiện qua ngày. Hãy nạp lại Scene hoặc Load Game!");
                 }
+                if (GameOverUI.Instance != null)
+                {
+                    GameOverUI.Instance.ShowGameOver("Thất bại", "Không đạt điều kiện qua ngày. Hãy thử lại!", false);
+                }
                 return;
             }
 

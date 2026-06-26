@@ -161,7 +161,7 @@ public class QuestDatabase : MonoBehaviour
                     "Hôm qua cậu làm tốt lắm.",
                     "Ta tin tưởng vào cậu hôm nay.",
                     "Tuy nhiên Gióng đang ngày càng lớn lên, sức ăn cũng lớn hơn.",
-                    "Thanh đói sẽ tụt nhanh hơn. Hãy cẩn thận."
+                    "Thanh đói sẽ càng ngày càng tụt nhanh hơn. Hãy cẩn thận."
                 }
             },
 
@@ -308,10 +308,10 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 4,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Khai thác 2 quặng sắt và mang về kho",
+                questDescription = "Khai thác 5 quặng sắt và mang về kho",
                 stepType = QuestStepType.CollectIron,
                 targetItemId = "iron_ore",
-                requiredAmount = 2,
+                requiredAmount = 5,
                 isSideQuest = true,
                 unlockAtMainStepIndex = 1
             },
@@ -424,6 +424,21 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 7,
                 questName = "Nhiệm vụ ngày 7",
+                questDescription = "Nói chuyện với Già Làng.",
+                stepType = QuestStepType.TalkToNPC,
+                targetNPCId = "village_elder",
+                requiredAmount = 1,
+                dialogueLines = new string[]
+                {
+                    "Hôm nay là ngày cuối cùng rồi.",
+                    "Hãy gặp bác thợ rèn để biết mình cần làm gì nhé."
+                }
+            },
+
+            new QuestStep
+            {
+                day = 7,
+                questName = "Nhiệm vụ ngày 7",
                 questDescription = "Nói chuyện với Bác Thợ Rèn.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "blacksmith",
@@ -436,7 +451,7 @@ public class QuestDatabase : MonoBehaviour
                     "Cậu trẻ hãy giúp ta một tay.",
                     "Hãy đào và mang 10 viên sắt vào kho.",
                     "Để ta đúc ngựa sắt, roi sắt!",
-                    "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân nhé!"
+                    "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân!"
                 }
             },
 
