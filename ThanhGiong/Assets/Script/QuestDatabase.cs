@@ -359,10 +359,10 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 5,
                 questName = "Nhiệm vụ phụ",
-                questDescription = "Chặt 5 bó tre mang về kho.",
+                questDescription = "Chặt 3 bó tre mang về kho.",
                 stepType = QuestStepType.CollectBamboo,
                 targetItemId = "bamboo",
-                requiredAmount = 5,
+                requiredAmount = 3,
                 isSideQuest = true,
                 unlockAtMainStepIndex = 1
             },
@@ -404,13 +404,13 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 6,
                 questName = "Nhiệm vụ ngày 6",
-                questDescription = "Giữ thanh đói trên 80%, tích trữ ít nhất 10 quặng sắt và 10 bó tre.",
+                questDescription = "Giữ thanh đói trên 80%, tích trữ ít nhất 4 quặng sắt và 6 bó tre.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1,
                 storageRequirements = new List<QuestRequirement>
                 {
-                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 10 },
-                    new QuestRequirement { targetItemId = "bamboo", requiredAmount = 10 }
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 4 },
+                    new QuestRequirement { targetItemId = "bamboo", requiredAmount = 6 }
                 }
             }
         };
@@ -434,7 +434,7 @@ public class QuestDatabase : MonoBehaviour
                     "Thời khắc quyết định đã đến!",
                     "Tuy nhiên chúng ta thiếu quá nhiều sắt.",
                     "Cậu trẻ hãy giúp ta một tay.",
-                    "Hãy đào và mang 20 viên sắt vào kho.",
+                    "Hãy đào và mang 5 viên sắt vào kho.",
                     "Để ta đúc ngựa sắt, roi sắt!",
                     "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân nhé!"
                 }
@@ -444,12 +444,12 @@ public class QuestDatabase : MonoBehaviour
             {
                 day = 7,
                 questName = "Nhiệm vụ ngày 7",
-                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 20 quặng sắt.",
+                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 5 quặng sắt.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1,
                 storageRequirements = new List<QuestRequirement>
                 {
-                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 20 }
+                    new QuestRequirement { targetItemId = "iron_ore", requiredAmount = 5 }
                 }
             }
         };
