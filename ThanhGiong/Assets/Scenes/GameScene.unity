@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15c8fbbf2db4424190c2637fc0bf562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDayManager
-  currentDay: 7
+  currentDay: 1
   maxDay: 7
   dayDuration: 240
   remainingTime: 240
