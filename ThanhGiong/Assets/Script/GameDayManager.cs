@@ -82,14 +82,23 @@ public class GameDayManager : MonoBehaviour
             if (!success)
             {
                 isDayRunning = false;
-                if (playerHubUI != null)
+
+                // --- GỌI BẢNG THUA GAME Ở ĐÂY ---
+                GameOverManager gameOver = FindFirstObjectByType<GameOverManager>();
+                if (gameOver != null)
                 {
-                    playerHubUI.UpdateQuestUI("Thất bại", "Không đạt điều kiện qua ngày. Hãy nạp lại Scene hoặc Load Game!");
+                    gameOver.TriggerGameOver(); // Bật UI Thua game
                 }
                 if (GameOverUI.Instance != null)
                 {
                     GameOverUI.Instance.ShowGameOver("Thất bại", "Không đạt điều kiện qua ngày. Hãy thử lại!", false);
                 }
+                else if (playerHubUI != null)
+                {
+                    // Backup nếu lỡ quên chưa kéo GameManager
+                    playerHubUI.UpdateQuestUI("Thất bại", "Không đạt điều kiện qua ngày!");
+                }
+
                 return;
             }
 
