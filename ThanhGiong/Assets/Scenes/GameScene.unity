@@ -8897,6 +8897,9 @@ MonoBehaviour:
   spawnGroundMask:
     serializedVersion: 2
     m_Bits: 8
+  onlineSpawnOrigin: {x: -77.876, y: 11.23, z: 171.307}
+  onlineSpawnEulerAngles: {x: 0, y: 138.947, z: 0}
+  onlineSpawnSpacing: 1.35
   showDebugGui: 1
 --- !u!114 &534550088
 MonoBehaviour:

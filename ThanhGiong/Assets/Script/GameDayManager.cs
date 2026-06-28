@@ -29,6 +29,7 @@ public class GameDayManager : MonoBehaviour
     private bool hasStartedCountdownThisDay = false;
     private float networkSyncTimer;
     private bool endingStarted;
+    private Coroutine sharedTransitionCoroutine;
 
     private void Start()
     {
@@ -82,18 +83,13 @@ public class GameDayManager : MonoBehaviour
             if (!success)
             {
                 isDayRunning = false;
+                SharedQuestNetwork.ShowGameOverForAll(
+                    "Game Over",
+                    "Khong dat dieu kien qua ngay. Hay thu lai!",
+                    false);
 
                 // --- GỌI BẢNG THUA GAME Ở ĐÂY ---
-                GameOverManager gameOver = FindFirstObjectByType<GameOverManager>();
-                if (gameOver != null)
-                {
-                    gameOver.TriggerGameOver(); // Bật UI Thua game
-                }
-                if (GameOverUI.Instance != null)
-                {
-                    GameOverUI.Instance.ShowGameOver("Thất bại", "Không đạt điều kiện qua ngày. Hãy thử lại!", false);
-                }
-                else if (playerHubUI != null)
+                if (GameOverUI.Instance == null && playerHubUI != null)
                 {
                     // Backup nếu lỡ quên chưa kéo GameManager
                     playerHubUI.UpdateQuestUI("Thất bại", "Không đạt điều kiện qua ngày!");
@@ -152,6 +148,8 @@ public class GameDayManager : MonoBehaviour
         }
 
         int nextDay = currentDay + 1;
+
+        SharedQuestNetwork.PlayDayTransitionForAll(nextDay);
 
         if (dayTransitionUI != null)
         {
@@ -242,6 +240,26 @@ public class GameDayManager : MonoBehaviour
         isDayRunning = running;
         isTransitioningDay = transitioning;
         UpdateDayUI();
+    }
+
+    public static void PlaySharedDayTransitionLocal(int nextDay)
+    {
+        GameDayManager manager = FindFirstObjectByType<GameDayManager>();
+        if (manager == null || manager.dayTransitionUI == null)
+            return;
+
+        if (manager.sharedTransitionCoroutine != null)
+        {
+            manager.StopCoroutine(manager.sharedTransitionCoroutine);
+        }
+
+        manager.sharedTransitionCoroutine = manager.StartCoroutine(manager.PlaySharedDayTransitionRoutine(nextDay));
+    }
+
+    private IEnumerator PlaySharedDayTransitionRoutine(int nextDay)
+    {
+        yield return dayTransitionUI.PlayDayTransition(nextDay);
+        sharedTransitionCoroutine = null;
     }
 
     private static bool CanSimulateSharedWorld()

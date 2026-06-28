@@ -105,12 +105,10 @@ public class GiongHunger : MonoBehaviour
         {
             Debug.Log("Gióng quá đói! Game Over.");
             StopHungerDrain();
-
-            GameOverManager gameOver = FindFirstObjectByType<GameOverManager>();
-            if (gameOver != null)
-            {
-                gameOver.TriggerGameOver();
-            }
+            SharedQuestNetwork.ShowGameOverForAll(
+                "Game Over",
+                "Giong qua doi. Hay thu lai!",
+                false);
         }
     }
 

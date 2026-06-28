@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
 public class ResourcePickup : MonoBehaviour
 {
+    private static readonly Dictionary<string, ResourcePickup> SharedPickups = new Dictionary<string, ResourcePickup>();
+
     [Header("Item Settings")]
     public ItemData itemData;
     public int amount = 1;
@@ -34,6 +37,9 @@ public class ResourcePickup : MonoBehaviour
     private bool playerInRange = false;
     private bool isCollecting = false;
     private bool isRespawning = false;
+    private bool waitingForSharedCollect;
+    private float sharedRespawnEndTime;
+    private string networkResourceId;
 
     // Khi resource hồi lại mà player vẫn đứng trong vùng,
     // khóa tương tác cho tới khi player bước ra rồi vào lại.
@@ -51,6 +57,7 @@ public class ResourcePickup : MonoBehaviour
 
     private void Awake()
     {
+        networkResourceId = BuildNetworkResourceId();
         renderers = GetComponentsInChildren<Renderer>(true);
         colliders = GetComponentsInChildren<Collider>(true);
 
@@ -60,6 +67,21 @@ public class ResourcePickup : MonoBehaviour
         {
             triggerCollider.isTrigger = true;
             triggerCollider.enabled = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        RegisterSharedPickup();
+    }
+
+    private void OnDisable()
+    {
+        if (!string.IsNullOrEmpty(networkResourceId) &&
+            SharedPickups.TryGetValue(networkResourceId, out ResourcePickup pickup) &&
+            pickup == this)
+        {
+            SharedPickups.Remove(networkResourceId);
         }
     }
 
@@ -92,6 +114,7 @@ public class ResourcePickup : MonoBehaviour
 
     private bool CanInteract()
     {
+        if (waitingForSharedCollect) return false;
         if (lockedUntilPlayerExit) return false;
         if (!playerInRange) return false;
         if (playerInventory == null) return false;
@@ -171,6 +194,12 @@ public class ResourcePickup : MonoBehaviour
 
         int pickupAmount = 1;
 
+        if (ShouldUseSharedOnlineRespawn())
+        {
+            TryCollectSharedResource(pickupAmount);
+            return;
+        }
+
         bool success = playerInventory.AddItem(itemData, pickupAmount);
 
         ResetCollecting();
@@ -222,6 +251,52 @@ public class ResourcePickup : MonoBehaviour
         }
     }
 
+    private void TryCollectSharedResource(int pickupAmount)
+    {
+        if (!playerInventory.CanAddItem(itemData, pickupAmount))
+        {
+            ResetCollecting();
+            if (interactionUI != null)
+            {
+                interactionUI.SetProgress(0f);
+                interactionUI.Show("Inventory day");
+            }
+            return;
+        }
+
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening)
+            return;
+
+        ResetCollecting();
+
+        if (interactionUI != null)
+        {
+            interactionUI.SetProgress(0f);
+        }
+
+        if (networkManager.IsServer)
+        {
+            if (TryReserveSharedCollect(networkResourceId, out string itemId, out int amountToGrant, out _))
+            {
+                GrantSharedCollectReward(itemId, amountToGrant);
+            }
+            else if (interactionUI != null)
+            {
+                interactionUI.Hide();
+            }
+            return;
+        }
+
+        waitingForSharedCollect = true;
+        if (interactionUI != null)
+        {
+            interactionUI.Show("Dang lay...");
+        }
+
+        SharedQuestNetwork.RequestResourceCollect(networkResourceId);
+    }
+
     private IEnumerator RespawnRoutine()
     {
         isRespawning = true;
@@ -267,6 +342,19 @@ public class ResourcePickup : MonoBehaviour
         }
     }
 
+    private IEnumerator SharedRespawnRoutine(float seconds)
+    {
+        yield return new WaitForSeconds(Mathf.Max(0.05f, seconds));
+
+        ApplySharedVisibility(true, false);
+
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager != null && networkManager.IsServer)
+        {
+            SharedQuestNetwork.PublishResourceState(networkResourceId, false, 0f);
+        }
+    }
+
     private void SetObjectVisible(bool visible)
     {
         for (int i = 0; i < renderers.Length; i++)
@@ -292,6 +380,47 @@ public class ResourcePickup : MonoBehaviour
             // Collider phụ, ví dụ collider thân cây, đá, model...
             // Có thể tắt khi resource biến mất.
             colliders[i].enabled = visible;
+        }
+    }
+
+    private void ApplySharedVisibility(bool visible, bool lockIfPlayerInside)
+    {
+        if (respawnCoroutine != null)
+        {
+            StopCoroutine(respawnCoroutine);
+            respawnCoroutine = null;
+        }
+
+        SetObjectVisible(visible);
+        isRespawning = !visible;
+        sharedRespawnEndTime = visible ? 0f : Time.time + respawnTime;
+        waitingForSharedCollect = false;
+        ResetCollecting();
+
+        if (interactionUI != null)
+        {
+            interactionUI.SetProgress(0f);
+            if (!visible || !playerInRange)
+            {
+                interactionUI.Hide();
+            }
+            else if (CanInteract())
+            {
+                interactionUI.Show(GetInteractionMessage());
+            }
+        }
+
+        if (visible && requirePlayerExitAfterRespawn && lockIfPlayerInside && playerInRange)
+        {
+            lockedUntilPlayerExit = true;
+            if (interactionUI != null)
+            {
+                interactionUI.Hide();
+            }
+        }
+        else if (!visible)
+        {
+            lockedUntilPlayerExit = false;
         }
     }
 
@@ -330,6 +459,187 @@ public class ResourcePickup : MonoBehaviour
                 questManager.AddProgress(QuestStepType.CatchChicken, "chick", collectedAmount);
                 break;
         }
+    }
+
+    private bool ShouldUseSharedOnlineRespawn()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        return networkManager != null &&
+            networkManager.IsListening &&
+            respawnAfterCollect &&
+            !CanReturnItem();
+    }
+
+    private string BuildNetworkResourceId()
+    {
+        string itemId = itemData != null ? itemData.itemId : "missing";
+        Vector3 position = transform.position;
+        return string.Format(
+            "{0}:{1}:{2}:{3}:{4}",
+            gameObject.scene.name,
+            itemId,
+            Mathf.RoundToInt(position.x * 100f),
+            Mathf.RoundToInt(position.y * 100f),
+            Mathf.RoundToInt(position.z * 100f));
+    }
+
+    private void RegisterSharedPickup()
+    {
+        if (string.IsNullOrEmpty(networkResourceId))
+        {
+            networkResourceId = BuildNetworkResourceId();
+        }
+
+        if (respawnAfterCollect)
+        {
+            SharedPickups[networkResourceId] = this;
+        }
+    }
+
+    public static bool TryReserveSharedCollect(
+        string resourceId,
+        out string itemId,
+        out int amount,
+        out float respawnSeconds)
+    {
+        itemId = "";
+        amount = 0;
+        respawnSeconds = 0f;
+
+        if (string.IsNullOrEmpty(resourceId) ||
+            !SharedPickups.TryGetValue(resourceId, out ResourcePickup pickup) ||
+            pickup == null ||
+            pickup.itemData == null ||
+            pickup.isRespawning)
+        {
+            return false;
+        }
+
+        itemId = pickup.itemData.itemId;
+        amount = Mathf.Max(1, pickup.amount);
+        respawnSeconds = Mathf.Max(0.05f, pickup.respawnTime);
+        pickup.ApplySharedVisibility(false, false);
+        pickup.sharedRespawnEndTime = Time.time + respawnSeconds;
+        pickup.respawnCoroutine = pickup.StartCoroutine(pickup.SharedRespawnRoutine(respawnSeconds));
+        SharedQuestNetwork.PublishResourceState(resourceId, true, respawnSeconds);
+        return true;
+    }
+
+    public static void ApplySharedResourceState(string resourceId, bool hidden, float remainingSeconds)
+    {
+        if (string.IsNullOrEmpty(resourceId) ||
+            !SharedPickups.TryGetValue(resourceId, out ResourcePickup pickup) ||
+            pickup == null)
+        {
+            return;
+        }
+
+        if (hidden)
+        {
+            pickup.ApplySharedVisibility(false, false);
+            pickup.respawnCoroutine = pickup.StartCoroutine(pickup.SharedRespawnRoutine(remainingSeconds));
+        }
+        else
+        {
+            pickup.ApplySharedVisibility(true, true);
+        }
+    }
+
+    public static void ApplySharedCollectResult(string resourceId, string itemId, int amount, bool success)
+    {
+        if (string.IsNullOrEmpty(resourceId) ||
+            !SharedPickups.TryGetValue(resourceId, out ResourcePickup pickup) ||
+            pickup == null)
+        {
+            return;
+        }
+
+        pickup.waitingForSharedCollect = false;
+
+        if (!success)
+        {
+            if (pickup.interactionUI != null)
+            {
+                pickup.interactionUI.Hide();
+            }
+            return;
+        }
+
+        pickup.GrantSharedCollectReward(itemId, amount);
+    }
+
+    public static void PublishKnownSharedStatesToClient(ulong clientId)
+    {
+        foreach (ResourcePickup pickup in SharedPickups.Values)
+        {
+            if (pickup == null || !pickup.isRespawning)
+                continue;
+
+            float remainingSeconds = Mathf.Max(0.05f, pickup.sharedRespawnEndTime - Time.time);
+            SharedQuestNetwork.SendResourceState(clientId, pickup.networkResourceId, true, remainingSeconds);
+        }
+    }
+
+    private void GrantSharedCollectReward(string itemId, int amountToGrant)
+    {
+        PlayerInventory inventory = playerInventory != null ? playerInventory : FindLocalInventory();
+        ItemData rewardItem = FindItemData(itemId);
+
+        if (inventory == null || rewardItem == null)
+            return;
+
+        bool success = inventory.AddItem(rewardItem, amountToGrant);
+        if (!success)
+        {
+            if (interactionUI != null)
+            {
+                interactionUI.Show("Inventory day");
+            }
+            return;
+        }
+
+        Debug.Log("Da lay: " + rewardItem.itemName);
+
+        if (reportQuestProgress)
+        {
+            ReportQuestProgress(amountToGrant);
+        }
+    }
+
+    private static PlayerInventory FindLocalInventory()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        PlayerMovement[] players = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+
+        foreach (PlayerMovement movement in players)
+        {
+            if (movement == null || !movement.gameObject.activeInHierarchy)
+                continue;
+
+            if (networkManager != null && networkManager.IsListening && movement.IsSpawned && !movement.IsOwner)
+                continue;
+
+            PlayerInventory inventory = movement.GetComponent<PlayerInventory>();
+            if (inventory != null)
+                return inventory;
+        }
+
+        return null;
+    }
+
+    private static ItemData FindItemData(string itemId)
+    {
+        if (string.IsNullOrEmpty(itemId))
+            return null;
+
+        ItemData[] items = Resources.FindObjectsOfTypeAll<ItemData>();
+        foreach (ItemData item in items)
+        {
+            if (item != null && item.itemId == itemId)
+                return item;
+        }
+
+        return null;
     }
 
     private void CancelCollecting()

@@ -13,6 +13,14 @@ public class SharedQuestNetwork : MonoBehaviour
     private const string FeedMessage = "ThanhGiongFeed";
     private const string WorldStateMessage = "ThanhGiongWorldState";
     private const string EndingSceneMessage = "ThanhGiongEndingScene";
+    private const string ResourceCollectMessage = "ThanhGiongResourceCollect";
+    private const string ResourceCollectResultMessage = "ThanhGiongResourceCollectResult";
+    private const string ResourceStateMessage = "ThanhGiongResourceState";
+    private const string GameOverMessage = "ThanhGiongGameOver";
+    private const string ChickenCatchMessage = "ThanhGiongChickenCatch";
+    private const string ChickenCatchResultMessage = "ThanhGiongChickenCatchResult";
+    private const string ChickenStateMessage = "ThanhGiongChickenState";
+    private const string DayTransitionMessage = "ThanhGiongDayTransition";
 
     private static SharedQuestNetwork instance;
     private NetworkManager manager;
@@ -58,6 +66,14 @@ public class SharedQuestNetwork : MonoBehaviour
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(FeedMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(WorldStateMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(EndingSceneMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ResourceCollectMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ResourceCollectResultMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ResourceStateMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(GameOverMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchResultMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenStateMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(DayTransitionMessage);
             manager.OnClientConnectedCallback -= OnClientConnected;
         }
 
@@ -160,6 +176,93 @@ public class SharedQuestNetwork : MonoBehaviour
         return true;
     }
 
+    public static bool RequestResourceCollect(string resourceId)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening || networkManager.IsServer)
+            return false;
+
+        instance?.RegisterMessages(networkManager);
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(resourceId ?? "");
+        networkManager.CustomMessagingManager.SendNamedMessage(ResourceCollectMessage, NetworkManager.ServerClientId, writer);
+        return true;
+    }
+
+    public static bool RequestChickenCatch(string chickenId)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening || networkManager.IsServer)
+            return false;
+
+        instance?.RegisterMessages(networkManager);
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(chickenId ?? "");
+        networkManager.CustomMessagingManager.SendNamedMessage(ChickenCatchMessage, NetworkManager.ServerClientId, writer);
+        return true;
+    }
+
+    public static void PublishChickenState(string chickenId, bool caught)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        foreach (ulong clientId in networkManager.ConnectedClientsIds)
+        {
+            if (clientId == networkManager.LocalClientId)
+                continue;
+
+            SendChickenState(clientId, chickenId, caught);
+        }
+    }
+
+    public static void SendChickenState(ulong clientId, string chickenId, bool caught)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(chickenId ?? "");
+        writer.WriteValueSafe(caught);
+        networkManager.CustomMessagingManager.SendNamedMessage(ChickenStateMessage, clientId, writer);
+    }
+
+    public static void PublishResourceState(string resourceId, bool hidden, float remainingSeconds)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        foreach (ulong clientId in networkManager.ConnectedClientsIds)
+        {
+            if (clientId == networkManager.LocalClientId)
+                continue;
+
+            SendResourceState(clientId, resourceId, hidden, remainingSeconds);
+        }
+    }
+
+    public static void SendResourceState(ulong clientId, string resourceId, bool hidden, float remainingSeconds)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(resourceId ?? "");
+        writer.WriteValueSafe(hidden);
+        writer.WriteValueSafe(Mathf.Max(0f, remainingSeconds));
+        networkManager.CustomMessagingManager.SendNamedMessage(ResourceStateMessage, clientId, writer);
+    }
+
     public static void PublishWorldState()
     {
         NetworkManager networkManager = NetworkManager.Singleton;
@@ -207,6 +310,59 @@ public class SharedQuestNetwork : MonoBehaviour
         }
     }
 
+    public static void ShowGameOverForAll(string title, string reason, bool isDeath)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+        {
+            ShowGameOverLocal(title, reason, isDeath);
+            return;
+        }
+
+        if (!networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        foreach (ulong clientId in networkManager.ConnectedClientsIds)
+        {
+            if (clientId == networkManager.LocalClientId)
+                continue;
+
+            using FastBufferWriter writer = new FastBufferWriter(512, Allocator.Temp);
+            writer.WriteValueSafe(title ?? "");
+            writer.WriteValueSafe(reason ?? "");
+            writer.WriteValueSafe(isDeath);
+            networkManager.CustomMessagingManager.SendNamedMessage(GameOverMessage, clientId, writer);
+        }
+
+        ShowGameOverLocal(title, reason, isDeath);
+    }
+
+    public static void PlayDayTransitionForAll(int nextDay)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening)
+            return;
+
+        if (!networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        foreach (ulong clientId in networkManager.ConnectedClientsIds)
+        {
+            if (clientId == networkManager.LocalClientId)
+                continue;
+
+            using FastBufferWriter writer = new FastBufferWriter(sizeof(int), Allocator.Temp);
+            writer.WriteValueSafe(nextDay);
+            networkManager.CustomMessagingManager.SendNamedMessage(DayTransitionMessage, clientId, writer);
+        }
+    }
+
     public static void LoadEndingSceneForAll(string sceneName)
     {
         if (string.IsNullOrWhiteSpace(sceneName))
@@ -251,6 +407,14 @@ public class SharedQuestNetwork : MonoBehaviour
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(FeedMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(WorldStateMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(EndingSceneMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ResourceCollectMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ResourceCollectResultMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ResourceStateMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(GameOverMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchResultMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenStateMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(DayTransitionMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ProgressMessage, OnProgressMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StateMessage, OnStateMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(RewardMessage, OnRewardMessage);
@@ -258,6 +422,14 @@ public class SharedQuestNetwork : MonoBehaviour
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(FeedMessage, OnFeedMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(WorldStateMessage, OnWorldStateMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(EndingSceneMessage, OnEndingSceneMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ResourceCollectMessage, OnResourceCollectMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ResourceCollectResultMessage, OnResourceCollectResultMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ResourceStateMessage, OnResourceStateMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(GameOverMessage, OnGameOverMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenCatchMessage, OnChickenCatchMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenCatchResultMessage, OnChickenCatchResultMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenStateMessage, OnChickenStateMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(DayTransitionMessage, OnDayTransitionMessage);
         networkManager.OnClientConnectedCallback -= OnClientConnected;
         networkManager.OnClientConnectedCallback += OnClientConnected;
         messagesRegistered = true;
@@ -276,6 +448,8 @@ public class SharedQuestNetwork : MonoBehaviour
         }
 
         PublishWorldState();
+        ResourcePickup.PublishKnownSharedStatesToClient(clientId);
+        ChickenController.PublishKnownSharedStatesToClient(clientId);
     }
 
     private void OnProgressMessage(ulong senderClientId, FastBufferReader reader)
@@ -353,6 +527,98 @@ public class SharedQuestNetwork : MonoBehaviour
         }
     }
 
+    private void OnResourceCollectMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (manager == null || !manager.IsServer)
+            return;
+
+        reader.ReadValueSafe(out string resourceId);
+
+        bool success = ResourcePickup.TryReserveSharedCollect(
+            resourceId,
+            out string itemId,
+            out int amount,
+            out _);
+
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(resourceId ?? "");
+        writer.WriteValueSafe(itemId ?? "");
+        writer.WriteValueSafe(amount);
+        writer.WriteValueSafe(success);
+        manager.CustomMessagingManager.SendNamedMessage(ResourceCollectResultMessage, senderClientId, writer);
+    }
+
+    private void OnResourceCollectResultMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string resourceId);
+        reader.ReadValueSafe(out string itemId);
+        reader.ReadValueSafe(out int amount);
+        reader.ReadValueSafe(out bool success);
+        ResourcePickup.ApplySharedCollectResult(resourceId, itemId, amount, success);
+    }
+
+    private void OnResourceStateMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string resourceId);
+        reader.ReadValueSafe(out bool hidden);
+        reader.ReadValueSafe(out float remainingSeconds);
+        ResourcePickup.ApplySharedResourceState(resourceId, hidden, remainingSeconds);
+    }
+
+    private void OnChickenCatchMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (manager == null || !manager.IsServer)
+            return;
+
+        reader.ReadValueSafe(out string chickenId);
+
+        bool success = ChickenController.TryReserveSharedCatch(
+            chickenId,
+            out string itemId);
+
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(chickenId ?? "");
+        writer.WriteValueSafe(itemId ?? "");
+        writer.WriteValueSafe(success);
+        manager.CustomMessagingManager.SendNamedMessage(ChickenCatchResultMessage, senderClientId, writer);
+    }
+
+    private void OnChickenCatchResultMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string chickenId);
+        reader.ReadValueSafe(out string itemId);
+        reader.ReadValueSafe(out bool success);
+        ChickenController.ApplySharedCatchResult(chickenId, itemId, success);
+    }
+
+    private void OnChickenStateMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string chickenId);
+        reader.ReadValueSafe(out bool caught);
+        ChickenController.ApplySharedState(chickenId, caught);
+    }
+
+    private void OnDayTransitionMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out int nextDay);
+        GameDayManager.PlaySharedDayTransitionLocal(nextDay);
+    }
+
     private void OnWorldStateMessage(ulong senderClientId, FastBufferReader reader)
     {
         if (senderClientId != NetworkManager.ServerClientId) return;
@@ -382,12 +648,37 @@ public class SharedQuestNetwork : MonoBehaviour
         LoadEndingSceneLocal(sceneName);
     }
 
+    private void OnGameOverMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string title);
+        reader.ReadValueSafe(out string reason);
+        reader.ReadValueSafe(out bool isDeath);
+        ShowGameOverLocal(title, reason, isDeath);
+    }
+
     private static void LoadEndingSceneLocal(string sceneName)
     {
         if (string.IsNullOrWhiteSpace(sceneName))
             return;
 
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    private static void ShowGameOverLocal(string title, string reason, bool isDeath)
+    {
+        GameOverManager gameOver = FindFirstObjectByType<GameOverManager>();
+        if (gameOver != null)
+        {
+            gameOver.TriggerGameOver();
+        }
+
+        if (GameOverUI.Instance != null)
+        {
+            GameOverUI.Instance.ShowGameOver(title, reason, isDeath);
+        }
     }
 
     private void QueueReward(string itemId, int amount)

@@ -71,7 +71,7 @@ public class NetworkLobbyCoordinator : MonoBehaviour
 
         if (networkManager == null || !networkManager.IsHost)
         {
-            reason = "Only the host can start.";
+            reason = "Chỉ chủ phòng mới được bắt đầu.";
             return false;
         }
 
@@ -80,7 +80,7 @@ public class NetworkLobbyCoordinator : MonoBehaviour
 
         if (players.Length < connectedPlayers || connectedPlayers == 0)
         {
-            reason = "Waiting for players...";
+            reason = "Đang chờ người chơi...";
             return false;
         }
 
@@ -91,18 +91,18 @@ public class NetworkLobbyCoordinator : MonoBehaviour
 
             if (players[i].playerName.Value.IsEmpty)
             {
-                reason = "Every player needs a name.";
+                reason = "Mỗi người chơi cần nhập tên.";
                 return false;
             }
 
             if (!players[i].ready.Value)
             {
-                reason = "Waiting for everyone to be ready.";
+                reason = "Đang chờ tất cả sẵn sàng.";
                 return false;
             }
         }
 
-        reason = "Everyone is ready.";
+        reason = "Tất cả đã sẵn sàng.";
         return true;
     }
 

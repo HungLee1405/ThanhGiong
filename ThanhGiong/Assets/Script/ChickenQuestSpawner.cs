@@ -44,7 +44,7 @@ public class ChickenQuestSpawner : MonoBehaviour
             if (isCatchQuestActive)
             {
                 // Bật các gà chưa Delivered
-                if (!chicken.isDelivered)
+                if (!chicken.isDelivered && !chicken.isCaught)
                 {
                     if (!chicken.gameObject.activeSelf)
                     {

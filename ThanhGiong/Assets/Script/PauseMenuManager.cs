@@ -83,8 +83,6 @@ public class PauseMenuManager : MonoBehaviour
         inGameOptionsPanel.SetActive(false); // Luôn mở bảng 4 nút chính trước
         NetworkManager manager = NetworkManager.Singleton;
         Time.timeScale = manager != null && manager.IsListening ? 1f : 0f;
-        inGameOptionsPanel.SetActive(false);
-        Time.timeScale = 0f; // Đóng băng thời gian
         isPaused = true;
 
         // Hiện và thả tự do chuột để click UI

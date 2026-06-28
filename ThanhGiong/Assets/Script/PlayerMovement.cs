@@ -135,6 +135,7 @@ public class PlayerMovement : NetworkBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             lastGroundedTime = float.NegativeInfinity;
             TriggerJumpAnimation();
+            BroadcastJumpAnimation();
         }
 
         UpdateMovementAnimation(input, wantsToRun);
@@ -295,6 +296,30 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (characterAnimator != null)
             characterAnimator.SetTrigger(JumpHash);
+    }
+
+    private void BroadcastJumpAnimation()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening || !IsSpawned || !IsOwner)
+            return;
+
+        TriggerJumpAnimationServerRpc();
+    }
+
+    [ServerRpc]
+    private void TriggerJumpAnimationServerRpc()
+    {
+        TriggerJumpAnimationClientRpc();
+    }
+
+    [ClientRpc]
+    private void TriggerJumpAnimationClientRpc()
+    {
+        if (IsOwner)
+            return;
+
+        TriggerJumpAnimation();
     }
 
     public void ResetVelocity()

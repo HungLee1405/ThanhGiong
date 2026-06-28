@@ -8,6 +8,12 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
     public AudioListener audioListener;
     public Canvas[] localCanvases;
 
+    [Header("Camera Pose")]
+    [SerializeField] private Vector3 localCameraPosition = new Vector3(-0.008f, 2.762f, 0.536f);
+    [SerializeField] private Vector3 localCameraEulerAngles = Vector3.zero;
+
+    private bool ownsLocalView;
+
     private void Awake()
     {
         if (playerCamera == null)
@@ -36,6 +42,18 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (!ownsLocalView || playerCamera == null)
+            return;
+
+        Transform cameraTransform = playerCamera.transform;
+        if ((cameraTransform.localPosition - localCameraPosition).sqrMagnitude > 0.000001f)
+        {
+            cameraTransform.localPosition = localCameraPosition;
+        }
+    }
+
     private void ApplyOwnershipState()
     {
         SetLocalObjectsActive(IsOwner);
@@ -43,8 +61,15 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
 
     private void SetLocalObjectsActive(bool isLocalPlayer)
     {
+        ownsLocalView = isLocalPlayer;
+
         if (playerCamera != null)
         {
+            if (isLocalPlayer)
+            {
+                ApplyLocalCameraPose();
+            }
+
             playerCamera.enabled = isLocalPlayer;
         }
 
@@ -63,5 +88,12 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
                 localCanvases[i].enabled = isLocalPlayer;
             }
         }
+    }
+
+    private void ApplyLocalCameraPose()
+    {
+        Transform cameraTransform = playerCamera.transform;
+        cameraTransform.localPosition = localCameraPosition;
+        cameraTransform.localRotation = Quaternion.Euler(localCameraEulerAngles);
     }
 }

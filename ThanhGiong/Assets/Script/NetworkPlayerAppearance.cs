@@ -21,7 +21,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
     private static readonly string[] CharacterNames =
     {
-        "Red", "Blue", "Green", "Purple", "Brown", "Yellow"
+        "Đỏ", "Xanh lam", "Xanh lá", "Tím", "Nâu", "Vàng"
     };
 
     private static readonly string[] CharacterPortraitResourceNames =
@@ -107,9 +107,11 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private bool nameInputFocused;
     private GUIStyle titleStyle;
     private GUIStyle subtitleStyle;
+    private GUIStyle panelStyle;
     private GUIStyle cardStyle;
     private GUIStyle selectedCardStyle;
     private GUIStyle readyStyle;
+    private GUIStyle statusBadgeStyle;
     private GUIStyle smallButtonStyle;
     private GUIStyle playButtonStyle;
     private GUIStyle closeButtonStyle;
@@ -117,6 +119,9 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private GUIStyle rosterStyle;
     private GUIStyle nameTagStyle;
     private GUIStyle inputTextStyle;
+    private Font titleFont;
+    private Font uiFont;
+    private Color panelColor = new Color(0.10f, 0.17f, 0.16f, 0.98f);
     private Texture2D whiteTexture;
     private Texture2D panelTexture;
     private Texture2D cardTexture;
@@ -159,7 +164,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         if (IsOwner)
         {
             previewColorIndex = (int)(OwnerClientId % (ulong)ShirtColors.Length);
-            localNameInput = "Player " + (OwnerClientId + 1);
+            localNameInput = "Người chơi " + (OwnerClientId + 1);
             nameInputFocused = true;
             RequestColorServerRpc(previewColorIndex);
             RequestNameServerRpc(localNameInput);
@@ -184,6 +189,12 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             IsLocalSelectionOpen = false;
             SetCursorForSelection(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        DestroyRuntimeFont(titleFont);
+        DestroyRuntimeFont(uiFont);
     }
 
     private void Update()
@@ -239,8 +250,8 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
     private void DrawLobbyPanel()
     {
-        float panelWidth = Mathf.Min(940f, Screen.width - 24f);
-        float panelHeight = Mathf.Min(650f, Screen.height - 24f);
+        float panelWidth = Mathf.Min(980f, Screen.width - 24f);
+        float panelHeight = Mathf.Min(640f, Screen.height - 24f);
         Rect panelRect = new Rect(
             (Screen.width - panelWidth) * 0.5f,
             (Screen.height - panelHeight) * 0.5f,
@@ -249,27 +260,28 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         );
 
         Color oldColor = GUI.color;
-        GUI.color = new Color(0.73f, 0.86f, 0.94f, 0.35f);
+        GUI.color = new Color(0.02f, 0.04f, 0.05f, 0.58f);
         GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), whiteTexture);
         GUI.color = Color.white;
-        GUI.DrawTexture(panelRect, panelTexture);
+        GUI.Box(panelRect, GUIContent.none, panelStyle);
 
-        GUILayout.BeginArea(new Rect(panelRect.x + 20f, panelRect.y + 16f, panelRect.width - 40f, panelRect.height - 32f));
-        GUILayout.Label("ONLINE LOBBY", titleStyle);
-        GUILayout.Label("ROOM CODE: " + MultiplayerConnector.ActiveRoomCode, readyStyle);
-        GUILayout.Label("Choose your color, enter your name, then ready up.", subtitleStyle);
-        GUILayout.Space(12f);
+        GUILayout.BeginArea(new Rect(panelRect.x + 26f, panelRect.y + 20f, panelRect.width - 52f, panelRect.height - 40f));
         GUILayout.BeginHorizontal();
-        GUILayout.BeginVertical(GUILayout.Width((panelRect.width - 70f) * 0.64f));
+        GUILayout.Label("PHÒNG CHỜ TRỰC TUYẾN", titleStyle, GUILayout.ExpandWidth(true));
+        GUILayout.Label("MÃ PHÒNG: " + MultiplayerConnector.ActiveRoomCode, statusBadgeStyle, GUILayout.Width(220f), GUILayout.Height(34f));
+        GUILayout.EndHorizontal();
+        GUILayout.Space(14f);
+        GUILayout.BeginHorizontal();
+        GUILayout.BeginVertical(GUILayout.Width((panelRect.width - 86f) * 0.64f));
 
-        GUILayout.Label("PLAYER NAME", readyStyle);
+        GUILayout.Label("TÊN NGƯỜI CHƠI", readyStyle);
         GUI.enabled = !ready.Value;
         DrawPlayerNameInput();
 
         GUILayout.Space(10f);
-        GUILayout.Label("CHARACTER COLOR", readyStyle);
+        GUILayout.Label("NHÂN VẬT", readyStyle);
 
-        float cardWidth = Mathf.Max(118f, ((panelRect.width - 70f) * 0.64f - 34f) / 3f);
+        float cardWidth = Mathf.Max(124f, ((panelRect.width - 86f) * 0.64f - 42f) / 3f);
 
         for (int row = 0; row < 2; row++)
         {
@@ -286,12 +298,12 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         }
 
         GUI.enabled = true;
-        GUILayout.Space(10f);
+        GUILayout.Space(12f);
         string validPlayerName = SanitizePlayerName(localNameInput);
         GUI.enabled = !string.IsNullOrWhiteSpace(validPlayerName);
-        string readyButtonText = ready.Value ? "NOT READY" : "READY";
+        string readyButtonText = ready.Value ? "HỦY SẴN SÀNG" : "SẴN SÀNG";
 
-        if (GUILayout.Button(readyButtonText, ready.Value ? closeButtonStyle : playButtonStyle, GUILayout.Height(48f)))
+        if (GUILayout.Button(readyButtonText, ready.Value ? closeButtonStyle : playButtonStyle, GUILayout.Height(52f)))
         {
             bool nextReadyState = !ready.Value;
 
@@ -310,7 +322,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
         GUI.enabled = true;
         GUILayout.EndVertical();
-        GUILayout.Space(18f);
+        GUILayout.Space(22f);
         DrawPlayerRoster();
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
@@ -322,12 +334,12 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         bool selected = previewColorIndex == index;
         GUIStyle style = selected ? selectedCardStyle : cardStyle;
 
-        GUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Height(132f));
-        Rect previewRect = GUILayoutUtility.GetRect(width - 22f, 76f);
+        GUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Height(142f));
+        Rect previewRect = GUILayoutUtility.GetRect(width - 22f, 78f);
         DrawCharacterPreview(previewRect, index, ShirtColors[index], selected);
         GUILayout.Label(CharacterNames[index], subtitleStyle);
 
-        if (GUILayout.Button(selected ? "Selected" : "Select", smallButtonStyle))
+        if (GUILayout.Button(selected ? "Đã chọn" : "Chọn", smallButtonStyle))
         {
             previewColorIndex = index;
             RequestColorServerRpc(index);
@@ -340,8 +352,8 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private void DrawPlayerRoster()
     {
         GUILayout.BeginVertical(rosterStyle, GUILayout.ExpandHeight(true));
-        GUILayout.Label("PLAYERS", readyStyle);
-        GUILayout.Space(6f);
+        GUILayout.Label("NGƯỜI CHƠI", readyStyle);
+        GUILayout.Space(8f);
 
         NetworkPlayerAppearance[] players = FindObjectsByType<NetworkPlayerAppearance>(FindObjectsSortMode.None);
         Array.Sort(players, (left, right) => left.OwnerClientId.CompareTo(right.OwnerClientId));
@@ -351,18 +363,18 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             if (!players[i].IsSpawned)
                 continue;
 
-            GUILayout.BeginHorizontal(cardStyle, GUILayout.Height(44f));
+            GUILayout.BeginHorizontal(cardStyle, GUILayout.Height(46f));
             Color oldColor = GUI.color;
             GUI.color = ShirtColors[Mathf.Clamp(players[i].colorIndex.Value, 0, ShirtColors.Length - 1)];
             GUILayout.Box(GUIContent.none, GUILayout.Width(24f), GUILayout.Height(24f));
             GUI.color = oldColor;
 
             string displayName = players[i].playerName.Value.IsEmpty
-                ? "Choosing name..."
+                ? "Đang chọn tên..."
                 : players[i].playerName.Value.ToString();
-            string hostMarker = players[i].OwnerClientId == NetworkManager.ServerClientId ? " (HOST)" : "";
+            string hostMarker = players[i].OwnerClientId == NetworkManager.ServerClientId ? " (CHỦ PHÒNG)" : "";
             GUILayout.Label(displayName + hostMarker, subtitleStyle, GUILayout.ExpandWidth(true));
-            GUILayout.Label(players[i].ready.Value ? "READY" : "...", players[i].ready.Value ? readyStyle : subtitleStyle, GUILayout.Width(62f));
+            GUILayout.Label(players[i].ready.Value ? "SẴN SÀNG" : "CHỜ", players[i].ready.Value ? statusBadgeStyle : subtitleStyle, GUILayout.Width(104f));
             GUILayout.EndHorizontal();
             GUILayout.Space(4f);
         }
@@ -376,7 +388,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             GUILayout.Label(startReason, subtitleStyle);
             GUI.enabled = canStart;
 
-            if (GUILayout.Button("PLAY", playButtonStyle, GUILayout.Height(52f)))
+            if (GUILayout.Button("BẮT ĐẦU", playButtonStyle, GUILayout.Height(52f)))
             {
                 NetworkLobbyCoordinator.TryStartMatch();
             }
@@ -385,12 +397,12 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         }
         else
         {
-            GUILayout.Label("WAITING FOR HOST", subtitleStyle);
+            GUILayout.Label("ĐANG CHỜ CHỦ PHÒNG", subtitleStyle);
         }
 
         GUILayout.Space(8f);
 
-        if (GUILayout.Button("LEAVE ROOM", closeButtonStyle, GUILayout.Height(40f)))
+        if (GUILayout.Button("RỜI PHÒNG", closeButtonStyle, GUILayout.Height(40f)))
         {
             MultiplayerConnector.LeaveCurrentSession();
         }
@@ -950,9 +962,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         BindMovementAnimatorToCurrentModel();
         RefreshVisualReferences();
         renderers = GetComponentsInChildren<Renderer>(true);
-        SetClothingOverlayVisible(
-            !useCustomCharacter &&
-            (!IsSpawned || !IsOwner));
+        SetClothingOverlayVisible(!useCustomCharacter);
 
         return useCustomCharacter;
     }
@@ -1530,7 +1540,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
     private void ApplyOwnerVisibility()
     {
-        bool showWorldModel = IsSpawned && !IsOwner;
+        bool showWorldModel = true;
 
         if (renderers == null || renderers.Length == 0)
         {
@@ -1811,43 +1821,67 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             whiteTexture = Texture2D.whiteTexture;
         }
 
-        panelTexture ??= MakeTexture(new Color(0.18f, 0.23f, 0.14f, 0.98f));
-        cardTexture ??= MakeTexture(new Color(0.25f, 0.28f, 0.19f, 1f));
-        selectedCardTexture ??= MakeTexture(new Color(0.72f, 0.55f, 0.22f, 1f));
-        buttonTexture ??= MakeTexture(new Color(0.29f, 0.48f, 0.24f, 1f));
-        playButtonTexture ??= MakeTexture(new Color(0.82f, 0.61f, 0.23f, 1f));
-        closeButtonTexture ??= MakeTexture(new Color(0.82f, 0.22f, 0.18f, 1f));
-        inputTexture ??= MakeTexture(new Color(0.96f, 0.90f, 0.73f, 1f));
-        blackTexture ??= MakeTexture(new Color(0.03f, 0.03f, 0.03f, 0.88f));
+        panelTexture ??= MakeRoundedRectTexture(96, 96, 14, panelColor);
+        cardTexture ??= MakeRoundedRectTexture(64, 64, 8, new Color(0.15f, 0.23f, 0.22f, 1f));
+        selectedCardTexture ??= MakeRoundedRectTexture(64, 64, 8, new Color(0.88f, 0.63f, 0.24f, 1f));
+        buttonTexture ??= MakeRoundedRectTexture(64, 64, 7, new Color(0.20f, 0.52f, 0.43f, 1f));
+        playButtonTexture ??= MakeRoundedRectTexture(64, 64, 8, new Color(0.88f, 0.63f, 0.24f, 1f));
+        closeButtonTexture ??= MakeRoundedRectTexture(64, 64, 8, new Color(0.70f, 0.22f, 0.20f, 1f));
+        inputTexture ??= MakeRoundedRectTexture(64, 64, 7, new Color(0.96f, 0.92f, 0.78f, 1f));
+        blackTexture ??= MakeRoundedRectTexture(48, 48, 6, new Color(0.03f, 0.03f, 0.03f, 0.88f));
+        titleFont ??= CreateRuntimeFont("Palatino Linotype", "Georgia", "Times New Roman");
+        uiFont ??= CreateRuntimeFont("Cambria", "Book Antiqua", "Georgia", "Times New Roman");
 
         titleStyle ??= new GUIStyle(GUI.skin.label)
         {
-            fontSize = 28,
+            font = titleFont,
+            fontSize = 30,
             fontStyle = FontStyle.Bold,
-            alignment = TextAnchor.MiddleCenter,
-            normal = { textColor = new Color(1f, 0.84f, 0.42f) }
+            alignment = TextAnchor.MiddleLeft,
+            normal = { textColor = new Color(1f, 0.82f, 0.36f) }
+        };
+
+        panelStyle ??= new GUIStyle(GUI.skin.box)
+        {
+            border = new RectOffset(14, 14, 14, 14),
+            normal = { background = panelTexture }
         };
 
         subtitleStyle ??= new GUIStyle(GUI.skin.label)
         {
-            fontSize = 15,
+            font = uiFont,
+            fontSize = 16,
+            fontStyle = FontStyle.Bold,
             alignment = TextAnchor.MiddleCenter,
             wordWrap = true,
-            normal = { textColor = new Color(0.95f, 0.91f, 0.78f) }
+            normal = { textColor = new Color(0.86f, 0.91f, 0.82f) }
         };
 
         readyStyle ??= new GUIStyle(GUI.skin.label)
         {
-            fontSize = 18,
+            font = uiFont,
+            fontSize = 17,
             fontStyle = FontStyle.Bold,
             alignment = TextAnchor.MiddleLeft,
-            normal = { textColor = new Color(0.55f, 0.85f, 0.45f) }
+            normal = { textColor = new Color(0.95f, 0.84f, 0.46f) }
+        };
+
+        statusBadgeStyle ??= new GUIStyle(GUI.skin.label)
+        {
+            font = uiFont,
+            fontSize = 14,
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleCenter,
+            border = new RectOffset(8, 8, 8, 8),
+            padding = new RectOffset(10, 10, 4, 4),
+            normal = { background = selectedCardTexture, textColor = new Color(0.12f, 0.09f, 0.04f) }
         };
 
         cardStyle ??= new GUIStyle(GUI.skin.box)
         {
             alignment = TextAnchor.MiddleCenter,
-            padding = new RectOffset(8, 8, 8, 8),
+            border = new RectOffset(8, 8, 8, 8),
+            padding = new RectOffset(10, 10, 10, 10),
             margin = new RectOffset(5, 5, 5, 5),
             normal = { background = cardTexture, textColor = Color.white }
         };
@@ -1860,27 +1894,42 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
         smallButtonStyle ??= new GUIStyle(GUI.skin.button)
         {
+            font = uiFont,
+            border = new RectOffset(7, 7, 7, 7),
             fixedHeight = 26,
+            fontSize = 15,
             fontStyle = FontStyle.Bold,
-            normal = { background = buttonTexture, textColor = Color.white }
+            normal = { background = buttonTexture, textColor = Color.white },
+            hover = { background = buttonTexture, textColor = new Color(1f, 0.92f, 0.70f) },
+            active = { background = buttonTexture, textColor = Color.white }
         };
 
         playButtonStyle ??= new GUIStyle(GUI.skin.button)
         {
+            font = uiFont,
+            border = new RectOffset(8, 8, 8, 8),
             fontSize = 17,
             fontStyle = FontStyle.Bold,
-            normal = { background = playButtonTexture, textColor = Color.white }
+            normal = { background = playButtonTexture, textColor = new Color(0.12f, 0.09f, 0.04f) },
+            hover = { background = playButtonTexture, textColor = Color.white },
+            active = { background = playButtonTexture, textColor = new Color(1f, 0.92f, 0.70f) }
         };
 
         closeButtonStyle ??= new GUIStyle(GUI.skin.button)
         {
+            font = uiFont,
+            border = new RectOffset(8, 8, 8, 8),
             fontStyle = FontStyle.Bold,
-            normal = { background = closeButtonTexture, textColor = Color.white }
+            normal = { background = closeButtonTexture, textColor = Color.white },
+            hover = { background = closeButtonTexture, textColor = new Color(1f, 0.92f, 0.70f) },
+            active = { background = closeButtonTexture, textColor = Color.white }
         };
 
         inputStyle ??= new GUIStyle(GUI.skin.textField)
         {
+            font = uiFont,
             alignment = TextAnchor.MiddleLeft,
+            border = new RectOffset(7, 7, 7, 7),
             padding = new RectOffset(14, 14, 6, 6),
             fontSize = 18,
             fontStyle = FontStyle.Bold,
@@ -1890,6 +1939,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
         inputTextStyle ??= new GUIStyle(GUI.skin.label)
         {
+            font = uiFont,
             alignment = TextAnchor.MiddleLeft,
             padding = new RectOffset(14, 14, 0, 0),
             fontSize = 18,
@@ -1900,15 +1950,18 @@ public class NetworkPlayerAppearance : NetworkBehaviour
 
         rosterStyle ??= new GUIStyle(GUI.skin.box)
         {
+            border = new RectOffset(8, 8, 8, 8),
             padding = new RectOffset(12, 12, 12, 12),
             normal = { background = cardTexture, textColor = Color.white }
         };
 
         nameTagStyle ??= new GUIStyle(GUI.skin.label)
         {
+            font = uiFont,
             alignment = TextAnchor.MiddleCenter,
+            border = new RectOffset(6, 6, 6, 6),
             padding = new RectOffset(10, 10, 4, 4),
-            fontSize = 15,
+            fontSize = 14,
             fontStyle = FontStyle.Bold,
             normal = { background = blackTexture, textColor = Color.white }
         };
@@ -1921,5 +1974,60 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         texture.Apply();
 
         return texture;
+    }
+
+    private Texture2D MakeRoundedRectTexture(int width, int height, int radius, Color color)
+    {
+        Texture2D texture = new Texture2D(width, height);
+        texture.wrapMode = TextureWrapMode.Clamp;
+
+        float cornerRadius = radius - 0.5f;
+        float maxDistance = cornerRadius * cornerRadius;
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                float dx = 0f;
+                float dy = 0f;
+
+                if (x < radius)
+                    dx = cornerRadius - x;
+                else if (x >= width - radius)
+                    dx = x - (width - radius) + 0.5f;
+
+                if (y < radius)
+                    dy = cornerRadius - y;
+                else if (y >= height - radius)
+                    dy = y - (height - radius) + 0.5f;
+
+                bool inside = dx == 0f && dy == 0f || dx * dx + dy * dy <= maxDistance;
+                texture.SetPixel(x, y, inside ? color : new Color(color.r, color.g, color.b, 0f));
+            }
+        }
+
+        texture.Apply();
+        return texture;
+    }
+
+    private Font CreateRuntimeFont(params string[] fontNames)
+    {
+        for (int i = 0; i < fontNames.Length; i++)
+        {
+            Font font = Font.CreateDynamicFontFromOSFont(fontNames[i], 18);
+
+            if (font != null)
+                return font;
+        }
+
+        return GUI.skin.font;
+    }
+
+    private void DestroyRuntimeFont(Font font)
+    {
+        if (font != null && font != GUI.skin.font)
+        {
+            Destroy(font);
+        }
     }
 }
