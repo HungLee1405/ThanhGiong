@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using Unity.Netcode;
@@ -90,7 +90,9 @@ public class NPCDialogue : MonoBehaviour
 
         HideInteractionText();
 
-        dialogueManager.StartDialogue(npcName, dialogueLines, () =>
+        AudioClip[] voiceClips = questManager.GetCurrentVoiceClipsForNPC(npcId);
+
+        dialogueManager.StartDialogue(npcName, dialogueLines, voiceClips, () =>
         {
             questManager.CompleteTalkToNPC(npcId);
 

@@ -251,6 +251,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 897494557}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1001 &2959032
 PrefabInstance:
@@ -414,6 +415,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 477404803}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!114 &16039500 stripped
 MonoBehaviour:
@@ -597,6 +599,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 213.01999
@@ -1030,6 +1036,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 216.95226
@@ -1340,6 +1350,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 265.05402
@@ -1759,6 +1773,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 206.70927
@@ -3022,6 +3040,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 0}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &202834691
 GameObject:
@@ -4094,6 +4113,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 863681715}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &323229688
 GameObject:
@@ -4939,6 +4959,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 228.56422
@@ -6055,6 +6079,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 235.25793
@@ -6807,6 +6835,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1826382827}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &413033259
 GameObject:
@@ -7119,6 +7148,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 231.73386
@@ -7727,6 +7760,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 884740024}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &448046613
 GameObject:
@@ -8719,6 +8753,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1983807718}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!114 &510466921 stripped
 MonoBehaviour:
@@ -9136,6 +9171,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1659970403}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1001 &541699029
 PrefabInstance:
@@ -9290,6 +9326,7 @@ MonoBehaviour:
   cookedRiceAmount: 1
   cookTime: 8
   interactionUI: {fileID: 1471865643}
+  cookingSound: {fileID: 8300000, guid: 05341dd63858f3f40b036eb21b517369, type: 3}
   cookingMenuUI: {fileID: 1691767387}
   useDataDrivenMenu: 1
 --- !u!4 &550826733 stripped
@@ -9446,6 +9483,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 209.93213
@@ -11000,6 +11041,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 227.18677
@@ -11757,6 +11802,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 654426034}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &672004416
 GameObject:
@@ -12164,6 +12210,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 2096289176}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &685304641
 GameObject:
@@ -13530,6 +13577,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 16039500}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1001 &781793042
 PrefabInstance:
@@ -13663,6 +13711,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1713581106}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &786098322
 GameObject:
@@ -14069,6 +14118,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 222.8268
@@ -14587,6 +14640,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 861410716}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &837292455
 GameObject:
@@ -17826,6 +17880,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 437229454}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &1031977793
 GameObject:
@@ -17936,6 +17991,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 218.81
@@ -19191,6 +19250,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 236.68721
@@ -19380,6 +19443,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 353105299}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &1104095361
 GameObject:
@@ -19978,6 +20042,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 221.34148
@@ -21606,6 +21674,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 213.06999
@@ -22038,6 +22110,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1876906770}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &1240299182
 GameObject:
@@ -22310,6 +22383,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestDatabase
   axeItem: {fileID: 11400000, guid: 882084d8a78aeb941bb3d0ceaaff8198, type: 2}
   pickaxeItem: {fileID: 11400000, guid: 7a7aefcfeadd1f947b858e2f87487ca3, type: 2}
+  voice1GL: {fileID: 8300000, guid: 873236a15fb121d468c736355f50c44c, type: 3}
+  voice2GL: {fileID: 8300000, guid: c4bc0df1c55d10b4d8df5aff3b3b6ee7, type: 3}
+  voice3GL: {fileID: 8300000, guid: dce952114b438e54e99268936ddf33f5, type: 3}
+  voice4GL: {fileID: 8300000, guid: 4878bc94fb536914ca0278a0947b4e1e, type: 3}
+  voice5GL: {fileID: 8300000, guid: 1fb2d6c527be23b46941b70c2f700ff5, type: 3}
+  voice6GL: {fileID: 8300000, guid: 2d3e3415f4d82754f9e2a1ec64f6a435, type: 3}
+  voice7GL: {fileID: 8300000, guid: 8fa4f660dd0972345a9c905a83b5811e, type: 3}
+  voice8GL: {fileID: 8300000, guid: 77a94651799c3a0439cf2ef0ae21a5dd, type: 3}
+  voice9GL: {fileID: 8300000, guid: deebd4af6312a404b83f03e0914f738f, type: 3}
+  voice10GL: {fileID: 8300000, guid: 709052a9ef51d174ca6c8577db0b246a, type: 3}
+  voice11GL: {fileID: 8300000, guid: 9ab67861c4db57d439418fcdd23ae7af, type: 3}
+  voice12GL: {fileID: 8300000, guid: 0375841b09fa27f42bdb7d724516a7d6, type: 3}
+  voice13GL: {fileID: 8300000, guid: 6ece2be46200e734fa7ccec6733d7716, type: 3}
+  voice1MG: {fileID: 8300000, guid: 33f4d0a9cf6751846987ddbe0bd26782, type: 3}
+  voice2MG: {fileID: 8300000, guid: 2035bcf71790f844dbe02b10ec0b7ff2, type: 3}
+  voice3MG: {fileID: 8300000, guid: ed5bf3089bef3c147be61796fcc2d712, type: 3}
+  voice4MG: {fileID: 8300000, guid: efa4ec14fa53ee34096a868759db6a48, type: 3}
+  voice5MG: {fileID: 8300000, guid: a962e82e9172e7846aeae779147c00af, type: 3}
+  voice6MG: {fileID: 8300000, guid: 6003309a6e4becb45ad71ef0250440a1, type: 3}
+  voice7MG: {fileID: 8300000, guid: acdeb7902f082a54daae00b5a5ee42b6, type: 3}
+  voice8MG: {fileID: 8300000, guid: fa129ea23ae214c498fe4f9740574b19, type: 3}
+  voice9MG: {fileID: 8300000, guid: 82b4069fdd39ee74b861669397d92fa2, type: 3}
+  voice10MG: {fileID: 8300000, guid: cfe8e6fa9ed846d488e89460346168a4, type: 3}
+  voice1Bacba: {fileID: 8300000, guid: 54f4e8509996d7547bfde0566f2c28b1, type: 3}
+  voice2Bacba: {fileID: 8300000, guid: 30ce68653fd9c1b428bee6ae8d167fe2, type: 3}
+  voice3Bacba: {fileID: 8300000, guid: bf1205c171d3e2c4eab25cfd454067e2, type: 3}
+  voice4Bacba: {fileID: 8300000, guid: c3aced323c097b241a367405bf47d50f, type: 3}
+  voice5Bacba: {fileID: 8300000, guid: ab6e914faeea01a46ab366cb4ab402f4, type: 3}
+  voice6Bacba: {fileID: 8300000, guid: f919e3a9609d9324b86029b059296583, type: 3}
+  voice7Bacba: {fileID: 8300000, guid: cc2482ddda3016b45af07fa26073cbb7, type: 3}
+  voice1ThoRen: {fileID: 8300000, guid: 48bc386797b568846ba77e32cb3ce766, type: 3}
+  voice2ThoRen: {fileID: 8300000, guid: faa8fe03e4888b243ba8eb7f1f967339, type: 3}
 --- !u!4 &1248918207
 Transform:
   m_ObjectHideFlags: 0
@@ -23193,6 +23298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1292416599}
   - component: {fileID: 1292416600}
+  - component: {fileID: 1292416601}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -23230,6 +23336,109 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1286913135}
   dialogueNpcNameText: {fileID: 1767649566}
   dialogueText: {fileID: 1287468195}
+  voiceAudioSource: {fileID: 1292416601}
+  bgmSourceOverride: {fileID: 1646384486}
+  duckedVolume: 0
+  normalVolume: 0.15
+  bgmFadeInDuration: 0.5
+  bgmFadeOutDuration: 1
+--- !u!82 &1292416601
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292416598}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 0
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1296796206
 GameObject:
   m_ObjectHideFlags: 0
@@ -24695,6 +24904,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 510466921}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &1397243852
 GameObject:
@@ -24956,6 +25166,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 208.71118
@@ -25581,6 +25795,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 1488087776}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &1471865641
 GameObject:
@@ -27310,6 +27525,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 210.2083
@@ -28136,6 +28355,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 262.3154
@@ -28632,7 +28855,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 4a8618e41e9eec441ab096697ce0b170, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -29535,6 +29758,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1371357397}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &1672908071
 GameObject:
@@ -29916,6 +30140,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 226.63618
@@ -33885,6 +34113,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 649287486}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1001 &1842815595
 PrefabInstance:
@@ -35389,6 +35618,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 216.74179
@@ -35843,6 +36076,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 114218406}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &1969705348
 GameObject:
@@ -36395,6 +36629,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 224.9727
@@ -37239,6 +37477,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 448046615}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!1 &2045931247
 GameObject:
@@ -38220,6 +38459,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899381221778957545, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: actionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b80b3d8329fa5824d94b0b531f872e88, type: 3}
     - target: {fileID: 2278034556775256485, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 231.10368
@@ -38410,6 +38653,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m r\xECu tr\xEAn tay"
   collectTime: 2
   interactionUI: {fileID: 1696086735}
+  actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
 --- !u!1 &2118227669
 GameObject:
@@ -38977,6 +39221,7 @@ MonoBehaviour:
   missingToolMessage: "B\u1EA1n c\u1EA7n c\u1EA7m c\xF4ng c\u1EE5 ph\xF9 h\u1EE3p"
   collectTime: 2
   interactionUI: {fileID: 1969705350}
+  actionSound: {fileID: 0}
   reportQuestProgress: 1
 --- !u!65 &2140899630
 BoxCollider:

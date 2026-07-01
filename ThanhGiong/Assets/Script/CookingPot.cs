@@ -19,6 +19,10 @@ public class CookingPot : MonoBehaviour
     [Header("Interaction UI")]
     public InteractionUI interactionUI;
 
+    [Header("Sound Settings")]
+    public AudioClip cookingSound;  // Âm thanh phát khi đang nấu (ví dụ: nấu ăn.mp3)
+    private AudioSource audioSource;
+
     private bool playerInRange = false;
     private bool isCooking = false;
 
@@ -40,6 +44,20 @@ public class CookingPot : MonoBehaviour
     public ItemData PendingOutputItem => pendingOutputItem;
     public int PendingOutputAmount => pendingOutputAmount;
     public string CurrentRecipeName => currentRecipe != null ? currentRecipe.displayName : "Cơm";
+
+    private void Start()
+    {
+        // Khởi tạo AudioSource để phát âm thanh nấu ăn
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+        audioSource.spatialBlend = 0f; // 2D sound – nghe rõ bất kể khoảng cách
+        audioSource.volume = 1f;
+    }
 
     private void Update()
     {
@@ -129,6 +147,7 @@ public class CookingPot : MonoBehaviour
         currentRecipe = recipe;
         isCooking = true;
         cookingTimer = 0f;
+        PlayCookingSound();
 
         if (interactionUI != null)
         {
@@ -155,6 +174,7 @@ public class CookingPot : MonoBehaviour
 
             isCooking = true;
             cookingTimer = 0f;
+            PlayCookingSound();
 
             if (interactionUI != null)
             {
@@ -296,6 +316,23 @@ public class CookingPot : MonoBehaviour
     {
         isCooking = false;
         cookingTimer = 0f;
+        StopCookingSound();
+    }
+
+    private void PlayCookingSound()
+    {
+        if (cookingSound == null || audioSource == null) return;
+        if (audioSource.isPlaying && audioSource.clip == cookingSound) return;
+        audioSource.clip = cookingSound;
+        audioSource.Play();
+    }
+
+    private void StopCookingSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 
     // Kiểm tra xem collider có phải là local player không.

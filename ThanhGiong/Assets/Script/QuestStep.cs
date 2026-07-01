@@ -37,6 +37,10 @@ public class QuestStep
     [TextArea(2, 5)]
     public string[] dialogueLines;
 
+    /// <summary>Mảng AudioClip tương ứng 1-1 với từng dòng dialogueLines.
+    /// Phần tử null được bỏ qua (không phát âm thanh cho dòng đó).</summary>
+    public AudioClip[] voiceClips;
+
     [Header("Rewards")]
     public ItemData rewardItem;
     public int rewardAmount = 1;

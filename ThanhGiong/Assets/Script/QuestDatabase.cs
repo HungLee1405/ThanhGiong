@@ -7,6 +7,72 @@ public class QuestDatabase : MonoBehaviour
     public ItemData axeItem;
     public ItemData pickaxeItem;
 
+    // ─────────────────────────────────────────────
+    //  VOICE CLIPS – GIÀ LÀNG (village_elder)
+    //  Mỗi clip ứng với 1 dòng thoại theo thứ tự.
+    //  Ngày 1:  3 dòng → Voice1GL, Voice2GL, Voice3GL
+    //  Ngày 2:  4 dòng → Voice4GL …  Voice7GL
+    //  Ngày 3:  4 dòng → Voice8GL …  Voice11GL
+    //  Ngày 4:  5 dòng → Voice12GL, Voice13GL, null, null, null
+    //  Ngày 5:  6 dòng → (không còn clip)
+    //  Ngày 6:  5 dòng → (không còn clip)
+    //  Ngày 7:  2 dòng → (không còn clip)
+    // ─────────────────────────────────────────────
+    [Header("Voice – Già Làng (GL)")]
+    public AudioClip voice1GL;
+    public AudioClip voice2GL;
+    public AudioClip voice3GL;
+    public AudioClip voice4GL;
+    public AudioClip voice5GL;
+    public AudioClip voice6GL;
+    public AudioClip voice7GL;
+    public AudioClip voice8GL;
+    public AudioClip voice9GL;
+    public AudioClip voice10GL;
+    public AudioClip voice11GL;
+    public AudioClip voice12GL;
+    public AudioClip voice13GL;
+
+    // ─────────────────────────────────────────────
+    //  VOICE CLIPS – MẸ GIÓNG (giong_mother)
+    //  Lần 1 (ngày 1): 6 dòng → Voice1MG … Voice6MG
+    //  Lần 2 (ngày 1): 4 dòng → Voice7MG … Voice10MG
+    // ─────────────────────────────────────────────
+    [Header("Voice – Mẹ Gióng (MG)")]
+    public AudioClip voice1MG;
+    public AudioClip voice2MG;
+    public AudioClip voice3MG;
+    public AudioClip voice4MG;
+    public AudioClip voice5MG;
+    public AudioClip voice6MG;
+    public AudioClip voice7MG;
+    public AudioClip voice8MG;
+    public AudioClip voice9MG;
+    public AudioClip voice10MG;
+
+    // ─────────────────────────────────────────────
+    //  VOICE CLIPS – BÁC BA (bac_ba)
+    //  Lần 1 (ngày 3): 4 dòng → Voice1Bacba … Voice4Bacba
+    //  Lần 2 (ngày 3): 3 dòng → Voice5Bacba … Voice7Bacba
+    // ─────────────────────────────────────────────
+    [Header("Voice – Bác Ba (Bacba)")]
+    public AudioClip voice1Bacba;
+    public AudioClip voice2Bacba;
+    public AudioClip voice3Bacba;
+    public AudioClip voice4Bacba;
+    public AudioClip voice5Bacba;
+    public AudioClip voice6Bacba;
+    public AudioClip voice7Bacba;
+
+    // ─────────────────────────────────────────────
+    //  VOICE CLIPS – THỢ RÈN (blacksmith)
+    //  Ngày 4: 1 clip phát khi bắt đầu cuộc thoại → Voice1ThoRen
+    //  Ngày 7: 1 clip phát khi bắt đầu cuộc thoại → Voice2ThoRen
+    // ─────────────────────────────────────────────
+    [Header("Voice – Thợ Rèn (ThoRen)")]
+    public AudioClip voice1ThoRen;
+    public AudioClip voice2ThoRen;
+
     public List<QuestStep> GetQuestStepsForDay(int day)
     {
         switch (day)
@@ -54,7 +120,9 @@ public class QuestDatabase : MonoBehaviour
                     "Vậy là cậu là người được phái tới à.",
                     "Ta là Già Làng Phù Đổng, thật tốt khi thiếu niên trẻ vẫn còn hăng hái.",
                     "Hãy đi gặp mẹ Gióng để biết mình cần làm gì nhé."
-                }
+                },
+                // Voice1GL → dòng 0, Voice2GL → dòng 1, Voice3GL → dòng 2
+                voiceClips = new AudioClip[] { voice1GL, voice2GL, voice3GL }
             },
 
             new QuestStep
@@ -73,7 +141,9 @@ public class QuestDatabase : MonoBehaviour
                     "Hãy giúp tôi nấu ăn nhé.",
                     "Cậu có thể lấy nước từ giếng, gạo từ kho thóc và đến nồi ở giữa làng để nấu.",
                     "Sau khi nấu xong hãy đến gặp tôi."
-                }
+                },
+                // Voice1MG → dòng 0, …, Voice6MG → dòng 5
+                voiceClips = new AudioClip[] { voice1MG, voice2MG, voice3MG, voice4MG, voice5MG, voice6MG }
             },
 
             new QuestStep
@@ -130,7 +200,9 @@ public class QuestDatabase : MonoBehaviour
                     "Tuy nhiên nhiêu đây là chưa đủ, con tôi giờ đây đang ăn rất nhiều.",
                     "Hãy nấu và đưa cơm cho tôi để tôi đưa cho nó ăn.",
                     "Bên phải màn hình là thanh đói, hãy giúp tôi giữ nó trên 80% khi hết ngày."
-                }
+                },
+                // Voice7MG → dòng 0, …, Voice10MG → dòng 3
+                voiceClips = new AudioClip[] { voice7MG, voice8MG, voice9MG, voice10MG }
             },
 
             new QuestStep
@@ -162,7 +234,9 @@ public class QuestDatabase : MonoBehaviour
                     "Ta tin tưởng vào cậu hôm nay.",
                     "Tuy nhiên Gióng đang ngày càng lớn lên, sức ăn cũng lớn hơn.",
                     "Thanh đói sẽ càng ngày càng tụt nhanh hơn. Hãy cẩn thận."
-                }
+                },
+                // Voice4GL → dòng 0, …, Voice7GL → dòng 3
+                voiceClips = new AudioClip[] { voice4GL, voice5GL, voice6GL, voice7GL }
             },
 
             new QuestStep
@@ -194,7 +268,9 @@ public class QuestDatabase : MonoBehaviour
                     "Ta tin tưởng vào cậu hôm nay.",
                     "À mà, bác Ba có vẻ gặp khó khăn.",
                     "Nếu được hãy ghé qua giúp ông ấy một tay nhé."
-                }
+                },
+                // Voice8GL → dòng 0, …, Voice11GL → dòng 3
+                voiceClips = new AudioClip[] { voice8GL, voice9GL, voice10GL, voice11GL }
             },
 
             new QuestStep
@@ -223,7 +299,9 @@ public class QuestDatabase : MonoBehaviour
                     "Lũ gà của ta nghịch ngợm quá, đã xổng chuồng chạy đi khắp nơi rồi.",
                     "Cậu giúp ta bắt 3 con gà bỏ lại vào chuồng được không?",
                     "Sau đó ta sẽ truyền lại bí quyết nấu món Cơm Gà để giúp Gióng mau lớn!"
-                }
+                },
+                // Voice1Bacba → dòng 0, …, Voice4Bacba → dòng 3
+                voiceClips = new AudioClip[] { voice1Bacba, voice2Bacba, voice3Bacba, voice4Bacba }
             },
 
             new QuestStep
@@ -253,7 +331,9 @@ public class QuestDatabase : MonoBehaviour
                     "Ôi cậu làm tốt quá, cảm ơn cậu nhiều nhé!",
                     "Lũ gà giờ đã ở yên trong chuồng rồi.",
                     "Ta đã chuẩn bị công thức nấu Cơm Gà cho cậu rồi đấy, hãy dùng nó để cho Gióng ăn nhé!"
-                }
+                },
+                // Voice5Bacba → dòng 0, Voice6Bacba → dòng 1, Voice7Bacba → dòng 2
+                voiceClips = new AudioClip[] { voice5Bacba, voice6Bacba, voice7Bacba }
             }
         };
     }
@@ -277,7 +357,9 @@ public class QuestDatabase : MonoBehaviour
                     "Chúng ta phải chuẩn bị vũ khí cho Gióng.",
                     "Cậu hãy đến gặp bác thợ rèn ở rìa làng.",
                     "Bác ấy đang cần quặng sắt để chuẩn bị đúc ngựa và roi sắt đấy."
-                }
+                },
+                // Voice12GL → dòng 0, Voice13GL → dòng 1, dòng 2-4 không có clip
+                voiceClips = new AudioClip[] { voice12GL, voice13GL, null, null, null }
             },
 
             new QuestStep
@@ -301,7 +383,9 @@ public class QuestDatabase : MonoBehaviour
                     "Củi lửa đã sẵn sàng nhưng ta đang thiếu quặng sắt trầm trọng.",
                     "Cậu hãy cầm lấy cây cuốc chim này.",
                     "Ra mỏ đá phía sau làng đào một ít Quặng Sắt mang về kho giúp ta nhé!"
-                }
+                },
+                // Voice1ThoRen phát tại dòng đầu, 3 dòng sau không có clip
+                voiceClips = new AudioClip[] { voice1ThoRen, null, null, null }
             },
 
             new QuestStep
@@ -353,6 +437,7 @@ public class QuestDatabase : MonoBehaviour
                     "À, sẵn có ống tre tươi, cậu có thể nấu món Cơm Lam Ống Tre cho Gióng.",
                     "Thằng bé giờ đã lớn bằng ngôi nhà, sức ăn kinh khủng lắm."
                 }
+                // Ngày 5: không còn clip GL (đã dùng hết 13 clips từ ngày 1-4)
             },
 
             new QuestStep
@@ -398,6 +483,7 @@ public class QuestDatabase : MonoBehaviour
                     "Hãy vừa cho Gióng ăn, vừa vận chuyển thật nhiều Sắt và Tre vào kho dự trữ.",
                     "Sức ăn của Gióng hôm nay đã đạt đỉnh, cậu phải hoạt động hết công suất đấy!"
                 }
+                // Ngày 6: không còn clip GL
             },
 
             new QuestStep
@@ -433,6 +519,7 @@ public class QuestDatabase : MonoBehaviour
                     "Hôm nay là ngày cuối cùng rồi.",
                     "Hãy gặp bác thợ rèn để biết mình cần làm gì nhé."
                 }
+                // Ngày 7: không còn clip GL
             },
 
             new QuestStep
@@ -452,7 +539,9 @@ public class QuestDatabase : MonoBehaviour
                     "Hãy đào và mang 10 viên sắt vào kho.",
                     "Để ta đúc ngựa sắt, roi sắt!",
                     "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân!"
-                }
+                },
+                // Voice2ThoRen phát tại dòng đầu, 6 dòng sau không có clip
+                voiceClips = new AudioClip[] { voice2ThoRen, null, null, null, null, null, null }
             },
 
             new QuestStep

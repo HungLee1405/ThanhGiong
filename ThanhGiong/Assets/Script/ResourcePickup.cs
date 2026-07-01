@@ -31,6 +31,10 @@ public class ResourcePickup : MonoBehaviour
     public float collectTime = 2f;
     public InteractionUI interactionUI;
 
+    [Header("Sound Settings")]
+    public AudioClip actionSound;  // Âm thanh phát khi đang thu thập (vd: chatCay, đào đá)
+    private AudioSource audioSource;
+
     [Header("Quest Settings")]
     public bool reportQuestProgress = true;
 
@@ -68,6 +72,16 @@ public class ResourcePickup : MonoBehaviour
             triggerCollider.isTrigger = true;
             triggerCollider.enabled = true;
         }
+
+        // Khởi tạo AudioSource để phát âm thanh hành động
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+        audioSource.spatialBlend = 1f; // 3D sound
     }
 
     private void OnEnable()
@@ -150,6 +164,7 @@ public class ResourcePickup : MonoBehaviour
         {
             isCollecting = true;
             collectTimer = 0f;
+            PlayActionSound();
         }
 
         collectTimer += Time.deltaTime;
@@ -665,6 +680,23 @@ public class ResourcePickup : MonoBehaviour
     {
         isCollecting = false;
         collectTimer = 0f;
+        StopActionSound();
+    }
+
+    private void PlayActionSound()
+    {
+        if (actionSound == null || audioSource == null) return;
+        if (audioSource.isPlaying && audioSource.clip == actionSound) return;
+        audioSource.clip = actionSound;
+        audioSource.Play();
+    }
+
+    private void StopActionSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 
     private bool CanReturnItem()

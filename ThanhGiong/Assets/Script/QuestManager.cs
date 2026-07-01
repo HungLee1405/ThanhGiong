@@ -297,6 +297,19 @@ public class QuestManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>Trả về mảng AudioClip tương ứng với hội thoại hiện tại của NPC.</summary>
+    public AudioClip[] GetCurrentVoiceClipsForNPC(string npcId)
+    {
+        foreach (var step in GetActiveSteps())
+        {
+            if (step.stepType == QuestStepType.TalkToNPC && step.targetNPCId == npcId)
+            {
+                return step.voiceClips;
+            }
+        }
+        return null;
+    }
+
     public void CompleteTalkToNPC(string npcId)
     {
         if (!CanTalkToNPC(npcId))
