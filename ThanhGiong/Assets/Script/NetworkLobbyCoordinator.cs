@@ -52,6 +52,8 @@ public class NetworkLobbyCoordinator : MonoBehaviour
         {
             MatchStarted = false;
         }
+
+        OnlineUIFont.ApplyToCurrentOnlineText();
     }
 
     private void OnDisable()
@@ -168,6 +170,8 @@ public class NetworkLobbyCoordinator : MonoBehaviour
             return;
 
         MatchStarted = true;
+        OnlineUIFont.ApplyToCurrentOnlineText(true);
+        PersistentBGM.instance?.FadeInMusic(0.25f, 0.5f);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         MatchStartedEvent?.Invoke();

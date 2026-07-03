@@ -703,8 +703,8 @@ public class MultiplayerConnector : MonoBehaviour
         greenTexture = CreateRoundedRectTexture(64, 64, 8, new Color(0.20f, 0.52f, 0.43f, 1f));
         backTexture = CreateRoundedRectTexture(64, 64, 8, new Color(0.18f, 0.24f, 0.24f, 1f));
         inputTexture = CreateRoundedRectTexture(64, 64, 7, new Color(0.96f, 0.92f, 0.78f, 1f));
-        titleFont = CreateRuntimeFont("Palatino Linotype", "Georgia", "Times New Roman");
-        uiFont = CreateRuntimeFont("Cambria", "Book Antiqua", "Georgia", "Times New Roman");
+        titleFont = OnlineUIFont.CreateTitleFont();
+        uiFont = OnlineUIFont.CreateUIFont();
 
         overlayStyle = new GUIStyle(GUI.skin.box)
         {
@@ -844,25 +844,8 @@ public class MultiplayerConnector : MonoBehaviour
         return texture;
     }
 
-    private Font CreateRuntimeFont(params string[] fontNames)
-    {
-        for (int i = 0; i < fontNames.Length; i++)
-        {
-            Font font = Font.CreateDynamicFontFromOSFont(fontNames[i], 18);
-
-            if (font != null)
-                return font;
-        }
-
-        return GUI.skin.font;
-    }
-
     private void DestroyRuntimeFont(Font font)
     {
-        if (font != null && font != GUI.skin.font)
-        {
-            Destroy(font);
-        }
     }
 
     private void DestroyGuiTexture(Texture2D texture)

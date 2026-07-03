@@ -20,6 +20,7 @@ public class SharedQuestNetwork : MonoBehaviour
     private const string ChickenCatchMessage = "ThanhGiongChickenCatch";
     private const string ChickenCatchResultMessage = "ThanhGiongChickenCatchResult";
     private const string ChickenStateMessage = "ThanhGiongChickenState";
+    private const string ChickenTransformStateMessage = "ThanhGiongChickenTransformState";
     private const string DayTransitionMessage = "ThanhGiongDayTransition";
 
     private static SharedQuestNetwork instance;
@@ -73,6 +74,7 @@ public class SharedQuestNetwork : MonoBehaviour
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchResultMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenStateMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenTransformStateMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(DayTransitionMessage);
             manager.OnClientConnectedCallback -= OnClientConnected;
         }
@@ -230,6 +232,43 @@ public class SharedQuestNetwork : MonoBehaviour
         writer.WriteValueSafe(chickenId ?? "");
         writer.WriteValueSafe(caught);
         networkManager.CustomMessagingManager.SendNamedMessage(ChickenStateMessage, clientId, writer);
+    }
+
+    public static void PublishChickenTransformState(string chickenId, Vector3 position, float rotationY, bool hidden)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        foreach (ulong clientId in networkManager.ConnectedClientsIds)
+        {
+            if (clientId == networkManager.LocalClientId)
+                continue;
+
+            SendChickenTransformState(clientId, chickenId, position, rotationY, hidden);
+        }
+    }
+
+    public static void SendChickenTransformState(
+        ulong clientId,
+        string chickenId,
+        Vector3 position,
+        float rotationY,
+        bool hidden)
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+        using FastBufferWriter writer = new FastBufferWriter(256, Allocator.Temp);
+        writer.WriteValueSafe(chickenId ?? "");
+        writer.WriteValueSafe(position);
+        writer.WriteValueSafe(rotationY);
+        writer.WriteValueSafe(hidden);
+        networkManager.CustomMessagingManager.SendNamedMessage(ChickenTransformStateMessage, clientId, writer);
     }
 
     public static void PublishResourceState(string resourceId, bool hidden, float remainingSeconds)
@@ -414,6 +453,7 @@ public class SharedQuestNetwork : MonoBehaviour
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenCatchResultMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenStateMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ChickenTransformStateMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(DayTransitionMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ProgressMessage, OnProgressMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StateMessage, OnStateMessage);
@@ -429,6 +469,7 @@ public class SharedQuestNetwork : MonoBehaviour
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenCatchMessage, OnChickenCatchMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenCatchResultMessage, OnChickenCatchResultMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenStateMessage, OnChickenStateMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ChickenTransformStateMessage, OnChickenTransformStateMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(DayTransitionMessage, OnDayTransitionMessage);
         networkManager.OnClientConnectedCallback -= OnClientConnected;
         networkManager.OnClientConnectedCallback += OnClientConnected;
@@ -608,6 +649,18 @@ public class SharedQuestNetwork : MonoBehaviour
         reader.ReadValueSafe(out string chickenId);
         reader.ReadValueSafe(out bool caught);
         ChickenController.ApplySharedState(chickenId, caught);
+    }
+
+    private void OnChickenTransformStateMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out string chickenId);
+        reader.ReadValueSafe(out Vector3 position);
+        reader.ReadValueSafe(out float rotationY);
+        reader.ReadValueSafe(out bool hidden);
+        ChickenController.ApplySharedTransformState(chickenId, position, rotationY, hidden);
     }
 
     private void OnDayTransitionMessage(ulong senderClientId, FastBufferReader reader)

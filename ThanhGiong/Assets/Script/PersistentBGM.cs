@@ -18,6 +18,8 @@ public class PersistentBGM : MonoBehaviour
     [Header("Kéo file MainMixer vào đây")]
     public UnityEngine.Audio.AudioMixer mainMixer;
 
+    private AudioListener fallbackListener;
+
     void Awake()
     {
         // Cơ chế giữ object bất tử khi chuyển Scene
@@ -64,12 +66,14 @@ public class PersistentBGM : MonoBehaviour
 
         // Đảm bảo nhạc nền đang phát
         EnsureBGMPlaying();
+        EnsureAudioListenerExists();
     }
 
     private void Update()
     {
         // Nếu nhạc bị dừng vì lý do gì đó (scene reload, etc.), play lại
         EnsureBGMPlaying();
+        EnsureAudioListenerExists();
     }
 
     private void EnsureBGMPlaying()
@@ -80,6 +84,31 @@ public class PersistentBGM : MonoBehaviour
 
         bgmSource.loop = true;
         bgmSource.Play();
+    }
+
+    private void EnsureAudioListenerExists()
+    {
+        AudioListener[] listeners = FindObjectsByType<AudioListener>(
+            FindObjectsInactive.Exclude,
+            FindObjectsSortMode.None);
+
+        for (int i = 0; i < listeners.Length; i++)
+        {
+            if (listeners[i] != null && listeners[i].enabled)
+                return;
+        }
+
+        if (fallbackListener == null)
+        {
+            fallbackListener = GetComponent<AudioListener>();
+        }
+
+        if (fallbackListener == null)
+        {
+            fallbackListener = gameObject.AddComponent<AudioListener>();
+        }
+
+        fallbackListener.enabled = true;
     }
 
     // Hàm gọi lệnh làm mờ nhạc

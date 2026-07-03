@@ -47,6 +47,8 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
         if (!ownsLocalView || playerCamera == null)
             return;
 
+        EnsureLocalAudioListener();
+
         Transform cameraTransform = playerCamera.transform;
         if ((cameraTransform.localPosition - localCameraPosition).sqrMagnitude > 0.000001f)
         {
@@ -73,6 +75,11 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
             playerCamera.enabled = isLocalPlayer;
         }
 
+        if (isLocalPlayer)
+        {
+            EnsureLocalAudioListener();
+        }
+
         if (audioListener != null)
         {
             audioListener.enabled = isLocalPlayer;
@@ -95,5 +102,40 @@ public class NetworkLocalPlayerSetup : NetworkBehaviour
         Transform cameraTransform = playerCamera.transform;
         cameraTransform.localPosition = localCameraPosition;
         cameraTransform.localRotation = Quaternion.Euler(localCameraEulerAngles);
+    }
+
+    private void EnsureLocalAudioListener()
+    {
+        if (playerCamera == null)
+        {
+            playerCamera = GetComponentInChildren<Camera>(true);
+        }
+
+        if (playerCamera == null)
+            return;
+
+        if (audioListener == null)
+        {
+            audioListener = playerCamera.GetComponent<AudioListener>();
+        }
+
+        if (audioListener == null)
+        {
+            audioListener = playerCamera.gameObject.AddComponent<AudioListener>();
+        }
+
+        AudioListener[] listeners = FindObjectsByType<AudioListener>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
+
+        for (int i = 0; i < listeners.Length; i++)
+        {
+            if (listeners[i] != null && listeners[i] != audioListener)
+            {
+                listeners[i].enabled = false;
+            }
+        }
+
+        audioListener.enabled = true;
     }
 }

@@ -1829,8 +1829,8 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         closeButtonTexture ??= MakeRoundedRectTexture(64, 64, 8, new Color(0.70f, 0.22f, 0.20f, 1f));
         inputTexture ??= MakeRoundedRectTexture(64, 64, 7, new Color(0.96f, 0.92f, 0.78f, 1f));
         blackTexture ??= MakeRoundedRectTexture(48, 48, 6, new Color(0.03f, 0.03f, 0.03f, 0.88f));
-        titleFont ??= CreateRuntimeFont("Palatino Linotype", "Georgia", "Times New Roman");
-        uiFont ??= CreateRuntimeFont("Cambria", "Book Antiqua", "Georgia", "Times New Roman");
+        titleFont ??= OnlineUIFont.CreateTitleFont();
+        uiFont ??= OnlineUIFont.CreateUIFont();
 
         titleStyle ??= new GUIStyle(GUI.skin.label)
         {
@@ -2010,24 +2010,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         return texture;
     }
 
-    private Font CreateRuntimeFont(params string[] fontNames)
-    {
-        for (int i = 0; i < fontNames.Length; i++)
-        {
-            Font font = Font.CreateDynamicFontFromOSFont(fontNames[i], 18);
-
-            if (font != null)
-                return font;
-        }
-
-        return GUI.skin.font;
-    }
-
     private void DestroyRuntimeFont(Font font)
     {
-        if (font != null && font != GUI.skin.font)
-        {
-            Destroy(font);
-        }
     }
 }

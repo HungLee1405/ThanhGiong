@@ -35,6 +35,13 @@ public class ChickenController : MonoBehaviour
     public bool isDelivered = false;
     private Vector3 spawnPosition;
     private string networkChickenId;
+    private Vector3 sharedTargetPosition;
+    private Quaternion sharedTargetRotation;
+    private float nextSharedTransformPublishTime;
+    private bool hasSharedTransformState;
+
+    private const float SharedTransformPublishInterval = 0.12f;
+    private const float SharedTransformLerpSpeed = 12f;
 
     private void Start()
     {
@@ -70,26 +77,42 @@ public class ChickenController : MonoBehaviour
 
     private void Update()
     {
-        HandleAI();
+        if (ShouldFollowSharedOnlineTransform())
+        {
+            HandleSharedTransformFollow();
+        }
+        else
+        {
+            HandleAI();
+            PublishSharedTransformIfNeeded();
+        }
+
         HandleInteraction();
     }
 
     private void HandleAI()
     {
-        if (player == null || !player.gameObject.activeInHierarchy)
+        Transform threatPlayer = FindChickenThreatTarget();
+
+        if (threatPlayer == null && (player == null || !player.gameObject.activeInHierarchy))
         {
             FindLocalPlayer();
         }
 
-        if (player == null || agent == null || !agent.isOnNavMesh) return;
+        if (threatPlayer == null)
+        {
+            threatPlayer = player;
+        }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (threatPlayer == null || agent == null || !agent.isOnNavMesh) return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, threatPlayer.position);
 
         if (distanceToPlayer < fleeDistance)
         {
             // Chạy trốn
             agent.speed = runSpeed;
-            Vector3 fleeDirection = (transform.position - player.position).normalized;
+            Vector3 fleeDirection = (transform.position - threatPlayer.position).normalized;
             Vector3 fleeTarget = transform.position + fleeDirection * fleeDistance;
             
             NavMeshHit hit;
@@ -436,6 +459,55 @@ public class ChickenController : MonoBehaviour
         return manager != null && manager.IsListening;
     }
 
+    private bool ShouldFollowSharedOnlineTransform()
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        return manager != null && manager.IsListening && !manager.IsServer;
+    }
+
+    private bool ShouldPublishSharedOnlineTransform()
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        return manager != null && manager.IsListening && manager.IsServer;
+    }
+
+    private void PublishSharedTransformIfNeeded()
+    {
+        if (!ShouldPublishSharedOnlineTransform())
+            return;
+
+        if (Time.unscaledTime < nextSharedTransformPublishTime)
+            return;
+
+        nextSharedTransformPublishTime = Time.unscaledTime + SharedTransformPublishInterval;
+        SharedQuestNetwork.PublishChickenTransformState(
+            networkChickenId,
+            transform.position,
+            transform.eulerAngles.y,
+            isCaught || !gameObject.activeInHierarchy);
+    }
+
+    private void HandleSharedTransformFollow()
+    {
+        if (agent != null && agent.enabled)
+        {
+            agent.enabled = false;
+        }
+
+        if (!hasSharedTransformState)
+            return;
+
+        transform.position = Vector3.Lerp(
+            transform.position,
+            sharedTargetPosition,
+            Time.deltaTime * SharedTransformLerpSpeed);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            sharedTargetRotation,
+            Time.deltaTime * SharedTransformLerpSpeed);
+    }
+
     private string BuildNetworkChickenId()
     {
         Vector3 position = transform.position;
@@ -511,14 +583,70 @@ public class ChickenController : MonoBehaviour
         chicken.ApplySharedCaught(caught);
     }
 
+    public static void ApplySharedTransformState(string chickenId, Vector3 position, float rotationY, bool hidden)
+    {
+        if (string.IsNullOrEmpty(chickenId) ||
+            !SharedChickens.TryGetValue(chickenId, out ChickenController chicken) ||
+            chicken == null)
+        {
+            return;
+        }
+
+        bool shouldSnap = !chicken.hasSharedTransformState ||
+            (chicken.transform.position - position).sqrMagnitude > 9f;
+
+        chicken.waitingForSharedCatch = false;
+        chicken.isCaught = hidden;
+        chicken.hasSharedTransformState = true;
+        chicken.sharedTargetPosition = position;
+        chicken.sharedTargetRotation = Quaternion.Euler(0f, rotationY, 0f);
+
+        if (hidden)
+        {
+            if (chicken.interactionUI != null)
+            {
+                chicken.interactionUI.Hide();
+            }
+
+            chicken.gameObject.SetActive(false);
+            return;
+        }
+
+        if (!chicken.gameObject.activeSelf && !chicken.isDelivered)
+        {
+            chicken.gameObject.SetActive(true);
+        }
+
+        if (chicken.agent != null && chicken.agent.enabled)
+        {
+            chicken.agent.enabled = false;
+        }
+
+        if (shouldSnap)
+        {
+            chicken.transform.position = position;
+            chicken.transform.rotation = chicken.sharedTargetRotation;
+        }
+    }
+
     public static void PublishKnownSharedStatesToClient(ulong clientId)
     {
         foreach (ChickenController chicken in SharedChickens.Values)
         {
-            if (chicken == null || !chicken.isCaught)
+            if (chicken == null)
                 continue;
 
-            SharedQuestNetwork.SendChickenState(clientId, chicken.networkChickenId, true);
+            SharedQuestNetwork.SendChickenTransformState(
+                clientId,
+                chicken.networkChickenId,
+                chicken.transform.position,
+                chicken.transform.eulerAngles.y,
+                chicken.isCaught || !chicken.gameObject.activeInHierarchy);
+
+            if (chicken.isCaught)
+            {
+                SharedQuestNetwork.SendChickenState(clientId, chicken.networkChickenId, true);
+            }
         }
     }
 
@@ -572,6 +700,35 @@ public class ChickenController : MonoBehaviour
             playerHandController = movement.GetComponent<PlayerHandController>();
             return;
         }
+    }
+
+    private Transform FindChickenThreatTarget()
+    {
+        NetworkManager manager = NetworkManager.Singleton;
+        PlayerMovement[] players = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+        Transform nearestPlayer = null;
+        float nearestDistance = float.MaxValue;
+
+        foreach (PlayerMovement movement in players)
+        {
+            if (movement == null || !movement.gameObject.activeInHierarchy)
+                continue;
+
+            if (manager != null && manager.IsListening && !manager.IsServer &&
+                movement.IsSpawned && !movement.IsOwner)
+            {
+                continue;
+            }
+
+            float distance = (movement.transform.position - transform.position).sqrMagnitude;
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestPlayer = movement.transform;
+            }
+        }
+
+        return nearestPlayer;
     }
 
     private bool IsLocalPlayer(Collider other)

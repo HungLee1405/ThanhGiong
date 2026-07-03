@@ -120,6 +120,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Phát voice clip cho dòng đầu tiên
+        OnlineUIFont.ApplyToCurrentOnlineText(true);
         PlayVoiceClipAt(index);
 
         // Fade nhạc nền xuống nhẹ khi bắt đầu hội thoại
@@ -140,6 +141,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             // Phát voice clip cho dòng tiếp theo
+            OnlineUIFont.ApplyToCurrentOnlineText(true);
             PlayVoiceClipAt(index);
         }
         else
@@ -165,6 +167,7 @@ public class DialogueManager : MonoBehaviour
 
         // Fade nhạc nền trở lại mức bình thường
         DuckBGM(false);
+        PersistentBGM.instance?.FadeInMusic(0.25f, normalVolume);
 
         onDialogueEnd?.Invoke();
     }

@@ -20,6 +20,7 @@ public class PlayerHubUI : MonoBehaviour
         int seconds = Mathf.FloorToInt(remainingTime % 60);
 
         dayText.text = "Day " + currentDay + "\n" + minutes.ToString("00") + ":" + seconds.ToString("00");
+        OnlineUIFont.ApplyToCurrentOnlineText();
     }
 
     public void UpdateQuestUI(string questName, string questDescription)
@@ -33,6 +34,8 @@ public class PlayerHubUI : MonoBehaviour
         {
             questText.text = questDescription;
         }
+
+        OnlineUIFont.ApplyToCurrentOnlineText(true);
     }
 
     public void ClearQuestUI()
