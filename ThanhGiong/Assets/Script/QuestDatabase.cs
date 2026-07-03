@@ -7,18 +7,17 @@ public class QuestDatabase : MonoBehaviour
     public ItemData axeItem;
     public ItemData pickaxeItem;
 
-    // ─────────────────────────────────────────────
-    //  VOICE CLIPS – GIÀ LÀNG (village_elder)
-    //  Mỗi clip ứng với 1 dòng thoại theo thứ tự.
-    //  Ngày 1:  3 dòng → Voice1GL, Voice2GL, Voice3GL
-    //  Ngày 2:  4 dòng → Voice4GL …  Voice7GL
-    //  Ngày 3:  4 dòng → Voice8GL …  Voice11GL
-    //  Ngày 4:  5 dòng → Voice12GL, Voice13GL, null, null, null
-    //  Ngày 5:  6 dòng → (không còn clip)
-    //  Ngày 6:  5 dòng → (không còn clip)
-    //  Ngày 7:  2 dòng → (không còn clip)
-    // ─────────────────────────────────────────────
-    [Header("Voice – Già Làng (GL)")]
+    // ─────────────────────────────────────────────────────────────────
+    //  VOICE CLIPS – GIÀ LÀNG (village_elder)  — 29 clips, 1 clip/dòng
+    //  Ngày 1 (3 dòng) : Voice1GL  … Voice3GL
+    //  Ngày 2 (4 dòng) : Voice4GL  … Voice7GL
+    //  Ngày 3 (4 dòng) : Voice8GL  … Voice11GL
+    //  Ngày 4 (5 dòng) : Voice12GL … Voice16GL
+    //  Ngày 5 (6 dòng) : Voice17GL … Voice22GL
+    //  Ngày 6 (5 dòng) : Voice23GL … Voice27GL
+    //  Ngày 7 (2 dòng) : Voice28GL … Voice29GL
+    // ─────────────────────────────────────────────────────────────────
+    [Header("Voice – Già Làng (GL) — 29 clips")]
     public AudioClip voice1GL;
     public AudioClip voice2GL;
     public AudioClip voice3GL;
@@ -32,13 +31,29 @@ public class QuestDatabase : MonoBehaviour
     public AudioClip voice11GL;
     public AudioClip voice12GL;
     public AudioClip voice13GL;
+    public AudioClip voice14GL;
+    public AudioClip voice15GL;
+    public AudioClip voice16GL;
+    public AudioClip voice17GL;
+    public AudioClip voice18GL;
+    public AudioClip voice19GL;
+    public AudioClip voice20GL;
+    public AudioClip voice21GL;
+    public AudioClip voice22GL;
+    public AudioClip voice23GL;
+    public AudioClip voice24GL;
+    public AudioClip voice25GL;
+    public AudioClip voice26GL;
+    public AudioClip voice27GL;
+    public AudioClip voice28GL;
+    public AudioClip voice29GL;
 
-    // ─────────────────────────────────────────────
-    //  VOICE CLIPS – MẸ GIÓNG (giong_mother)
-    //  Lần 1 (ngày 1): 6 dòng → Voice1MG … Voice6MG
-    //  Lần 2 (ngày 1): 4 dòng → Voice7MG … Voice10MG
-    // ─────────────────────────────────────────────
-    [Header("Voice – Mẹ Gióng (MG)")]
+    // ─────────────────────────────────────────────────────────────────
+    //  VOICE CLIPS – MẸ GIÓNG (giong_mother)  — 10 clips
+    //  Lần 1 (6 dòng) : Voice1MG  … Voice6MG
+    //  Lần 2 (4 dòng) : Voice7MG  … Voice10MG
+    // ─────────────────────────────────────────────────────────────────
+    [Header("Voice – Mẹ Gióng (MG) — 10 clips")]
     public AudioClip voice1MG;
     public AudioClip voice2MG;
     public AudioClip voice3MG;
@@ -50,12 +65,12 @@ public class QuestDatabase : MonoBehaviour
     public AudioClip voice9MG;
     public AudioClip voice10MG;
 
-    // ─────────────────────────────────────────────
-    //  VOICE CLIPS – BÁC BA (bac_ba)
-    //  Lần 1 (ngày 3): 4 dòng → Voice1Bacba … Voice4Bacba
-    //  Lần 2 (ngày 3): 3 dòng → Voice5Bacba … Voice7Bacba
-    // ─────────────────────────────────────────────
-    [Header("Voice – Bác Ba (Bacba)")]
+    // ─────────────────────────────────────────────────────────────────
+    //  VOICE CLIPS – BÁC BA (bac_ba)  — 7 clips
+    //  Lần 1 (4 dòng) : Voice1Bacba … Voice4Bacba
+    //  Lần 2 (3 dòng) : Voice5Bacba … Voice7Bacba
+    // ─────────────────────────────────────────────────────────────────
+    [Header("Voice – Bác Ba (Bacba) — 7 clips")]
     public AudioClip voice1Bacba;
     public AudioClip voice2Bacba;
     public AudioClip voice3Bacba;
@@ -64,49 +79,45 @@ public class QuestDatabase : MonoBehaviour
     public AudioClip voice6Bacba;
     public AudioClip voice7Bacba;
 
-    // ─────────────────────────────────────────────
-    //  VOICE CLIPS – THỢ RÈN (blacksmith)
-    //  Ngày 4: 1 clip phát khi bắt đầu cuộc thoại → Voice1ThoRen
-    //  Ngày 7: 1 clip phát khi bắt đầu cuộc thoại → Voice2ThoRen
-    // ─────────────────────────────────────────────
-    [Header("Voice – Thợ Rèn (ThoRen)")]
+    // ─────────────────────────────────────────────────────────────────
+    //  VOICE CLIPS – THỢ RÈN / BLACKSMITH  — 11 clips
+    //  Ngày 4 (4 dòng) : Voice1ThoRen  … Voice4ThoRen
+    //  Ngày 7 (7 dòng) : Voice5ThoRen  … Voice11ThoRen
+    // ─────────────────────────────────────────────────────────────────
+    [Header("Voice – Thợ Rèn (ThoRen) — 11 clips")]
     public AudioClip voice1ThoRen;
     public AudioClip voice2ThoRen;
+    public AudioClip voice3ThoRen;
+    public AudioClip voice4ThoRen;
+    public AudioClip voice5ThoRen;
+    public AudioClip voice6ThoRen;
+    public AudioClip voice7ThoRen;
+    public AudioClip voice8ThoRen;
+    public AudioClip voice9ThoRen;
+    public AudioClip voice10ThoRen;
+    public AudioClip voice11ThoRen;
 
     public List<QuestStep> GetQuestStepsForDay(int day)
     {
         switch (day)
         {
-            case 1:
-                return GetDay1Steps();
-
-            case 2:
-                return GetDay2Steps();
-
-            case 3:
-                return GetDay3Steps();
-
-            case 4:
-                return GetDay4Steps();
-
-            case 5:
-                return GetDay5Steps();
-
-            case 6:
-                return GetDay6Steps();
-
-            case 7:
-                return GetDay7Steps();
-
-            default:
-                return new List<QuestStep>();
+            case 1: return GetDay1Steps();
+            case 2: return GetDay2Steps();
+            case 3: return GetDay3Steps();
+            case 4: return GetDay4Steps();
+            case 5: return GetDay5Steps();
+            case 6: return GetDay6Steps();
+            case 7: return GetDay7Steps();
+            default: return new List<QuestStep>();
         }
     }
 
+    // ─── NGÀY 1 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay1Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 1 (3 dòng → Voice1-3GL)
             new QuestStep
             {
                 day = 1,
@@ -121,10 +132,10 @@ public class QuestDatabase : MonoBehaviour
                     "Ta là Già Làng Phù Đổng, thật tốt khi thiếu niên trẻ vẫn còn hăng hái.",
                     "Hãy đi gặp mẹ Gióng để biết mình cần làm gì nhé."
                 },
-                // Voice1GL → dòng 0, Voice2GL → dòng 1, Voice3GL → dòng 2
                 voiceClips = new AudioClip[] { voice1GL, voice2GL, voice3GL }
             },
 
+            // Mẹ Gióng – lần 1 (6 dòng → Voice1-6MG)
             new QuestStep
             {
                 day = 1,
@@ -142,7 +153,6 @@ public class QuestDatabase : MonoBehaviour
                     "Cậu có thể lấy nước từ giếng, gạo từ kho thóc và đến nồi ở giữa làng để nấu.",
                     "Sau khi nấu xong hãy đến gặp tôi."
                 },
-                // Voice1MG → dòng 0, …, Voice6MG → dòng 5
                 voiceClips = new AudioClip[] { voice1MG, voice2MG, voice3MG, voice4MG, voice5MG, voice6MG }
             },
 
@@ -186,6 +196,7 @@ public class QuestDatabase : MonoBehaviour
                 requiredAmount = 1
             },
 
+            // Mẹ Gióng – lần 2 (4 dòng → Voice7-10MG)
             new QuestStep
             {
                 day = 1,
@@ -201,7 +212,6 @@ public class QuestDatabase : MonoBehaviour
                     "Hãy nấu và đưa cơm cho tôi để tôi đưa cho nó ăn.",
                     "Bên phải màn hình là thanh đói, hãy giúp tôi giữ nó trên 80% khi hết ngày."
                 },
-                // Voice7MG → dòng 0, …, Voice10MG → dòng 3
                 voiceClips = new AudioClip[] { voice7MG, voice8MG, voice9MG, voice10MG }
             },
 
@@ -216,10 +226,12 @@ public class QuestDatabase : MonoBehaviour
         };
     }
 
+    // ─── NGÀY 2 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay2Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 2 (4 dòng → Voice4-7GL)
             new QuestStep
             {
                 day = 2,
@@ -235,7 +247,6 @@ public class QuestDatabase : MonoBehaviour
                     "Tuy nhiên Gióng đang ngày càng lớn lên, sức ăn cũng lớn hơn.",
                     "Thanh đói sẽ càng ngày càng tụt nhanh hơn. Hãy cẩn thận."
                 },
-                // Voice4GL → dòng 0, …, Voice7GL → dòng 3
                 voiceClips = new AudioClip[] { voice4GL, voice5GL, voice6GL, voice7GL }
             },
 
@@ -250,10 +261,12 @@ public class QuestDatabase : MonoBehaviour
         };
     }
 
+    // ─── NGÀY 3 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay3Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 3 (4 dòng → Voice8-11GL)
             new QuestStep
             {
                 day = 3,
@@ -269,7 +282,6 @@ public class QuestDatabase : MonoBehaviour
                     "À mà, bác Ba có vẻ gặp khó khăn.",
                     "Nếu được hãy ghé qua giúp ông ấy một tay nhé."
                 },
-                // Voice8GL → dòng 0, …, Voice11GL → dòng 3
                 voiceClips = new AudioClip[] { voice8GL, voice9GL, voice10GL, voice11GL }
             },
 
@@ -283,6 +295,7 @@ public class QuestDatabase : MonoBehaviour
                 isSideQuest = false
             },
 
+            // Bác Ba – lần 1 (4 dòng → Voice1-4Bacba)
             new QuestStep
             {
                 day = 3,
@@ -300,7 +313,6 @@ public class QuestDatabase : MonoBehaviour
                     "Cậu giúp ta bắt 3 con gà bỏ lại vào chuồng được không?",
                     "Sau đó ta sẽ truyền lại bí quyết nấu món Cơm Gà để giúp Gióng mau lớn!"
                 },
-                // Voice1Bacba → dòng 0, …, Voice4Bacba → dòng 3
                 voiceClips = new AudioClip[] { voice1Bacba, voice2Bacba, voice3Bacba, voice4Bacba }
             },
 
@@ -316,6 +328,7 @@ public class QuestDatabase : MonoBehaviour
                 unlockAtMainStepIndex = 1
             },
 
+            // Bác Ba – lần 2 (3 dòng → Voice5-7Bacba)
             new QuestStep
             {
                 day = 3,
@@ -332,16 +345,17 @@ public class QuestDatabase : MonoBehaviour
                     "Lũ gà giờ đã ở yên trong chuồng rồi.",
                     "Ta đã chuẩn bị công thức nấu Cơm Gà cho cậu rồi đấy, hãy dùng nó để cho Gióng ăn nhé!"
                 },
-                // Voice5Bacba → dòng 0, Voice6Bacba → dòng 1, Voice7Bacba → dòng 2
                 voiceClips = new AudioClip[] { voice5Bacba, voice6Bacba, voice7Bacba }
             }
         };
     }
 
+    // ─── NGÀY 4 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay4Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 4 (5 dòng → Voice12-16GL)
             new QuestStep
             {
                 day = 4,
@@ -358,10 +372,10 @@ public class QuestDatabase : MonoBehaviour
                     "Cậu hãy đến gặp bác thợ rèn ở rìa làng.",
                     "Bác ấy đang cần quặng sắt để chuẩn bị đúc ngựa và roi sắt đấy."
                 },
-                // Voice12GL → dòng 0, Voice13GL → dòng 1, dòng 2-4 không có clip
-                voiceClips = new AudioClip[] { voice12GL, voice13GL, null, null, null }
+                voiceClips = new AudioClip[] { voice12GL, voice13GL, voice14GL, voice15GL, voice16GL }
             },
 
+            // Thợ Rèn – ngày 4 (4 dòng → Voice1-4ThoRen)
             new QuestStep
             {
                 day = 4,
@@ -384,8 +398,7 @@ public class QuestDatabase : MonoBehaviour
                     "Cậu hãy cầm lấy cây cuốc chim này.",
                     "Ra mỏ đá phía sau làng đào một ít Quặng Sắt mang về kho giúp ta nhé!"
                 },
-                // Voice1ThoRen phát tại dòng đầu, 3 dòng sau không có clip
-                voiceClips = new AudioClip[] { voice1ThoRen, null, null, null }
+                voiceClips = new AudioClip[] { voice1ThoRen, voice2ThoRen, voice3ThoRen, voice4ThoRen }
             },
 
             new QuestStep
@@ -411,10 +424,12 @@ public class QuestDatabase : MonoBehaviour
         };
     }
 
+    // ─── NGÀY 5 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay5Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 5 (6 dòng → Voice17-22GL)
             new QuestStep
             {
                 day = 5,
@@ -436,8 +451,8 @@ public class QuestDatabase : MonoBehaviour
                     "Khu vực Rừng Tre ở phía Đông, cậu hãy mang rìu ra đó thu hoạch nhé.",
                     "À, sẵn có ống tre tươi, cậu có thể nấu món Cơm Lam Ống Tre cho Gióng.",
                     "Thằng bé giờ đã lớn bằng ngôi nhà, sức ăn kinh khủng lắm."
-                }
-                // Ngày 5: không còn clip GL (đã dùng hết 13 clips từ ngày 1-4)
+                },
+                voiceClips = new AudioClip[] { voice17GL, voice18GL, voice19GL, voice20GL, voice21GL, voice22GL }
             },
 
             new QuestStep
@@ -463,10 +478,12 @@ public class QuestDatabase : MonoBehaviour
         };
     }
 
+    // ─── NGÀY 6 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay6Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 6 (5 dòng → Voice23-27GL)
             new QuestStep
             {
                 day = 6,
@@ -482,8 +499,8 @@ public class QuestDatabase : MonoBehaviour
                     "Chúng ta phải dốc toàn lực!",
                     "Hãy vừa cho Gióng ăn, vừa vận chuyển thật nhiều Sắt và Tre vào kho dự trữ.",
                     "Sức ăn của Gióng hôm nay đã đạt đỉnh, cậu phải hoạt động hết công suất đấy!"
-                }
-                // Ngày 6: không còn clip GL
+                },
+                voiceClips = new AudioClip[] { voice23GL, voice24GL, voice25GL, voice26GL, voice27GL }
             },
 
             new QuestStep
@@ -502,10 +519,12 @@ public class QuestDatabase : MonoBehaviour
         };
     }
 
+    // ─── NGÀY 7 ────────────────────────────────────────────────────
     private List<QuestStep> GetDay7Steps()
     {
         return new List<QuestStep>
         {
+            // Già Làng – ngày 7 (2 dòng → Voice28-29GL)
             new QuestStep
             {
                 day = 7,
@@ -518,10 +537,11 @@ public class QuestDatabase : MonoBehaviour
                 {
                     "Hôm nay là ngày cuối cùng rồi.",
                     "Hãy gặp bác thợ rèn để biết mình cần làm gì nhé."
-                }
-                // Ngày 7: không còn clip GL
+                },
+                voiceClips = new AudioClip[] { voice28GL, voice29GL }
             },
 
+            // Thợ Rèn – ngày 7 (7 dòng → Voice5-11ThoRen)
             new QuestStep
             {
                 day = 7,
@@ -540,8 +560,7 @@ public class QuestDatabase : MonoBehaviour
                     "Để ta đúc ngựa sắt, roi sắt!",
                     "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân!"
                 },
-                // Voice2ThoRen phát tại dòng đầu, 6 dòng sau không có clip
-                voiceClips = new AudioClip[] { voice2ThoRen, null, null, null, null, null, null }
+                voiceClips = new AudioClip[] { voice5ThoRen, voice6ThoRen, voice7ThoRen, voice8ThoRen, voice9ThoRen, voice10ThoRen, voice11ThoRen }
             },
 
             new QuestStep
