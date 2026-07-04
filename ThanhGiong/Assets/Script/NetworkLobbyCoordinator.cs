@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class NetworkLobbyCoordinator : MonoBehaviour
 {
     private const string StartMatchMessage = "ThanhGiongLobbyStart";
+    private const float StartBroadcastDuration = 3f;
+    private const float StartBroadcastInterval = 0.25f;
 
     public static bool MatchStarted { get; private set; }
     public static bool IsOnlineLobbyActive
@@ -21,6 +24,7 @@ public class NetworkLobbyCoordinator : MonoBehaviour
 
     private NetworkManager manager;
     private bool messageRegistered;
+    private Coroutine startBroadcastCoroutine;
 
     public static void EnsureExists(GameObject target)
     {
@@ -58,6 +62,12 @@ public class NetworkLobbyCoordinator : MonoBehaviour
 
     private void OnDisable()
     {
+        if (startBroadcastCoroutine != null)
+        {
+            StopCoroutine(startBroadcastCoroutine);
+            startBroadcastCoroutine = null;
+        }
+
         if (messageRegistered && manager != null && manager.CustomMessagingManager != null)
         {
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(StartMatchMessage);
@@ -128,15 +138,44 @@ public class NetworkLobbyCoordinator : MonoBehaviour
             return;
 
         SetMatchStarted();
+        StartStartBroadcast();
+    }
 
-        using FastBufferWriter writer = new FastBufferWriter(sizeof(bool), Allocator.Temp);
-        writer.WriteValueSafe(true);
+    private void StartStartBroadcast()
+    {
+        if (startBroadcastCoroutine != null)
+        {
+            StopCoroutine(startBroadcastCoroutine);
+        }
+
+        startBroadcastCoroutine = StartCoroutine(BroadcastStartMatchForAWhile());
+    }
+
+    private IEnumerator BroadcastStartMatchForAWhile()
+    {
+        float stopTime = Time.unscaledTime + StartBroadcastDuration;
+
+        while (Time.unscaledTime <= stopTime)
+        {
+            BroadcastStartMatchOnce();
+            yield return new WaitForSecondsRealtime(StartBroadcastInterval);
+        }
+
+        startBroadcastCoroutine = null;
+    }
+
+    private void BroadcastStartMatchOnce()
+    {
+        if (manager == null || !manager.IsHost || manager.CustomMessagingManager == null)
+            return;
 
         foreach (ulong clientId in manager.ConnectedClientsIds)
         {
             if (clientId == manager.LocalClientId)
                 continue;
 
+            using FastBufferWriter writer = new FastBufferWriter(sizeof(bool), Allocator.Temp);
+            writer.WriteValueSafe(true);
             manager.CustomMessagingManager.SendNamedMessage(StartMatchMessage, clientId, writer);
         }
     }
