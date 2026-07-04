@@ -196,6 +196,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1169694}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169696}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &1169692 stripped
 Transform:
@@ -253,6 +256,27 @@ MonoBehaviour:
   interactionUI: {fileID: 897494557}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &1169696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169693}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.9656832}
+  m_Center: {x: 0.0008090758, y: 0.009667547, z: -0.4828416}
 --- !u!1001 &2959032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -598,6 +622,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -1045,6 +1073,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -1365,6 +1397,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -1796,6 +1832,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -3206,7 +3246,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DescriptionText
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 1875915114}
   m_sharedMaterial: {fileID: 1426229985}
@@ -4090,6 +4130,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 317341420}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 317341422}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &317341418 stripped
 Transform:
@@ -4147,6 +4190,27 @@ MonoBehaviour:
   interactionUI: {fileID: 863681715}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &317341422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317341419}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081241084, y: 0.009667071, z: -0.4828418}
 --- !u!1 &323229688
 GameObject:
   m_ObjectHideFlags: 0
@@ -4990,6 +5054,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -6120,6 +6188,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -6828,6 +6900,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 409036645}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 409036647}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &409036643 stripped
 Transform:
@@ -6885,6 +6960,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1826382827}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &409036647
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409036644}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.0008109809, y: 0.009668503, z: -0.4828418}
 --- !u!1 &413033259
 GameObject:
   m_ObjectHideFlags: 0
@@ -7195,6 +7291,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -7761,6 +7861,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 447093736}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 447093738}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &447093734 stripped
 Transform:
@@ -7818,6 +7921,27 @@ MonoBehaviour:
   interactionUI: {fileID: 884740024}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &447093738
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447093735}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081288826, y: 0.009668503, z: -0.48284167}
 --- !u!1 &448046613
 GameObject:
   m_ObjectHideFlags: 0
@@ -8754,6 +8878,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 509430053}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509430055}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &509430051 stripped
 Transform:
@@ -8811,6 +8938,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1983807718}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &509430055
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509430052}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081145775, y: 0.009667549, z: -0.48284167}
 --- !u!114 &510466921 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7647651819908720336, guid: 558c4abd27aeb6043b99ee995e04b0af, type: 3}
@@ -9172,6 +9320,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 541384654}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 541384656}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &541384652 stripped
 Transform:
@@ -9229,6 +9380,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1659970403}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &541384656
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541384653}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081288716, y: 0.009667071, z: -0.48284155}
 --- !u!1001 &541699029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9538,6 +9710,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -11106,6 +11282,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -12227,6 +12407,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 678662904}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 678662906}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &678662902 stripped
 Transform:
@@ -12284,6 +12467,27 @@ MonoBehaviour:
   interactionUI: {fileID: 2096289176}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &678662906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678662903}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081145775, y: 0.009667549, z: -0.48284167}
 --- !u!1 &685304641
 GameObject:
   m_ObjectHideFlags: 0
@@ -13160,7 +13364,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &747550676
 MonoBehaviour:
@@ -13205,7 +13409,7 @@ RectTransform:
   m_GameObject: {fileID: 752917037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1061, y: 1.1061, z: 1.1061}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1498386833}
@@ -13728,6 +13932,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 781793045}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 781793047}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &781793043 stripped
 Transform:
@@ -13785,6 +13992,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1713581106}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &781793047
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781793044}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.0008109809, y: 0.009669457, z: -0.48284167}
 --- !u!1 &786098322
 GameObject:
   m_ObjectHideFlags: 0
@@ -14189,6 +14417,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -17951,6 +18183,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1028661207}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1028661209}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &1028661205 stripped
 Transform:
@@ -18008,6 +18243,27 @@ MonoBehaviour:
   interactionUI: {fileID: 437229454}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &1028661209
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028661206}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.0008105041, y: 0.009667549, z: -0.48284167}
 --- !u!1 &1031977793
 GameObject:
   m_ObjectHideFlags: 0
@@ -18116,6 +18372,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -19056,7 +19316,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 8.5, y: 17.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1073637050
 MonoBehaviour:
@@ -19383,6 +19643,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -20183,6 +20447,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -21825,6 +22093,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -22213,6 +22485,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1236288776}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236288778}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &1236288774 stripped
 Transform:
@@ -22270,6 +22545,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1876906770}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &1236288778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236288775}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.0008109809, y: 0.009668503, z: -0.48284167}
 --- !u!1 &1240299182
 GameObject:
   m_ObjectHideFlags: 0
@@ -25350,6 +25646,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -27784,6 +28084,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -28620,6 +28924,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -29977,6 +30285,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1671077983}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1671077985}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &1671077981 stripped
 Transform:
@@ -30034,6 +30345,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1371357397}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &1671077985
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671077982}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.0008107723, y: 0.009666596, z: -0.48284167}
 --- !u!1 &1672908071
 GameObject:
   m_ObjectHideFlags: 0
@@ -30413,6 +30745,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -34340,6 +34676,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1842181176}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1842181178}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &1842181174 stripped
 Transform:
@@ -34397,6 +34736,27 @@ MonoBehaviour:
   interactionUI: {fileID: 649287486}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &1842181178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842181175}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.0008109809, y: 0.009665642, z: -0.48284167}
 --- !u!1001 &1842815595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279444,6 +279804,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -279854,6 +280218,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1965039420}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1965039422}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &1965039418 stripped
 Transform:
@@ -279911,6 +280278,27 @@ MonoBehaviour:
   interactionUI: {fileID: 114218406}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &1965039422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965039419}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081014645, y: 0.009665165, z: -0.48284167}
 --- !u!1 &1969705348
 GameObject:
   m_ObjectHideFlags: 0
@@ -280461,6 +280849,10 @@ PrefabInstance:
     - target: {fileID: 64374773592520046, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
@@ -282301,6 +282693,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
+      propertyPath: m_fontSize
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 593256385506666206, guid: 47efb6e53db77794e9823cb19de97e85, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 1875915114}
@@ -282447,6 +282843,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2103481087}
+    - targetCorrespondingSourceObject: {fileID: -6922187488808801084, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2103481089}
   m_SourcePrefab: {fileID: -8670829309088485133, guid: bd50fb25efce0ed4a8e35f72d2f056a3, type: 3}
 --- !u!4 &2103481085 stripped
 Transform:
@@ -282504,6 +282903,27 @@ MonoBehaviour:
   interactionUI: {fileID: 1696086735}
   actionSound: {fileID: 8300000, guid: 90f4b5c2116ff6f4abaef534ae0806de, type: 3}
   reportQuestProgress: 1
+--- !u!65 &2103481089
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103481086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.38, z: 0.96568334}
+  m_Center: {x: 0.00081145775, y: 0.009669457, z: -0.4828418}
 --- !u!1 &2118227669
 GameObject:
   m_ObjectHideFlags: 0

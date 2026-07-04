@@ -85,7 +85,7 @@ public class GameDayManager : MonoBehaviour
                 isDayRunning = false;
                 SharedQuestNetwork.ShowGameOverForAll(
                     "Game Over",
-                    "Khong dat dieu kien qua ngay. Hay thu lai!",
+                    "Không đạt điều kiện qua ngày. Hãy thử lại!",
                     false);
 
                 // --- GỌI BẢNG THUA GAME Ở ĐÂY ---
