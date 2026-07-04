@@ -6,10 +6,19 @@ using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
+    private const string DialogueFontResourcePath = "Fonts/BeVietnamPro-Regular";
+    private const string DialogueFontName = "Be Vietnam Pro";
+
     [Header("UI")]
     public GameObject dialoguePanel;
     public TMP_Text dialogueNpcNameText;
     public TMP_Text dialogueText;
+
+    [Header("Dialogue Font")]
+    public bool useBeVietnamProFont = true;
+
+    private static Font dialogueFont;
+    private static TMP_FontAsset dialogueTmpFont;
 
     [Header("Voice Audio")]
     [Tooltip("AudioSource dùng để phát voice. Nếu để trống sẽ tự tạo.")]
@@ -41,6 +50,8 @@ public class DialogueManager : MonoBehaviour
     private void Awake()
     {
         // Tự tạo AudioSource nếu chưa gắn
+        ApplyDialogueFont();
+
         if (voiceAudioSource == null)
         {
             voiceAudioSource = gameObject.AddComponent<AudioSource>();
@@ -58,6 +69,8 @@ public class DialogueManager : MonoBehaviour
             dialoguePanel.SetActive(false);
 
         // Áp dụng volume bình thường ngay khi scene load
+        ApplyDialogueFont();
+
         AudioSource bgm = GetBGMSource();
         if (bgm != null) bgm.volume = normalVolume;
     }
@@ -73,6 +86,14 @@ public class DialogueManager : MonoBehaviour
         {
             NextLine();
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (!isTalking)
+            return;
+
+        ApplyDialogueFont();
     }
 
     /// <summary>
@@ -121,6 +142,7 @@ public class DialogueManager : MonoBehaviour
 
         // Phát voice clip cho dòng đầu tiên
         OnlineUIFont.ApplyToCurrentOnlineText(true);
+        ApplyDialogueFont();
         PlayVoiceClipAt(index);
 
         // Fade nhạc nền xuống nhẹ khi bắt đầu hội thoại
@@ -142,6 +164,7 @@ public class DialogueManager : MonoBehaviour
 
             // Phát voice clip cho dòng tiếp theo
             OnlineUIFont.ApplyToCurrentOnlineText(true);
+            ApplyDialogueFont();
             PlayVoiceClipAt(index);
         }
         else
@@ -243,6 +266,47 @@ public class DialogueManager : MonoBehaviour
         voiceAudioSource.Stop();
         voiceAudioSource.clip = clip;
         voiceAudioSource.Play();
+    }
+
+    private void ApplyDialogueFont()
+    {
+        if (!useBeVietnamProFont)
+            return;
+
+        TMP_FontAsset fontAsset = GetDialogueTmpFont();
+        if (fontAsset == null)
+            return;
+
+        if (dialogueNpcNameText != null)
+            dialogueNpcNameText.font = fontAsset;
+
+        if (dialogueText != null)
+            dialogueText.font = fontAsset;
+    }
+
+    private static TMP_FontAsset GetDialogueTmpFont()
+    {
+        if (dialogueTmpFont != null)
+            return dialogueTmpFont;
+
+        dialogueFont ??= Resources.Load<Font>(DialogueFontResourcePath);
+        dialogueFont ??= Font.CreateDynamicFontFromOSFont(DialogueFontName, 18);
+
+        if (dialogueFont == null)
+            return null;
+
+        try
+        {
+            dialogueTmpFont = TMP_FontAsset.CreateFontAsset(dialogueFont);
+            dialogueTmpFont.name = DialogueFontName + " Dialogue TMP";
+        }
+        catch (Exception exception)
+        {
+            Debug.LogWarning("Dialogue font could not create a TMP font asset: " + exception.Message);
+            return null;
+        }
+
+        return dialogueTmpFont;
     }
 
     public bool IsTalking()
