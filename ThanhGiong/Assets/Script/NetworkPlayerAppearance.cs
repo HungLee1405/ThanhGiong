@@ -167,7 +167,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             localNameInput = "Người chơi " + (OwnerClientId + 1);
             nameInputFocused = true;
             RequestColorServerRpc(previewColorIndex);
-            RequestNameServerRpc(localNameInput);
+            RequestNameServerRpc(ToNetworkPlayerName(localNameInput));
             RequestReadyServerRpc(false);
             showSelectionPanel = true;
         }
@@ -275,6 +275,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         GUILayout.BeginVertical(GUILayout.Width((panelRect.width - 86f) * 0.64f));
 
         GUILayout.Label("TÊN NGƯỜI CHƠI", readyStyle);
+        bool previousGuiEnabled = GUI.enabled;
         GUI.enabled = !ready.Value;
         DrawPlayerNameInput();
 
@@ -297,10 +298,11 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             GUILayout.Space(8f);
         }
 
-        GUI.enabled = true;
+        GUI.enabled = previousGuiEnabled;
         GUILayout.Space(12f);
         string validPlayerName = SanitizePlayerName(localNameInput);
-        GUI.enabled = !string.IsNullOrWhiteSpace(validPlayerName);
+        previousGuiEnabled = GUI.enabled;
+        GUI.enabled = ready.Value || !string.IsNullOrWhiteSpace(validPlayerName);
         string readyButtonText = ready.Value ? "HỦY SẴN SÀNG" : "SẴN SÀNG";
 
         if (GUILayout.Button(readyButtonText, ready.Value ? closeButtonStyle : playButtonStyle, GUILayout.Height(52f)))
@@ -310,7 +312,6 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             if (nextReadyState)
             {
                 localNameInput = validPlayerName;
-                RequestNameServerRpc(localNameInput);
             }
             else
             {
@@ -318,9 +319,14 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             }
 
             RequestReadyServerRpc(nextReadyState);
+
+            if (nextReadyState)
+            {
+                RequestNameServerRpc(ToNetworkPlayerName(localNameInput));
+            }
         }
 
-        GUI.enabled = true;
+        GUI.enabled = previousGuiEnabled;
         GUILayout.EndVertical();
         GUILayout.Space(22f);
         DrawPlayerRoster();
@@ -750,22 +756,41 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         localNameInput = localNameInput.Remove(localNameInput.Length - removeCount, removeCount);
     }
 
-    [ServerRpc]
-    private void RequestColorServerRpc(int requestedColor)
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestColorServerRpc(int requestedColor, ServerRpcParams rpcParams = default)
     {
+        if (!IsRequestFromOwner(rpcParams))
+            return;
+
         colorIndex.Value = Mathf.Clamp(requestedColor, 0, ShirtColors.Length - 1);
     }
 
-    [ServerRpc]
-    private void RequestReadyServerRpc(bool isReady)
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestReadyServerRpc(bool isReady, ServerRpcParams rpcParams = default)
     {
+        if (!IsRequestFromOwner(rpcParams))
+            return;
+
         ready.Value = isReady;
     }
 
-    [ServerRpc]
-    private void RequestNameServerRpc(string requestedName)
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestNameServerRpc(FixedString64Bytes requestedName, ServerRpcParams rpcParams = default)
     {
-        playerName.Value = new FixedString64Bytes(SanitizePlayerName(requestedName));
+        if (!IsRequestFromOwner(rpcParams))
+            return;
+
+        playerName.Value = ToNetworkPlayerName(requestedName.ToString());
+    }
+
+    private bool IsRequestFromOwner(ServerRpcParams rpcParams)
+    {
+        return rpcParams.Receive.SenderClientId == OwnerClientId;
+    }
+
+    private static FixedString64Bytes ToNetworkPlayerName(string value)
+    {
+        return new FixedString64Bytes(SanitizePlayerName(value));
     }
 
     private void OnColorChanged(int previousValue, int newValue)
