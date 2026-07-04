@@ -44,6 +44,7 @@ public class DialogueManager : MonoBehaviour
     private AudioClip[] voiceClips;
     private int index;
     private bool isTalking;
+    private bool justStarted;   // bỏ qua input E trong frame bắt đầu hội thoại
     private Action onDialogueEnd;
     private Coroutine fadeCoroutine;
 
@@ -82,6 +83,13 @@ public class DialogueManager : MonoBehaviour
         if (!isTalking) return;
         if (Keyboard.current == null) return;
 
+        // Bỏ qua input E ở frame đầu tiên để tránh skip dòng đầu hội thoại
+        if (justStarted)
+        {
+            justStarted = false;
+            return;
+        }
+
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             NextLine();
@@ -115,6 +123,7 @@ public class DialogueManager : MonoBehaviour
         voiceClips = clips;
         index = 0;
         isTalking = true;
+        justStarted = true;   // đặt cờ để bỏ qua E press frame này
         onDialogueEnd = onEnd;
 
         if (dialoguePanel != null)

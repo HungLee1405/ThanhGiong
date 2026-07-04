@@ -128,7 +128,6 @@ public class QuestDatabase : MonoBehaviour
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "",
                     "Vậy là cậu là người được phái tới à.",
                     "Ta là Già Làng Phù Đổng, thật tốt khi thiếu niên trẻ vẫn còn hăng hái.",
                     "Hãy đi gặp mẹ Gióng để biết mình cần làm gì nhé."
@@ -242,7 +241,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Hôm qua cậu làm tốt lắm.",
                     "Ta tin tưởng vào cậu hôm nay.",
                     "Tuy nhiên Gióng đang ngày càng lớn lên, sức ăn cũng lớn hơn.",
@@ -277,7 +276,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Hôm qua cậu làm tốt lắm.",
                     "Ta tin tưởng vào cậu hôm nay.",
                     "À mà, bác Ba có vẻ gặp khó khăn.",
@@ -308,7 +307,7 @@ public class QuestDatabase : MonoBehaviour
                 isSideQuest = true,
                 unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Chào cậu trẻ, ta là bác Ba.",
                     "Lũ gà của ta nghịch ngợm quá, đã xổng chuồng chạy đi khắp nơi rồi.",
                     "Cậu giúp ta bắt 3 con gà bỏ lại vào chuồng được không?",
@@ -341,7 +340,7 @@ public class QuestDatabase : MonoBehaviour
                 isSideQuest = true,
                 unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Ôi cậu làm tốt quá, cảm ơn cậu nhiều nhé!",
                     "Lũ gà giờ đã ở yên trong chuồng rồi.",
                     "Ta đã chuẩn bị công thức nấu Cơm Gà cho cậu rồi đấy, hãy dùng nó để cho Gióng ăn nhé!"
@@ -366,7 +365,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Nhiệm vụ hôm nay cũng như hôm qua.",
                     "Mà giặc Ân đã đến rất gần rồi.",
                     "Chúng ta phải chuẩn bị vũ khí cho Gióng.",
@@ -445,7 +444,7 @@ public class QuestDatabase : MonoBehaviour
                 rewardMessage = "Nhận được Rìu!",
                 requireInventorySpace = true,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Tình hình nguy cấp rồi cậu trẻ ơi!",
                     "Giặc Ân đã áp sát biên thùy.",
                     "Làng ta cần gấp một lượng tre lớn để làm cọc phòng thủ.",
@@ -494,7 +493,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Ngày mai là thợ rèn bắt đầu đúc vũ khí thần tốc rồi.",
                     "Hôm nay là ngày cao điểm để tích lũy tài nguyên.",
                     "Chúng ta phải dốc toàn lực!",
@@ -535,7 +534,7 @@ public class QuestDatabase : MonoBehaviour
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
-                {"",
+                {
                     "Hôm nay là ngày cuối cùng rồi.",
                     "Hãy gặp bác thợ rèn để biết mình cần làm gì nhé."
                 },
