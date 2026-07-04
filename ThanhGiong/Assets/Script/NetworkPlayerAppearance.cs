@@ -167,7 +167,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             localNameInput = "Người chơi " + (OwnerClientId + 1);
             nameInputFocused = true;
             RequestColorServerRpc(previewColorIndex);
-            RequestNameServerRpc(ToNetworkPlayerName(localNameInput));
+            RequestNameServerRpc(localNameInput);
             RequestReadyServerRpc(false);
             showSelectionPanel = true;
         }
@@ -318,12 +318,12 @@ public class NetworkPlayerAppearance : NetworkBehaviour
                 nameInputFocused = true;
             }
 
-            RequestReadyServerRpc(nextReadyState);
-
             if (nextReadyState)
             {
-                RequestNameServerRpc(ToNetworkPlayerName(localNameInput));
+                RequestNameServerRpc(localNameInput);
             }
+
+            RequestReadyServerRpc(nextReadyState);
         }
 
         GUI.enabled = previousGuiEnabled;
@@ -756,36 +756,22 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         localNameInput = localNameInput.Remove(localNameInput.Length - removeCount, removeCount);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestColorServerRpc(int requestedColor, ServerRpcParams rpcParams = default)
+    [ServerRpc]
+    private void RequestColorServerRpc(int requestedColor)
     {
-        if (!IsRequestFromOwner(rpcParams))
-            return;
-
         colorIndex.Value = Mathf.Clamp(requestedColor, 0, ShirtColors.Length - 1);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestReadyServerRpc(bool isReady, ServerRpcParams rpcParams = default)
+    [ServerRpc]
+    private void RequestReadyServerRpc(bool isReady)
     {
-        if (!IsRequestFromOwner(rpcParams))
-            return;
-
         ready.Value = isReady;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestNameServerRpc(FixedString64Bytes requestedName, ServerRpcParams rpcParams = default)
+    [ServerRpc]
+    private void RequestNameServerRpc(string requestedName)
     {
-        if (!IsRequestFromOwner(rpcParams))
-            return;
-
-        playerName.Value = ToNetworkPlayerName(requestedName.ToString());
-    }
-
-    private bool IsRequestFromOwner(ServerRpcParams rpcParams)
-    {
-        return rpcParams.Receive.SenderClientId == OwnerClientId;
+        playerName.Value = ToNetworkPlayerName(requestedName);
     }
 
     private static FixedString64Bytes ToNetworkPlayerName(string value)
