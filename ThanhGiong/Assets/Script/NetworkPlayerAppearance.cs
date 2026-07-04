@@ -275,6 +275,7 @@ public class NetworkPlayerAppearance : NetworkBehaviour
         GUILayout.BeginVertical(GUILayout.Width((panelRect.width - 86f) * 0.64f));
 
         GUILayout.Label("TÊN NGƯỜI CHƠI", readyStyle);
+        bool previousGuiEnabled = GUI.enabled;
         GUI.enabled = !ready.Value;
         DrawPlayerNameInput();
 
@@ -297,10 +298,11 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             GUILayout.Space(8f);
         }
 
-        GUI.enabled = true;
+        GUI.enabled = previousGuiEnabled;
         GUILayout.Space(12f);
         string validPlayerName = SanitizePlayerName(localNameInput);
-        GUI.enabled = !string.IsNullOrWhiteSpace(validPlayerName);
+        previousGuiEnabled = GUI.enabled;
+        GUI.enabled = ready.Value || !string.IsNullOrWhiteSpace(validPlayerName);
         string readyButtonText = ready.Value ? "HỦY SẴN SÀNG" : "SẴN SÀNG";
 
         if (GUILayout.Button(readyButtonText, ready.Value ? closeButtonStyle : playButtonStyle, GUILayout.Height(52f)))
@@ -310,17 +312,21 @@ public class NetworkPlayerAppearance : NetworkBehaviour
             if (nextReadyState)
             {
                 localNameInput = validPlayerName;
-                RequestNameServerRpc(localNameInput);
             }
             else
             {
                 nameInputFocused = true;
             }
 
+            if (nextReadyState)
+            {
+                RequestNameServerRpc(localNameInput);
+            }
+
             RequestReadyServerRpc(nextReadyState);
         }
 
-        GUI.enabled = true;
+        GUI.enabled = previousGuiEnabled;
         GUILayout.EndVertical();
         GUILayout.Space(22f);
         DrawPlayerRoster();
@@ -507,10 +513,13 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private IEnumerator SnapVisualModelToGround()
     {
         yield return null;
-        yield return new WaitForEndOfFrame();
+        yield return null;
 
         for (int attempt = 0; attempt < 4; attempt++)
         {
+            if (!IsSpawned)
+                yield break;
+
             ApplyVisualGroundSnap();
 
             if (attempt < 3)
@@ -762,7 +771,12 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     [ServerRpc]
     private void RequestNameServerRpc(string requestedName)
     {
-        playerName.Value = new FixedString64Bytes(SanitizePlayerName(requestedName));
+        playerName.Value = ToNetworkPlayerName(requestedName);
+    }
+
+    private static FixedString64Bytes ToNetworkPlayerName(string value)
+    {
+        return new FixedString64Bytes(SanitizePlayerName(value));
     }
 
     private void OnColorChanged(int previousValue, int newValue)

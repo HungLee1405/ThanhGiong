@@ -217,7 +217,12 @@ public class MultiplayerConnector : MonoBehaviour
 
             GUILayout.Space(22f);
             GUILayout.Label("MÃ PHÒNG", codeLabelStyle);
-            joinCode = GUILayout.TextField(CleanJoinCode(joinCode), inputStyle, GUILayout.Height(56f));
+            GUI.SetNextControlName("OnlineJoinCode");
+            string editedJoinCode = GUILayout.TextField(joinCode, inputStyle, GUILayout.Height(56f));
+            if (editedJoinCode != joinCode)
+            {
+                joinCode = CleanJoinCode(editedJoinCode);
+            }
             GUILayout.Space(12f);
 
             if (GUILayout.Button("VÀO PHÒNG", secondaryButtonStyle, GUILayout.Height(62f)))
