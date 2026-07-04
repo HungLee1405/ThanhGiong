@@ -191,6 +191,28 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
+    public int FindItemSlot(string itemId)
+    {
+        EnsureSlotCount();
+
+        if (string.IsNullOrEmpty(itemId))
+            return -1;
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            InventoryItem item = items[i];
+
+            if (item != null &&
+                item.itemData != null &&
+                item.itemData.itemId == itemId)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public bool IsInventoryFull()
     {
         EnsureSlotCount();

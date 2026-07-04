@@ -88,22 +88,18 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
 
     public bool TryReceiveChicken(PlayerHandController hand)
     {
-        if (hand == null || hand.carriedChicken == null) return false;
+        if (hand == null) return false;
         ItemData heldItem = hand.GetHeldItemData();
         if (heldItem == null || !CanReceiveItem(heldItem, 1)) return false;
 
-        hand.carriedChicken.isDelivered = true;
         if (hand.TryConsumeHeldItem(1))
         {
             hand.carriedChicken = null;
             ReceiveItem(heldItem, 1);
             return true;
         }
-        else
-        {
-            hand.carriedChicken.isDelivered = false;
-            return false;
-        }
+
+        return false;
     }
 
     private void Update()
@@ -167,7 +163,7 @@ public class ChickenCoop : MonoBehaviour, IItemReceiver
             {
                 message = coopFullMessage;
             }
-            else if (hand.carriedChicken == null || !hand.IsHoldingItem(acceptedItemId))
+            else if (!hand.IsHoldingItem(acceptedItemId))
             {
                 message = noChickenMessage;
             }

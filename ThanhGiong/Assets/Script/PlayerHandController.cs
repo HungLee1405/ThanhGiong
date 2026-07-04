@@ -147,6 +147,7 @@ public class PlayerHandController : NetworkBehaviour
     {
         if (playerInventory == null) return;
 
+        EnsureInventoryUI();
         selectedSlotIndex = slotIndex;
         RefreshSelectedItem();
 
@@ -206,7 +207,7 @@ public class PlayerHandController : NetworkBehaviour
 
         ItemData itemToPut = selectedItem.itemData;
 
-        if (currentReceiver is ChickenCoop coop && itemToPut.itemId == "chick" && carriedChicken != null)
+        if (currentReceiver is ChickenCoop coop && itemToPut.itemId == "chick")
         {
             bool success = coop.TryReceiveChicken(this);
             if (!success)
@@ -251,6 +252,8 @@ public class PlayerHandController : NetworkBehaviour
 
     private void OnInventoryChanged()
     {
+        EnsureInventoryUI();
+
         if (selectedSlotIndex < 0) return;
 
         RefreshSelectedItem();
@@ -371,6 +374,14 @@ public class PlayerHandController : NetworkBehaviour
     public void RefreshHeldItem()
     {
         RefreshSelectedItem();
+    }
+
+    private void EnsureInventoryUI()
+    {
+        if (playerInventoryUI == null)
+        {
+            playerInventoryUI = FindFirstObjectByType<PlayerInventoryUI>();
+        }
     }
 
     public InventoryItem GetHeldItem()

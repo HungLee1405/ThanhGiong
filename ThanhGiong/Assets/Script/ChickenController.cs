@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class ChickenController : MonoBehaviour
 {
     private static readonly Dictionary<string, ChickenController> SharedChickens = new Dictionary<string, ChickenController>();
+    private const float RecaptureDelay = 0.75f;
 
     [Header("Settings")]
     public float wanderRadius = 5f;
@@ -38,6 +39,7 @@ public class ChickenController : MonoBehaviour
     private Vector3 sharedTargetPosition;
     private Quaternion sharedTargetRotation;
     private float nextSharedTransformPublishTime;
+    private float nextCatchAllowedTime;
     private bool hasSharedTransformState;
 
     private const float SharedTransformPublishInterval = 0.12f;
@@ -150,6 +152,7 @@ public class ChickenController : MonoBehaviour
         if (NetworkLobbyCoordinator.IsOnlineLobbyActive) return;
         if (waitingForSharedCatch) return;
         if (Keyboard.current == null || isCaught) return;
+        if (Time.time < nextCatchAllowedTime) return;
 
         if (!playerInRange)
         {
@@ -222,20 +225,9 @@ public class ChickenController : MonoBehaviour
                 interactionUI.Hide();
             }
 
-            if (playerHandController != null)
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    InventoryItem item = playerInventory.GetItemAtSlot(i);
-                    if (item != null && item.itemData == chickenItemData)
-                    {
-                        playerHandController.SelectSlot(i);
-                        break;
-                    }
-                }
-            }
+            SelectCaughtChickenSlot(chickenItemData.itemId);
 
-            gameObject.SetActive(false);
+            ResetAfterCatch();
         }
         else
         {
@@ -325,17 +317,9 @@ public class ChickenController : MonoBehaviour
         if (playerHandController != null)
         {
             playerHandController.carriedChicken = this;
-
-            for (int i = 0; i < 8; i++)
-            {
-                InventoryItem item = playerInventory.GetItemAtSlot(i);
-                if (item != null && item.itemData == rewardItem)
-                {
-                    playerHandController.SelectSlot(i);
-                    break;
-                }
-            }
         }
+
+        SelectCaughtChickenSlot(rewardItem.itemId);
 
         if (interactionUI != null)
         {
@@ -343,7 +327,25 @@ public class ChickenController : MonoBehaviour
             interactionUI.Hide();
         }
 
-        gameObject.SetActive(false);
+        ResetAfterCatch();
+    }
+
+    private void SelectCaughtChickenSlot(string itemId)
+    {
+        if (playerInventory == null || playerHandController == null)
+            return;
+
+        int slotIndex = playerInventory.FindItemSlot(itemId);
+        if (slotIndex < 0)
+            return;
+
+        playerHandController.SelectSlot(slotIndex);
+
+        if (playerHandController.playerInventoryUI != null)
+        {
+            playerHandController.playerInventoryUI.UpdateUI();
+            playerHandController.playerInventoryUI.HighlightSlot(slotIndex);
+        }
     }
 
     private void CancelCatching()
@@ -430,6 +432,30 @@ public class ChickenController : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    private void ResetAfterCatch()
+    {
+        isCaught = false;
+        waitingForSharedCatch = false;
+        isCatching = false;
+        catchTimer = 0f;
+        nextCatchAllowedTime = Time.time + RecaptureDelay;
+
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+
+        if (agent != null && agent.enabled && agent.isOnNavMesh)
+        {
+            agent.Warp(spawnPosition);
+            agent.SetDestination(spawnPosition);
+        }
+        else
+        {
+            transform.position = spawnPosition;
+        }
+    }
+
     private void ApplySharedCaught(bool caught)
     {
         waitingForSharedCatch = false;
@@ -445,7 +471,7 @@ public class ChickenController : MonoBehaviour
 
         if (caught)
         {
-            gameObject.SetActive(false);
+            ResetAfterCatch();
         }
         else if (!isDelivered)
         {
@@ -536,15 +562,15 @@ public class ChickenController : MonoBehaviour
             !SharedChickens.TryGetValue(chickenId, out ChickenController chicken) ||
             chicken == null ||
             chicken.chickenItemData == null ||
-            chicken.isCaught ||
-            chicken.isDelivered)
+            chicken.isDelivered ||
+            Time.time < chicken.nextCatchAllowedTime)
         {
             return false;
         }
 
         itemId = chicken.chickenItemData.itemId;
-        chicken.ApplySharedCaught(true);
-        SharedQuestNetwork.PublishChickenState(chickenId, true);
+        chicken.ResetAfterCatch();
+        SharedQuestNetwork.PublishChickenState(chickenId, false);
         return true;
     }
 
@@ -596,7 +622,7 @@ public class ChickenController : MonoBehaviour
             (chicken.transform.position - position).sqrMagnitude > 9f;
 
         chicken.waitingForSharedCatch = false;
-        chicken.isCaught = hidden;
+        chicken.isCaught = false;
         chicken.hasSharedTransformState = true;
         chicken.sharedTargetPosition = position;
         chicken.sharedTargetRotation = Quaternion.Euler(0f, rotationY, 0f);
@@ -608,7 +634,7 @@ public class ChickenController : MonoBehaviour
                 chicken.interactionUI.Hide();
             }
 
-            chicken.gameObject.SetActive(false);
+            chicken.ResetAfterCatch();
             return;
         }
 
@@ -641,12 +667,9 @@ public class ChickenController : MonoBehaviour
                 chicken.networkChickenId,
                 chicken.transform.position,
                 chicken.transform.eulerAngles.y,
-                chicken.isCaught || !chicken.gameObject.activeInHierarchy);
+                false);
 
-            if (chicken.isCaught)
-            {
-                SharedQuestNetwork.SendChickenState(clientId, chicken.networkChickenId, true);
-            }
+            SharedQuestNetwork.SendChickenState(clientId, chicken.networkChickenId, false);
         }
     }
 
