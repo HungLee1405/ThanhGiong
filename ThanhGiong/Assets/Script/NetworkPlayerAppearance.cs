@@ -507,10 +507,13 @@ public class NetworkPlayerAppearance : NetworkBehaviour
     private IEnumerator SnapVisualModelToGround()
     {
         yield return null;
-        yield return new WaitForEndOfFrame();
+        yield return null;
 
         for (int attempt = 0; attempt < 4; attempt++)
         {
+            if (!IsSpawned)
+                yield break;
+
             ApplyVisualGroundSnap();
 
             if (attempt < 3)
