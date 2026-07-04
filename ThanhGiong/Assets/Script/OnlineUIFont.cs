@@ -3,10 +3,10 @@ using UnityEngine;
 
 public static class OnlineUIFont
 {
-    private const string TitleFontName = "Palatino Linotype";
-    private const string UIFontName = "Cambria";
-    private const string TitleFontResourcePath = "Fonts/PalatinoLinotype";
-    private const string UIFontResourcePath = "Fonts/CambriaBold";
+    private const string TitleFontName = "Be Vietnam Pro";
+    private const string UIFontName = "Be Vietnam Pro";
+    private const string TitleFontResourcePath = "Fonts/BeVietnamPro-Regular";
+    private const string UIFontResourcePath = "Fonts/BeVietnamPro-Regular";
     private const float ApplyInterval = 0.5f;
 
     private static Font titleFont;
@@ -21,7 +21,7 @@ public static class OnlineUIFont
         if (titleFont != null)
             return titleFont;
 
-        return CreateRuntimeFont(TitleFontName, "Georgia", "Times New Roman");
+        return CreateRuntimeFont(TitleFontName, "Arial", "Segoe UI");
     }
 
     public static Font CreateUIFont()
@@ -31,7 +31,7 @@ public static class OnlineUIFont
         if (uiFont != null)
             return uiFont;
 
-        return CreateRuntimeFont(UIFontName, "Book Antiqua", "Georgia", "Times New Roman");
+        return CreateRuntimeFont(UIFontName, "Arial", "Segoe UI");
     }
 
     public static void ApplyToCurrentOnlineText(bool force = false)
@@ -95,7 +95,7 @@ public static class OnlineUIFont
 
             if (uiTmpFont != null)
             {
-                uiTmpFont.name = UIFontName + " UI TMP";
+                uiTmpFont.name = UIFontName + " Game TMP";
             }
         }
     }

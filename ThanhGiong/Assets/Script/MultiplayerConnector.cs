@@ -35,7 +35,13 @@ public class MultiplayerConnector : MonoBehaviour
     [Header("Optional")]
     public bool showDebugGui = true;
 
-    private Rect sessionWindowRect = new Rect(16f, 16f, 300f, 180f);
+    private const float SessionWindowWidth = 220f;
+    private const float SessionWindowHeight = 104f;
+    private const float SessionWindowLeft = 24f;
+    private const float SessionWindowTop = 12f;
+    private Rect sessionWindowRect = new Rect(SessionWindowLeft, SessionWindowTop, SessionWindowWidth, SessionWindowHeight);
+    private int lastSessionWindowScreenWidth = -1;
+    private int lastSessionWindowScreenHeight = -1;
     private string currentRoomCode = "";
     private string statusMessage = "";
     private bool isStartingOnline;
@@ -57,10 +63,13 @@ public class MultiplayerConnector : MonoBehaviour
     private GUIStyle secondaryButtonStyle;
     private GUIStyle inputStyle;
     private GUIStyle sessionWindowStyle;
+    private GUIStyle sessionLabelStyle;
+    private GUIStyle sessionCodeStyle;
+    private GUIStyle sessionButtonStyle;
     private Font titleFont;
     private Font uiFont;
     private Color panelColor = new Color(0.10f, 0.17f, 0.16f, 0.98f);
-    private Color sessionColor = new Color(0.10f, 0.18f, 0.15f, 0.94f);
+    private Color sessionColor = new Color(0.035f, 0.045f, 0.055f, 0.58f);
     private Texture2D overlayTexture;
     private Texture2D panelTexture;
     private Texture2D sessionTexture;
@@ -68,6 +77,10 @@ public class MultiplayerConnector : MonoBehaviour
     private Texture2D greenTexture;
     private Texture2D backTexture;
     private Texture2D inputTexture;
+    private Texture2D sessionCodeTexture;
+    private Texture2D sessionButtonTexture;
+    private Texture2D sessionButtonHoverTexture;
+    private Texture2D sessionButtonActiveTexture;
 
     private void Start()
     {
@@ -138,11 +151,12 @@ public class MultiplayerConnector : MonoBehaviour
         if (manager != null && manager.IsListening)
         {
             EnsureGuiStyles();
+            PositionSessionWindowAboveQuestPanel();
             sessionWindowRect = GUILayout.Window(
                 GetInstanceID(),
                 sessionWindowRect,
                 DrawSessionWindow,
-                "PHÒNG TRỰC TUYẾN",
+                "PHÒNG ONLINE",
                 sessionWindowStyle);
             return;
         }
@@ -260,24 +274,46 @@ public class MultiplayerConnector : MonoBehaviour
         if (manager == null)
             return;
 
-        GUILayout.Label(GetNetworkStatus(manager), codeLabelStyle);
+        GUILayout.Label(GetNetworkStatus(manager), sessionLabelStyle);
 
         if (manager.IsHost)
         {
-            GUILayout.Label("MÃ PHÒNG", labelStyle);
-            GUILayout.TextField(RoomCodeUtility.FormatCode(GetCurrentRoomCode()), inputStyle, GUILayout.Height(42f));
+            GUILayout.TextField(RoomCodeUtility.FormatCode(GetCurrentRoomCode()), sessionCodeStyle, GUILayout.Height(30f));
         }
         else
         {
-            GUILayout.Label("Đã kết nối tới phòng " + joinCode, labelStyle);
+            GUILayout.TextField(RoomCodeUtility.FormatCode(joinCode), sessionCodeStyle, GUILayout.Height(30f));
         }
 
-        if (GUILayout.Button("RỜI PHÒNG", secondaryButtonStyle, GUILayout.Height(42f)))
+        GUILayout.Space(2f);
+        if (GUILayout.Button("RỜI", sessionButtonStyle, GUILayout.Height(24f)))
         {
             LeaveSession(manager);
         }
 
         GUI.DragWindow();
+    }
+
+    private void PositionSessionWindowAboveQuestPanel()
+    {
+        bool screenChanged = Screen.width != lastSessionWindowScreenWidth ||
+            Screen.height != lastSessionWindowScreenHeight;
+        bool stillAtDefaultPosition = Mathf.Approximately(sessionWindowRect.x, 16f) &&
+            Mathf.Approximately(sessionWindowRect.y, 16f);
+
+        sessionWindowRect.width = SessionWindowWidth;
+        sessionWindowRect.height = SessionWindowHeight;
+
+        if (screenChanged || stillAtDefaultPosition)
+        {
+            sessionWindowRect.x = SessionWindowLeft;
+            sessionWindowRect.y = SessionWindowTop;
+        }
+
+        sessionWindowRect.x = Mathf.Clamp(sessionWindowRect.x, 8f, Mathf.Max(8f, Screen.width - sessionWindowRect.width - 8f));
+        sessionWindowRect.y = Mathf.Clamp(sessionWindowRect.y, 8f, Mathf.Max(8f, Screen.height - sessionWindowRect.height - 8f));
+        lastSessionWindowScreenWidth = Screen.width;
+        lastSessionWindowScreenHeight = Screen.height;
     }
 
     private void Update()
@@ -305,6 +341,10 @@ public class MultiplayerConnector : MonoBehaviour
         DestroyGuiTexture(greenTexture);
         DestroyGuiTexture(backTexture);
         DestroyGuiTexture(inputTexture);
+        DestroyGuiTexture(sessionCodeTexture);
+        DestroyGuiTexture(sessionButtonTexture);
+        DestroyGuiTexture(sessionButtonHoverTexture);
+        DestroyGuiTexture(sessionButtonActiveTexture);
         DestroyRuntimeFont(titleFont);
         DestroyRuntimeFont(uiFont);
     }
@@ -703,11 +743,15 @@ public class MultiplayerConnector : MonoBehaviour
 
         overlayTexture = CreateColorTexture(new Color(0.02f, 0.04f, 0.05f, 0.72f));
         panelTexture = CreateRoundedRectTexture(96, 96, 14, panelColor);
-        sessionTexture = CreateRoundedRectTexture(72, 72, 10, sessionColor);
+        sessionTexture = CreateRoundedRectTexture(72, 72, 8, sessionColor);
         goldTexture = CreateRoundedRectTexture(64, 64, 8, new Color(0.88f, 0.63f, 0.24f, 1f));
         greenTexture = CreateRoundedRectTexture(64, 64, 8, new Color(0.20f, 0.52f, 0.43f, 1f));
         backTexture = CreateRoundedRectTexture(64, 64, 8, new Color(0.18f, 0.24f, 0.24f, 1f));
         inputTexture = CreateRoundedRectTexture(64, 64, 7, new Color(0.96f, 0.92f, 0.78f, 1f));
+        sessionCodeTexture = CreateRoundedRectTexture(64, 64, 7, new Color(0.96f, 0.92f, 0.78f, 0.92f));
+        sessionButtonTexture = CreateRoundedRectTexture(64, 64, 7, new Color(0.18f, 0.46f, 0.38f, 0.92f));
+        sessionButtonHoverTexture = CreateRoundedRectTexture(64, 64, 7, new Color(0.24f, 0.56f, 0.46f, 0.95f));
+        sessionButtonActiveTexture = CreateRoundedRectTexture(64, 64, 7, new Color(0.16f, 0.38f, 0.32f, 0.95f));
         titleFont = OnlineUIFont.CreateTitleFont();
         uiFont = OnlineUIFont.CreateUIFont();
 
@@ -784,10 +828,57 @@ public class MultiplayerConnector : MonoBehaviour
         sessionWindowStyle = new GUIStyle(GUI.skin.window)
         {
             border = new RectOffset(10, 10, 10, 10),
-            padding = new RectOffset(18, 18, 30, 16),
-            font = titleFont,
+            padding = new RectOffset(14, 14, 22, 10),
+            font = uiFont,
+            fontSize = 15,
             fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.UpperCenter,
             normal = { background = sessionTexture, textColor = new Color(1f, 0.82f, 0.36f) }
+        };
+
+        sessionLabelStyle = new GUIStyle(labelStyle)
+        {
+            fontSize = 13,
+            padding = new RectOffset(0, 0, 0, 0),
+            margin = new RectOffset(0, 0, 0, 2),
+            normal = { textColor = new Color(0.96f, 0.9f, 0.72f) }
+        };
+
+        sessionCodeStyle = new GUIStyle(inputStyle)
+        {
+            fontSize = 20,
+            padding = new RectOffset(10, 10, 3, 3),
+            normal =
+            {
+                background = sessionCodeTexture,
+                textColor = new Color(0.12f, 0.10f, 0.07f)
+            },
+            focused =
+            {
+                background = sessionCodeTexture,
+                textColor = new Color(0.12f, 0.10f, 0.07f)
+            }
+        };
+
+        sessionButtonStyle = new GUIStyle(secondaryButtonStyle)
+        {
+            fontSize = 15,
+            padding = new RectOffset(10, 10, 4, 4),
+            normal =
+            {
+                background = sessionButtonTexture,
+                textColor = Color.white
+            },
+            hover =
+            {
+                background = sessionButtonHoverTexture,
+                textColor = Color.white
+            },
+            active =
+            {
+                background = sessionButtonActiveTexture,
+                textColor = new Color(1f, 0.92f, 0.70f)
+            }
         };
     }
 

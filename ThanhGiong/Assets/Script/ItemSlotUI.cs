@@ -28,8 +28,9 @@ public class ItemSlotUI : MonoBehaviour
 
         if (itemIcon != null)
         {
-            itemIcon.gameObject.SetActive(true);
-            itemIcon.enabled = true;
+            bool hasIcon = inventoryItem.itemData.itemIcon != null;
+            itemIcon.gameObject.SetActive(hasIcon);
+            itemIcon.enabled = hasIcon;
             itemIcon.sprite = inventoryItem.itemData.itemIcon;
             itemIcon.preserveAspect = true;
 
@@ -47,8 +48,9 @@ public class ItemSlotUI : MonoBehaviour
             }
             else
             {
-                amountText.gameObject.SetActive(false);
-                amountText.text = "";
+                bool hasIcon = inventoryItem.itemData.itemIcon != null;
+                amountText.gameObject.SetActive(!hasIcon);
+                amountText.text = hasIcon ? "" : GetFallbackLabel(inventoryItem.itemData);
             }
         }
 
@@ -92,5 +94,19 @@ public class ItemSlotUI : MonoBehaviour
         {
             highlightObject.SetActive(active);
         }
+    }
+
+    private string GetFallbackLabel(ItemData itemData)
+    {
+        if (itemData == null)
+            return "";
+
+        if (!string.IsNullOrWhiteSpace(itemData.itemName))
+            return itemData.itemName.Substring(0, Mathf.Min(2, itemData.itemName.Length)).ToUpper();
+
+        if (!string.IsNullOrWhiteSpace(itemData.itemId))
+            return itemData.itemId.Substring(0, Mathf.Min(2, itemData.itemId.Length)).ToUpper();
+
+        return "?";
     }
 }

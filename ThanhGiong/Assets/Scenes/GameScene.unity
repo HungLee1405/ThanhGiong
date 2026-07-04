@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15c8fbbf2db4424190c2637fc0bf562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDayManager
-  currentDay: 1
+  currentDay: 3
   maxDay: 7
   dayDuration: 240
   remainingTime: 240
@@ -14046,7 +14046,7 @@ MonoBehaviour:
   playerHubUI: {fileID: 1044638459}
   gameDayManager: {fileID: 27118297}
   giongHunger: {fileID: 273875418}
-  currentDay: 1
+  currentDay: 3
   currentStepIndex: 0
   isDayQuestCompleted: 0
   scaleSharedObjectivesWithPlayers: 1

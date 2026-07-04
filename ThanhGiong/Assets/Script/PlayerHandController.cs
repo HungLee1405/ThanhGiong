@@ -145,6 +145,7 @@ public class PlayerHandController : NetworkBehaviour
 
     public void SelectSlot(int slotIndex)
     {
+        EnsureLocalInventory();
         if (playerInventory == null) return;
 
         EnsureInventoryUI();
@@ -252,6 +253,7 @@ public class PlayerHandController : NetworkBehaviour
 
     private void OnInventoryChanged()
     {
+        EnsureLocalInventory();
         EnsureInventoryUI();
 
         if (selectedSlotIndex < 0) return;
@@ -266,6 +268,8 @@ public class PlayerHandController : NetworkBehaviour
 
     private void RefreshSelectedItem()
     {
+        EnsureLocalInventory();
+
         if (playerInventory == null || selectedSlotIndex < 0)
         {
             selectedItem = null;
@@ -310,6 +314,13 @@ public class PlayerHandController : NetworkBehaviour
 
         currentHandObject.transform.localPosition = Vector3.zero;
         currentHandObject.transform.localRotation = Quaternion.identity;
+
+        if (itemData.itemId == "chick")
+        {
+            currentHandObject.transform.localPosition = new Vector3(0f, -0.05f, 0.25f);
+            currentHandObject.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+            currentHandObject.transform.localScale = Vector3.one * 0.45f;
+        }
     }
 
     [ServerRpc]
@@ -382,6 +393,83 @@ public class PlayerHandController : NetworkBehaviour
         {
             playerInventoryUI = FindFirstObjectByType<PlayerInventoryUI>();
         }
+
+        if (playerInventoryUI != null)
+        {
+            playerInventoryUI.RebindToLocalInventory();
+        }
+    }
+
+    private void EnsureLocalInventory()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+        if (networkManager == null || !networkManager.IsListening)
+        {
+            if (playerInventory == null)
+            {
+                playerInventory = GetComponent<PlayerInventory>();
+            }
+            return;
+        }
+
+        if (IsSpawned)
+        {
+            if (!IsOwner)
+                return;
+
+            PlayerInventory ownInventory = GetComponent<PlayerInventory>();
+            if (ownInventory == null)
+            {
+                ownInventory = GetComponentInChildren<PlayerInventory>();
+            }
+
+            if (ownInventory != null)
+            {
+                SetPlayerInventory(ownInventory);
+                return;
+            }
+        }
+
+        if (playerInventory != null && playerInventory.gameObject.activeInHierarchy)
+        {
+            PlayerMovement currentMovement = playerInventory.GetComponentInParent<PlayerMovement>();
+            if (currentMovement != null && currentMovement.IsSpawned && currentMovement.IsOwner)
+                return;
+        }
+
+        PlayerMovement[] movements = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+        foreach (PlayerMovement movement in movements)
+        {
+            if (movement == null || !movement.IsSpawned || !movement.IsOwner)
+                continue;
+
+            PlayerInventory localInventory = movement.GetComponent<PlayerInventory>();
+            if (localInventory == null)
+            {
+                localInventory = movement.GetComponentInChildren<PlayerInventory>();
+            }
+
+            if (localInventory == null)
+                continue;
+
+            SetPlayerInventory(localInventory);
+            return;
+        }
+    }
+
+    private void SetPlayerInventory(PlayerInventory inventory)
+    {
+        if (inventory == null || playerInventory == inventory)
+            return;
+
+        if (playerInventory != null)
+        {
+            playerInventory.OnInventoryChanged -= OnInventoryChanged;
+        }
+
+        playerInventory = inventory;
+        playerInventory.OnInventoryChanged -= OnInventoryChanged;
+        playerInventory.OnInventoryChanged += OnInventoryChanged;
     }
 
     public InventoryItem GetHeldItem()

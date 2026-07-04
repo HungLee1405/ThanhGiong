@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestDatabase : MonoBehaviour
@@ -7,17 +7,17 @@ public class QuestDatabase : MonoBehaviour
     public ItemData axeItem;
     public ItemData pickaxeItem;
 
-    // ─────────────────────────────────────────────────────────────────
-    //  VOICE CLIPS – GIÀ LÀNG (village_elder)  — 29 clips, 1 clip/dòng
-    //  Ngày 1 (3 dòng) : Voice1GL  … Voice3GL
-    //  Ngày 2 (4 dòng) : Voice4GL  … Voice7GL
-    //  Ngày 3 (4 dòng) : Voice8GL  … Voice11GL
-    //  Ngày 4 (5 dòng) : Voice12GL … Voice16GL
-    //  Ngày 5 (6 dòng) : Voice17GL … Voice22GL
-    //  Ngày 6 (5 dòng) : Voice23GL … Voice27GL
-    //  Ngày 7 (2 dòng) : Voice28GL … Voice29GL
-    // ─────────────────────────────────────────────────────────────────
-    [Header("Voice – Già Làng (GL) — 29 clips")]
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    //  VOICE CLIPS â€“ GIÃ€ LÃ€NG (village_elder)  â€” 29 clips, 1 clip/dÃ²ng
+    //  NgÃ y 1 (3 dÃ²ng) : Voice1GL  â€¦ Voice3GL
+    //  NgÃ y 2 (4 dÃ²ng) : Voice4GL  â€¦ Voice7GL
+    //  NgÃ y 3 (4 dÃ²ng) : Voice8GL  â€¦ Voice11GL
+    //  NgÃ y 4 (5 dÃ²ng) : Voice12GL â€¦ Voice16GL
+    //  NgÃ y 5 (6 dÃ²ng) : Voice17GL â€¦ Voice22GL
+    //  NgÃ y 6 (5 dÃ²ng) : Voice23GL â€¦ Voice27GL
+    //  NgÃ y 7 (2 dÃ²ng) : Voice28GL â€¦ Voice29GL
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    [Header("Voice â€“ GiÃ  LÃ ng (GL) â€” 29 clips")]
     public AudioClip voice1GL;
     public AudioClip voice2GL;
     public AudioClip voice3GL;
@@ -48,12 +48,12 @@ public class QuestDatabase : MonoBehaviour
     public AudioClip voice28GL;
     public AudioClip voice29GL;
 
-    // ─────────────────────────────────────────────────────────────────
-    //  VOICE CLIPS – MẸ GIÓNG (giong_mother)  — 10 clips
-    //  Lần 1 (6 dòng) : Voice1MG  … Voice6MG
-    //  Lần 2 (4 dòng) : Voice7MG  … Voice10MG
-    // ─────────────────────────────────────────────────────────────────
-    [Header("Voice – Mẹ Gióng (MG) — 10 clips")]
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    //  VOICE CLIPS â€“ Máº¸ GIÃ“NG (giong_mother)  â€” 10 clips
+    //  Láº§n 1 (6 dÃ²ng) : Voice1MG  â€¦ Voice6MG
+    //  Láº§n 2 (4 dÃ²ng) : Voice7MG  â€¦ Voice10MG
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    [Header("Voice â€“ Máº¹ GiÃ³ng (MG) â€” 10 clips")]
     public AudioClip voice1MG;
     public AudioClip voice2MG;
     public AudioClip voice3MG;
@@ -65,12 +65,12 @@ public class QuestDatabase : MonoBehaviour
     public AudioClip voice9MG;
     public AudioClip voice10MG;
 
-    // ─────────────────────────────────────────────────────────────────
-    //  VOICE CLIPS – BÁC BA (bac_ba)  — 7 clips
-    //  Lần 1 (4 dòng) : Voice1Bacba … Voice4Bacba
-    //  Lần 2 (3 dòng) : Voice5Bacba … Voice7Bacba
-    // ─────────────────────────────────────────────────────────────────
-    [Header("Voice – Bác Ba (Bacba) — 7 clips")]
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    //  VOICE CLIPS â€“ BÃC BA (bac_ba)  â€” 7 clips
+    //  Láº§n 1 (4 dÃ²ng) : Voice1Bacba â€¦ Voice4Bacba
+    //  Láº§n 2 (3 dÃ²ng) : Voice5Bacba â€¦ Voice7Bacba
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    [Header("Voice â€“ BÃ¡c Ba (Bacba) â€” 7 clips")]
     public AudioClip voice1Bacba;
     public AudioClip voice2Bacba;
     public AudioClip voice3Bacba;
@@ -79,12 +79,12 @@ public class QuestDatabase : MonoBehaviour
     public AudioClip voice6Bacba;
     public AudioClip voice7Bacba;
 
-    // ─────────────────────────────────────────────────────────────────
-    //  VOICE CLIPS – THỢ RÈN / BLACKSMITH  — 11 clips
-    //  Ngày 4 (4 dòng) : Voice1ThoRen  … Voice4ThoRen
-    //  Ngày 7 (7 dòng) : Voice5ThoRen  … Voice11ThoRen
-    // ─────────────────────────────────────────────────────────────────
-    [Header("Voice – Thợ Rèn (ThoRen) — 11 clips")]
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    //  VOICE CLIPS â€“ THá»¢ RÃˆN / BLACKSMITH  â€” 11 clips
+    //  NgÃ y 4 (4 dÃ²ng) : Voice1ThoRen  â€¦ Voice4ThoRen
+    //  NgÃ y 7 (7 dÃ²ng) : Voice5ThoRen  â€¦ Voice11ThoRen
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    [Header("Voice â€“ Thá»£ RÃ¨n (ThoRen) â€” 11 clips")]
     public AudioClip voice1ThoRen;
     public AudioClip voice2ThoRen;
     public AudioClip voice3ThoRen;
@@ -112,46 +112,46 @@ public class QuestDatabase : MonoBehaviour
         }
     }
 
-    // ─── NGÀY 1 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 1 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay1Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 1 (3 dòng → Voice1-3GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 1 (3 dÃ²ng â†’ Voice1-3GL)
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Đến gặp Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "Äáº¿n gáº·p GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Vậy là cậu là người được phái tới à.",
-                    "Ta là Già Làng Phù Đổng, thật tốt khi thiếu niên trẻ vẫn còn hăng hái.",
-                    "Hãy đi gặp mẹ Gióng để biết mình cần làm gì nhé."
+                    "Váº­y lÃ  cáº­u lÃ  ngÆ°á»i Ä‘Æ°á»£c phÃ¡i tá»›i Ã .",
+                    "Ta lÃ  GiÃ  LÃ ng PhÃ¹ Äá»•ng, tháº­t tá»‘t khi thiáº¿u niÃªn tráº» váº«n cÃ²n hÄƒng hÃ¡i.",
+                    "HÃ£y Ä‘i gáº·p máº¹ GiÃ³ng Ä‘á»ƒ biáº¿t mÃ¬nh cáº§n lÃ m gÃ¬ nhÃ©."
                 },
                 voiceClips = new AudioClip[] { voice1GL, voice2GL, voice3GL }
             },
 
-            // Mẹ Gióng – lần 1 (6 dòng → Voice1-6MG)
+            // Máº¹ GiÃ³ng â€“ láº§n 1 (6 dÃ²ng â†’ Voice1-6MG)
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Nói chuyện với mẹ Gióng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "NÃ³i chuyá»‡n vá»›i máº¹ GiÃ³ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "giong_mother",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Vậy cậu là người mà Già Làng nói tới.",
-                    "Tôi là mẹ Gióng. Hiện giờ con trai tôi đang ăn rất nhiều.",
-                    "Tôi nấu không xuể dù mọi người có góp gạo góp sức.",
-                    "Hãy giúp tôi nấu ăn nhé.",
-                    "Cậu có thể lấy nước từ giếng, gạo từ kho thóc và đến nồi ở giữa làng để nấu.",
-                    "Sau khi nấu xong hãy đến gặp tôi."
+                    "Váº­y cáº­u lÃ  ngÆ°á»i mÃ  GiÃ  LÃ ng nÃ³i tá»›i.",
+                    "TÃ´i lÃ  máº¹ GiÃ³ng. Hiá»‡n giá» con trai tÃ´i Ä‘ang Äƒn ráº¥t nhiá»u.",
+                    "TÃ´i náº¥u khÃ´ng xuá»ƒ dÃ¹ má»i ngÆ°á»i cÃ³ gÃ³p gáº¡o gÃ³p sá»©c.",
+                    "HÃ£y giÃºp tÃ´i náº¥u Äƒn nhÃ©.",
+                    "Cáº­u cÃ³ thá»ƒ láº¥y nÆ°á»›c tá»« giáº¿ng, gáº¡o tá»« kho thÃ³c vÃ  Ä‘áº¿n ná»“i á»Ÿ giá»¯a lÃ ng Ä‘á»ƒ náº¥u.",
+                    "Sau khi náº¥u xong hÃ£y Ä‘áº¿n gáº·p tÃ´i."
                 },
                 voiceClips = new AudioClip[] { voice1MG, voice2MG, voice3MG, voice4MG, voice5MG, voice6MG }
             },
@@ -159,8 +159,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Lấy nước từ giếng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "Láº¥y nÆ°á»›c tá»« giáº¿ng.",
                 stepType = QuestStepType.CollectWater,
                 targetItemId = "water",
                 requiredAmount = 1
@@ -169,8 +169,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Lấy gạo từ kho thóc.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "Láº¥y gáº¡o tá»« kho thÃ³c.",
                 stepType = QuestStepType.CollectRice,
                 targetItemId = "rice",
                 requiredAmount = 1
@@ -179,8 +179,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Nấu cơm tại nồi giữa làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "Náº¥u cÆ¡m táº¡i ná»“i giá»¯a lÃ ng.",
                 stepType = QuestStepType.CookRice,
                 targetItemId = "cooked_rice",
                 requiredAmount = 1
@@ -189,28 +189,28 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Đưa cơm cho mẹ Gióng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "ÄÆ°a cÆ¡m cho máº¹ GiÃ³ng.",
                 stepType = QuestStepType.FeedGiong,
                 targetItemId = "cooked_rice",
                 requiredAmount = 1
             },
 
-            // Mẹ Gióng – lần 2 (4 dòng → Voice7-10MG)
+            // Máº¹ GiÃ³ng â€“ láº§n 2 (4 dÃ²ng â†’ Voice7-10MG)
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Nói chuyện lại với mẹ Gióng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "NÃ³i chuyá»‡n láº¡i vá»›i máº¹ GiÃ³ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "giong_mother",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Tuyệt vời, cậu làm tốt lắm.",
-                    "Tuy nhiên nhiêu đây là chưa đủ, con tôi giờ đây đang ăn rất nhiều.",
-                    "Hãy nấu và đưa cơm cho tôi để tôi đưa cho nó ăn.",
-                    "Bên phải màn hình là thanh đói, hãy giúp tôi giữ nó trên 80% khi hết ngày."
+                    "Tuyá»‡t vá»i, cáº­u lÃ m tá»‘t láº¯m.",
+                    "Tuy nhiÃªn nhiÃªu Ä‘Ã¢y lÃ  chÆ°a Ä‘á»§, con tÃ´i giá» Ä‘Ã¢y Ä‘ang Äƒn ráº¥t nhiá»u.",
+                    "HÃ£y náº¥u vÃ  Ä‘Æ°a cÆ¡m cho tÃ´i Ä‘á»ƒ tÃ´i Ä‘Æ°a cho nÃ³ Äƒn.",
+                    "BÃªn pháº£i mÃ n hÃ¬nh lÃ  thanh Ä‘Ã³i, hÃ£y giÃºp tÃ´i giá»¯ nÃ³ trÃªn 80% khi háº¿t ngÃ y."
                 },
                 voiceClips = new AudioClip[] { voice7MG, voice8MG, voice9MG, voice10MG }
             },
@@ -218,34 +218,34 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 1,
-                questName = "Nhiệm vụ ngày 1",
-                questDescription = "Nấu cơm và giữ cho thanh đói của Gióng trên 80% khi ngày kết thúc.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 1",
+                questDescription = "Náº¥u cÆ¡m vÃ  giá»¯ cho thanh Ä‘Ã³i cá»§a GiÃ³ng trÃªn 80% khi ngÃ y káº¿t thÃºc.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1
             }
         };
     }
 
-    // ─── NGÀY 2 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 2 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay2Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 2 (4 dòng → Voice4-7GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 2 (4 dÃ²ng â†’ Voice4-7GL)
             new QuestStep
             {
                 day = 2,
-                questName = "Nhiệm vụ ngày 2",
-                questDescription = "Nói chuyện với Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 2",
+                questDescription = "NÃ³i chuyá»‡n vá»›i GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Hôm qua cậu làm tốt lắm.",
-                    "Ta tin tưởng vào cậu hôm nay.",
-                    "Tuy nhiên Gióng đang ngày càng lớn lên, sức ăn cũng lớn hơn.",
-                    "Thanh đói sẽ càng ngày càng tụt nhanh hơn. Hãy cẩn thận."
+                    "HÃ´m qua cáº­u lÃ m tá»‘t láº¯m.",
+                    "Ta tin tÆ°á»Ÿng vÃ o cáº­u hÃ´m nay.",
+                    "Tuy nhiÃªn GiÃ³ng Ä‘ang ngÃ y cÃ ng lá»›n lÃªn, sá»©c Äƒn cÅ©ng lá»›n hÆ¡n.",
+                    "Thanh Ä‘Ã³i sáº½ cÃ ng ngÃ y cÃ ng tá»¥t nhanh hÆ¡n. HÃ£y cáº©n tháº­n."
                 },
                 voiceClips = new AudioClip[] { voice4GL, voice5GL, voice6GL, voice7GL }
             },
@@ -253,54 +253,54 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 2,
-                questName = "Nhiệm vụ ngày 2",
-                questDescription = "Nấu cơm và giữ cho thanh đói của Gióng trên 80% khi ngày kết thúc.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 2",
+                questDescription = "Náº¥u cÆ¡m vÃ  giá»¯ cho thanh Ä‘Ã³i cá»§a GiÃ³ng trÃªn 80% khi ngÃ y káº¿t thÃºc.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1
             }
         };
     }
 
-    // ─── NGÀY 3 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 3 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay3Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 3 (4 dòng → Voice8-11GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 3 (4 dÃ²ng â†’ Voice8-11GL)
             new QuestStep
             {
                 day = 3,
-                questName = "Nhiệm vụ ngày 3",
-                questDescription = "Nói chuyện với Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 3",
+                questDescription = "NÃ³i chuyá»‡n vá»›i GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Hôm qua cậu làm tốt lắm.",
-                    "Ta tin tưởng vào cậu hôm nay.",
-                    "À mà, bác Ba có vẻ gặp khó khăn.",
-                    "Nếu được hãy ghé qua giúp ông ấy một tay nhé."
+                    "HÃ´m qua cáº­u lÃ m tá»‘t láº¯m.",
+                    "Ta tin tÆ°á»Ÿng vÃ o cáº­u hÃ´m nay.",
+                    "Ã€ mÃ , bÃ¡c Ba cÃ³ váº» gáº·p khÃ³ khÄƒn.",
+                    "Náº¿u Ä‘Æ°á»£c hÃ£y ghÃ© qua giÃºp Ã´ng áº¥y má»™t tay nhÃ©."
                 },
-                voiceClips = new AudioClip[] { voice4GL, voice5GL, voice8GL, voice9GL }
+                voiceClips = new AudioClip[] { voice8GL, voice9GL, voice10GL, voice11GL }
             },
 
             new QuestStep
             {
                 day = 3,
-                questName = "Nhiệm vụ ngày 3",
-                questDescription = "Nấu cơm và giữ cho thanh đói của Gióng trên 80% khi ngày kết thúc.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 3",
+                questDescription = "Giá»¯ thanh Ä‘Ã³i cá»§a GiÃ³ng trÃªn 80% vÃ  hoÃ n thÃ nh viá»‡c giÃºp bÃ¡c Ba báº¯t gÃ .",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1,
                 isSideQuest = false
             },
 
-            // Bác Ba – lần 1 (4 dòng → Voice1-4Bacba)
+            // BÃ¡c Ba â€“ láº§n 1 (4 dÃ²ng â†’ Voice1-4Bacba)
             new QuestStep
             {
                 day = 3,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Đến gặp bác Ba.",
+                questName = "Nhiá»‡m vá»¥ phá»¥",
+                questDescription = "Äáº¿n gáº·p bÃ¡c Ba.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "bac_ba",
                 requiredAmount = 1,
@@ -308,10 +308,10 @@ public class QuestDatabase : MonoBehaviour
                 unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
                 {
-                    "Chào cậu trẻ, ta là bác Ba.",
-                    "Lũ gà của ta nghịch ngợm quá, đã xổng chuồng chạy đi khắp nơi rồi.",
-                    "Cậu giúp ta bắt 3 con gà bỏ lại vào chuồng được không?",
-                    "Sau đó ta sẽ truyền lại bí quyết nấu món Cơm Gà để giúp Gióng mau lớn!"
+                    "ChÃ o cáº­u tráº», ta lÃ  bÃ¡c Ba.",
+                    "LÅ© gÃ  cá»§a ta nghá»‹ch ngá»£m quÃ¡, Ä‘Ã£ xá»•ng chuá»“ng cháº¡y Ä‘i kháº¯p nÆ¡i rá»“i.",
+                    "Cáº­u giÃºp ta báº¯t 3 con gÃ  bá» láº¡i vÃ o chuá»“ng Ä‘Æ°á»£c khÃ´ng?",
+                    "Sau Ä‘Ã³ ta sáº½ truyá»n láº¡i bÃ­ quyáº¿t náº¥u mÃ³n CÆ¡m GÃ  Ä‘á»ƒ giÃºp GiÃ³ng mau lá»›n!"
                 },
                 voiceClips = new AudioClip[] { voice1Bacba, voice2Bacba, voice3Bacba, voice4Bacba }
             },
@@ -319,8 +319,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 3,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Bắt gà và đưa về chuồng.",
+                questName = "Nhiá»‡m vá»¥ phá»¥",
+                questDescription = "Báº¯t gÃ  vÃ  Ä‘Æ°a vá» chuá»“ng.",
                 stepType = QuestStepType.CatchChicken,
                 targetItemId = "chick",
                 requiredAmount = 3,
@@ -328,12 +328,12 @@ public class QuestDatabase : MonoBehaviour
                 unlockAtMainStepIndex = 1
             },
 
-            // Bác Ba – lần 2 (3 dòng → Voice5-7Bacba)
+            // BÃ¡c Ba â€“ láº§n 2 (3 dÃ²ng â†’ Voice5-7Bacba)
             new QuestStep
             {
                 day = 3,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Nói chuyện lại với bác Ba.",
+                questName = "Nhiá»‡m vá»¥ phá»¥",
+                questDescription = "NÃ³i chuyá»‡n láº¡i vá»›i bÃ¡c Ba.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "bac_ba",
                 requiredAmount = 1,
@@ -341,46 +341,46 @@ public class QuestDatabase : MonoBehaviour
                 unlockAtMainStepIndex = 1,
                 dialogueLines = new string[]
                 {
-                    "Ôi cậu làm tốt quá, cảm ơn cậu nhiều nhé!",
-                    "Lũ gà giờ đã ở yên trong chuồng rồi.",
-                    "Ta đã chuẩn bị công thức nấu Cơm Gà cho cậu rồi đấy, hãy dùng nó để cho Gióng ăn nhé!"
+                    "Ã”i cáº­u lÃ m tá»‘t quÃ¡, cáº£m Æ¡n cáº­u nhiá»u nhÃ©!",
+                    "LÅ© gÃ  giá» Ä‘Ã£ á»Ÿ yÃªn trong chuá»“ng rá»“i.",
+                    "Ta Ä‘Ã£ chuáº©n bá»‹ cÃ´ng thá»©c náº¥u CÆ¡m GÃ  cho cáº­u rá»“i Ä‘áº¥y, hÃ£y dÃ¹ng nÃ³ Ä‘á»ƒ cho GiÃ³ng Äƒn nhÃ©!"
                 },
                 voiceClips = new AudioClip[] { voice5Bacba, voice6Bacba, voice7Bacba }
             }
         };
     }
 
-    // ─── NGÀY 4 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 4 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay4Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 4 (5 dòng → Voice12-16GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 4 (5 dÃ²ng â†’ Voice12-16GL)
             new QuestStep
             {
                 day = 4,
-                questName = "Nhiệm vụ ngày 4",
-                questDescription = "Nói chuyện với Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 4",
+                questDescription = "NÃ³i chuyá»‡n vá»›i GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Nhiệm vụ hôm nay cũng như hôm qua.",
-                    "Mà giặc Ân đã đến rất gần rồi.",
-                    "Chúng ta phải chuẩn bị vũ khí cho Gióng.",
-                    "Cậu hãy đến gặp bác thợ rèn ở rìa làng.",
-                    "Bác ấy đang cần quặng sắt để chuẩn bị đúc ngựa và roi sắt đấy."
+                    "HÃ´m nay nhiá»‡m vá»¥ sáº½ khÃ¡c hÃ´m qua.",
+                    "MÃ  giáº·c Ã‚n Ä‘Ã£ Ä‘áº¿n ráº¥t gáº§n rá»“i.",
+                    "ChÃºng ta pháº£i chuáº©n bá»‹ vÅ© khÃ­ cho GiÃ³ng.",
+                    "Cáº­u hÃ£y Ä‘áº¿n gáº·p bÃ¡c thá»£ rÃ¨n á»Ÿ rÃ¬a lÃ ng.",
+                    "BÃ¡c áº¥y Ä‘ang cáº§n quáº·ng sáº¯t Ä‘á»ƒ chuáº©n bá»‹ Ä‘Ãºc ngá»±a vÃ  roi sáº¯t Ä‘áº¥y."
                 },
-                voiceClips = new AudioClip[] { voice10GL, voice11GL, voice12GL, voice13GL, voice14GL }
+                voiceClips = new AudioClip[] { voice12GL, voice13GL, voice14GL, voice15GL, voice16GL }
             },
 
-            // Thợ Rèn – ngày 4 (4 dòng → Voice1-4ThoRen)
+            // Thá»£ RÃ¨n â€“ ngÃ y 4 (4 dÃ²ng â†’ Voice1-4ThoRen)
             new QuestStep
             {
                 day = 4,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Gặp Bác Thợ Rèn.",
+                questName = "Nhiá»‡m vá»¥ phá»¥",
+                questDescription = "Gáº·p BÃ¡c Thá»£ RÃ¨n.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "blacksmith",
                 isSideQuest = true,
@@ -389,14 +389,14 @@ public class QuestDatabase : MonoBehaviour
                 rewardItem = pickaxeItem,
                 rewardAmount = 1,
                 rewardTiming = RewardTiming.TalkToNPC,
-                rewardMessage = "Nhận được Cuốc Chim!",
+                rewardMessage = "Nháº­n Ä‘Æ°á»£c Cuá»‘c Chim!",
                 requireInventorySpace = true,
                 dialogueLines = new string[]
                 {
-                    "Cậu ắt hẳn là người mà Già Làng nhắc đến.",
-                    "Củi lửa đã sẵn sàng nhưng ta đang thiếu quặng sắt trầm trọng.",
-                    "Cậu hãy cầm lấy cây cuốc chim này.",
-                    "Ra mỏ đá phía sau làng đào một ít Quặng Sắt mang về kho giúp ta nhé!"
+                    "Cáº­u áº¯t háº³n lÃ  ngÆ°á»i mÃ  GiÃ  LÃ ng nháº¯c Ä‘áº¿n.",
+                    "Cá»§i lá»­a Ä‘Ã£ sáºµn sÃ ng nhÆ°ng ta Ä‘ang thiáº¿u quáº·ng sáº¯t tráº§m trá»ng.",
+                    "Cáº­u hÃ£y cáº§m láº¥y cÃ¢y cuá»‘c chim nÃ y.",
+                    "Ra má» Ä‘Ã¡ phÃ­a sau lÃ ng Ä‘Ã o má»™t Ã­t Quáº·ng Sáº¯t mang vá» kho giÃºp ta nhÃ©!"
                 },
                 voiceClips = new AudioClip[] { voice1ThoRen, voice2ThoRen, voice3ThoRen, voice4ThoRen }
             },
@@ -404,8 +404,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 4,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Khai thác 2 quặng sắt và mang về kho",
+                questName = "Nhiá»‡m vá»¥ phá»¥",
+                questDescription = "Khai thÃ¡c 2 quáº·ng sáº¯t vÃ  mang vá» kho",
                 stepType = QuestStepType.CollectIron,
                 targetItemId = "iron_ore",
                 requiredAmount = 2,
@@ -416,41 +416,41 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 4,
-                questName = "Nhiệm vụ ngày 4",
-                questDescription = "Nấu cơm và giữ cho thanh đói của Gióng trên 80% khi ngày kết thúc.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 4",
+                questDescription = "Giá»¯ thanh Ä‘Ã³i cá»§a GiÃ³ng trÃªn 80% vÃ  há»— trá»£ thá»£ rÃ¨n chuáº©n bá»‹ quáº·ng sáº¯t.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1
             }
         };
     }
 
-    // ─── NGÀY 5 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 5 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay5Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 5 (6 dòng → Voice17-22GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 5 (6 dÃ²ng â†’ Voice17-22GL)
             new QuestStep
             {
                 day = 5,
-                questName = "Nhiệm vụ ngày 5",
-                questDescription = "Nói chuyện với Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 5",
+                questDescription = "NÃ³i chuyá»‡n vá»›i GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 rewardItem = axeItem,
                 rewardAmount = 1,
                 rewardTiming = RewardTiming.TalkToNPC,
-                rewardMessage = "Nhận được Rìu!",
+                rewardMessage = "Nháº­n Ä‘Æ°á»£c RÃ¬u!",
                 requireInventorySpace = true,
                 dialogueLines = new string[]
                 {
-                    "Tình hình nguy cấp rồi cậu trẻ ơi!",
-                    "Giặc Ân đã áp sát biên thùy.",
-                    "Làng ta cần gấp một lượng tre lớn để làm cọc phòng thủ.",
-                    "Khu vực Rừng Tre ở phía Đông, cậu hãy mang rìu ra đó thu hoạch nhé.",
-                    "À, sẵn có ống tre tươi, cậu có thể nấu món Cơm Lam Ống Tre cho Gióng.",
-                    "Thằng bé giờ đã lớn bằng ngôi nhà, sức ăn kinh khủng lắm."
+                    "TÃ¬nh hÃ¬nh nguy cáº¥p rá»“i cáº­u tráº» Æ¡i!",
+                    "Giáº·c Ã‚n Ä‘Ã£ Ã¡p sÃ¡t biÃªn thÃ¹y.",
+                    "LÃ ng ta cáº§n gáº¥p má»™t lÆ°á»£ng tre lá»›n Ä‘á»ƒ lÃ m cá»c phÃ²ng thá»§.",
+                    "Khu vá»±c Rá»«ng Tre á»Ÿ phÃ­a ÄÃ´ng, cáº­u hÃ£y mang rÃ¬u ra Ä‘Ã³ thu hoáº¡ch nhÃ©.",
+                    "Ã€, sáºµn cÃ³ á»‘ng tre tÆ°Æ¡i, cáº­u cÃ³ thá»ƒ náº¥u mÃ³n CÆ¡m Lam á»ng Tre cho GiÃ³ng.",
+                    "Tháº±ng bÃ© giá» Ä‘Ã£ lá»›n báº±ng ngÃ´i nhÃ , sá»©c Äƒn kinh khá»§ng láº¯m."
                 },
                 voiceClips = new AudioClip[] { voice16GL, voice17GL, voice18GL, voice19GL, voice21GL, voice22GL }
             },
@@ -458,8 +458,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 5,
-                questName = "Nhiệm vụ phụ",
-                questDescription = "Chặt 5 bó tre mang về kho.",
+                questName = "Nhiá»‡m vá»¥ phá»¥",
+                questDescription = "Cháº·t 5 bÃ³ tre mang vá» kho.",
                 stepType = QuestStepType.CollectBamboo,
                 targetItemId = "bamboo",
                 requiredAmount = 5,
@@ -470,35 +470,35 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 5,
-                questName = "Nhiệm vụ ngày 5",
-                questDescription = "Nấu ăn và giữ cho thanh đói của Gióng trên 80% khi ngày kết thúc.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 5",
+                questDescription = "Náº¥u Äƒn vÃ  giá»¯ cho thanh Ä‘Ã³i cá»§a GiÃ³ng trÃªn 80% khi ngÃ y káº¿t thÃºc.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1
             }
         };
     }
 
-    // ─── NGÀY 6 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 6 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay6Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 6 (5 dòng → Voice23-27GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 6 (5 dÃ²ng â†’ Voice23-27GL)
             new QuestStep
             {
                 day = 6,
-                questName = "Nhiệm vụ ngày 6",
-                questDescription = "Nói chuyện với Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 6",
+                questDescription = "NÃ³i chuyá»‡n vá»›i GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Ngày mai là thợ rèn bắt đầu đúc vũ khí thần tốc rồi.",
-                    "Hôm nay là ngày cao điểm để tích lũy tài nguyên.",
-                    "Chúng ta phải dốc toàn lực!",
-                    "Hãy vừa cho Gióng ăn, vừa vận chuyển thật nhiều Sắt và Tre vào kho dự trữ.",
-                    "Sức ăn của Gióng hôm nay đã đạt đỉnh, cậu phải hoạt động hết công suất đấy!"
+                    "NgÃ y mai lÃ  thá»£ rÃ¨n báº¯t Ä‘áº§u Ä‘Ãºc vÅ© khÃ­ tháº§n tá»‘c rá»“i.",
+                    "HÃ´m nay lÃ  ngÃ y cao Ä‘iá»ƒm Ä‘á»ƒ tÃ­ch lÅ©y tÃ i nguyÃªn.",
+                    "ChÃºng ta pháº£i dá»‘c toÃ n lá»±c!",
+                    "HÃ£y vá»«a cho GiÃ³ng Äƒn, vá»«a váº­n chuyá»ƒn tháº­t nhiá»u Sáº¯t vÃ  Tre vÃ o kho dá»± trá»¯.",
+                    "Sá»©c Äƒn cá»§a GiÃ³ng hÃ´m nay Ä‘Ã£ Ä‘áº¡t Ä‘á»‰nh, cáº­u pháº£i hoáº¡t Ä‘á»™ng háº¿t cÃ´ng suáº¥t Ä‘áº¥y!"
                 },
                 voiceClips = new AudioClip[] { voice23GL, voice24GL, voice25GL, voice26GL, voice27GL }
             },
@@ -506,8 +506,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 6,
-                questName = "Nhiệm vụ ngày 6",
-                questDescription = "Giữ thanh đói trên 80%, tích trữ ít nhất 5 quặng sắt và 10 bó tre.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 6",
+                questDescription = "Giá»¯ thanh Ä‘Ã³i trÃªn 80%, tÃ­ch trá»¯ Ã­t nháº¥t 5 quáº·ng sáº¯t vÃ  10 bÃ³ tre.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1,
                 storageRequirements = new List<QuestRequirement>
@@ -519,46 +519,46 @@ public class QuestDatabase : MonoBehaviour
         };
     }
 
-    // ─── NGÀY 7 ────────────────────────────────────────────────────
+    // â”€â”€â”€ NGÃ€Y 7 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private List<QuestStep> GetDay7Steps()
     {
         return new List<QuestStep>
         {
-            // Già Làng – ngày 7 (2 dòng → Voice28-29GL)
+            // GiÃ  LÃ ng â€“ ngÃ y 7 (2 dÃ²ng â†’ Voice28-29GL)
             new QuestStep
             {
                 day = 7,
-                questName = "Nhiệm vụ ngày 7",
-                questDescription = "Nói chuyện với Già Làng.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 7",
+                questDescription = "NÃ³i chuyá»‡n vá»›i GiÃ  LÃ ng.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "village_elder",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Hôm nay là ngày cuối cùng rồi.",
-                    "Hãy gặp bác thợ rèn để biết mình cần làm gì nhé."
+                    "HÃ´m nay lÃ  ngÃ y cuá»‘i cÃ¹ng rá»“i.",
+                    "HÃ£y gáº·p bÃ¡c thá»£ rÃ¨n Ä‘á»ƒ biáº¿t mÃ¬nh cáº§n lÃ m gÃ¬ nhÃ©."
                 },
                 voiceClips = new AudioClip[] { voice23GL, voice29GL }
             },
 
-            // Thợ Rèn – ngày 7 (7 dòng → Voice5-11ThoRen)
+            // Thá»£ RÃ¨n â€“ ngÃ y 7 (7 dÃ²ng â†’ Voice5-11ThoRen)
             new QuestStep
             {
                 day = 7,
-                questName = "Nhiệm vụ ngày 7",
-                questDescription = "Nói chuyện với Bác Thợ Rèn.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 7",
+                questDescription = "NÃ³i chuyá»‡n vá»›i BÃ¡c Thá»£ RÃ¨n.",
                 stepType = QuestStepType.TalkToNPC,
                 targetNPCId = "blacksmith",
                 requiredAmount = 1,
                 dialogueLines = new string[]
                 {
-                    "Giặc đã đến đầu làng rồi!",
-                    "Thời khắc quyết định đã đến!",
-                    "Tuy nhiên chúng ta thiếu quá nhiều sắt.",
-                    "Cậu trẻ hãy giúp ta một tay.",
-                    "Hãy đào và mang 10 viên sắt vào kho.",
-                    "Để ta đúc ngựa sắt, roi sắt!",
-                    "Song song đó, vẫn phải đưa cơm cho Gióng ăn no để chuẩn bị xuất quân!"
+                    "Giáº·c Ä‘Ã£ Ä‘áº¿n Ä‘áº§u lÃ ng rá»“i!",
+                    "Thá»i kháº¯c quyáº¿t Ä‘á»‹nh Ä‘Ã£ Ä‘áº¿n!",
+                    "Tuy nhiÃªn chÃºng ta thiáº¿u quÃ¡ nhiá»u sáº¯t.",
+                    "Cáº­u tráº» hÃ£y giÃºp ta má»™t tay.",
+                    "HÃ£y Ä‘Ã o vÃ  mang 10 viÃªn sáº¯t vÃ o kho.",
+                    "Äá»ƒ ta Ä‘Ãºc ngá»±a sáº¯t, roi sáº¯t!",
+                    "Song song Ä‘Ã³, váº«n pháº£i Ä‘Æ°a cÆ¡m cho GiÃ³ng Äƒn no Ä‘á»ƒ chuáº©n bá»‹ xuáº¥t quÃ¢n!"
                 },
                 voiceClips = new AudioClip[] { voice5ThoRen, voice6ThoRen, voice7ThoRen, voice8ThoRen, voice9ThoRen, voice10ThoRen, voice11ThoRen }
             },
@@ -566,8 +566,8 @@ public class QuestDatabase : MonoBehaviour
             new QuestStep
             {
                 day = 7,
-                questName = "Nhiệm vụ ngày 7",
-                questDescription = "Giữ thanh đói trên 80% và tích trữ ít nhất 10 quặng sắt.",
+                questName = "Nhiá»‡m vá»¥ ngÃ y 7",
+                questDescription = "Giá»¯ thanh Ä‘Ã³i trÃªn 80% vÃ  tÃ­ch trá»¯ Ã­t nháº¥t 10 quáº·ng sáº¯t.",
                 stepType = QuestStepType.SurviveUntilDayEnd,
                 requiredAmount = 1,
                 storageRequirements = new List<QuestRequirement>

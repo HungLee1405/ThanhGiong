@@ -44,6 +44,8 @@ public class PlayerInventoryUI : MonoBehaviour
             playerInventory = null; // force rebind
             BindInventory(FindLocalPlayerInventory());
         }
+
+        UpdateUI();
     }
 
     private void OnDestroy()
@@ -106,6 +108,12 @@ public class PlayerInventoryUI : MonoBehaviour
 
         playerInventory = inventory;
         playerInventory.OnInventoryChanged += UpdateUI;
+        UpdateUI();
+    }
+
+    public void RebindToLocalInventory()
+    {
+        BindInventory(FindLocalPlayerInventory());
         UpdateUI();
     }
 

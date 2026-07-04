@@ -8,6 +8,7 @@ public class SharedQuestNetwork : MonoBehaviour
 {
     private const string ProgressMessage = "ThanhGiongQuestProgress";
     private const string StateMessage = "ThanhGiongQuestState";
+    private const string StateRequestMessage = "ThanhGiongQuestStateRequest";
     private const string RewardMessage = "ThanhGiongQuestReward";
     private const string StorageMessage = "ThanhGiongStorageDeposit";
     private const string FeedMessage = "ThanhGiongFeed";
@@ -27,11 +28,26 @@ public class SharedQuestNetwork : MonoBehaviour
     private NetworkManager manager;
     private bool messagesRegistered;
     private readonly List<PendingReward> pendingRewards = new List<PendingReward>();
+    private bool hasPendingQuestState;
+    private PendingQuestState pendingQuestState;
 
     private struct PendingReward
     {
         public string itemId;
         public int amount;
+    }
+
+    private struct PendingQuestState
+    {
+        public int day;
+        public int stepIndex;
+        public int currentAmount;
+        public int requiredAmount;
+        public bool completed;
+        public int sideStepIndex;
+        public int sideCurrentAmount;
+        public int sideRequiredAmount;
+        public ulong completedMask;
     }
 
     public static void EnsureExists(GameObject target)
@@ -62,6 +78,7 @@ public class SharedQuestNetwork : MonoBehaviour
         {
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(ProgressMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(StateMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(StateRequestMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(RewardMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(StorageMessage);
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(FeedMessage);
@@ -219,6 +236,40 @@ public class SharedQuestNetwork : MonoBehaviour
 
             SendChickenState(clientId, chickenId, caught);
         }
+    }
+
+    public static void RequestQuestState()
+    {
+        NetworkManager networkManager = NetworkManager.Singleton;
+
+        if (networkManager == null || !networkManager.IsListening || networkManager.IsServer)
+            return;
+
+        instance?.RegisterMessages(networkManager);
+
+        using FastBufferWriter writer = new FastBufferWriter(sizeof(bool), Allocator.Temp);
+        writer.WriteValueSafe(true);
+        networkManager.CustomMessagingManager.SendNamedMessage(StateRequestMessage, NetworkManager.ServerClientId, writer);
+    }
+
+    public static bool TryApplyPendingQuestState(QuestManager questManager)
+    {
+        if (instance == null || questManager == null || !instance.hasPendingQuestState)
+            return false;
+
+        PendingQuestState state = instance.pendingQuestState;
+        instance.hasPendingQuestState = false;
+        questManager.ApplySharedState(
+            state.day,
+            state.stepIndex,
+            state.currentAmount,
+            state.requiredAmount,
+            state.completed,
+            state.sideStepIndex,
+            state.sideCurrentAmount,
+            state.sideRequiredAmount,
+            state.completedMask);
+        return true;
     }
 
     public static void SendChickenState(ulong clientId, string chickenId, bool caught)
@@ -441,6 +492,7 @@ public class SharedQuestNetwork : MonoBehaviour
         manager = networkManager;
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(ProgressMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(StateMessage);
+        networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(StateRequestMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(RewardMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(StorageMessage);
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(FeedMessage);
@@ -457,6 +509,7 @@ public class SharedQuestNetwork : MonoBehaviour
         networkManager.CustomMessagingManager.UnregisterNamedMessageHandler(DayTransitionMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(ProgressMessage, OnProgressMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StateMessage, OnStateMessage);
+        networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StateRequestMessage, OnStateRequestMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(RewardMessage, OnRewardMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(StorageMessage, OnStorageMessage);
         networkManager.CustomMessagingManager.RegisterNamedMessageHandler(FeedMessage, OnFeedMessage);
@@ -532,6 +585,36 @@ public class SharedQuestNetwork : MonoBehaviour
             questManager.ApplySharedState(
                 day, stepIndex, currentAmount, requiredAmount, completed,
                 sideStepIndex, sideCurrentAmount, sideRequiredAmount, completedMask);
+        }
+        else
+        {
+            pendingQuestState = new PendingQuestState
+            {
+                day = day,
+                stepIndex = stepIndex,
+                currentAmount = currentAmount,
+                requiredAmount = requiredAmount,
+                completed = completed,
+                sideStepIndex = sideStepIndex,
+                sideCurrentAmount = sideCurrentAmount,
+                sideRequiredAmount = sideRequiredAmount,
+                completedMask = completedMask
+            };
+            hasPendingQuestState = true;
+        }
+    }
+
+    private void OnStateRequestMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (manager == null || !manager.IsServer)
+            return;
+
+        reader.ReadValueSafe(out bool requestState);
+
+        QuestManager questManager = FindFirstObjectByType<QuestManager>();
+        if (requestState && questManager != null)
+        {
+            PublishState(questManager);
         }
     }
 

@@ -298,6 +298,11 @@ public class ChickenController : MonoBehaviour
     private void GrantSharedCatchReward(string itemId)
     {
         ItemData rewardItem = FindItemData(itemId);
+        if (playerInventory == null || playerHandController == null)
+        {
+            FindLocalPlayer();
+        }
+
         if (playerInventory == null || rewardItem == null)
             return;
 
@@ -333,6 +338,11 @@ public class ChickenController : MonoBehaviour
     private void SelectCaughtChickenSlot(string itemId)
     {
         if (playerInventory == null || playerHandController == null)
+        {
+            FindLocalPlayer();
+        }
+
+        if (playerInventory == null || playerHandController == null)
             return;
 
         int slotIndex = playerInventory.FindItemSlot(itemId);
@@ -340,11 +350,20 @@ public class ChickenController : MonoBehaviour
             return;
 
         playerHandController.SelectSlot(slotIndex);
+        playerHandController.RefreshHeldItem();
 
-        if (playerHandController.playerInventoryUI != null)
+        PlayerInventoryUI inventoryUI = playerHandController.playerInventoryUI;
+        if (inventoryUI == null)
         {
-            playerHandController.playerInventoryUI.UpdateUI();
-            playerHandController.playerInventoryUI.HighlightSlot(slotIndex);
+            inventoryUI = FindFirstObjectByType<PlayerInventoryUI>();
+            playerHandController.playerInventoryUI = inventoryUI;
+        }
+
+        if (inventoryUI != null)
+        {
+            inventoryUI.RebindToLocalInventory();
+            inventoryUI.UpdateUI();
+            inventoryUI.HighlightSlot(slotIndex);
         }
     }
 
@@ -690,19 +709,22 @@ public class ChickenController : MonoBehaviour
 
     private void BindPlayer(Collider other)
     {
-        if (playerInventory == null)
+        PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
+        if (movement != null)
         {
-            playerInventory = other.GetComponent<PlayerInventory>();
-            if (playerInventory == null) playerInventory = other.GetComponentInParent<PlayerInventory>();
-            if (playerInventory == null) playerInventory = other.GetComponentInChildren<PlayerInventory>();
+            player = movement.transform;
         }
 
-        if (playerHandController == null)
-        {
-            playerHandController = other.GetComponent<PlayerHandController>();
-            if (playerHandController == null) playerHandController = other.GetComponentInParent<PlayerHandController>();
-            if (playerHandController == null) playerHandController = other.GetComponentInChildren<PlayerHandController>();
-        }
+        PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+        if (inventory == null) inventory = other.GetComponentInParent<PlayerInventory>();
+        if (inventory == null) inventory = other.GetComponentInChildren<PlayerInventory>();
+
+        PlayerHandController handController = other.GetComponent<PlayerHandController>();
+        if (handController == null) handController = other.GetComponentInParent<PlayerHandController>();
+        if (handController == null) handController = other.GetComponentInChildren<PlayerHandController>();
+
+        if (inventory != null) playerInventory = inventory;
+        if (handController != null) playerHandController = handController;
     }
 
     private void FindLocalPlayer()

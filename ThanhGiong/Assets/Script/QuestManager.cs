@@ -45,6 +45,11 @@ public class QuestManager : MonoBehaviour
         }
 
         LoadDay(currentDay);
+
+        if (!SharedQuestNetwork.TryApplyPendingQuestState(this))
+        {
+            SharedQuestNetwork.RequestQuestState();
+        }
     }
 
     private void OnDestroy()
@@ -90,22 +95,8 @@ public class QuestManager : MonoBehaviour
 
         List<QuestStep> allSteps = questDatabase.GetQuestStepsForDay(day);
         
-        // Giữ lại các nhiệm vụ phụ chưa hoàn thành từ ngày cũ
-        List<QuestStep> leftoverSideSteps = new List<QuestStep>();
-        if (sideQuestSteps != null && currentSideStepIndex >= 0 && currentSideStepIndex < sideQuestSteps.Count)
-        {
-            for (int i = currentSideStepIndex; i < sideQuestSteps.Count; i++)
-            {
-                if (!sideQuestSteps[i].IsCompleted())
-                {
-                    sideQuestSteps[i].unlockAtMainStepIndex = 0; // Xóa block
-                    leftoverSideSteps.Add(sideQuestSteps[i]);
-                }
-            }
-        }
-
         currentSteps = new List<QuestStep>();
-        sideQuestSteps = new List<QuestStep>(leftoverSideSteps);
+        sideQuestSteps = new List<QuestStep>();
 
         if (allSteps != null)
         {
@@ -783,6 +774,7 @@ public class QuestManager : MonoBehaviour
             {
                 playerHubUI.questText.text = $"<b>NHIỆM VỤ CHÍNH</b>\n{mainDesc}\n\n<b>NHIỆM VỤ PHỤ</b>\n{sideDesc}";
             }
+            playerHubUI.UpdateQuestUI(mainStep.questName, mainDesc, sideStep.questName, sideDesc);
         }
         else
         {
