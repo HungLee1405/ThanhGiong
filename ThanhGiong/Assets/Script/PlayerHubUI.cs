@@ -53,6 +53,8 @@ public class PlayerHubUI : MonoBehaviour
     public void UpdateQuestUI(string questName, string questDescription)
     {
         ApplyHudStyle();
+        questName = VietnameseText.Fix(questName);
+        questDescription = VietnameseText.Fix(questDescription);
 
         if (questNameText != null)
         {
@@ -76,6 +78,10 @@ public class PlayerHubUI : MonoBehaviour
         string sideQuestDescription)
     {
         ApplyHudStyle();
+        mainQuestName = VietnameseText.Fix(mainQuestName);
+        mainQuestDescription = VietnameseText.Fix(mainQuestDescription);
+        sideQuestName = VietnameseText.Fix(sideQuestName);
+        sideQuestDescription = VietnameseText.Fix(sideQuestDescription);
 
         if (questNameText != null)
         {
@@ -321,7 +327,7 @@ public class PlayerHubUI : MonoBehaviour
         if (string.IsNullOrWhiteSpace(questDescription))
             return "";
 
-        string text = questDescription.Trim();
+        string text = VietnameseText.Fix(questDescription).Trim();
         if (text.StartsWith("- "))
         {
             text = text.Substring(2).TrimStart();

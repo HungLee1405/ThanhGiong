@@ -282,7 +282,7 @@ public class QuestManager : MonoBehaviour
         {
             if (step.stepType == QuestStepType.TalkToNPC && step.targetNPCId == npcId)
             {
-                return step.dialogueLines;
+                return VietnameseText.Fix(step.dialogueLines);
             }
         }
         return null;
@@ -747,7 +747,7 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        string mainDesc = "- " + mainStep.questDescription + mainProgress;
+        string mainDesc = "- " + VietnameseText.Fix(mainStep.questDescription) + VietnameseText.Fix(mainProgress);
 
         if (sideStep != null)
         {
@@ -757,37 +757,37 @@ public class QuestManager : MonoBehaviour
                 sideProgress = "\nTiến độ: " + sideStep.currentAmount + "/" + sideStep.requiredAmount;
             }
 
-            string sideDesc = "- " + sideStep.questDescription + sideProgress;
+            string sideDesc = "- " + VietnameseText.Fix(sideStep.questDescription) + VietnameseText.Fix(sideProgress);
 
             if (playerHubUI.mainQuestText != null && playerHubUI.sideQuestText != null)
             {
-                playerHubUI.mainQuestText.text = $"<b>{mainStep.questName}</b>\n{mainDesc}";
-                playerHubUI.sideQuestText.text = $"<b>{sideStep.questName}</b>\n{sideDesc}";
+                playerHubUI.mainQuestText.text = $"<b>{VietnameseText.Fix(mainStep.questName)}</b>\n{mainDesc}";
+                playerHubUI.sideQuestText.text = $"<b>{VietnameseText.Fix(sideStep.questName)}</b>\n{sideDesc}";
             }
 
             if (playerHubUI.questNameText != null)
             {
-                playerHubUI.questNameText.text = mainStep.questName;
+                playerHubUI.questNameText.text = VietnameseText.Fix(mainStep.questName);
             }
 
             if (playerHubUI.questText != null)
             {
                 playerHubUI.questText.text = $"<b>NHIỆM VỤ CHÍNH</b>\n{mainDesc}\n\n<b>NHIỆM VỤ PHỤ</b>\n{sideDesc}";
             }
-            playerHubUI.UpdateQuestUI(mainStep.questName, mainDesc, sideStep.questName, sideDesc);
+            playerHubUI.UpdateQuestUI(VietnameseText.Fix(mainStep.questName), mainDesc, VietnameseText.Fix(sideStep.questName), sideDesc);
         }
         else
         {
             if (playerHubUI.mainQuestText != null)
             {
-                playerHubUI.mainQuestText.text = $"<b>{mainStep.questName}</b>\n{mainDesc}";
+                playerHubUI.mainQuestText.text = $"<b>{VietnameseText.Fix(mainStep.questName)}</b>\n{mainDesc}";
             }
             if (playerHubUI.sideQuestText != null)
             {
                 playerHubUI.sideQuestText.text = "";
             }
 
-            playerHubUI.UpdateQuestUI(mainStep.questName, mainDesc);
+            playerHubUI.UpdateQuestUI(VietnameseText.Fix(mainStep.questName), mainDesc);
         }
     }
 
@@ -830,7 +830,7 @@ public class QuestManager : MonoBehaviour
             step.rewardReceived = true;
             if (playerHubUI != null && !string.IsNullOrEmpty(step.rewardMessage))
             {
-                playerHubUI.UpdateQuestUI("Nhận thưởng!", step.rewardMessage);
+                playerHubUI.UpdateQuestUI("Nhận thưởng!", VietnameseText.Fix(step.rewardMessage));
             }
             return true;
         }

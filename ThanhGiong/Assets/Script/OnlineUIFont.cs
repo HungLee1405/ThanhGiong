@@ -57,7 +57,16 @@ public static class OnlineUIFont
 
             for (int i = 0; i < tmpTexts.Length; i++)
             {
-                if (tmpTexts[i] != null && tmpTexts[i].font != uiTmpFont)
+                if (tmpTexts[i] == null)
+                    continue;
+
+                string fixedText = VietnameseText.Fix(tmpTexts[i].text);
+                if (fixedText != tmpTexts[i].text)
+                {
+                    tmpTexts[i].text = fixedText;
+                }
+
+                if (tmpTexts[i].font != uiTmpFont)
                 {
                     tmpTexts[i].font = uiTmpFont;
                 }
@@ -70,7 +79,16 @@ public static class OnlineUIFont
 
         for (int i = 0; i < legacyTexts.Length; i++)
         {
-            if (legacyTexts[i] != null && legacyTexts[i].font != uiFont)
+            if (legacyTexts[i] == null)
+                continue;
+
+            string fixedText = VietnameseText.Fix(legacyTexts[i].text);
+            if (fixedText != legacyTexts[i].text)
+            {
+                legacyTexts[i].text = fixedText;
+            }
+
+            if (legacyTexts[i].font != uiFont)
             {
                 legacyTexts[i].font = uiFont;
             }
@@ -96,8 +114,17 @@ public static class OnlineUIFont
             if (uiTmpFont != null)
             {
                 uiTmpFont.name = UIFontName + " Game TMP";
+                ConfigureUIFont(uiTmpFont);
             }
         }
+    }
+
+    public static void ConfigureUIFont(TMP_FontAsset fontAsset)
+    {
+        if (fontAsset == null)
+            return;
+
+        fontAsset.atlasPopulationMode = AtlasPopulationMode.Dynamic;
     }
 
     private static Font CreateRuntimeFont(params string[] fontNames)

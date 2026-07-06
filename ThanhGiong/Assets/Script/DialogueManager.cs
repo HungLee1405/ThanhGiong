@@ -119,7 +119,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        lines = newLines;
+        lines = VietnameseText.Fix(newLines);
         voiceClips = clips;
         index = 0;
         isTalking = true;
@@ -133,7 +133,7 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueNpcNameText != null)
         {
-            dialogueNpcNameText.text = npcName;
+            dialogueNpcNameText.text = VietnameseText.Fix(npcName);
         }
         else
         {
@@ -142,7 +142,7 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueText != null)
         {
-            dialogueText.text = lines[index];
+            dialogueText.text = VietnameseText.Fix(lines[index]);
         }
         else
         {
@@ -168,7 +168,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogueText != null)
             {
-                dialogueText.text = lines[index];
+                dialogueText.text = VietnameseText.Fix(lines[index]);
             }
 
             // Phát voice clip cho dòng tiếp theo
@@ -308,6 +308,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueTmpFont = TMP_FontAsset.CreateFontAsset(dialogueFont);
             dialogueTmpFont.name = DialogueFontName + " Dialogue TMP";
+            OnlineUIFont.ConfigureUIFont(dialogueTmpFont);
         }
         catch (Exception exception)
         {

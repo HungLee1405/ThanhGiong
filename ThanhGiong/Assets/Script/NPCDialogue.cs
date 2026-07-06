@@ -37,6 +37,9 @@ public class NPCDialogue : MonoBehaviour
             dialogueManager = FindFirstObjectByType<DialogueManager>();
         }
 
+        npcName = VietnameseText.FixNpcName(npcId, npcName);
+        interactionMessage = VietnameseText.Fix(interactionMessage);
+
         if (worldNameText != null)
         {
             worldNameText.text = npcName;
@@ -92,7 +95,7 @@ public class NPCDialogue : MonoBehaviour
 
         AudioClip[] voiceClips = questManager.GetCurrentVoiceClipsForNPC(npcId);
 
-        dialogueManager.StartDialogue(npcName, dialogueLines, voiceClips, () =>
+        dialogueManager.StartDialogue(VietnameseText.FixNpcName(npcId, npcName), dialogueLines, voiceClips, () =>
         {
             questManager.CompleteTalkToNPC(npcId);
 
@@ -116,7 +119,7 @@ public class NPCDialogue : MonoBehaviour
 
         if (interactionText != null)
         {
-            interactionText.text = interactionMessage;
+            interactionText.text = VietnameseText.Fix(interactionMessage);
         }
     }
 
