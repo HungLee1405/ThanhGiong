@@ -6,6 +6,8 @@ using Unity.Collections;
 public class PlayerHandController : NetworkBehaviour
 {
     private const float HeldChickenScale = 0.18f;
+    private static readonly Vector3 HeldChickenCenterOffset = new Vector3(0.02f, -0.14f, 0.02f);
+    private static readonly Quaternion HeldChickenRotationOffset = Quaternion.Euler(0f, 180f, 0f);
 
     [Header("References")]
     public PlayerInventory playerInventory;
@@ -21,6 +23,8 @@ public class PlayerHandController : NetworkBehaviour
 
     private GameObject currentHandObject;
     private IItemReceiver currentReceiver;
+    private Transform heldChickenAnchor;
+    private bool isShowingHeldChicken;
     private readonly NetworkVariable<FixedString64Bytes> networkHeldItemId = new NetworkVariable<FixedString64Bytes>(
         default,
         NetworkVariableReadPermission.Everyone,
@@ -80,6 +84,11 @@ public class PlayerHandController : NetworkBehaviour
 
         HandleHotkeys();
         HandlePutItem();
+    }
+
+    private void LateUpdate()
+    {
+        UpdateHeldChickenPose();
     }
 
     private bool CanUseLocalInput()
@@ -302,6 +311,8 @@ public class PlayerHandController : NetworkBehaviour
         }
 
         currentHandObject = null;
+        heldChickenAnchor = null;
+        isShowingHeldChicken = false;
 
         if (itemData == null) return;
         if (itemData.handPrefab == null) return;
@@ -319,9 +330,160 @@ public class PlayerHandController : NetworkBehaviour
 
         if (itemData.itemId == "chick")
         {
-            currentHandObject.transform.localPosition = new Vector3(0f, -0.05f, 0.25f);
-            currentHandObject.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+            heldChickenAnchor = FindHandAnchor();
+            isShowingHeldChicken = true;
             currentHandObject.transform.localScale = Vector3.one * HeldChickenScale;
+            DisableHeldChickenGameplayComponents(currentHandObject);
+            UpdateHeldChickenPose();
+        }
+    }
+
+    private void UpdateHeldChickenPose()
+    {
+        if (!isShowingHeldChicken || currentHandObject == null)
+            return;
+
+        if (heldChickenAnchor == null || !heldChickenAnchor.gameObject.activeInHierarchy)
+        {
+            heldChickenAnchor = FindHandAnchor();
+        }
+
+        Transform anchor = heldChickenAnchor != null ? heldChickenAnchor : handPoint;
+        if (anchor == null)
+            return;
+
+        Vector3 targetCenter =
+            anchor.position +
+            transform.right * HeldChickenCenterOffset.x +
+            transform.up * HeldChickenCenterOffset.y +
+            transform.forward * HeldChickenCenterOffset.z;
+
+        currentHandObject.transform.rotation = transform.rotation * HeldChickenRotationOffset;
+
+        if (TryGetHeldObjectRenderBounds(currentHandObject, out Bounds heldBounds))
+        {
+            currentHandObject.transform.position += targetCenter - heldBounds.center;
+        }
+        else
+        {
+            currentHandObject.transform.position = targetCenter;
+        }
+    }
+
+    private Transform FindHandAnchor()
+    {
+        Animator[] animators = GetComponentsInChildren<Animator>(true);
+
+        foreach (Animator animator in animators)
+        {
+            Transform rightHand = GetRightHandBone(animator, true);
+            if (rightHand != null)
+                return rightHand;
+        }
+
+        Transform namedRightHand = FindNamedRightHand(true);
+        if (namedRightHand != null)
+            return namedRightHand;
+
+        foreach (Animator animator in animators)
+        {
+            Transform rightHand = GetRightHandBone(animator, false);
+            if (rightHand != null)
+                return rightHand;
+        }
+
+        namedRightHand = FindNamedRightHand(false);
+        if (namedRightHand != null)
+            return namedRightHand;
+
+        return handPoint;
+    }
+
+    private static Transform GetRightHandBone(Animator animator, bool requireActive)
+    {
+        if (animator == null || !animator.isHuman)
+            return null;
+
+        if (requireActive && !animator.gameObject.activeInHierarchy)
+            return null;
+
+        return animator.GetBoneTransform(HumanBodyBones.RightHand);
+    }
+
+    private Transform FindNamedRightHand(bool requireActive)
+    {
+        Transform[] transforms = GetComponentsInChildren<Transform>(true);
+        foreach (Transform candidate in transforms)
+        {
+            if (candidate == null)
+                continue;
+
+            if (requireActive && !candidate.gameObject.activeInHierarchy)
+                continue;
+
+            if (candidate.name == "mixamorig:RightHand" || candidate.name == "RightHand")
+                return candidate;
+        }
+
+        return null;
+    }
+
+    private static bool TryGetHeldObjectRenderBounds(GameObject heldObject, out Bounds result)
+    {
+        result = default;
+
+        if (heldObject == null)
+            return false;
+
+        Renderer[] renderers = heldObject.GetComponentsInChildren<Renderer>(true);
+        bool hasBounds = false;
+
+        foreach (Renderer targetRenderer in renderers)
+        {
+            if (targetRenderer == null || targetRenderer is ParticleSystemRenderer)
+                continue;
+
+            if (!targetRenderer.enabled)
+                continue;
+
+            if (!hasBounds)
+            {
+                result = targetRenderer.bounds;
+                hasBounds = true;
+            }
+            else
+            {
+                result.Encapsulate(targetRenderer.bounds);
+            }
+        }
+
+        return hasBounds;
+    }
+
+    private static void DisableHeldChickenGameplayComponents(GameObject heldObject)
+    {
+        if (heldObject == null)
+            return;
+
+        ChickenController chickenController = heldObject.GetComponent<ChickenController>();
+        if (chickenController != null)
+        {
+            chickenController.enabled = false;
+        }
+
+        UnityEngine.AI.NavMeshAgent navMeshAgent = heldObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (navMeshAgent != null)
+        {
+            navMeshAgent.enabled = false;
+        }
+
+        Collider[] colliders = heldObject.GetComponentsInChildren<Collider>(true);
+        foreach (Collider collider in colliders)
+        {
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
         }
     }
 

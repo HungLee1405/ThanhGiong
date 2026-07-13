@@ -7,8 +7,11 @@ using UnityEngine;
 public class NetworkLobbyCoordinator : MonoBehaviour
 {
     private const string StartMatchMessage = "ThanhGiongLobbyStart";
+    private const string MatchStateRequestMessage = "ThanhGiongLobbyStateRequest";
+    private const string MatchStateResponseMessage = "ThanhGiongLobbyStateResponse";
     private const float StartBroadcastDuration = 3f;
     private const float StartBroadcastInterval = 0.25f;
+    private const float MatchStateRequestInterval = 0.5f;
 
     public static bool MatchStarted { get; private set; }
     public static bool IsOnlineLobbyActive
@@ -25,6 +28,7 @@ public class NetworkLobbyCoordinator : MonoBehaviour
     private NetworkManager manager;
     private bool messageRegistered;
     private Coroutine startBroadcastCoroutine;
+    private float nextMatchStateRequestTime;
 
     public static void EnsureExists(GameObject target)
     {
@@ -52,6 +56,8 @@ public class NetworkLobbyCoordinator : MonoBehaviour
             RegisterMessage();
         }
 
+        RequestMatchStateIfNeeded();
+
         if (manager != null && !manager.IsListening && MatchStarted)
         {
             MatchStarted = false;
@@ -71,6 +77,9 @@ public class NetworkLobbyCoordinator : MonoBehaviour
         if (messageRegistered && manager != null && manager.CustomMessagingManager != null)
         {
             manager.CustomMessagingManager.UnregisterNamedMessageHandler(StartMatchMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(MatchStateRequestMessage);
+            manager.CustomMessagingManager.UnregisterNamedMessageHandler(MatchStateResponseMessage);
+            manager.OnClientConnectedCallback -= OnClientConnected;
         }
 
         messageRegistered = false;
@@ -186,7 +195,13 @@ public class NetworkLobbyCoordinator : MonoBehaviour
             return;
 
         manager.CustomMessagingManager.UnregisterNamedMessageHandler(StartMatchMessage);
+        manager.CustomMessagingManager.UnregisterNamedMessageHandler(MatchStateRequestMessage);
+        manager.CustomMessagingManager.UnregisterNamedMessageHandler(MatchStateResponseMessage);
         manager.CustomMessagingManager.RegisterNamedMessageHandler(StartMatchMessage, OnStartMatchMessage);
+        manager.CustomMessagingManager.RegisterNamedMessageHandler(MatchStateRequestMessage, OnMatchStateRequestMessage);
+        manager.CustomMessagingManager.RegisterNamedMessageHandler(MatchStateResponseMessage, OnMatchStateResponseMessage);
+        manager.OnClientConnectedCallback -= OnClientConnected;
+        manager.OnClientConnectedCallback += OnClientConnected;
         messageRegistered = true;
     }
 
@@ -201,6 +216,72 @@ public class NetworkLobbyCoordinator : MonoBehaviour
         {
             SetMatchStarted();
         }
+    }
+
+    private void OnMatchStateRequestMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (manager == null || !manager.IsServer)
+            return;
+
+        reader.ReadValueSafe(out bool requestState);
+
+        if (requestState)
+        {
+            SendMatchState(senderClientId);
+        }
+    }
+
+    private void OnMatchStateResponseMessage(ulong senderClientId, FastBufferReader reader)
+    {
+        if (senderClientId != NetworkManager.ServerClientId)
+            return;
+
+        reader.ReadValueSafe(out bool started);
+
+        if (started)
+        {
+            SetMatchStarted();
+        }
+    }
+
+    private void OnClientConnected(ulong clientId)
+    {
+        if (MatchStarted)
+        {
+            SendMatchState(clientId);
+        }
+    }
+
+    private void RequestMatchStateIfNeeded()
+    {
+        if (MatchStarted ||
+            manager == null ||
+            !manager.IsListening ||
+            manager.IsServer ||
+            manager.CustomMessagingManager == null ||
+            Time.unscaledTime < nextMatchStateRequestTime)
+        {
+            return;
+        }
+
+        nextMatchStateRequestTime = Time.unscaledTime + MatchStateRequestInterval;
+
+        using FastBufferWriter writer = new FastBufferWriter(sizeof(bool), Allocator.Temp);
+        writer.WriteValueSafe(true);
+        manager.CustomMessagingManager.SendNamedMessage(MatchStateRequestMessage, NetworkManager.ServerClientId, writer);
+    }
+
+    private void SendMatchState(ulong clientId)
+    {
+        if (manager == null || !manager.IsServer || manager.CustomMessagingManager == null)
+            return;
+
+        if (clientId == manager.LocalClientId)
+            return;
+
+        using FastBufferWriter writer = new FastBufferWriter(sizeof(bool), Allocator.Temp);
+        writer.WriteValueSafe(MatchStarted);
+        manager.CustomMessagingManager.SendNamedMessage(MatchStateResponseMessage, clientId, writer);
     }
 
     private static void SetMatchStarted()
