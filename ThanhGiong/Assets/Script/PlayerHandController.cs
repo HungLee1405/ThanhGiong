@@ -5,6 +5,8 @@ using Unity.Collections;
 
 public class PlayerHandController : NetworkBehaviour
 {
+    private const float HeldChickenScale = 0.18f;
+
     [Header("References")]
     public PlayerInventory playerInventory;
     public PlayerInventoryUI playerInventoryUI;
@@ -319,7 +321,7 @@ public class PlayerHandController : NetworkBehaviour
         {
             currentHandObject.transform.localPosition = new Vector3(0f, -0.05f, 0.25f);
             currentHandObject.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-            currentHandObject.transform.localScale = Vector3.one * 0.45f;
+            currentHandObject.transform.localScale = Vector3.one * HeldChickenScale;
         }
     }
 
